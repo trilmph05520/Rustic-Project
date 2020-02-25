@@ -85,7 +85,7 @@ public class AdminController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "admin/index";
+        return "admin/dashboard";
     }
 
     @RequestMapping(value = "chartBill", method = RequestMethod.GET)
