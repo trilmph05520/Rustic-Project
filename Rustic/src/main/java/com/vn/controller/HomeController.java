@@ -330,9 +330,28 @@ public class HomeController {
 
     @RequestMapping(value = "/home/contact.html", method = RequestMethod.GET)
     public ModelAndView viewContact(Model model) {
-        model.addAttribute("report", new Report());
-        model.addAttribute("mapError", new HashedMap<String, String>());
+//        model.addAttribute("report", new Report());
+//        model.addAttribute("mapError", new HashedMap<String, String>());
         ModelAndView modelAndView = new ModelAndView("home/contact");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/home/blog.html", method = RequestMethod.GET)
+    public ModelAndView viewBlog(Model model) {
+        ModelAndView modelAndView = new ModelAndView("home/blog");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/home/register.html", method = RequestMethod.GET)
+    public ModelAndView viewRegister(Model model) {
+        ModelAndView modelAndView = new ModelAndView("home/register");
+        return modelAndView;
+    }
+    
+    
+    @RequestMapping(value = "/home/faq.html", method = RequestMethod.GET)
+    public ModelAndView viewFAQ(Model model) {
+        ModelAndView modelAndView = new ModelAndView("home/faq");
         return modelAndView;
     }
 
