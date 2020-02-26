@@ -212,7 +212,8 @@
 							aria-haspopup="true" aria-expanded="false">
 								<div class="media align-items-center">
 									<span class="avatar avatar-sm rounded-circle"> <img
-										alt="Image placeholder" th:src="@{/assets/img/theme/team-4.jpg}">
+										alt="Image placeholder"
+										th:src="@{/assets/img/theme/team-4.jpg}">
 									</span>
 									<div class="media-body  ml-2  d-none d-lg-block">
 										<span class="mb-0 text-sm  font-weight-bold">John Snow</span>
@@ -257,7 +258,7 @@
 								</ol>
 							</nav>
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
@@ -293,10 +294,6 @@
 								<i class="ni ni-pin-3 text-primary"></i> <span
 								class="nav-link-text">Google</span>
 						</a></li> -->
-						<li class="nav-item"><a class="nav-link" href="profile.html">
-								<i class="ni ni-single-02 text-yellow"></i> <span
-								class="nav-link-text">Profile</span>
-						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/category/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
@@ -315,13 +312,17 @@
 					</h6>
 					<!-- Navigation -->
 					<ul class="navbar-nav mb-md-3">
-						<li class="nav-item"><a class="nav-link" href="login.html">
+						<!-- <li class="nav-item"><a class="nav-link" href="login.html">
 								<i class="ni ni-key-25 text-info"></i> <span
 								class="nav-link-text">Login</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link" href="register.html">
 								<i class="ni ni-circle-08 text-pink"></i> <span
 								class="nav-link-text">Register</span>
+						</a></li> -->
+						<li class="nav-item"><a class="nav-link" href="profile.html">
+								<i class="ni ni-single-02 text-yellow"></i> <span
+								class="nav-link-text">Profile</span>
 						</a></li>
 					</ul>
 				</div>
@@ -444,9 +445,10 @@
 			</div>
 		</footer>
 	</div>
-	
-	
-	<div class="col-md-4" id="deleteConfirm-wrapper" th:fragment="modal-delete">
+
+
+	<div class="col-md-4" id="deleteConfirm-wrapper"
+		th:fragment="modal-delete">
 		<div class="modal fade" id="productModal" tabindex="-1" role="dialog"
 			aria-labelledby="modal-notification" aria-hidden="true">
 			<div class="modal-dialog modal-danger modal-dialog-centered modal-"
@@ -481,5 +483,5 @@
 			</div>
 		</div>
 	</div>
-	
+
 </div>
