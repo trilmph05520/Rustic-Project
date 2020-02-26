@@ -216,7 +216,8 @@
 										th:src="@{/assets/img/theme/team-4.jpg}">
 									</span>
 									<div class="media-body  ml-2  d-none d-lg-block">
-										<span class="mb-0 text-sm  font-weight-bold" th:text="${session.account}">John Snow</span>
+										<span class="mb-0 text-sm  font-weight-bold"
+											th:text="${session.account}">John Snow</span>
 									</div>
 								</div>
 						</a>
@@ -235,7 +236,7 @@
 									class="ni ni-support-16"></i> <span>Support</span>
 								</a> -->
 								<div class="dropdown-divider"></div>
-								<a  th:href="@{/logout.html}" class="dropdown-item"> <i
+								<a th:href="@{/logout.html}" class="dropdown-item"> <i
 									class="ni ni-user-run"></i> <span>Logout</span>
 								</a>
 							</div></li>
@@ -296,12 +297,47 @@
 								<i class="ni ni-pin-3 text-primary"></i> <span
 								class="nav-link-text">Google</span>
 						</a></li> -->
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators')"><a
+							class="nav-link" th:href="@{/staff/list.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Employee</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/user/list.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Customer</span>
+						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/category/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Category</span>
 						</a></li>
-
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/product/list.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Product</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/bill/list.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Bill</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/bill/listCancel.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Bill Cancel</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/review/list.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Review</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/report/list.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Report</span>
+						</a></li>
 						<!-- <li class="nav-item"><a class="nav-link" href="upgrade.html">
 								<i class="ni ni-send text-dark"></i> <span class="nav-link-text">Upgrade</span>
 						</a></li> -->

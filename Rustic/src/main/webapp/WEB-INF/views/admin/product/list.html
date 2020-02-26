@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<div th:replace="fragments/initAdmin :: head"></div>
+</head>
+
+<body>
+	<!-- Sidenav -->
+	<!-- Sidenav -->
+	<div th:replace="fragments/navAdmin :: slide-bar"></div>
+	<!-- Main content -->
+	<div class="main-content" id="panel">
+		<!-- Topnav -->
+		<div th:replace="fragments/navAdmin :: top-nav"></div>
+		<!-- Header -->
+		<!-- Header -->
+
+		<!-- Page content -->
+		<div class="container-fluid mt--6">
+
+			<!-- Dark table -->
+			<div class="row">
+				<div class="col">
+					<div class="card bg-default shadow">
+						<div class="card-header bg-transparent border-0">
+							<h3 class="text-white mb-0">Danh mục</h3>
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5">
+								<form role="form" th:action="@{/product/list.html}"
+									method="POST">
+									<div class="row">
+										<!-- <div class="col-lg-4">
+											<label>Từ ngày - đến ngày</label>
+											<div class="input-prepend input-group">
+												<span class="add-on input-group-addon"><i
+													class="glyphicon glyphicon-calendar fa fa-calendar"></i></span> <input
+													type="text" name="from_date" id="from_date" hidden="true"
+													th:value="${from_date}" /> <input type="text"
+													name="to_date" id="to_date" hidden="true"
+													th:value="${to_date}" /> <input type="text"
+													style="width: 100%" id="timePicker"
+													class="form-control span4" value=" - "
+													th:value="${from_date} + ' - ' + ${to_date}"
+													readonly="readonly" />
+											</div>
+										</div> -->
+										<div class="input-daterange datepicker row align-items-center">
+											<div class="col">
+												<div class="form-group">
+													<label class="text-white">Từ ngày</label>
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<span class="input-group-text"><i
+																class="ni ni-calendar-grid-58"></i></span>
+														</div>
+														<input class="form-control" placeholder="Start date"
+															type="text" value="06/18/2020" name="from_date"
+															id="from_date" th:value="${from_date}">
+													</div>
+												</div>
+											</div>
+											<div class="col">
+												<div class="form-group">
+													<label class="text-white">Đến ngày</label>
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<span class="input-group-text"><i
+																class="ni ni-calendar-grid-58"></i></span>
+														</div>
+														<input class="form-control" placeholder="End date"
+															type="text" value="06/22/2020" name="to_date"
+															id="to_date"th:value="${to_date}">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3">
+											<label class="text-white">Tên sản phẩm</label>
+											<div>
+												<input type="text" placeholder="Tên sản phẩm" name="name"
+													id="name" class="form-control" th:value="${name}" />
+											</div>
+										</div>
+										<div class="col-sm-2">
+											<label>&nbsp;</label>
+											<div>
+												<button type="submit" id="btnSearch" class="btn btn-primary">Tìm
+													kiếm</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<input type="hidden" name="category_list_ss"
+								th:value="${category_list_ss}" />
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5 text-right">
+								<a th:href="@{/product/add.html}"
+									sec:authorize="hasAnyAuthority('Administrators','Staffs')"
+									class="btn btn-sm btn-primary">New</a> <a
+									th:href="@{/category/list.html(category_list_ss=${category_list_ss})}"
+									class="btn btn-sm btn-neutral">Reset</a>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-dark table-flush">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Tên</th>
+										<th scope="col">Giá</th>
+										<th scope="col">Giảm giá</th>
+										<th scope="col">Số lượng</th>
+										<th scope="col">Miêu tả</th>
+										<th scope="col">Thông tin</th>
+										<th scope="col">Trạng thái</th>
+										<th scope="col" class="text-center">#</th>
+										<th scope="col" class="text-center">#</th>
+									</tr>
+								</thead>
+								<tbody class="list" th:if="${page.content} != null">
+									<tr th:each="eachRow, iterStat : ${page}">
+										<td class="text-table-body" th:text="${iterStat.count}"></td>
+										<td class="text-table-body" th:text="${eachRow.name}"></td>
+										<td class="text-table-body"
+											th:text="${#numbers.formatDecimal(eachRow.price, 0, 'COMMA', 0,'POINT')}"></td>
+										<td class="text-table-body"
+											th:text="${#numbers.formatDecimal(eachRow.priceSale, 0, 'COMMA', 0,'POINT')}"></td>
+										<td class="text-table-body" th:text="${eachRow.quantity}"></td>
+										<td class="text-table-body" th:text="${eachRow.description}"></td>
+										<td class="text-table-body" th:text="${eachRow.info}"></td>
+										<td class="text-table-body" style="text-align: center;">
+											<button class="btn btn-warning"
+												th:if="${eachRow.quantity <= 0}">Hết hàng</button>
+											<button class="btn btn-success"
+												th:if="${eachRow.quantity > 0}">Còn hàng</button>
+										</td>
+										<td scope="row"><a type="button" class="btn btn-warning"
+											th:href="@{/product/{id}/update.html(id=${eachRow.id})}">Edit</a>
+
+										</td>
+										<td scope="row"><a type="button" class="btn btn-danger"
+											data-toggle="modal" data-target="#productModal"
+											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'">Delete</a>
+
+										</td>
+										<!-- <td><a
+											th:href="@{/product/{id}/update.html(id=${eachRow.id})}"
+											data-toggle="tooltip" title="Thay đổi thông tin Sản phẩm">
+												<button class="btn btn-info btn-circle">
+													<i class="fa fa-edit"></i>
+												</button>
+										</a></td>
+										<td><a type="button" class="btn btn-warning" href="#"
+											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'"
+											data-toggle="modal" data-target="#productModal"><i
+												class="glyphicon glyphicon-trash"></i></a></td> -->
+										<!-- <th scope="row" th:text="${iterStat.count}"></th>
+										<td scope="row" th:text="${eachRow.id}"></td>
+										<td scope="row" th:text="${eachRow.name}">
+											<div class="media align-items-center">
+												<a href="#" class="avatar rounded-circle mr-3"> <img
+													alt="Image placeholder"
+													src="../assets/img/theme/bootstrap.jpg">
+												</a>
+												<div class="media-body">
+													<span class="name mb-0 text-sm" class="text-center" ></span>
+												</div>
+											</div>
+										</td>
+
+										<td scope="row">
+											<div class="d-flex align-items-center"
+												th:if="${eachRow.parent != null}">
+												<div class="media-body">
+													<span class="name mb-0 text-sm"
+														th:text="${eachRow.parent.name}"></span>
+												</div>
+											</div>
+										</td>
+										<td scope="row"><a type="button" class="btn btn-warning"
+											th:href="@{/category/{id}/edit.html(id=${eachRow.id})}">Edit</a>
+
+										</td>
+										<td scope="row"><a type="button" class="btn btn-danger"
+											data-toggle="modal" data-target="#productModal"
+											th:onclick="'deleteConfirm(\'' + ${eachRow.id} + '\',\'' + ${eachRow.name} + '\');'">Delete</a>
+
+										</td> -->
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<!-- Card footer -->
+						<div class="card-footer py-4">
+							<div
+								th:replace="fragments/panigatorAdmin :: content(page = ${page})">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer -->
+				<!-- <div th:replace="fragments/navAdmin :: footer"></div> -->
+			</div>
+		</div>
+	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+
+	<!-- Optional JS -->
+	<!-- 	<script th:src="@{/assets/vendor/chart.js/dist/Chart.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/dist/Chart.extension.js}"></script> -->
+	<!-- Argon JS -->
+	<div th:replace="fragments/initAdmin :: commonScript"></div>
+
+	<div th:replace="fragments/navAdmin :: modal-delete"></div>
+
+	<!-- <div id="deleteConfirm-wrapper">
+		Modal
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id="name"></p>
+						<button id="delete" class="btn btn-sm btn-danger text-right">Delete</button>
+						.modal-product
+					</div>
+					.modal-body
+				</div>
+				.modal-content
+			</div>
+			.modal-dialog
+		</div>
+		END Modal
+	</div> -->
+
+
+
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var currUrl = /*[[@{/}]]*/"";
+		/*]]>*/
+	</script>
+
+	<script type="text/javascript">
+		function deleteConfirm(key, name) {
+			var id = key;
+
+			$('#modal-title-notification').text('Xác nhận xóa sản phẩm')
+
+			$('#name').text(
+					'Bạn có chắc chắn muốn xóa sản phẩm: ' + key + ' - ' + name
+							+ ' không ? Bấm Delete để xác nhận.');
+
+			$('#delete').click(
+					function() {
+						$.ajax({
+							url : window.location.origin + currUrl
+									+ 'product/delete/' + id + '/list.html',
+							method : 'GET',
+							success : function() {
+								window.location.href = window.location.origin
+										+ currUrl + 'product/list.html';
+							}
+						});
+					});
+		}
+	</script>
+</body>
+
+</html>

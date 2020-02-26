@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<div th:replace="fragments/initAdmin :: head"></div>
+</head>
+<style>
+.error {
+	color: red;
+}
+
+/*---------upload ảnh------------*/
+.wrap-custom-file {
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	margin: 10px 10px 5px 20px;
+	text-align: center;
+}
+
+.wrap-custom-file input[type="file"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2px;
+	height: 2px;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.wrap-custom-file label {
+	z-index: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	overflow: hidden;
+	padding: 0 0.5rem;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 4px;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	transition: transform 0.4s, -webkit-transform 0.4s;
+}
+
+.wrap-custom-file label span {
+	display: block;
+	margin-top: 2rem;
+	font-size: 1.4rem;
+	color: #777;
+	-webkit-transition: color 0.4s;
+	transition: color 0.4s;
+}
+
+.wrap-custom-file label:hover {
+	-webkit-transform: translateY(-0.5rem);
+	transform: translateY(-0.5rem);
+	transition: transform .5s, box-shadow .5s;
+	box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+.wrap-custom-file label:hover span {
+	color: #333;
+}
+
+.wrap-custom-file label {
+	background-size: cover;
+	background-position: center;
+	border: 1px dashed cornflowerblue;
+	border-radius: 10px;
+	/*box-shadow: 2px 2px 5px #cdcdcd;*/
+}
+
+.wrap-custom-file label.file-ok {
+	border: none;
+	box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+.wrap-custom-file label.file-ok span {
+	height: 30px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 0.3rem;
+	font-size: 1.1rem;
+	color: #6a0700;
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
+/*---------end upload ảnh--------*/
+.wrap-custom-fileadd {
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	margin: 10px 10px 5px 20px;
+	text-align: center;
+}
+
+.wrap-custom-fileadd input[type="file"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2px;
+	height: 2px;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.wrap-custom-fileadd label {
+	z-index: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	overflow: hidden;
+	padding: 0 0.5rem;
+	background-color: #fff;
+	border-radius: 4px;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	transition: transform 0.4s, -webkit-transform 0.4s;
+}
+
+.wrap-custom-fileadd label span {
+	display: block;
+	margin-top: 2rem;
+	font-size: 1.4rem;
+	color: #777;
+	-webkit-transition: color 0.4s;
+	transition: color 0.4s;
+}
+
+.wrap-custom-fileadd label:hover {
+	-webkit-transform: translateY(-0.5rem);
+	transform: translateY(-0.5rem);
+	transition: transform .5s, box-shadow .5s;
+	box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+.wrap-custom-fileadd label:hover span {
+	color: #333;
+}
+
+.wrap-custom-fileadd label {
+	background-size: cover;
+	background-position: center;
+	border: 1px dashed cornflowerblue;
+	border-radius: 10px;
+}
+
+.wrap-custom-fileadd label.file-ok {
+	border: none;
+	box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+.wrap-custom-fileadd label.file-ok span {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 0.3rem;
+	font-size: 1.1rem;
+	color: #6a0700;
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
+.title-hinhanh-chi-tiet {
+	width: 100%;
+	height: 46px;
+	border-bottom: 1px solid #E8E8E8;
+}
+
+.title-hinhanh-chi-tiet h5 {
+	font-size: 20px;
+	margin-left: 20px;
+	line-height: 46px;
+	margin-top: 10px;
+	font-weight: 500;
+	margin-top: 5px;
+}
+
+.row-card-hinhanh-chit-tiet .group-hinhanh {
+	width: 100%;
+	float: left;
+	margin-bottom: 20px;
+}
+
+.removeIMG {
+	font-size: 13px !important;
+	margin-top: 40px !important;
+}
+
+.removeIMGAdd {
+	font-size: 13px !important;
+}
+
+.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file label:hover {
+	background: #aaaaaa !important;
+}
+
+.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file[id^="idSubImage_"] label:hover span
+	{
+	display: block !important;
+}
+
+.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file[id^="idAddSubImage_"] label:hover span
+	{
+	display: block !important;
+}
+</style>
+<body>
+	<!-- Sidenav -->
+	<!-- Sidenav -->
+	<div th:replace="fragments/navAdmin :: slide-bar"></div>
+	<!-- Main content -->
+	<div class="main-content" id="panel">
+		<!-- Topnav -->
+		<div th:replace="fragments/navAdmin :: top-nav"></div>
+		<!-- Header -->
+		<!-- Header -->
+		<!-- Page content -->
+		<div class="container-fluid mt--6">
+			<div class="row">
+				<div class="col-xl-12 order-xl-1">
+					<div class="card">
+						<div class="card-header">
+							<div class="row align-items-center">
+								<div class="col-8">
+									<h3 class="mb-0">Edit Product</h3>
+								</div>
+								<!-- <div class="col-4 text-right">
+									<a href="#!" class="btn btn-sm btn-primary">Settings</a>
+								</div> -->
+							</div>
+						</div>
+						<div class="card-body">
+							<form>
+								<h6 class="heading-small text-muted mb-4">Product
+									information</h6>
+								<div class="pl-lg-4">
+									<div class="row">
+										<div class="col-lg-3">
+											<div class="form-group">
+												<label>Hình ảnh đại diện</label><span class="error">
+													*</span>
+												<div>
+													<div class="group-hinhanh">
+														<div class="wrap-custom-file">
+															<input type="file" name="image1" class="imgUpload"
+																id="image1" accept=".gif,.jpg,.png,.jpeg" /> <label
+																for="image1"> <span>Chọn ảnh</span>
+															</label>
+														</div>
+													</div>
+													<input type="text" name="mainImg" id="mainImg" hidden /> <span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+														id="mainError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-9" style="border-left: 2px solid #aaa;">
+											<div class="form-group">
+												<label>Hình ảnh chi tiết</label><span class="error">
+													*</span>
+												<div>
+													<div class="detail-step row-card-hinhanh-chit-tiet">
+														<div class="group-hinhanh">
+															<div class="wrap-custom-fileadd" id="addSubImages">
+																<input type="file" name="addSubImage" class="imgAddSub"
+																	id="addSubImage" accept=".gif,.jpg,.png,.jpeg" /> <label
+																	for="addSubImage"
+																	style="display: flex; align-items: center; justify-content: center;">
+																	<span style="margin-top: 0px !important;"> <i
+																		class="fa fa-plus" style="font-size: 50px;"></i>
+																</span>
+																</label>
+															</div>
+															<br> <span
+																style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+																id="subError"></span>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label>Danh mục SP</label><span class="error"> *</span>
+												<div>
+													<select class="form-control" id="form-field-cateChildren">
+														<option value="0">Chọn DM SP</option>
+														<option th:each="eachCate : ${category}"
+															th:value="${eachCate.id}" th:text="${eachCate.name}"></option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6" style="margin-bottom: 20px;">
+											<div class="form-group">
+												<label>Loại DM</label><span class="error"> *</span>
+												<div>
+													<select class="form-control" id="form-field-cate-children">
+														<option value="">Chọn loại DM</option>
+													</select>
+												</div>
+												<span
+													style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+													id="idCateError"></span>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label>Tên sản phẩm</label><span class="error"> *</span>
+												<div>
+													<input type="text" class="form-control" id="name"
+														placeholder="Tên sản phẩm" maxlength="64" /> <span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="nameError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6" style="margin-bottom: 20px;">
+											<div class="form-group">
+												<label>Số lượng</label><span class="error"> *</span>
+												<div>
+													<input type="text" class="form-control" id="quantity"
+														value="1" maxlength="11" /> <span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="quantityError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label>Giá sản phẩm</label><span class="error"> *</span>
+												<div>
+													<input type="text" class="form-control"
+														placeholder="Giá sản phẩm" id="price" /> <span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="priceError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6" style="margin-bottom: 20px;">
+											<div class="form-group">
+												<label>Giảm giá</label>
+												<div>
+													<input type="text" class="form-control"
+														placeholder="Giảm giá" id="priceSale" /> <span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="priceSaleError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6" style="height: 100px;">
+											<div class="form-group" style="height: 100px;">
+												<label>Miêu tả sản phẩm</label><span class="error"> *</span>
+												<div style="height: 100px;">
+													<textarea class="form-control"
+														placeholder="Miêu tả sản phẩm" id="description"
+														style="height: 100px;" maxlength="256"></textarea>
+													<span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="descriptionError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label>Thông tin sản phẩm</label><span class="error">
+													*</span>
+												<div>
+													<textarea class="form-control"
+														placeholder="Thông tin sản phẩm" id="info"
+														style="height: 100px;" maxlength="256"></textarea>
+													<span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="infoError"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row  text-right">
+										<div class="col-lg-12 col-5">
+											<div class="form-group">
+												<a
+													th:href="@{/product/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
+													href="/account/list" class="btn btn-sm btn-neutral">Cancel</a>
+												<button type="button" id="addProduct"
+													class="btn btn-sm btn-neutral">Save</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer -->
+
+		</div>
+	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+	<div th:replace="fragments/initAdmin :: commonScript"></div>
+	<script th:inline="javascript">
+    /*<![CDATA[*/
+    var currUrl = /*[[@{/}]]*/ "";
+    /*]]>*/
+</script>
+	<script>
+    $('#form-field-cateChildren').on('change', function () {
+        var id = $('#form-field-cateChildren option:selected').val();
+        $.ajax({
+            url: currUrl + 'product/categoryChildren.html',
+            method: 'GET',
+            data: {'parent_id': id},
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (response) {
+                var data = JSON.parse(response);
+                var html = '';
+                for (var eachRow of data) {
+                    html += `<option value="${eachRow.id}">${eachRow.name}</option>`;
+                }
+                $('#form-field-cate-children').html(html);
+            }
+        });
+    });
+</script>
+	<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            defaultDate: new Date(),
+            format: 'DD/MM/YYYY HH:mm'
+        });
+    });
+</script>
+	<script>
+    function formatNumberString(numberStr) {
+        if (typeof numberStr === 'number') {
+            numberStr = numberStr.toString();
+        }
+        return numberStr.replace(/(?=(?:\d{3})+$)(?!^)/g, ',');
+    }
+</script>
+	<script>
+    var that = this;
+    var isFormatNumber = true;
+    if (isFormatNumber !== false) {
+        $('#price').on('keyup', function () {
+            var formattedVal = formatNumberString($('#price').val().replace(/,/g, ''));
+            $('#price').val(formattedVal);
+        });
+    }
+    if (isFormatNumber !== false) {
+        $('#priceSale').on('keyup', function () {
+            var formattedVal = formatNumberString($('#priceSale').val().replace(/,/g, ''));
+            $('#priceSale').val(formattedVal);
+        });
+    }
+    $('#price, #priceSale, #quantity').on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+        if (/^\d*$/.test(this.value.replace(/,/g, ''))) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        }
+    });
+</script>
+	<script type="text/javascript">
+    var mainImg = '';
+    var that = this;
+    $('input[type="file"].imgUpload').each(
+        function () {
+            var $file = $(this), $label = $file.next('label'),
+                $labelText = $label.find('span'), labelDefault = $labelText.text();
+            $file.on('change', function (event) {
+                var reader = new FileReader();
+                var objectResult = {};
+                var dataFile = this.files[0];
+                reader.readAsDataURL(dataFile);
+                reader.onload = function () {
+                    if (dataFile.size < 15728640) {
+                        setTimeout(function () {
+                            objectResult.fileName = dataFile.name;
+                            var readerResult = reader.result;
+                            objectResult.content = readerResult.split(',')[1];
+                            var tmppath = URL.createObjectURL(dataFile);
+                            if (readerResult) {
+                                $label.addClass('file-ok').css('background-image', 'url(' + readerResult + ')');
+                                $labelText.removeClass('red');
+                                $labelText.text(dataFile.name);
+                                mainImg = objectResult;
+                            } else {
+                                $label.removeClass('file-ok');
+                                $labelText.text(labelDefault);
+                            }
+                        }, 500);
+                    } else {
+                        $('#mainError').text('Ảnh không quá 15Mb');
+                    }
+                };
+                reader.onerror = function (error) {
+                };
+            });
+        });
+
+    var subImages = [];
+    var indexOfImageToAdd = 0;
+    $('#addSubImage').on('change', function (event) {
+        var that = this;
+        var html = `<div class="wrap-custom-file" id="idAddSubImage_${indexOfImageToAdd}">
+            <label style="display:flex;
+            justify-content:center;
+            align-items:center;">
+        <span id="removeAdded_${indexOfImageToAdd}" data-id="${indexOfImageToAdd}" class="removeIMGAdd" style="display:none;border:2px solid #fff;
+            font-size: 15px;color: white;padding: 3px;width: calc(100% - 15px);align-items: center;justify-content: center;
+            margin-top: 0!important;cursor:pointer;">REMOVE FILE</span>
+            <span id="loading-add-image-span" class="fa fa-spinner fa-spin" style="margin-top:0!important"></span>
+            <span class="nameFile" style="position:absolute;bottom:0;left:0;width:100%;padding:0.3rem;font-size:1.1rem;color:#6a0700;background-color: rgba(255, 255, 255, 0.7);height:28px;"></span>
+            </label></div>`;
+        var reader = new FileReader();
+        var imageGetted = [];
+        var objectResult = {};
+        var dataFile = this.files[0];
+        reader.readAsDataURL(dataFile);
+        var htmlAppend = $(html);
+        reader.onload = function () {
+            if (dataFile.size < 15728640) {
+                setTimeout(function () {
+                    objectResult.fileName = dataFile.name;
+                    var readerResult = reader.result;
+                    objectResult.content = readerResult.split(',')[1];
+                    $('#loading-add-image-span').remove();
+                    imageGetted.push(indexOfImageToAdd, objectResult);
+                    subImages.push(imageGetted);
+                    var tmppath = URL.createObjectURL(dataFile);
+                    htmlAppend.find('label').css('background-image', 'url(' + readerResult + ')');
+                    htmlAppend.find('.nameFile').text(dataFile.name);
+                    indexOfImageToAdd++;
+                }, 500);
+            } else {
+                $('#subError').text("Ảnh không quá 15Mb");
+            }
+            $('#addSubImages').before(htmlAppend);
+        };
+        reader.onerror = function (error) {
+        };
+    });
+
+    $('body').on('click', '.wrap-custom-file label span[id^="removeAdded_"]', function () {
+        let id = $(this).attr('data-id');
+        let indexDelete = '';
+        for (let i = 0; i < subImages.length; i++) {
+            console.log(id)
+            if (subImages[i][0] == id) {
+                indexDelete = i;
+                subImages.splice(i, 1);
+                break;
+            }
+        }
+        $(this).parent().parent().remove();
+    });
+
+    $('#addProduct').on('click', function () {
+        let subImamgeObject = [];
+        let valid = true;
+        for (let i of subImages) {
+            subImamgeObject.push(i[1]);
+        }
+        if (mainImg === null || mainImg === '') {
+            $('#mainError').text("Ảnh đại diện không để trống");
+            $('#mainError').hide().fadeIn(0).delay(2000).fadeOut(1000);
+            valid = false;
+        }
+        if (subImamgeObject.length === 0) {
+            $('#subError').text("Ảnh chi tiết không để trống");
+            $('#subError').hide().fadeIn(0).delay(2000).fadeOut(1000);
+            valid = false;
+        }
+        if (valid === true) {
+            var pricesale = $('#priceSale').val().replace(/,/g, '');
+            var price = $('#price').val().replace(/,/g, '');
+            if (pricesale == null || pricesale == '') {
+                pricesale = 0;
+            } else {
+                pricesale = $('#priceSale').val().replace(/,/g, '');
+            }
+            if (price == null || price == '') {
+                price = 0;
+            } else {
+                price = $('#price').val().replace(/,/g, '');
+            }
+            var dataObject = {};
+            dataObject.mainImg = mainImg;
+            dataObject.subImg = subImamgeObject;
+            dataObject.name = $('#name').val();
+            dataObject.idCate = $('#form-field-cate-children option:selected').val();
+            dataObject.description = $('#description').val();
+            dataObject.info = $('#info').val();
+            dataObject.quantity = $('#quantity').val();
+            dataObject.price = price;
+            dataObject.priceSale = pricesale;
+            $.ajax({
+                    url: currUrl + 'product/add.html',
+                    method: 'POST',
+                    data: JSON.stringify(dataObject),
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        if (data.name != null) {
+                            $('#nameError').text(data.name);
+                        } else {
+                            $('#nameError').text('');
+                        }
+                        if (data.idCate != null) {
+                            $('#idCateError').text(data.idCate);
+                        } else {
+                            $('#idCateError').text('');
+                        }
+                        if (data.info != null) {
+                            $('#infoError').text(data.info);
+                        } else {
+                            $('#infoError').text('');
+                        }
+                        if (data.description != null) {
+                            $('#descriptionError').text(data.description);
+                        } else {
+                            $('#descriptionError').text('');
+                        }
+                        if (data.priceSale != null) {
+                            $('#priceSaleError').text('');
+                        } else {
+                            $('#priceSaleError').text('');
+                        }
+                        if (data.price != null) {
+                            $('#priceError').text(data.price);
+                        } else {
+                            $('#priceError').text('');
+                        }
+                        if (data.quantity != null) {
+                            $('#quantityError').text(data.quantity);
+                        } else {
+                            $('#quantityError').text('');
+                        }
+                        if (data.success != null) {
+                            alert(data.success);
+                            // setTimeout(function () {
+                                window.location.href = window.location.origin + currUrl + 'product/list.html';
+                            // }, 1500);
+                        }
+                    }
+                });
+        }
+    })
+    ;
+</script>
+	<script>
+
+</script>
+	<script> //xóa subImg
+var that = this;
+$('body').on('click', '.wrap-custom-file label span[id^="remove_"]', function () {
+    var data_index = $(this).parent().parent().attr('data-index');
+    // that.remove.push(that.subImageGetted[data_index]);
+    $(this).parent().parent().remove();
+});
+</script>
+</body>
+
+</html>
