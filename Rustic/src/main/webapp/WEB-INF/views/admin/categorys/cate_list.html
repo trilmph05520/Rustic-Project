@@ -24,7 +24,40 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0">Category</h3>
+							<h3 class="text-white mb-0">Danh mục</h3>
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5 text-right">
+								<form role="form" th:action="@{/category/list.html}"
+									method="POST">
+									<div class="row">
+										<div class="col-lg-8 col-12">
+											<div>
+												<input class="form-control form-control-sm" id="txtName"
+													name="txtName" type="text" placeholder="Tên danh mục"
+													th:value="${txtName}">
+											</div>
+										</div>
+										<div class="col-lg-4 col-12">
+											<div>
+												<button type="submit" id="btnSearch"
+													class="btn btn-primary btn-sm">Tìm kiếm</button>
+											</div>
+										</div>
+									</div>
+									<div
+										style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+										th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
+								</form>
+							</div>
+							<input type="hidden" name="category_list_ss"
+								th:value="${category_list_ss}" />
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5 text-right">
+								<a th:href="@{/category/0/edit.html}"
+									class="btn btn-sm btn-primary">New</a> <a
+									th:href="@{/category/list.html(category_list_ss=${category_list_ss})}"
+									class="btn btn-sm btn-neutral">Reset</a>
+							</div>
 						</div>
 						<div class="table-responsive">
 							<table class="table align-items-center table-dark table-flush">
@@ -67,8 +100,8 @@
 											th:href="@{/category/{id}/edit.html(id=${eachRow.id})}">Edit</a>
 
 										</td>
-										<td scope="row"><a type="button"
-											class="btn btn-danger" href="#"
+										<td scope="row"><a type="button" class="btn btn-danger"
+											data-toggle="modal" data-target="#productModal"
 											th:onclick="'deleteConfirm(\'' + ${eachRow.id} + '\',\'' + ${eachRow.name} + '\');'">Delete</a>
 
 										</td>
@@ -79,63 +112,117 @@
 						</div>
 						<!-- Card footer -->
 						<div class="card-footer py-4">
-							<nav aria-label="...">
-								<ul class="pagination justify-content-end mb-0">
-									<li class="page-item disabled"><a class="page-link"
-										href="#" tabindex="-1"> <i class="fas fa-angle-left"></i>
-											<span class="sr-only">Previous</span>
-									</a></li>
-									<li class="page-item active"><a class="page-link" href="#">1</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">2
-											<span class="sr-only">(current)</span>
-									</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#"> <i
-											class="fas fa-angle-right"></i> <span class="sr-only">Next</span>
-									</a></li>
-								</ul>
-							</nav>
+							<div
+								th:replace="fragments/panigatorAdmin :: content(page = ${page})">
+							</div>
 						</div>
 					</div>
 				</div>
+				<!-- Footer -->
+				<!-- <div th:replace="fragments/navAdmin :: footer"></div> -->
 			</div>
-			<!-- Footer -->
-			<!-- <div th:replace="fragments/navAdmin :: footer"></div> -->
 		</div>
 	</div>
 	<!-- Argon Scripts -->
 	<!-- Core -->
 
 	<!-- Optional JS -->
-	<script th:src="@{/assets/vendor/chart.js/dist/Chart.min.js}"></script>
-	<script th:src="@{/assets/vendor/chart.js/dist/Chart.extension.js}"></script>
+	<!-- 	<script th:src="@{/assets/vendor/chart.js/dist/Chart.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/dist/Chart.extension.js}"></script> -->
 	<!-- Argon JS -->
 	<div th:replace="fragments/initAdmin :: commonScript"></div>
 
+
+	<!-- <div id="deleteConfirm-wrapper">
+		Modal
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id="name"></p>
+						<button id="delete" class="btn btn-sm btn-danger text-right">Delete</button>
+						.modal-product
+					</div>
+					.modal-body
+				</div>
+				.modal-content
+			</div>
+			.modal-dialog
+		</div>
+		END Modal
+	</div> -->
+
+	<div class="col-md-4" id="deleteConfirm-wrapper">
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog"
+			aria-labelledby="modal-notification" aria-hidden="true">
+			<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+				role="document">
+				<div class="modal-content bg-gradient-danger">
+
+					<div class="modal-header">
+						<h6 class="modal-title" id="modal-title-notification"></h6>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="py-3 text-center">
+							<i class="ni ni-bell-55 ni-3x"></i>
+							<h4 class="heading mt-4">You should read this!</h4>
+							<p id="name"></p>
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-white" id="delete">Delete</button>
+						<button type="button" class="btn btn-link text-white ml-auto"
+							data-dismiss="modal">Close</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var currUrl = /*[[@{/}]]*/"";
+		/*]]>*/
+	</script>
+
 	<script type="text/javascript">
 		function deleteConfirm(key, name) {
-			BootstrapDialog.show({
-				title : 'Xác Nhận xóa Tài Khoản',
-				message : 'Bạn có chắc chắn muốn xóa danh mục: ' + key + ' - '
-						+ name + ' không ? Bấm Delete để xách nhận.',
-				buttons : [
-						{
-							label : 'Bỏ qua',
-							action : function(dialogItself) {
-								dialogItself.close();
+			var id = key;
+
+			$('#modal-title-notification').text('Xác nhận xóa danh mục')
+
+			$('#name').text(
+					'Bạn có chắc chắn muốn xóa danh mục: ' + key + ' - ' + name
+							+ ' không ? Bấm Delete để xác nhận.');
+
+			$('#delete').click(
+					function() {
+						$.ajax({
+							url : window.location.origin + currUrl
+									+ 'category/delete/' + id + '/list.html',
+							method : 'GET',
+							success : function() {
+								window.location.href = window.location.origin
+										+ currUrl + 'category/list.html';
 							}
-						},
-						{
-							label : 'Delete',
-							cssClass : 'btn-primary',
-							action : function(dialogItself) {
-								window.location.href = currUrl
-										+ 'category/delete/' + key
-										+ '/list.html';
-							}
-						} ]
-			});
+						});
+					});
 		}
 	</script>
 </body>
