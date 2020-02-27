@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<div th:replace="fragments/initAdmin :: head"></div>
+</head>
+<style>
+.readonly {
+	background: white !important;
+}
+</style>
+
+<body>
+	<!-- Sidenav -->
+	<!-- Sidenav -->
+	<div th:replace="fragments/navAdmin :: slide-bar"></div>
+	<!-- Main content -->
+	<div class="main-content" id="panel">
+		<!-- Topnav -->
+		<div th:replace="fragments/navAdmin :: top-nav"></div>
+		<!-- Header -->
+		<!-- Header -->
+
+		<!-- Page content -->
+		<div class="container-fluid mt--6">
+
+			<!-- Dark table -->
+			<div class="row">
+				<div class="col">
+					<div class="card bg-default shadow">
+						<div class="card-header bg-transparent border-0">
+							<h3 class="text-white mb-0">Staff</h3>
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5 text-right">
+								<!-- <form role="form" th:action="@{/category/list.html}"
+									method="POST">
+									<div class="row">
+										<div class="col-lg-8 col-12">
+											<div>
+												<input class="form-control form-control-sm" id="txtName"
+													name="txtName" type="text" placeholder="Tên danh mục"
+													th:value="${txtName}">
+											</div>
+										</div>
+										<div class="col-lg-4 col-12">
+											<div>
+												<button type="submit" id="btnSearch"
+													class="btn btn-primary btn-sm">Tìm kiếm</button>
+											</div>
+										</div>
+									</div>
+									<div
+										style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+										th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
+								</form> -->
+								<form role="form" th:object="${userSearchingForm}"
+									th:action="@{/staff/list.html}" method="POST">
+									<div class="row">
+										<div class="col-lg-4 col-12">
+											<div>
+												<input class="form-control" id="txtUserName" name="userName"
+													type="text" placeholder="User name" th:value="*{userName}">
+											</div>
+										</div>
+										<div class="col-lg-4 col-12">
+											<div>
+												<input class="form-control" id="txtEmail" name="email"
+													type="text" placeholder="Email" th:value="*{email}">
+											</div>
+										</div>
+										<div class="col-lg-4 col-12">
+											<div>
+												<button type="submit" id="btnSearch" class="btn btn-primary">Tìm
+													kiếm</button>
+											</div>
+										</div>
+									</div>
+									<div
+										style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+										th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
+								</form>
+							</div>
+							<input type="hidden" name="category_list_ss"
+								th:value="${category_list_ss}" />
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5 text-right">
+								<!-- <a th:href="@{/category/0/edit.html}"
+									class="btn btn-sm btn-primary">New</a> -->
+								<a th:href="@{/staff/list.html(user_list_ss=${user_list_ss})}"
+									class="btn btn-sm btn-neutral">Reset</a>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-dark table-flush">
+								<thead class="thead-dark">
+									<tr>
+										<th class="col">#</th>
+										<th class="col">User name</th>
+										<th class="col">Tên đầy đủ</th>
+										<th class="col">Email</th>
+										<th class="col">Trạng thái Account</th>
+										<th class="col">Ngày tạo</th>
+										<th class="col">#</th>
+										<th class="col">#</th>
+									</tr>
+								</thead>
+								<tbody class="list" th:if="${page.content} != null">
+									<tr th:each="eachRow, iterStat : ${page.content}">
+										<td scope="row" th:text="${iterStat.count}"></td>
+										<td scope="row" th:text="${eachRow.userName}"></td>
+										<td scope="row" th:text="${eachRow.fullName}"></td>
+										<td scope="row" th:text="${eachRow.email}"></td>
+										<td scope="row" th:text="${user_status.get(eachRow.status)}"></td>
+										<td scope="row"
+											th:text="${#dates.format(eachRow.createdDate, 'dd/MM/yyyy')}"></td>
+										<td><a type="button" class="btn btn-danger"
+											th:onclick="'deleteConfirm(\'' + ${eachRow.userName} + '\');'"
+											data-toggle="tooltip" title="Xóa Khách hàng"> <i
+												class="glyphicon glyphicon-trash"></i></a></td>
+										<td><a
+											th:onclick="'detailUser(\'' + ${eachRow.id} + '\');'"
+											type="button" class="btn btn-success" data-toggle="modal"
+											data-target="#detailModal" title="Thông tin Tài Khoản"><i
+												class="fa fa-eye"></i></a></td>
+										<!--                                    <td>-->
+										<!--                                        <a href="#"-->
+										<!--                                           th:onclick="'resetPasswordConfirm(\'' + ${eachRow.userName} + '\');'"-->
+										<!--                                           data-toggle="tooltip" title="Reset mật khẩu Tài Khoản">-->
+										<!--                                            <button class="btn btn-info btn-circle"><i class="fa fa-refresh"></i>-->
+										<!--                                            </button>-->
+										<!--                                        </a>-->
+										<!--                                    </td>-->
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<!-- Card footer -->
+						<div class="card-footer py-4">
+							<div
+								th:replace="fragments/panigatorAdmin :: content(page = ${page})">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer -->
+				<!-- <div th:replace="fragments/navAdmin :: footer"></div> -->
+			</div>
+		</div>
+	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+
+	<!-- Optional JS -->
+	<!-- 	<script th:src="@{/assets/vendor/chart.js/dist/Chart.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/dist/Chart.extension.js}"></script> -->
+	<!-- Argon JS -->
+	<div th:replace="fragments/initAdmin :: commonScript"></div>
+
+	<div th:replace="fragments/navAdmin :: modal-delete"></div>
+
+	<div id="quickview-wrapper">
+		<!-- Modal -->
+		<div class="modal fade" id="detailModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="height: 50px;">
+						<label>Chi tiết nhân viên</label>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" style="padding-top: 0px !important;">
+						<div class="modal-product clearfix">
+							<div class="product-info">
+								<div class="row">
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Tên</label>
+										<div>
+											<input class="form-control readonly" id="nameUser"
+												type="text" readonly />
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Email</label>
+										<div>
+											<input class="form-control readonly" id="emailUser"
+												type="text" readonly />
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Số điện thoại</label>
+										<div>
+											<input class="form-control readonly" id="phone" type="text"
+												readonly />
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Ngày sinh</label>
+										<div>
+											<input class="form-control readonly" id="birthday"
+												type="text" readonly />
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Thành phố</label>
+										<div>
+											<input class="form-control readonly" id="province"
+												type="text" readonly />
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Quận/Huyện</label>
+										<div>
+											<input class="form-control readonly" id="town" type="text"
+												readonly />
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Ngân hàng</label>
+										<div>
+											<input class="form-control readonly" id="bank" type="text"
+												readonly />
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Số tài khoản</label>
+										<div>
+											<input class="form-control readonly" id="atmNumber"
+												type="text" readonly />
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Công ty</label>
+										<div>
+											<textarea class="form-control readonly" id="company" readonly></textarea>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+										<label>Địa chỉ</label>
+										<div>
+											<textarea class="form-control readonly" id="address" readonly></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- .product-info -->
+						</div>
+						<!-- .modal-product -->
+					</div>
+					<!-- .modal-body -->
+				</div>
+				<!-- .modal-content -->
+			</div>
+			<!-- .modal-dialog -->
+		</div>
+		<!-- END Modal -->
+	</div>
+
+	<!-- <div id="deleteConfirm-wrapper">
+		Modal
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id="name"></p>
+						<button id="delete" class="btn btn-sm btn-danger text-right">Delete</button>
+						.modal-product
+					</div>
+					.modal-body
+				</div>
+				.modal-content
+			</div>
+			.modal-dialog
+		</div>
+		END Modal
+	</div> -->
+
+
+
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var currUrl = /*[[@{/}]]*/"";
+		/*]]>*/
+	</script>
+
+
+	<script>
+		function detailUser(id) {
+			$.ajax({
+				url : currUrl + 'staff/detail.html',
+				method : 'GET',
+				data : {
+					'id' : id
+				},
+				contentType : 'application/x-www-form-urlencoded',
+				success : function(response) {
+					var data = JSON.parse(response);
+					if (data !== null && data !== '') {
+						$('#nameUser').val(data.nameUser);
+						$('#emailUser').val(data.emailUser);
+						$('#bank').val(data.bank);
+						$('#atmNumber').val(data.atmNumberBank);
+						$('#birthday').val(
+								moment(data.birthday).format('DD/MM/YYYY'));
+						$('#company').val(data.company);
+						$('#phone').val(data.phone);
+						$('#province').val(data.province);
+						$('#town').val(data.town);
+						$('#address').val(data.address);
+					} else {
+						$('#nameUser').val('');
+						$('#emailUser').val('');
+						$('#bank').val('');
+						$('#atmNumber').val('');
+						$('#birthday').val('');
+						$('#company').val('');
+						$('#phone').val('');
+						$('#province').val('');
+						$('#town').val('');
+					}
+				}
+			})
+		}
+	</script>
+
+	<script type="text/javascript">
+		function deleteConfirm(key, name) {
+			var id = key;
+
+			$('#modal-title-notification').text('Xác nhận xóa danh mục')
+
+			$('#name').text(
+					'Bạn có chắc chắn muốn xóa nhân viênc: ' + key + ' - '
+							+ name + ' không ? Bấm Delete để xác nhận.');
+
+			$('#delete').click(
+					function() {
+						$.ajax({
+							url : window.location.origin + currUrl
+									+ 'staff/delete/' + id + '/list.html',
+							method : 'GET',
+							success : function() {
+								window.location.href = window.location.origin
+										+ currUrl + 'staff/list.html';
+							}
+						});
+					});
+		}
+	</script>
+</body>
+
+</html>
