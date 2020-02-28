@@ -28,7 +28,8 @@
 				<div class="card-body">
 					<form th:object="${category}" th:action="@{/category/save.html}"
 						method="POST">
-						<h6 class="heading-small text-muted mb-4" th:utext="#{lable.categoryinformation}"></h6>
+						<h6 class="heading-small text-muted mb-4"
+							th:utext="#{lable.categoryinformation}"></h6>
 						<div class="alert alert-danger"
 							style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 							th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
@@ -36,8 +37,8 @@
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label class="form-control-label" for="input-username" th:utext="#{lable.namelist}">
-										 <font color="red">*</font>
+										<label class="form-control-label" for="input-username"
+											th:utext="#{lable.namelist}"> <font color="red">*</font>
 										</label> <input type="text" class="form-control" th:field="*{name}"
 											maxlength="64"> <input class="form-control"
 											type="hidden" id="form-field-id" th:field="*{id}" />
@@ -45,7 +46,9 @@
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label class="form-control-label" for="input-email" th:utext="#{lable.grouplist}"></label> <select class="form-control" th:field="*{parent}">
+										<label class="form-control-label" for="input-email"
+											th:utext="#{lable.grouplist}"></label> <select
+											class="form-control" th:field="*{parent}">
 											<option th:value="null"></option>
 											<option th:each="cate : ${lstCate}" th:value="${cate.id}"
 												th:text="${cate.name}" th:selected="${ cate == parent } "></option>
@@ -56,12 +59,10 @@
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-<<<<<<< HEAD
-										<label class="form-control-label" for="input-first-name" th:utext="#{lable.activestatus }"></label> <select class="form-control"
-=======
-										<label class="form-control-label" for="input-first-name" th:utext="#{lable.activestatus}"></label> <select class="form-control"
->>>>>>> 9c3dfdc5987a1fa98a0d017f39ce713d0206d493
-											th:field="*{isActive}">
+
+										<label class="form-control-label" for="input-first-name"
+											th:utext="#{lable.activestatus}"></label> <select
+											class="form-control" th:field="*{isActive}">
 											<option value="Y" th:utext="#{lable.yes}"></option>
 											<option value="N" th:utext="#{lable.no}"></option>
 										</select>
@@ -69,15 +70,17 @@
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group" th:if="${date == null}">
-										<label class="form-control-label" th:utext="#{lable.datecreatedo}"></label> <input
-											type="text" name="date" class="form-control"
+										<label class="form-control-label"
+											th:utext="#{lable.datecreatedo}"></label> <input type="text"
+											name="date" class="form-control"
 											th:value="${#calendars.format(#calendars.createNow(), 'dd/MM/yyyy HH:mm:ss')}"
 											readonly="readonly">
 									</div>
 									<div class="form-group" th:if="${date != null}">
-										<label class="form-control-label" th:utext="#{lable.datecreatedo}"></label> <input
-											type="text" name="date" class="form-control"
-											th:value="${date}" readonly="readonly">
+										<label class="form-control-label"
+											th:utext="#{lable.datecreatedo}"></label> <input type="text"
+											name="date" class="form-control" th:value="${date}"
+											readonly="readonly">
 									</div>
 									<div>
 										<input class="form-control" type="hidden"
@@ -88,8 +91,9 @@
 						</div>
 						<div class="col-lg-12 col-5 text-right">
 							<a th:href="@{/category/list.html}"
-								class="btn btn-sm btn-neutral"   th:utext="#{lable.cancel}">Cancel</a> <button type="submit"
-								class="btn btn-sm btn-neutral" th:utext="#{lable.save}">Save</button>
+								class="btn btn-sm btn-neutral" th:utext="#{lable.cancel}">Cancel</a>
+							<button type="submit" class="btn btn-sm btn-neutral"
+								th:utext="#{lable.save}">Save</button>
 						</div>
 					</form>
 				</div>
