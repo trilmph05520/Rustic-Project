@@ -25,27 +25,11 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0">Danh sách sản phẩm</h3>
+							<h3 class="text-white mb-0" th:utext="#{lable.danhmuc}"></h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
-								<form role="form" th:action="@{/product/list.html}"
-									method="POST">
+								<form role="form" th:action="@{/review/list.html}" method="POST">
 									<div class="row">
-										<!-- <div class="col-lg-4">
-											<label>Từ ngày - đến ngày</label>
-											<div class="input-prepend input-group">
-												<span class="add-on input-group-addon"><i
-													class="glyphicon glyphicon-calendar fa fa-calendar"></i></span> <input
-													type="text" name="from_date" id="from_date" hidden="true"
-													th:value="${from_date}" /> <input type="text"
-													name="to_date" id="to_date" hidden="true"
-													th:value="${to_date}" /> <input type="text"
-													style="width: 100%" id="timePicker"
-													class="form-control span4" value=" - "
-													th:value="${from_date} + ' - ' + ${to_date}"
-													readonly="readonly" />
-											</div>
-										</div> -->
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
 												<div class="form-group">
@@ -76,79 +60,85 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-3">
-											<label class="text-white">Tên sản phẩm</label>
+										<div class="col-lg-4 col-12">
 											<div>
-												<input type="text" placeholder="Tên sản phẩm" name="name"
-													id="name" class="form-control" th:value="${name}" />
+												<label class="text-white">Tên</label> <input
+													class="form-control" id="name" name="name" type="text"
+													placeholder="Name" th:value="${name}">
 											</div>
 										</div>
-										<div class="col-sm-2">
-											<label>&nbsp;</label>
+										<div class="col-lg-2 col-12 text-right">
 											<div>
-												<button type="submit" id="btnSearch" class="btn btn-primary">Tìm
-													kiếm</button>
+												<label>&nbsp;</label>
+												<div>
+													<button type="submit" id="btnSearch"
+														class="btn btn-primary">Tìm kiếm</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</form>
 							</div>
-							<input type="hidden" name="category_list_ss"
-								th:value="${category_list_ss}" />
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
-								<a th:href="@{/product/add.html}"
-									sec:authorize="hasAnyAuthority('Administrators','Staffs')"
-									class="btn btn-sm btn-primary">New</a> <a
-									th:href="@{/category/list.html(category_list_ss=${category_list_ss})}"
-									class="btn btn-sm btn-neutral">Refresh</a>
+								<a th:href="@{/review/list.html}" class="btn btn-sm btn-neutral"
+									th:utext="#{lable.lammoi}"></a>
 							</div>
 						</div>
 						<div class="table-responsive">
 							<table class="table align-items-center table-dark table-flush">
 								<thead class="thead-dark">
 									<tr>
-										<th scope="col">#</th>
-										<th scope="col">Tên</th>
-										<th scope="col">Giá</th>
-										<th scope="col">Giảm giá</th>
-										<th scope="col">Số lượng</th>
-										<th scope="col">Miêu tả</th>
-										<th scope="col">Thông tin</th>
-										<th scope="col">Trạng thái</th>
-										<th scope="col" class="text-center">#</th>
-										<th scope="col" class="text-center">#</th>
+										<th class="text-table-header">#</th>
+										<th class="text-table-header">Tên</th>
+										<th class="text-table-header">Email</th>
+										<th class="text-table-header">Miêu tả</th>
+										<th class="text-table-header">Trạng thái phản hồi</th>
+										<th class="text-table-header">Trạng thái</th>
+										<th class="text-table-header">#</th>
+										<th class="text-table-header">#</th>
+										<th class="text-table-header">#</th>
 									</tr>
 								</thead>
-								<tbody class="list" th:if="${page.content} != null">
-									<tr th:each="eachRow, iterStat : ${page}">
+								<tbody th:if="${page}!=null">
+									<tr th:each="eachRow,iterStat :${page}">
 										<td class="text-table-body" th:text="${iterStat.count}"></td>
 										<td class="text-table-body" th:text="${eachRow.name}"></td>
-										<td class="text-table-body"
-											th:text="${#numbers.formatDecimal(eachRow.price, 0, 'COMMA', 0,'POINT')}"></td>
-										<td class="text-table-body"
-											th:text="${#numbers.formatDecimal(eachRow.priceSale, 0, 'COMMA', 0,'POINT')}"></td>
-										<td class="text-table-body" th:text="${eachRow.quantity}"></td>
+										<td class="text-table-body" th:text="${eachRow.email}"></td>
 										<td class="text-table-body" th:text="${eachRow.description}"></td>
-										<td class="text-table-body" th:text="${eachRow.info}"></td>
 										<td class="text-table-body" style="text-align: center;">
-											<button class="btn btn-warning"
-												th:if="${eachRow.quantity <= 0}">Hết hàng</button>
 											<button class="btn btn-success"
-												th:if="${eachRow.quantity > 0}">Còn hàng</button>
+												th:if="${eachRow.reply != null}">Đã phản hồi</button>
+											<button class="btn btn-warning"
+												th:if="${eachRow.reply == null}">Chưa phản hồi</button>
 										</td>
-										<td scope="row"><a type="button" class="btn btn-warning"
-											th:href="@{/product/{id}/update.html(id=${eachRow.id})}">Edit</a>
-
+										<td class="text-table-body" style="text-align: center;">
+											<button class="btn btn-success"
+												th:if="${eachRow.status == 1}">Đã duyệt</button>
+											<button class="btn btn-warning"
+												th:if="${eachRow.status == 0}">Chưa duyệt</button>
 										</td>
-										<td scope="row"><a type="button" class="btn btn-danger"
-											data-toggle="modal" data-target="#productModal"
-											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'">Delete</a>
-
-										</td>
-
+										<td class="text-table-body"><a
+											th:href="@{/review/reply/{id}/list.html(id=${eachRow.id})}"
+											th:if="${eachRow.reply} == null" data-toggle="tooltip"
+											title="Phản hồi">
+												<button class="btn btn-info btn-circle">
+													<i class="fa fa-reply"></i>
+												</button>
+										</a> <label th:if="${eachRow.reply} != null">&nbsp;</label></td>
+										<td class="text-table-body"><a
+											th:onclick="'acceptReview(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\');'"
+											th:if="${eachRow.status} == 0" data-toggle="tooltip"
+											title="Duyệt">
+												<button class="btn btn-info btn-circle">
+													<i class="fa fa-check"></i>
+												</button>
+										</a> <label th:if="${eachRow.status} == 1">&nbsp;</label></td>
+										<td><a type="button" class="btn btn-warning" href="#"
+											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'"
+											data-toggle="tooltip" title="Xóa Đánh Giá"><i
+												class="glyphicon glyphicon-trash"></i></a></td>
 									</tr>
-
 								</tbody>
 							</table>
 						</div>
@@ -176,6 +166,30 @@
 
 	<div th:replace="fragments/navAdmin :: modal-delete"></div>
 
+	<!-- <div id="deleteConfirm-wrapper">
+		Modal
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id="name"></p>
+						<button id="delete" class="btn btn-sm btn-danger text-right">Delete</button>
+						.modal-product
+					</div>
+					.modal-body
+				</div>
+				.modal-content
+			</div>
+			.modal-dialog
+		</div>
+		END Modal
+	</div> -->
 
 
 
@@ -190,21 +204,21 @@
 		function deleteConfirm(name, key) {
 			var id = key;
 
-			$('#modal-title-notification').text('Xác nhận xóa sản phẩm')
+			$('#modal-title-notification').text('Xác nhận xóa đánh giá')
 
-			$('#contentDelete').text(
-					'Bạn có chắc chắn muốn xóa sản phẩm: ' + key + ' - ' + name
+			$('#name').text(
+					'Bạn có chắc chắn muốn xóa đánh giá: ' + key + ' - ' + name
 							+ ' không ? Bấm Delete để xác nhận.');
 
 			$('#delete').click(
 					function() {
 						$.ajax({
 							url : window.location.origin + currUrl
-									+ 'product/delete/' + id + '/list.html',
+									+ 'review/delete/' + id + '/list.html',
 							method : 'GET',
 							success : function() {
 								window.location.href = window.location.origin
-										+ currUrl + 'product/list.html';
+										+ currUrl + 'review/list.html';
 							}
 						});
 					});
