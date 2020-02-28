@@ -35,7 +35,7 @@ public class ReviewController {
     @Resource
     private ReviewService reviewService;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     @RequestMapping(value = "list.html", method = {RequestMethod.GET, RequestMethod.POST})
     @PreAuthorize("hasAnyAuthority('Administrators','Staffs')")
