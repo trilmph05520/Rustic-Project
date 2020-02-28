@@ -24,7 +24,7 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0" th:utext="#{lable.danhmuc}"></h3>
+							<h3 class="text-white mb-0" th:utext="#{lable.category}"></h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
 								<form role="form" th:action="@{/category/list.html}"
@@ -40,7 +40,7 @@
 										<div class="col-lg-4 col-12">
 											<div>
 												<button type="submit" id="btnSearch"
-													class="btn btn-primary btn-sm" th:utext="#{lable.timkiem}">Tìm kiếm</button>
+													class="btn btn-primary btn-sm" th:utext="#{lable.search}">Tìm kiếm</button>
 											</div>
 										</div>
 									</div>
@@ -54,9 +54,9 @@
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
 								<a th:href="@{/category/0/edit.html}"
-									class="btn btn-sm btn-primary"  th:utext="#{lable.themmoi}"></a> <a
+									class="btn btn-sm btn-primary"  th:utext="#{lable.new}"></a> <a
 									th:href="@{/category/list.html(category_list_ss=${category_list_ss})}"
-									class="btn btn-sm btn-neutral" th:utext="#{lable.lammoi}" ></a>
+									class="btn btn-sm btn-neutral" th:utext="#{lable.refresh}" ></a>
 							</div>
 						</div>
 						<div class="table-responsive">
@@ -64,9 +64,9 @@
 								<thead class="thead-dark">
 									<tr>
 										<th scope="col">#</th>
-										<th scope="col" th:utext="#{lable.madanhmuc}" ></th>
-										<th scope="col" th:utext="#{lable.tendanhmuc}" ></th>
-										<th scope="col" th:utext="#{lable.nhomdanhmuc}">Nhóm danh mục</th>
+										<th scope="col" th:utext="#{lable.Catalogcode}" ></th>
+										<th scope="col" th:utext="#{lable.namelist}" ></th>
+										<th scope="col" th:utext="#{lable.grouplist}"></th>
 										<th scope="col" class="text-center">#</th>
 										<th scope="col" class="text-center">#</th>
 									</tr>
@@ -97,12 +97,12 @@
 											</div>
 										</td>
 										<td scope="row"><a type="button" class="btn btn-warning"
-											th:href="@{/category/{id}/edit.html(id=${eachRow.id})}"th:utext="#{lable.sua}"></a>
+											th:href="@{/category/{id}/edit.html(id=${eachRow.id})}"th:utext="#{lable.edit}"></a>
 
 										</td>
 										<td scope="row"><a type="button" class="btn btn-danger"
 											data-toggle="modal" data-target="#productModal"
-											th:onclick="'deleteConfirm(\'' + ${eachRow.id} + '\',\'' + ${eachRow.name} + '\');'" th:utext="#{lable.xoa}"></a>
+											th:onclick="'deleteConfirm(\'' + ${eachRow.id} + '\',\'' + ${eachRow.name} + '\');'" th:utext="#{lable.delete}"></a>
 
 										</td>
 									</tr>
