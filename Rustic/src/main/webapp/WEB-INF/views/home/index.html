@@ -233,11 +233,11 @@
 								</a>
 								<div class="product-price">
 									<!-- $14.00 <span>$35.00</span> -->
-									<h4 th:if="${eachPro.rate == 0}" class="pro-price"
+									<h4 th:if="${eachPro.rate == 0}" class="product-price"
 										style="margin-top: 33px;"
 										th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
 										&nbsp;Vnđ</h4>
-									<h4 th:if="${eachPro.rate != 0}" class="pro-price"
+									<h4 th:if="${eachPro.rate != 0}" class="product-price"
 										th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
 										&nbsp;Vnđ</h4>
 								</div>

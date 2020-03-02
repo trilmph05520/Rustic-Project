@@ -83,7 +83,7 @@
 					<div class="row">
 						<div class="col-lg-2 col-md-2">
 							<div class="logo">
-								<a th:href="@{/}"> <img th:src="@{/assets/img/logo.png}"
+								<a th:href="@{/}"> <img th:src="@{/assets/img/logoRustic.png}" width="88px" height="23px"
 									alt="">
 								</a>
 							</div>
@@ -106,47 +106,77 @@
 										class="icon_heart_alt"></i> <span>1</span>
 								</a></li>
 								<li class="cart-icon"><a href="#"> <i
-										class="icon_bag_alt"></i> <span>3</span>
+										class="icon_bag_alt"></i> <span class="cart-quantity"
+										th:if="${session.myCartNum != 0}"
+										th:text="${session.myCartNum}">3</span> <span
+										class="cart-quantity"
+										th:if="${session.myCartNum == null || session.myCartNum==0}">0</span>
 								</a>
-									<div class="cart-hover">
+									<div class="cart-hover"
+										th:if="${session.myCartItems != null} and ${session.myCartTotal != 0}">
 										<div class="select-items">
 											<table>
 												<tbody>
-													<tr>
-														<td class="si-pic"><img
-															th:src="@{/assets/img/select-product-1.jpg}" alt=""></td>
+													<tr th:each="cart : ${session.myCartItems}">
+														<td class="si-pic"><a
+															th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}"><img
+																th:src="|${cart.value.product.mainImg}|" alt=""
+																width="72px" height="72px"></a></td>
 														<td class="si-text">
 															<div class="product-selected">
-																<p>$60.00 x 1</p>
-																<h6>Kabino Bedside Table</h6>
+																<a
+																	th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}"><h6
+																		th:text="|${cart.value.product.name}|">Kabino
+																		Bedside Table</h6></a>
+																<p th:id="pricecart+${cart.value.product.id}"
+																	th:text="|${#numbers.formatDecimal(cart.value.product.price * cart.value.quantity, 0, 'COMMA', 0,'POINT')} VND|">$60.00
+																	x 1</p>
+																<p>
+																	<span><strong>SL: </strong></span> <span
+																		th:id="quantitycart+${cart.value.product.id}"
+																		th:text="|${cart.value.quantity}|"></span>
+																</p>
 															</div>
 														</td>
-														<td class="si-close"><i class="ti-close"></i></td>
-													</tr>
-													<tr>
-														<td class="si-pic"><img
-															th:src="@{/assets/img/select-product-2.jpg}" alt=""></td>
-														<td class="si-text">
-															<div class="product-selected">
-																<p>$60.00 x 1</p>
-																<h6>Kabino Bedside Table</h6>
-															</div>
-														</td>
-														<td class="si-close"><i class="ti-close"></i></td>
+														<td class="si-close"><a
+															th:onclick="'remove(\'' +  ${cart.value.product.id} + '\')'"><i
+																class="ti-close"></i></a></td>
 													</tr>
 												</tbody>
 											</table>
 										</div>
 										<div class="select-total">
 											<span>total:</span>
-											<h5>$120.00</h5>
+											<h5 id="totalPriceCart"
+												th:text="'Tổng = ' + ${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')}">$120.00</h5>
 										</div>
 										<div class="select-button">
-											<a href="#" class="primary-btn view-card">VIEW CARD</a> <a
-												href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+											<a th:href="@{/home/cart.html}" class="primary-btn view-card">VIEW
+												CARD</a> <a th:href="@{/home/cart.html?payment=true}"
+												class="primary-btn checkout-btn">CHECK OUT</a>
 										</div>
+										<script>
+											function remove(id) {
+												var path = window.location.pathname
+														.split("/")[1];
+												$
+														.ajax({
+															url : window.location.origin
+																	+ '/'
+																	+ path
+																	+ '/'
+																	+ 'cart/remove/'
+																	+ id
+																	+ '.html',
+															method : 'GET',
+														});
+												location.reload();
+
+											}
+										</script>
 									</div></li>
-								<li class="cart-price">$150.00</li>
+
+								<!-- <li class="cart-price">$150.00</li> -->
 							</ul>
 						</div>
 					</div>
@@ -161,15 +191,14 @@
 
 							<!-- 							<i class="ti-menu" ><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>   -->
 
-							<ul class="depart-hover">
-								<li class="active"><a href="#">Women’s Clothing</a></li>
-								<li><a href="#">Men’s Clothing</a></li>
-								<li><a href="#">Underwear</a></li>
-								<li><a href="#">Kid's Clothing</a></li>
-								<li><a href="#">Brand Fashion</a></li>
-								<li><a href="#">Accessories/Shoes</a></li>
-								<li><a href="#">Luxury Brands</a></li>
-								<li><a href="#">Brand Outdoor Apparel</a></li>
+							<ul class="depart-hover"
+								style="height: 400px; overflow-y: scroll;">
+								<li th:each="eachCate : ${session.categoryNav}"><span
+									th:each="cateChilren : ${eachCate.value[1]}"> <a
+										th:href="@{/home/{id}/product.html(id=${cateChilren[0]})}"
+										th:text="${cateChilren[1]}">Iphone</a>
+								</span></li>
+
 							</ul>
 						</div>
 					</div>
@@ -184,11 +213,19 @@
 							<li><a th:href="@{/}">Home</a></li>
 							<li><a th:href="@{/home/shop.html}" th:utext="#{lable.Shop}"></a></li>
 							<li><a th:utext="#{lable.Collection}"></a>
-								<ul class="dropdown">
-									<li><a href="#">Men's</a></li>
-									<li><a href="#">Women's</a></li>
-									<li><a href="#">Kid's</a></li>
+								<ul class="dropdown" style="height: 400px; overflow-y: scroll;"
+									th:if="${session.categoryNavPr != null && session.categoryNavPr.size() > 10}">
+									<li th:each="eachCatePr : ${session.categoryNavPr}"><a
+										th:href="@{/home/{id}/product.html(id=${eachCatePr.id})}"
+										th:text="${eachCatePr.name}">Iphone</a></li>
+								</ul>
+								<ul class="dropdown"
+									th:if="${session.categoryNavPr != null && session.categoryNavPr.size() < 10}">
+									<li th:each="eachCatePr : ${session.categoryNavPr}"><a
+										th:href="@{/home/{id}/list/product.html(id=${eachCatePr.id})}"
+										th:text="${eachCatePr.name}">Iphone</a></li>
 								</ul></li>
+
 							<li><a th:href="@{/home/blog.html}">Blog</a></li>
 							<li><a th:href="@{/home/contact.html}"
 								th:utext="#{lable.Contact}"></a></li>
@@ -217,7 +254,7 @@
 					<div class="col-lg-3">
 						<div class="footer-left">
 							<div class="footer-logo">
-								<a href="#"><img th:src="@{/assets/img/footer-logo.png}"
+								<a href="#"><img th:src="@{/assets/img/logoRustic.png}" width="88px" height="23px"
 									alt=""></a>
 							</div>
 							<ul>
@@ -367,4 +404,6 @@
 		<!-- END Modal -->
 	</div>
 	<!-- END QUICKVIEW PRODUCT -->
+
 </div>
+
