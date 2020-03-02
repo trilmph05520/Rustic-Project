@@ -117,13 +117,13 @@
 											</div>
 										</div>
 										<div class="product-price">
-											<h4 th:if="${eachPro.rate == 0}" class="pro-price"
+											<h5 th:if="${eachPro.rate == 0}" class="pro-price"
 												style="margin-top: 33px;"
-												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')}">
-												&nbsp;Vnđ</h4>
-											<h4 th:if="${eachPro.rate != 0}" class="pro-price"
-												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')}">
-												&nbsp;Vnđ</h4>
+												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
+												&nbsp;Vnđ</h5>
+											<h5 th:if="${eachPro.rate != 0}" class="pro-price"
+												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
+												&nbsp;Vnđ </h5>
 										</div>
 									</div>
 								</div>
