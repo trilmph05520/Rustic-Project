@@ -241,7 +241,7 @@
 						<div class="card-header">
 							<div class="row align-items-center">
 								<div class="col-8">
-									<h3 class="mb-0">Edit Product</h3>
+									<h3 class="mb-0" th:utext="#{lable.editproduct}"></h3>
 								</div>
 								<!-- <div class="col-4 text-right">
 									<a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -256,7 +256,7 @@
 								<div class="row">
 									<div class="col-lg-3">
 										<div class="form-group">
-											<label>Hình ảnh đại diện</label><span class="error"> *</span>
+											<label th:utext="#{lable.avtImg}"></label><span class="error"> *</span>
 											<div>
 												<div class="group-hinhanh">
 													<div class="wrap-custom-file">
@@ -275,7 +275,7 @@
 									</div>
 									<div class="col-lg-9" style="border-left: 2px solid #aaa;">
 										<div class="form-group">
-											<label>Hình ảnh chi tiết</label><span class="error"> *</span>
+											<label th:utext="#{lable.imgdetail}"></label><span class="error"> *</span>
 											<div>
 												<div class="detail-step row-card-hinhanh-chit-tiet">
 													<div class="group-hinhanh">
@@ -301,7 +301,7 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label>Danh mục SP</label><span class="error"> *</span>
+											<label th:utext="#{lable.productportfolio}"></label><span class="error"> *</span>
 											<div>
 												<select class="form-control" id="form-field-cateChildren">
 													<option th:each="eachCate : ${category}"
@@ -313,7 +313,7 @@
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 20px;">
 										<div class="form-group">
-											<label>Loại DM</label><span class="error"> *</span>
+											<label th:utext="#{lable.category}"></label><span class="error"> *</span>
 											<div>
 												<select class="form-control" id="form-field-cate-children">
 												</select>
@@ -325,7 +325,7 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label>Tên sản phẩm</label><span class="error"> *</span>
+											<label th:utext="#{lable.productname}"></label><span class="error"> *</span>
 											<div>
 												<input type="text" class="form-control" id="name"
 													placeholder="Tên sản phẩm" th:value="${product.name}"
@@ -337,7 +337,7 @@
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 20px;">
 										<div class="form-group">
-											<label>Số lượng</label><span class="error"> *</span>
+											<label th:utext="#{lable.amount}"></label><span class="error"> *</span>
 											<div>
 												<input type="text" class="form-control" id="quantity"
 													maxlength="11" th:value="${product.quantity}" /> <span
@@ -348,7 +348,7 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label>Giá sản phẩm</label><span class="error"> *</span>
+											<label th:utext="#{lable.price}"></label><span class="error"> *</span>
 											<div>
 												<input type="text" class="form-control"
 													placeholder="Giá sản phẩm" id="price"
@@ -361,7 +361,7 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label>Giảm giá</label>
+											<label th:utext="#{lable.discount}"></label>
 											<div>
 												<input type="text" class="form-control"
 													placeholder="Giảm giá" id="priceSale"
@@ -389,10 +389,10 @@
 									<!--                        </div>-->
 									<div class="col-lg-6" style="height: 100px;">
 										<div class="form-group" style="height: 100px;">
-											<label>Miêu tả sản phẩm</label><span class="error"> *</span>
+											<label th:utext="#{lable.described}"></label><span class="error"> *</span>
 											<div style="height: 100px;">
 												<textarea class="form-control"
-													placeholder="Miêu tả sản phẩm" id="description"
+													placeholder="" id="description"
 													th:text="${product.description}" style="height: 100px;"
 													maxlength="256"></textarea>
 												<span
@@ -403,11 +403,11 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label>Thông tin sản phẩm</label><span class="error">
+											<label th:utext="#{lable.productportfoli}"></label><span class="error">
 												*</span>
 											<div>
 												<textarea class="form-control"
-													placeholder="Thông tin sản phẩm" id="info"
+													placeholder="" id="info"
 													th:text="${product.info}" style="height: 100px;"
 													maxlength="256"></textarea>
 												<span
@@ -422,9 +422,9 @@
 											<div class="form-group">
 												<a
 													th:href="@{/product/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
-													href="/account/list" class="btn btn-sm btn-neutral">Cancel</a>
+													href="/account/list" class="btn btn-sm btn-neutral" th:utext="#{lable.cancel}"></a>
 												<button type="button" id="updateProduct"
-													class="btn btn-sm btn-neutral">Save</button>
+													class="btn btn-sm btn-neutral" th:utext="#{lable.save}"></button>
 											</div>
 										</div>
 									</div>

@@ -236,7 +236,7 @@
 						<div class="card-header">
 							<div class="row align-items-center">
 								<div class="col-8">
-									<h3 class="mb-0">Add Product</h3>
+									<h3 class="mb-0" th:utext="#{lable.addproduct}"></h3>
 								</div>
 								<!-- <div class="col-4 text-right">
 									<a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -245,20 +245,19 @@
 						</div>
 						<div class="card-body">
 							<form>
-								<h6 class="heading-small text-muted mb-4">Product
-									information</h6>
+								<h6 class="heading-small text-muted mb-4"th:utext="#{lable.productinformation}"></h6>
 								<div class="pl-lg-4">
 									<div class="row">
 										<div class="col-lg-3">
 											<div class="form-group">
-												<label>Hình ảnh đại diện</label><span class="error">
+												<label th:utext="#{lable.avtImg}"></label><span class="error">
 													*</span>
 												<div>
 													<div class="group-hinhanh">
 														<div class="wrap-custom-file">
 															<input type="file" name="image1" class="imgUpload"
 																id="image1" accept=".gif,.jpg,.png,.jpeg" /> <label
-																for="image1"> <span>Chọn ảnh</span>
+																for="image1"> <span  th:utext="#{lable.choosephoto}"></span>
 															</label>
 														</div>
 													</div>
@@ -270,7 +269,7 @@
 										</div>
 										<div class="col-lg-9" style="border-left: 2px solid #aaa;">
 											<div class="form-group">
-												<label>Hình ảnh chi tiết</label><span class="error">
+												<label th:utext="#{lable.imgdetail}">t</label><span class="error">
 													*</span>
 												<div>
 													<div class="detail-step row-card-hinhanh-chit-tiet">
@@ -298,10 +297,10 @@
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label>Danh mục SP</label><span class="error"> *</span>
+												<label th:utext="#{lable.productportfolio}"></label><span class="error"> *</span>
 												<div>
 													<select class="form-control" id="form-field-cateChildren">
-														<option value="0">Chọn DM SP</option>
+														<option value="0" th:utext="#{lable.productportfolio}"></option>
 														<option th:each="eachCate : ${category}"
 															th:value="${eachCate.id}" th:text="${eachCate.name}"></option>
 													</select>
@@ -310,10 +309,10 @@
 										</div>
 										<div class="col-lg-6" style="margin-bottom: 20px;">
 											<div class="form-group">
-												<label>Loại DM</label><span class="error"> *</span>
+												<label th:utext="#{lable.category}"></label><span class="error"> *</span>
 												<div>
 													<select class="form-control" id="form-field-cate-children">
-														<option value="">Chọn loại DM</option>
+														<option value="" th:utext="#{lable.category}">M</option>
 													</select>
 												</div>
 												<span
@@ -323,10 +322,10 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label>Tên sản phẩm</label><span class="error"> *</span>
+												<label th:utext="#{lable.productname}"></label><span class="error"> *</span>
 												<div>
 													<input type="text" class="form-control" id="name"
-														placeholder="Tên sản phẩm" maxlength="64" /> <span
+														placeholder="" maxlength="64" /> <span
 														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
 														id="nameError"></span>
 												</div>
@@ -334,7 +333,7 @@
 										</div>
 										<div class="col-lg-6" style="margin-bottom: 20px;">
 											<div class="form-group">
-												<label>Số lượng</label><span class="error"> *</span>
+												<label th:utext="#{lable.amount}"></label><span class="error"> *</span>
 												<div>
 													<input type="text" class="form-control" id="quantity"
 														value="1" maxlength="11" /> <span
@@ -345,7 +344,7 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label>Giá sản phẩm</label><span class="error"> *</span>
+												<label th:utext="#{lable.price}"></label><span class="error"> *</span>
 												<div>
 													<input type="text" class="form-control"
 														placeholder="Giá sản phẩm" id="price" /> <span
@@ -356,7 +355,7 @@
 										</div>
 										<div class="col-lg-6" style="margin-bottom: 20px;">
 											<div class="form-group">
-												<label>Giảm giá</label>
+												<label th:utext="#{lable.discount}"></label>
 												<div>
 													<input type="text" class="form-control"
 														placeholder="Giảm giá" id="priceSale" /> <span
@@ -367,10 +366,10 @@
 										</div>
 										<div class="col-lg-6" style="height: 100px;">
 											<div class="form-group" style="height: 100px;">
-												<label>Miêu tả sản phẩm</label><span class="error"> *</span>
+												<label th:utext="#{lable.described}"></label><span class="error"> *</span>
 												<div style="height: 100px;">
 													<textarea class="form-control"
-														placeholder="Miêu tả sản phẩm" id="description"
+														placeholder="" id="description"
 														style="height: 100px;" maxlength="256"></textarea>
 													<span
 														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
@@ -380,7 +379,7 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label>Thông tin sản phẩm</label><span class="error">
+												<label th:utext="#{lable.productportfoli}"></label><span class="error">
 													*</span>
 												<div>
 													<textarea class="form-control"
@@ -398,9 +397,9 @@
 											<div class="form-group">
 												<a
 													th:href="@{/product/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
-													href="/account/list" class="btn btn-sm btn-neutral">Cancel</a>
+													href="/account/list" class="btn btn-sm btn-neutral" th:utext="#{lable.cancel}"></a>
 												<button type="button" id="addProduct"
-													class="btn btn-sm btn-neutral">Save</button>
+													class="btn btn-sm btn-neutral" th:utext="#{lable.save}"></button>
 											</div>
 										</div>
 									</div>
