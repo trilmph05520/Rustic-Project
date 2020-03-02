@@ -54,7 +54,7 @@
 							<select class="language_drop" name="countries" id="countries"
 								style="width: 300px;">
 
-		<!-- 						<option th:href="@{/Rustic/?lang=en}" value='yt'
+								<!-- 						<option th:href="@{/Rustic/?lang=en}" value='yt'
 									th:data-image="@{/assets/img/flag-1.jpg}"
 									data-imagecss="flag yt" data-title="English"><a
 										th:href="@{/Rustic/?lang=en}">English</a></option>
@@ -62,9 +62,10 @@
 									data-imagecss="flag yu" data-title="Bangladesh"><a
 										th:href="@{/Rustic/?lang=vi}">Viet</a></option> -->
 
-								<option th:href="@{/Rustic/?lang=en}" value='yt' th:data-image="@{/assets/img/flag-1.jpg}"
+								<option th:href="@{/Rustic/?lang=en}" value='yt'
+									th:data-image="@{/assets/img/flag-1.jpg}"
 									data-imagecss="flag yt" data-title="English">English</option>
-								<option  value='yu' th:data-image="@{/assets/img/vietnam.png}" 
+								<option value='yu' th:data-image="@{/assets/img/vietnam.png}"
 									data-imagecss="flag yu" data-title="Bangladesh">Vietnamese</option>
 
 							</select>
@@ -158,7 +159,7 @@
 
 							<i class="ti-menu"><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>
 
-<!-- 							<i class="ti-menu" ><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>   -->
+							<!-- 							<i class="ti-menu" ><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>   -->
 
 							<ul class="depart-hover">
 								<li class="active"><a href="#">Women’s Clothing</a></li>
@@ -175,14 +176,14 @@
 					<nav class="nav-menu mobile-menu">
 						<ul>
 
-<!-- 							<li class="active"><a href="./index.html"
+							<!-- 							<li class="active"><a href="./index.html"
 								th:utext="#{lable.Collection}"></a></li>
 									<li><a href="./shop.html" th:utext="#{lable.Contact}"></a></li> -->
 
-							<li class="active"><a href="./index.html" th:utext="#{lable.Collection}"></a></li>
-							<li><a href="./shop.html">Home</a></li>
-
-							<li><a href="#" th:utext="#{lable.Shop}"></a>
+							<!-- 		<li class="active"><a href="./index.html" th:utext="#{lable.Collection}"></a></li> -->
+							<li><a th:href="@{/}">Home</a></li>
+							<li><a th:href="@{/home/shop.html}" th:utext="#{lable.Shop}"></a></li>
+							<li><a th:utext="#{lable.Collection}"></a>
 								<ul class="dropdown">
 									<li><a href="#">Men's</a></li>
 									<li><a href="#">Women's</a></li>
@@ -225,14 +226,16 @@
 								<li>Email: trilmph05520@fpt.edu.vn</li>
 							</ul>
 							<div class="footer-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a> <a href="#"><i
+								<a href="https://www.facebook.com/mt.minhtri"><i
+									class="fa fa-facebook"></i></a> <a href="#"><i
+									class="fa fa-instagram"></i></a>
+								<!-- <a href="#"><i
 									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-pinterest"></i></a>
+									class="fa fa-pinterest"></i></a> -->
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-2 offset-lg-1">
+					<!-- <div class="col-lg-2 offset-lg-1">
 						<div class="footer-widget">
 							<h5>Information</h5>
 							<ul>
@@ -264,7 +267,7 @@
 								<button type="button">Subscribe</button>
 							</form>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="copyright-reserved">
@@ -291,4 +294,77 @@
 			</div>
 		</footer>
 	</div>
+
+	<!-- START QUICKVIEW PRODUCT -->
+	<div id="quickview-wrapper" th:fragment="quickview">
+		<!-- Modal -->
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Chi tiết sản phẩm</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product clearfix">
+							<div class="product-images">
+								<div class="main-image images">
+									<img alt="" src="" id="imageQuick">
+								</div>
+							</div>
+							<!-- .product-images -->
+							<div class="product-info">
+								<h4 id="nameQuick">SamSung A50</h4>
+								<div class="price-box-3">
+									<div class="s-price-box">
+										<span class="new-price" id="price"></span> <span
+											class="old-price" id="price_sale"></span>
+									</div>
+								</div>
+								<label id="status" class="see-all"></label>
+								<div class="quick-add-to-cart">
+									<!--											<div class="numbers-row">-->
+									<!--												<input type="number" id="french-hens" value="1">-->
+									<!--											</div>-->
+									<!-- 	<a href=""
+										style="line-height: 45px; height: 45px; border-radius: 5px; font-size: 17px;"
+										id="quickCart" class="btn btn-warning" type="submit">Thêm
+										vào giỏ </a> -->
+									<a href="#" class="primary-btn pd-cart" id="quickCart"
+										type="submit">Add To Cart</a>
+								</div>
+								<div class="quick-desc" id="info">Hello, Every body.</div>
+								<!-- <div class="social-sharing">
+									<div class="widget widget_socialsharing_widget">
+										<h3 class="widget-title-modal">Chia sẻ sản phẩm</h3>
+										<ul class="social-icons clearfix">
+											<li><a class="facebook" href="#" target="_blank"
+												title="Facebook"> <i class="zmdi zmdi-facebook"></i>
+											</a></li>
+											<li><a class="twitter" href="#" target="_blank"
+												title="Skype"> <i class="zmdi zmdi-skype"></i>
+											</a></li>
+											<li><a class="twitter" href="#" target="_blank"
+												title="Instagram"> <i class="zmdi zmdi-instagram"></i>
+											</a></li>
+										</ul>
+									</div>
+								</div> -->
+							</div>
+							<!-- .product-info -->
+						</div>
+						<!-- .modal-product -->
+					</div>
+					<!-- .modal-body -->
+				</div>
+				<!-- .modal-content -->
+			</div>
+			<!-- .modal-dialog -->
+		</div>
+		<!-- END Modal -->
+	</div>
+	<!-- END QUICKVIEW PRODUCT -->
 </div>

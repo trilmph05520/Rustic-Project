@@ -171,6 +171,40 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("home/index");
         return modelAndView;
     }
+    
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @RequestMapping(value = {"/home/shop.html"}, method = RequestMethod.GET)
+    public ModelAndView shop(Model model, Pageable pageable, HttpSession session) {
+        Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+        Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
+        Page<Product> product = productService.findAllByIsdelete("N", _pageable);
+        List<Product> newProduct = productService.lsProductDateDesc();
+        List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+        Map<Long, List> mapLsId = new HashMap<>();
+        for (Category each : category) {
+            if (each.getParent() == null) {
+                List ls = new ArrayList();
+                ls.add(each.getName());
+                List lsCategoryChildren = new ArrayList();
+                ls.add(lsCategoryChildren);
+                mapLsId.put(each.getId(), ls);
+            }
+        }
+        for (Category eachCateChildren : category) {
+            if (eachCateChildren.getParent() != null) {
+                ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
+                List lsCategoryInfo = new ArrayList();
+                lsCategoryInfo.add(eachCateChildren.getId());
+                lsCategoryInfo.add(eachCateChildren.getName());
+                lsChildren.add(lsCategoryInfo);
+            }
+        }
+        session.setAttribute("categoryNav", mapLsId);
+        model.addAttribute("newProduct", newProduct);
+        model.addAttribute("page", product);
+        ModelAndView modelAndView = new ModelAndView("home/shop");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/home/{id}/single-product.html", method = {RequestMethod.GET})
     public ModelAndView singleProduct(Model model, @PathVariable("id") Long id) {
