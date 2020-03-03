@@ -170,14 +170,19 @@
 													class="fa fa-star"></i>
 											</div>
 										</div>
-										<div class="product-price">
-											<h5 th:if="${eachPro.rate == 0}" class="product-price"
-												style="margin-top: 33px;"
+										<div class="product-price" th:if="${eachPro.priceSale == 0}">
+											<!-- $14.00 <span>$35.00</span> -->
+											<h4 class="product-price" style="margin-top: 33px;"
 												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
-												&nbsp;Vnđ</h5>
-											<h5 th:if="${eachPro.rate != 0}" class="product-price"
-												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
-												&nbsp;Vnđ</h5>
+												&nbsp;Vnđ</h4>
+										</div>
+										<div class="product-price" th:if="${eachPro.priceSale != 0}">
+											<!-- $14.00 <span>$35.00</span> -->
+											<h4 class="product-price" style="margin-top: 33px;"
+												th:text="${#numbers.formatDecimal(eachPro.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'">
+												&nbsp;Vnđ</h4>
+											<span style="text-decoration: line-through"
+												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">629.99</span>
 										</div>
 									</div>
 								</div>
