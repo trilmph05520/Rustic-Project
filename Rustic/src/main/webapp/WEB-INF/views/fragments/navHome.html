@@ -58,6 +58,18 @@
 
 
 	<div th:fragment="header">
+		<script>
+			function remove(id) {
+				var path = window.location.pathname.split("/")[1];
+				$.ajax({
+					url : window.location.origin + '/' + path + '/'
+							+ 'cart/remove/' + id + '.html',
+					method : 'GET',
+				});
+				location.reload();
+
+			}
+		</script>
 		<header class="header-section">
 			<div class="header-top">
 				<div class="container">
@@ -128,8 +140,8 @@
 								<li class="heart-icon"><a href="#"> <i
 										class="icon_heart_alt"></i> <span>1</span>
 								</a></li>
-								<li class="cart-icon"><a href="#"> <i
-										class="icon_bag_alt"></i> <span class="cart-quantity"
+								<li class="cart-icon"><a th:href="@{/home/cart.html}">
+										<i class="icon_bag_alt"></i> <span class="cart-quantity"
 										th:if="${session.myCartNum != 0}"
 										th:text="${session.myCartNum}">3</span> <span
 										class="cart-quantity"
@@ -152,8 +164,13 @@
 																		th:text="|${cart.value.product.name}|">Kabino
 																		Bedside Table</h6></a>
 																<p th:id="pricecart+${cart.value.product.id}"
-																	th:text="|${#numbers.formatDecimal(cart.value.product.price * cart.value.quantity, 0, 'COMMA', 0,'POINT')} VND|">$60.00
+																	th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
+																	th:text="|${#numbers.formatDecimal(new java.math.BigDecimal(cart.value.product.price) * new java.math.BigDecimal(cart.value.quantity), 0, 'COMMA', 0,'POINT')} VND|">$60.00
 																	x 1</p>
+																 <p th:id="pricecart+${cart.value.product.id}"
+																	th:if="${cart.value.product.priceSale != 0}"
+																	th:text="|${#numbers.formatDecimal(new java.math.BigDecimal(cart.value.product.priceSale) * new java.math.BigDecimal(cart.value.quantity), 0, 'COMMA', 0,'POINT')} VND|">$60.00
+																	x 1</p> 
 																<p>
 																	<span><strong>SL: </strong></span> <span
 																		th:id="quantitycart+${cart.value.product.id}"
@@ -171,32 +188,13 @@
 										<div class="select-total">
 											<span>total:</span>
 											<h5 id="totalPriceCart"
-												th:text="'Tổng = ' + ${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')}">$120.00</h5>
+												th:text="${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')} + ' VND'">$120.00</h5>
 										</div>
 										<div class="select-button">
 											<a th:href="@{/home/cart.html}" class="primary-btn view-card">VIEW
 												CARD</a> <a th:href="@{/home/cart.html?payment=true}"
 												class="primary-btn checkout-btn">CHECK OUT</a>
 										</div>
-										<script>
-											function remove(id) {
-												var path = window.location.pathname
-														.split("/")[1];
-												$
-														.ajax({
-															url : window.location.origin
-																	+ '/'
-																	+ path
-																	+ '/'
-																	+ 'cart/remove/'
-																	+ id
-																	+ '.html',
-															method : 'GET',
-														});
-												location.reload();
-
-											}
-										</script>
 									</div></li>
 
 								<!-- <li class="cart-price">$150.00</li> -->

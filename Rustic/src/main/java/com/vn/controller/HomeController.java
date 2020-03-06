@@ -1,5 +1,42 @@
 package com.vn.controller;
 
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.apache.commons.collections4.map.HashedMap;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,43 +45,30 @@ import com.vn.common.Constants;
 import com.vn.common.GoogleUtils;
 import com.vn.common.ThymeleafUtil;
 import com.vn.config.GoogleMailSender;
-import com.vn.jpa.*;
+import com.vn.jpa.AuthUser;
+import com.vn.jpa.Bill;
+import com.vn.jpa.Category;
+import com.vn.jpa.GmailGoogle;
+import com.vn.jpa.Infomation;
+import com.vn.jpa.Product;
+import com.vn.jpa.Product_Bill;
+import com.vn.jpa.Report;
+import com.vn.jpa.Review;
 import com.vn.model.AuthUserModel;
 import com.vn.model.BillProfileModel;
 import com.vn.model.Cart;
 import com.vn.model.InfomationModel;
 import com.vn.model.ProductQuickViewModel;
-import com.vn.service.*;
-
+import com.vn.service.AuthUserService;
+import com.vn.service.BankInfoService;
+import com.vn.service.BillService;
+import com.vn.service.CategoryService;
+import com.vn.service.GmailGoogleService;
+import com.vn.service.InfomationService;
+import com.vn.service.ProductService;
+import com.vn.service.Product_BillService;
+import com.vn.service.ReviewService;
 import com.vn.validation.service.InfomationFormValidator;
-import org.apache.commons.collections4.map.HashedMap;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
-import java.io.IOException;
-import java.math.BigInteger;
-import java.util.*;
 
 @Controller
 public class HomeController {
@@ -330,7 +354,7 @@ public class HomeController {
 			session.setAttribute("categoryNav", mapLsId);
 			model.addAttribute("newProduct", newProduct);
 			model.addAttribute("page", product);
-			modelAndView = new ModelAndView("home/index");
+			modelAndView = new ModelAndView("redirect:/");
 		} else if (((HashMap<Long, Cart>) session.getAttribute("myCartItems")).isEmpty()) {
 			Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
 			Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
@@ -362,7 +386,7 @@ public class HomeController {
 			session.setAttribute("categoryNav", mapLsId);
 			model.addAttribute("newProduct", newProduct);
 			model.addAttribute("page", product);
-			modelAndView = new ModelAndView("home/index");
+			modelAndView = new ModelAndView("redirect:/");
 		}
 		return modelAndView;
 	}

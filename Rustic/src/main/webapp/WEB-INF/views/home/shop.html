@@ -2,9 +2,8 @@
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 
-<head>
 <div th:replace="fragments/initHome :: head"></div>
-</head>
+
 <style>
 .status-success {
 	color: white !important;
@@ -80,7 +79,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-						<a href="#"><i class="fa fa-home"></i> Home</a> <span>Shop</span>
+						<a th:href="@{/}"><i class="fa fa-home"></i> Home</a> <span>Shop</span>
 					</div>
 				</div>
 			</div>
