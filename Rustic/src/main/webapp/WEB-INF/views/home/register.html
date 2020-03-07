@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="fragments/initHome :: head"></div>
-
+<style>
+    .error-valid {
+        color: red;
+        margin-top: 5px;
+    }
+</style>
 
 <body>
     <!-- Page Preloder -->
@@ -35,14 +40,24 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
                         <h2>Register</h2>
-                        <form action="#">
+                        <form th:action="@{/account/save.html}" th:object=${authUser} method="POST">
+                            <div class="alert alert-danger"
+                                 th:if="${mapError != null && mapError.containsKey('errorUnknown') != null}"
+                                 style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                 th:each="err: ${mapError.get('errorUnknown')}"
+                                 th:text="${err}"></div>
                             <div class="group-input">
-                                <label for="username">Username or email address *</label>
-                                <input type="text" id="username">
-                            </div>
+                                <label for="firstName">Họ *</label>
+                                <input type="text" th:field="*{authUser.firstName}" name="user" id="firstName">
+<!--                                <div class="alert alert-danger"-->
+<!--                                     th:if="${mapError != null && mapError.containsKey('firstName') != null}"-->
+<!--                                     style="text-align: left; color: red; font-weight: bold; font-size: 13px;"-->
+<!--                                     th:each="err: ${mapError.get('firstName')}"-->
+<!--                                     th:text="${err}"></div>-->
+                            </div>f
                             <div class="group-input">
                                 <label for="pass">Password *</label>
-                                <input type="text" id="pass">
+                                <input type="password" name="password" id="pass">
                             </div>
                             <div class="group-input">
                                 <label for="con-pass">Confirm Password *</label>
