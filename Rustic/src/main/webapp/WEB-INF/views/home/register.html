@@ -9,82 +9,160 @@
 </style>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-    <!-- Header Section Begin -->
-    <div th:replace="fragments/navHome :: header"></div>
-    <!-- Header End -->
+<!-- Header Section Begin -->
+<div th:replace="fragments/navHome :: header"></div>
+<!-- Header End -->
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>Register</span>
-                    </div>
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a href="#"><i class="fa fa-home"></i> Home</a>
+                    <span>Register</span>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Form Section Begin -->
+</div>
+<!-- Breadcrumb Form Section Begin -->
 
-    <!-- Register Section Begin -->
-    <div class="register-login-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="register-form">
-                        <h2>Register</h2>
-                        <form th:action="@{/account/save.html}" th:object=${authUser} method="POST">
-                            <div class="alert alert-danger"
-                                 th:if="${mapError != null && mapError.containsKey('errorUnknown') != null}"
-                                 style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
-                                 th:each="err: ${mapError.get('errorUnknown')}"
-                                 th:text="${err}"></div>
+<!-- Register Section Begin -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="col-lg-12 offset-lg-12">
+            <div class="register-form">
+                <h2>Register</h2>
+                <form th:action="@{/account/save.html}" th:object="${authUser}" method="POST">
+                    <div
+                            th:if="${mapError != null && mapError.containsKey('errorUnknown') != null}"
+                            style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                            th:each="err: ${mapError.get('errorUnknown')}"
+                            th:text="${err}"></div>
+                    <div class="row">
+                        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="group-input">
                                 <label for="firstName">Họ *</label>
-                                <input type="text" th:field="*{authUser.firstName}" name="user" id="firstName">
-<!--                                <div class="alert alert-danger"-->
-<!--                                     th:if="${mapError != null && mapError.containsKey('firstName') != null}"-->
-<!--                                     style="text-align: left; color: red; font-weight: bold; font-size: 13px;"-->
-<!--                                     th:each="err: ${mapError.get('firstName')}"-->
-<!--                                     th:text="${err}"></div>-->
-                            </div>f
-                            <div class="group-input">
-                                <label for="pass">Password *</label>
-                                <input type="password" name="password" id="pass">
+                                <input type="text" th:field="*{firstName}" name="firstName" id="firstName">
+                                <div
+                                        th:if="${mapError != null && mapError.containsKey('firstName') != null}"
+                                        style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                        th:each="err: ${mapError.get('firstName')}"
+                                        th:text="${err}"></div>
                             </div>
+                        </div>
+                        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="group-input">
-                                <label for="con-pass">Confirm Password *</label>
-                                <input type="text" id="con-pass">
+                                <label for="lastName">Tên *</label>
+                                <input type="tel" th:field="*{lastName}" name="lastName" id="lastName">
+                                <div
+                                        th:if="${mapError != null && mapError.containsKey('lastName') != null}"
+                                        style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                        th:each="err: ${mapError.get('lastName')}" th:text="${err}"></div>
                             </div>
-                            <button type="submit" class="site-btn register-btn">REGISTER</button>
-                        </form>
-                        <div class="switch-login">
-                            <a th:href="@{/home/login.html}" class="or-login">Or Login</a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="group-input">
+                                <label for="middleName">Tên đệm *</label>
+                                <input type="text" th:field="*{middleName}" name="middleName" id="middleName">
+                                <div
+                                        th:if="${mapError != null && mapError.containsKey('middleName') != null}"
+                                        style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                        th:each="err: ${mapError.get('middleName')}"
+                                        th:text="${err}"></div>
+                            </div>
+                        </div>
+                        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="group-input">
+                                <label for="gender">Giới tính *</label>
+                                <select class="custom-select" th:field="*{gender}" name="gender" id="gender"
+                                        style="height: 50px;">
+                                    <option value="">Giới tính</option>
+                                    <option value="0">Nam</option>
+                                    <option value="1">Nữ</option>
+                                </select>
+                                <div
+                                        th:if="${mapError != null && mapError.containsKey('gender') != null}"
+                                        style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                        th:each="err: ${mapError.get('gender')}" th:text="${err}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="group-input">
+                                <label for="email">Email *</label>
+                                <input type="text" th:field="*{email}" name="email" id="email">
+                                <div
+                                        th:if="${mapError != null && mapError.containsKey('email') != null}"
+                                        style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                        th:each="err: ${mapError.get('email')}" th:text="${err}"></div>
+                            </div>
+                        </div>
+                        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="group-input">
+                                <label for="userName">UserName *</label>
+                                <input type="text" th:field="*{userName}" name="userName" id="userName">
+                                <div
+                                        th:if="${mapError != null && mapError.containsKey('userName') != null}"
+                                        style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                        th:each="err: ${mapError.get('userName')}" th:text="${err}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="group-input">
+                                <label for="password">Password *</label>
+                                <input type="password" th:field="*{password}" name="passWord" id="password">
+                                <div
+                                        th:if="${mapError != null && mapError.containsKey('password') != null}"
+                                        style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                        th:each="err: ${mapError.get('password')}" th:text="${err}"></div>
+                            </div>
+                        </div>
+                        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="group-input">
+                                <label for="verifyPassword">Cofirm Password *</label>
+                                <input type="password" th:field="*{verifyPassword}" name="verifyPassword"
+                                       id="verifyPassword">
+                                <div
+                                        th:if="${mapError != null && mapError.containsKey('verifyPassword') != null}"
+                                        style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                        th:each="err: ${mapError.get('verifyPassword')}"
+                                        th:text="${err}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="site-btn register-btn">REGISTER</button>
+                </form>
+                <div class="switch-login">
+                    <a th:href="@{/home/login.html}" class="or-login">Or Login</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Register Form Section End -->
-    
-    <!-- Partner Logo Section Begin -->
-	<div th:replace="fragments/navHome :: partner-logo"></div>
-	<!-- Partner Logo Section End -->
+</div>
+<!-- Register Form Section End -->
 
-	<!-- Footer Section Begin -->
-	<div th:replace="fragments/navHome :: footer"></div>
-	<!-- Footer Section End -->
+<!-- Partner Logo Section Begin -->
+<div th:replace="fragments/navHome :: partner-logo"></div>
+<!-- Partner Logo Section End -->
 
-	<!-- Js Plugins -->
-	<div th:replace="fragments/initHome :: commonScript"></div>
+<!-- Footer Section Begin -->
+<div th:replace="fragments/navHome :: footer"></div>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<div th:replace="fragments/initHome :: commonScript"></div>
 </body>
 
 </html>

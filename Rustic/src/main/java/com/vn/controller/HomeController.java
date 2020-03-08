@@ -137,7 +137,7 @@ public class HomeController {
                     session.setAttribute("userLogin", authUser);
                     return "redirect:/";
                 }
-				model.addAttribute("errorLogin", "Sai tài khoản hoặc mật khẩu");
+                model.addAttribute("errorLogin", "Sai tài khoản hoặc mật khẩu");
             } else {
                 model.addAttribute("errorLogin", "Sai tài khoản hoặc mật khẩu");
             }
@@ -443,7 +443,7 @@ public class HomeController {
                 }
                 Long id = authUser.getId();
                 Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "createDate"));
-                Pageable _page = new PageRequest(pageable.getPageNumber(), 20, sort);
+                Pageable _page = new PageRequest(pageable.getPageNumber(), 3, sort);
                 Page<BillProfileModel> lsBill = billService.pageBillForShowProfileUser(id, _page);
                 if (lsBill.getContent() != null) {
                     model.addAttribute("lsBill", lsBill);
@@ -595,23 +595,23 @@ public class HomeController {
                 }
                 responseMap.put("password", pass);
                 responseMap.put("userName", authUser.getUserName());
-//                new Thread(() -> {
                 boolean statusSend = false;
-                    try {
-                        final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath(
-                                "html/MailForgetPassword.html", (HashMap<String, Object>) responseMap);
-                        mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", email,
-                                "[Rustic] Cấp Lại Mật Khẩu", htmlContent);
-                        statusSend = true;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+//                new Thread(() -> {
+                try {
+                    final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath(
+                            "html/MailForgetPassword.html", (HashMap<String, Object>) responseMap);
+                    mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", email,
+                            "[Rustic] Cấp Lại Mật Khẩu", htmlContent);
+                    statusSend = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 //                }).start();
-                if(statusSend) {
+                if (statusSend) {
                     authUser.setPassword(passwordEncoder.encode(pass));
                     authUserService.update(authUser);
                     response.put("success", "Quý khách vui lòng truy cập email để nhận lại mật khẩu mới");
-                }else{
+                } else {
                     response.put("err", "Lỗi hệ thống");
                 }
             } else {

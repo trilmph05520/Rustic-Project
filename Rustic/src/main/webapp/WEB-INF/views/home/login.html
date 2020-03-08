@@ -2,6 +2,9 @@
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="fragments/initHome :: head"></div>
 <style>
+    .hidden{
+        display: none;
+    }
     .error-valid {
         color: red;
         margin-top: 5px;
@@ -96,6 +99,7 @@
                                             <button class="site-btn login-btn btn-call-ajax" id="forget"
                                                     type="button"
                                                     style="margin-top: 0px !important;">Gửi
+                                                <i class="fa fa-spinner fa-spin hidden" id="spinner" style="float: right;font-size: 20px;"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -156,6 +160,7 @@
         }
 
         if (valid == true) {
+            $('#spinner').removeClass('hidden');
             $.ajax({
                 url: currUrl + '/home/forgetPassword.html',
                 method: 'POST',
@@ -164,6 +169,7 @@
                 },
                 contentType: 'application/x-www-form-urlencoded',
                 success: function (response) {
+                    $('#spinner').addClass('hidden');
                     var data = JSON.parse(response);
                     if (data.err != null) {
                         $('#err').text(data.err);

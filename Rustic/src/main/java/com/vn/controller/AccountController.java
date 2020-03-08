@@ -293,7 +293,7 @@ public class AccountController {
 
 	@RequestMapping(value = "save.html", method = RequestMethod.POST)
 	public String addUserCustomer(Model model, HttpSession session,
-			@ModelAttribute(value = "athUser") @Valid AuthUserModel user, BindingResult result) {
+			@ModelAttribute(value = "authUser") @Valid AuthUserModel user, BindingResult result) {
 		Map<String, String> mapError = new HashedMap<String, String>();
 		try {
 			userFormValidator.validateUserForm(user, result);
@@ -305,7 +305,7 @@ public class AccountController {
 					}
 				}
 				model.addAttribute("mapError", mapError);
-				return "/home/login";
+				return "/home/register";
 			}
 			List<Role> roles = new ArrayList<>();
 			roles.add(authRoleService.findOne(2l));
@@ -331,8 +331,7 @@ public class AccountController {
 			authUser.setUserType((byte) 2);
 			authUser.setAuthRoles(roles);
 			authUserService.create(authUser);
-			session.setAttribute("userLogin", authUser);
-			return "redirect:/";
+			return "redirect:/home/login.html";
 		} catch (Exception e) {
 			mapError.put("errorUnknown","Lỗi không xác định");
 			model.addAttribute("mapError", mapError);
