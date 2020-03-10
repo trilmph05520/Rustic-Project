@@ -4,6 +4,61 @@
 
 <div th:replace="fragments/initHome :: head"></div>
 <style>
+	/*css quickview*/
+	.modal-dialog.modal-lg{
+		margin-top: 50px;
+	}
+	.modal-content {
+		min-height: 400px;
+		height: 100%;
+	}
+	.product-info {
+		line-height: 28px;
+	}
+
+	.product-images #imageQuick {
+		height: 300px;
+	}
+
+	.product-info h4 {
+		font-weight: bold;
+	}
+
+	.product-info .s-price-box {
+		margin-top : 10px;
+		margin-bottom: 5px;
+	}
+
+	.product-info .new-price{
+		font-weight: bold;
+	}
+
+	.product-info .old-price {
+		text-decoration: line-through;
+		font-weight: 550;
+	}
+
+	.product-info #status {
+		font-size: 13px;
+		padding: 2px;
+		display: inline;
+	}
+
+	.product-info #quickCart {
+		margin-top: 10px;
+		padding: 6px;
+		transition: all .3s;
+	}
+	.product-info #quickCart:hover{
+		background: black;
+		color: white;
+		transition: all .3s;
+	}
+
+	.product-info #info{
+		margin-top: 10px;
+	}
+	/*end css quickview*/
 .status-success {
 	color: white !important;
 	background: #0fa145 !important;

@@ -56,7 +56,7 @@ public class ProductController {
     private String SUB_ADDRESS;
 
 //    private String MAIN_IMG_SOURCE_WEB = "/main-img/";
-//    private String SUB_IMG_SOURCE_WEB = "/sub-img";
+//    private String SUB_IMG_SOURCE_WEB = "/sub-img/";
 
     private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     private String DELETE = "N";

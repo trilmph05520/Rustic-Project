@@ -1,0 +1,445 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/initHome :: head"></div>
+</head>
+<style>
+    .hidden {
+        display: none;
+    }
+
+    .product-tab {
+        width: 100%;
+    }
+
+    .customer-review-option {
+        padding-top: 0px !important;
+    }
+
+    .btn.btn-success, .btn.btn-warning {
+        border-radius: 5px !important;
+    }
+
+    .p-30 {
+        padding-bottom: 40px !important;
+    }
+</style>
+<body>
+
+<!-- Body main wrapper start -->
+<div class="wrapper">
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!---->
+    <!-- Header Section Begin -->
+    <div th:replace="fragments/navHome :: header"></div>
+    <!-- Header End -->
+    <input type="hidden" id="user" th:value="${session.userLogin.userName}">
+    <input type="hidden" id="contextPath" th:value="@{/}">
+    <div id="page-content" class="page-wrapper">
+        <div class="shop-section mb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="product-tab">
+                        <div class="tab-item">
+                            <ul class="nav" role="tablist">
+                                <li>
+                                    <a class="active" data-toggle="tab" href="#profile"
+                                       role="tab">Thông tin cá nhân
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#history" role="tab">Lịch sử mua hàng
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#chang-password" role="tab">Đổi mật khẩu</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-item-content">
+                            <div class="tab-content">
+                                <div class="tab-pane fade-in active" id="profile" role="tabpanel">
+                                    <div class="register-login-section spad">
+                                        <div class="container">
+                                            <div class="col-lg-12 offset-lg-12">
+                                                <div class="register-form">
+                                                    <form th:action="@{/home/profile.html}" th:object="${profile}"
+                                                          method="POST">
+                                                        <div th:if="${mapError != null && mapError.containsKey('error') != null}"
+                                                             style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                                             th:each="err: ${mapError.get('errorProfile')}"
+                                                             th:text="${err}"></div>
+                                                        <div class="row">
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="firstName">Họ *</label>
+                                                                    <input type="text" th:field="*{firstName}"
+                                                                           name="firstName" id="firstName">
+                                                                    <div th:if="${mapError != null && mapError.containsKey('firstName') != null}"
+                                                                         style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                                                         th:each="err: ${mapError.get('firstName')}"
+                                                                         th:text="${err}"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Tên *</label>
+                                                                    <input type="tel" th:field="*{lastName}"
+                                                                           name="lastName" id="lastName">
+                                                                    <div
+                                                                            th:if="${mapError != null && mapError.containsKey('lastName') != null}"
+                                                                            style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                                                            th:each="err: ${mapError.get('lastName')}"
+                                                                            th:text="${err}"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Thành phố</label>
+                                                                    <input type="text"
+                                                                           name="province"
+                                                                           placeholder="Thành phố..."
+                                                                           th:field="*{province}"
+                                                                           maxlength="64">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Quận/Huyện</label>
+                                                                    <input type="text"
+                                                                           name="town"
+                                                                           placeholder="Quận/Huyện..."
+                                                                           th:field="*{town}"
+                                                                           maxlength="64">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Giới tính</label>
+                                                                    <select class="custom-select" name="gender"
+                                                                            style="height: 50px;"
+                                                                            th:field="*{gender}">
+                                                                        <option value="">Giới tính</option>
+                                                                        <option value="0">Nam</option>
+                                                                        <option value="1"> Nữ</option>
+                                                                    </select>
+                                                                    <div th:if="${mapError != null && mapError.containsKey('gender') != null}"
+                                                                         style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                                                         th:each="err: ${mapError.get('gender')}"
+                                                                         th:text="${err}"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Số điện thoại</label>
+                                                                    <input type="text"
+                                                                           name="phone"
+                                                                           placeholder="Số điện thoại..."
+                                                                           th:field="*{phone}"
+                                                                           maxlength="10">
+                                                                    <div th:if="${mapError != null && mapError.containsKey('phone') != null}"
+                                                                         style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+                                                                         th:each="err: ${mapError.get('phone')}"
+                                                                         th:text="${err}"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Ngân hàng</label>
+                                                                    <select class="custom-select" name="bank"
+                                                                            style="height: 50px;"
+                                                                            th:field="*{bank}">
+                                                                        <option value="">Ngân hàng</option>
+                                                                        <option th:each="bank : ${bankInfo}"
+                                                                                th:value="${bank.code}"
+                                                                                th:text="${bank.name}"
+                                                                                th:selected="${bank.code==bank}">
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Số tài khoản</label>
+                                                                    <input type="text"
+                                                                           name="atmNumber"
+                                                                           placeholder="Số tài khoản..."
+                                                                           th:field="*{atmNumberBank}"
+                                                                           maxlength="16">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Địa chỉ</label>
+                                                                    <input type="text"
+                                                                           name="address"
+                                                                           placeholder="Địa chỉ..."
+                                                                           th:field="*{address}"
+                                                                           maxlength="256">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                <div class="group-input">
+                                                                    <label for="lastName">Email</label>
+                                                                    <input type="text"
+                                                                           name="email"
+                                                                           th:field="*{emailUser}"
+                                                                           placeholder="Email..."
+                                                                           readonly="readonly"
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row"
+                                                             style="text-align: center;justify-content: center;">
+                                                            <button type="submit" class="site-btn">Lưu</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="history" role="tabpanel">
+                                    <div class="customer-review-option">
+                                        <div class="comment-option">
+                                            <div class="co-item">
+                                                <br>
+                                                <div class="table-responsive">
+                                                    <table class="table align-items-center table-dark table-flush">
+                                                        <thead class="thead-dark">
+                                                        <tr>
+                                                            <th scope="col">STT</th>
+                                                            <th scope="col">Ngày mua</th>
+                                                            <th scope="col">Mã hóa đơn</th>
+                                                            <th scope="col">Tổng tiền</th>
+                                                            <th scope="col">Trạng thái đơn hàng</th>
+                                                            <th scope="col">Trạng thái thanh toán</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="list" th:if="${lsBill.getTotalElements() != 0}">
+                                                        <tr th:each="each, iterate : ${lsBill}">
+                                                            <td class="text-table-body" th:text="${iterate.count}"></td>
+                                                            <td class="text-table-body"
+                                                                th:text="${#dates.format(each.createdDate, 'dd/MM/yyyy')}"></td>
+                                                            <td class="text-table-body" th:text="${each.code}"></td>
+                                                            <td class="text-table-body"
+                                                                th:text="${#numbers.formatDecimal(each.total, 0, 'COMMA', 0, 'POINT')}"></td>
+                                                            <td class="text-table-body">
+                                                                <span th:if="${each.typeStatus == 0}"
+                                                                      class="btn btn-success">Đã nhận hàng</span>
+                                                                <span th:if="${each.typeStatus == 1}"
+                                                                      class="btn btn-warning">Đã hủy</span>
+                                                                <span th:if="${each.typeStatus == 2}"
+                                                                      class="btn btn-success">Không nhận hàng</span>
+                                                                <span th:if="${each.typeStatus == 3}"
+                                                                      class="btn btn-success">Đang giao hàng</span>
+                                                                <span th:if="${each.typeStatus == 4}"
+                                                                      class="btn btn-success">Đang đóng gói</span>
+                                                                <span th:if="${each.typeStatus == 5}"
+                                                                      class="btn btn-success">Đang xác nhận đơn</span>
+                                                            </td>
+                                                            <td class="text-table-body" style="text-align: center;">
+                                                                <span th:if="${each.status == 1}"
+                                                                      class="btn btn-success">Đã thanh toán</span>
+                                                                <span th:if="${each.status == 2}"
+                                                                      class="btn btn-warning">Chưa thanh toán</span>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div th:replace="fragments/panigatorHome :: content(page = ${lsBill})"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="chang-password" role="tabpanel">
+                                    <div class="customer-review-option">
+                                        <div class="comment-option">
+                                            <div class="co-item">
+                                                <div class="register-login-section spad">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 offset-lg-3">
+                                                                <div class="login-form">
+                                                                    <form>
+                                                                        <div class="group-input">
+                                                                            <label for="oldPass">Mật khẩu cũ
+                                                                                *</label>
+                                                                            <input type="password" id="oldPass"
+                                                                                   placeholder="Mật khẩu cũ">
+                                                                            <label style="color: red;font-size: 15px;"
+                                                                                   id="oldPassError"></label>
+                                                                        </div>
+                                                                        <div class="group-input">
+                                                                            <label for="newPass">Mật khẩu mới
+                                                                                *</label>
+                                                                            <input type="password" id="newPass"
+                                                                                   placeholder="Mật khẩu mới">
+                                                                            <label style="color: red;font-size: 15px;"
+                                                                                   id="newPassError"></label>
+                                                                        </div>
+                                                                        <div class="group-input">
+                                                                            <label for="confirmPass">Mật khẩu mới
+                                                                                *</label>
+                                                                            <input type="password" id="confirmPass"
+                                                                                   placeholder="Xác thực mật khẩu">
+                                                                            <label style="color: red;font-size: 15px;"
+                                                                                   id="confirmPassError"></label>
+                                                                        </div>
+                                                                        <button type="button" id="reset"
+                                                                                class="site-btn login-btn">
+                                                                            Submit
+                                                                            <i class="fa fa-spinner fa-spin hidden"
+                                                                               id="spinner"
+                                                                               style="font-size: 15px;"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGIN SECTION START -->
+
+        <!-- LOGIN SECTION END -->
+    </div>
+
+
+    <!-- Partner Logo Section Begin -->
+    <div th:replace="fragments/navHome :: partner-logo"></div>
+    <!-- Partner Logo Section End -->
+
+    <!-- Footer Section Begin -->
+    <div th:replace="fragments/navHome :: footer"></div>
+    <!-- Footer Section End -->
+
+    <div th:replace="fragments/initHome :: commonScript"></div>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var currUrl = /*[[@{/}]]*/ "";
+    /*]]>*/
+</script>
+<script>
+    $(document)
+        .ajaxStart(function () {
+            $('.btn-call-ajax').addClass('disable-call-ajax');
+        })
+        .ajaxComplete(function () {
+            $('.btn-call-ajax').removeClass('disable-call-ajax');
+        });
+
+    $('#reset').on('click', function () {
+        var oldPass = $('#oldPass').val();
+        var newPass = $('#newPass').val();
+        var confirmPass = $('#confirmPass').val();
+        var user = $('#user').val();
+        var valid = true;
+
+        if (oldPass === null || oldPass === '') {
+            $('#oldPassError').text("Mật khẩu cũ không được để trống");
+            valid = false;
+            $('#oldPass').focus();
+        } else if (oldPass.length < 6) {
+            $('#oldPassError').text("Mật khẩu tối thiểu 6 kí tự");
+            valid = false;
+            $('#oldPass').focus();
+        } else {
+            $('#oldPassError').text('');
+            valid = true;
+        }
+
+        if (newPass === null || newPass === '') {
+            $('#newPassError').text("Mật khẩu mới không được để trống");
+            valid = false;
+            $('#newPass').focus();
+        } else if (newPass.length < 6) {
+            $('#newPassError').text("Mật khẩu mới tối thiểu 6 kí tự");
+            valid = false;
+            $('#newPass').focus();
+        } else if (newPass === oldPass) {
+            $('#newPassError').text("Mật khẩu mới trùng mật khẩu hiện tại");
+            valid = false;
+            $('#newPass').focus();
+        } else {
+            $('#newPassError').text('');
+            valid = true;
+        }
+
+        if (confirmPass === null || confirmPass === '') {
+            $('#confirmPassError').text("Xác thực mật khẩu không được để trống");
+            valid = false;
+            $('#confirmPass').focus();
+        } else if (confirmPass.length < 6) {
+            $('#confirmPassError').text("Xác thực mật khẩu tối thiểu 6 kí tự");
+            valid = false;
+            $('#confirmPass').focus();
+        } else if (confirmPass != newPass) {
+            $('#confirmPassError').text("Xác thực mật khẩu không trùng mật khẩu mới");
+            valid = false;
+            $('#confirmPass').focus();
+        } else {
+            $('#confirmPassError').text('');
+            valid = true;
+        }
+
+        if (valid === true) {
+            $('#spinner').removeClass('hidden');
+            $.ajax({
+                url: currUrl + 'home/reset.html',
+                method: 'POST',
+                data: {
+                    user: user,
+                    oldPass: oldPass,
+                    newPass: newPass
+                },
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (response) {
+                    $('#spinner').addClass('hidden');
+                    var data = JSON.parse(response);
+                    if (data.oldPassErr != null) {
+                        $('#oldPassError').text(data.oldPassErr);
+                    }
+                    if (data.newPassErr != null) {
+                        $('#newPassError').text(data.newPassErr);
+                    }
+                    if (data.success != null) {
+                        $('#confirmPassError').text(data.success);
+                        setTimeout(function () {
+                            window.location.href = window.location.origin + $('#contextPath').val() + '/home/login.html';
+                        }, 1500);
+                    }
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

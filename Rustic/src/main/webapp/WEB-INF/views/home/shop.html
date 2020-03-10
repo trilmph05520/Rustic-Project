@@ -5,311 +5,370 @@
 <div th:replace="fragments/initHome :: head"></div>
 
 <style>
-.status-success {
-	color: white !important;
-	background: #0fa145 !important;
-	text-decoration: none !important;
-	width: 100px;
-	padding: 5px;
-	border-radius: 5px;
-}
+    /*css quickview*/
+    .modal-dialog.modal-lg {
+        margin-top: 50px;
+    }
 
-.status-warning {
-	color: white !important;
-	background: #ff9800 !important;
-	text-decoration: none !important;
-	width: 100px;
-	padding: 5px;
-	border-radius: 5px;
-}
+    .modal-content {
+        min-height: 400px;
+        height: 100%;
+    }
 
-.like {
-	height: 30px;
-	width: 30px;
-	border-radius: 50px;
-	text-align: center;
-	line-height: 28px;
-	text-shadow: 1px 1px 1px #1684B2;
-	overflow: hidden;
-	position: relative;
-	border: 1px solid #ddd;
-}
+    .product-info {
+        line-height: 28px;
+    }
 
-.like:hover {
-	background: #FF7F00;
-	border: #FF7F00;
-	color: white;
-}
+    .product-images #imageQuick {
+        height: 300px;
+    }
 
-.gloss {
-	background: #FFF;
-	height: 150px;
-	width: 150px;
-	border-radius: 50%;
-	margin-left: -25px;
-	position: absolute;
-	top: -100px;
-	opacity: 0.3;
-}
+    .product-info h4 {
+        font-weight: bold;
+    }
 
-.down {
-	background: #005aff;
-	/*text-shadow: 1px -1px 1px #FF526F;*/
-	/*box-shadow: 0 -10px 10px #311;*/
-}
+    .product-info .s-price-box {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
 
-.action-button {
-	display: flex !important;
-	justify-content: center !important;
-}
+    .product-info .new-price {
+        font-weight: bold;
+    }
+
+    .product-info .old-price {
+        text-decoration: line-through;
+        font-weight: 550;
+    }
+
+    .product-info #status {
+        font-size: 13px;
+        padding: 2px;
+        display: inline;
+    }
+
+    .product-info #quickCart {
+        margin-top: 10px;
+        padding: 6px;
+        transition: all .3s;
+    }
+
+    .product-info #quickCart:hover {
+        background: black;
+        color: white;
+        transition: all .3s;
+    }
+
+    .product-info #info {
+        margin-top: 10px;
+    }
+
+    /*end css quickview*/
+    .status-success {
+        color: white !important;
+        background: #0fa145 !important;
+        text-decoration: none !important;
+        width: 100px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .status-warning {
+        color: white !important;
+        background: #ff9800 !important;
+        text-decoration: none !important;
+        width: 100px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .like {
+        height: 30px;
+        width: 30px;
+        border-radius: 50px;
+        text-align: center;
+        line-height: 28px;
+        text-shadow: 1px 1px 1px #1684B2;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid #ddd;
+    }
+
+    .like:hover {
+        background: #FF7F00;
+        border: #FF7F00;
+        color: white;
+    }
+
+    .gloss {
+        background: #FFF;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        margin-left: -25px;
+        position: absolute;
+        top: -100px;
+        opacity: 0.3;
+    }
+
+    .down {
+        background: #005aff;
+        /*text-shadow: 1px -1px 1px #FF526F;*/
+        /*box-shadow: 0 -10px 10px #311;*/
+    }
+
+    .action-button {
+        display: flex !important;
+        justify-content: center !important;
+    }
 </style>
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-	<!-- Header Section Begin -->
-	<div th:replace="fragments/navHome :: header"></div>
-	<!-- Header End -->
+<!-- Header Section Begin -->
+<div th:replace="fragments/navHome :: header"></div>
+<!-- Header End -->
 
-	<!-- Breadcrumb Section Begin -->
-	<div class="breacrumb-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="breadcrumb-text">
-						<a th:href="@{/}"><i class="fa fa-home"></i> Home</a> <span>Shop</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Breadcrumb Section Begin -->
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a th:href="@{/}"><i class="fa fa-home"></i> Home</a> <span>Shop</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
 
-	<!-- Product Shop Section Begin -->
-	<section class="product-shop spad">
-		<div class="container">
-			<div class="row">
+<!-- Product Shop Section Begin -->
+<section class="product-shop spad">
+    <div class="container">
+        <div class="row">
 
-				<div class="col-lg-12 order-1 order-lg-2"
-					th:if="${page.content} != null">
-					<!-- <div class="product-show-option">
-						<div class="row">
-							<div class="col-lg-7 col-md-7">
-								<div class="select-option">
-									<select class="sorting">
-										<option value="">Default Sorting</option>
-									</select> <select class="p-show">
-										<option value="">Show:</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-5 col-md-5 text-right">
-								<p>Show 01- 09 Of 36 Product</p>
-							</div>
-						</div>
-					</div> -->
-					<div class="product-list">
-						<div class="row">
-							<div class="col-lg-3 col-sm-6"
-								th:each="eachPro : ${page.content}">
-								<div class="product-item">
-									<div class="pi-pic">
-										<a
-											th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}"><img
-											th:src="${eachPro.mainImg}" alt="" width="100%"
-											height="295px"> </a>
-										<div class="sale pp-sale" th:if="${eachPro.priceSale != 0}">Sale</div>
-										<div class="icon">
-											<i class="icon_heart_alt"></i>
-										</div>
-										<ul>
-											<li class="w-icon active" th:if="${eachPro.quantity} > 0"><a
-												th:href="@{/cart/add/{productId}.html(productId = ${eachPro.id})}"><i
-													class="icon_bag_alt"></i></a></li>
-											<li class="quick-view"><a
-												th:onclick="'quickView(\'' + ${eachPro.id} + '\')'"
-												data-toggle="modal" data-target="#productModal">+ Quick
-													View</a></li>
-											<!-- <li class="w-icon"><a href="#"><i
-													class="fa fa-random"></i></a></li> -->
-										</ul>
-									</div>
-									<div class="pi-text">
-										<div class="catagory-name" th:text="${eachPro.category.name}">Towel</div>
-										<a
-											th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}">
-											<h5 th:text="${eachPro.name}">Pure Pineapple</h5>
-										</a>
-										<div class="pd-rating">
-											<div th:if="${eachPro.rate == 1}">
-												<i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachPro.rate == 2}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachPro.rate == 3}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachPro.rate == 4}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachPro.rate == 5}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i>
-											</div>
-										</div>
-										<div class="product-price" th:if="${eachPro.priceSale == 0}">
-											<!-- $14.00 <span>$35.00</span> -->
-											<h4 class="product-price" style="margin-top: 33px;"
-												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
-												&nbsp;Vnđ</h4>
-										</div>
-										<div class="product-price" th:if="${eachPro.priceSale != 0}">
-											<!-- $14.00 <span>$35.00</span> -->
-											<h4 class="product-price" style="margin-top: 33px;"
-												th:text="${#numbers.formatDecimal(eachPro.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'">
-												&nbsp;Vnđ</h4>
-											<span style="text-decoration: line-through"
-												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">629.99</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- <div class="loading-more">
-						<i class="icon_loading"></i> <a href="#"> Loading More </a>
-					</div> -->
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Product Shop Section End -->
+            <div class="col-lg-12 order-1 order-lg-2"
+                 th:if="${page.content} != null">
+                <!-- <div class="product-show-option">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-7">
+                            <div class="select-option">
+                                <select class="sorting">
+                                    <option value="">Default Sorting</option>
+                                </select> <select class="p-show">
+                                    <option value="">Show:</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 text-right">
+                            <p>Show 01- 09 Of 36 Product</p>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="product-list">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6"
+                             th:each="eachPro : ${page.content}">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    <a
+                                            th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}"><img
+                                            th:src="${eachPro.mainImg}" alt="" width="100%"
+                                            height="295px"> </a>
+                                    <div class="sale pp-sale" th:if="${eachPro.priceSale != 0}">Sale</div>
+                                    <div class="icon">
+                                        <i class="icon_heart_alt"></i>
+                                    </div>
+                                    <ul>
+                                        <li class="w-icon active" th:if="${eachPro.quantity} > 0"><a
+                                                th:href="@{/cart/add/{productId}.html(productId = ${eachPro.id})}"><i
+                                                class="icon_bag_alt"></i></a></li>
+                                        <li class="quick-view"><a
+                                                th:onclick="'quickView(\'' + ${eachPro.id} + '\')'"
+                                                data-toggle="modal" data-target="#productModal">+ Quick
+                                            View</a></li>
+                                        <!-- <li class="w-icon"><a href="#"><i
+                                                class="fa fa-random"></i></a></li> -->
+                                    </ul>
+                                </div>
+                                <div class="pi-text">
+                                    <div class="catagory-name" th:text="${eachPro.category.name}">Towel</div>
+                                    <a
+                                            th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}">
+                                        <h5 th:text="${eachPro.name}">Pure Pineapple</h5>
+                                    </a>
+                                    <div class="pd-rating">
+                                        <div th:if="${eachPro.rate == 1}">
+                                            <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
+                                                class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
+                                                class="fa fa-star-o"></i>
+                                        </div>
+                                        <div th:if="${eachPro.rate == 2}">
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
+                                                class="fa fa-star-o"></i>
+                                        </div>
+                                        <div th:if="${eachPro.rate == 3}">
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
+                                                class="fa fa-star-o"></i>
+                                        </div>
+                                        <div th:if="${eachPro.rate == 4}">
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                class="fa fa-star-o"></i>
+                                        </div>
+                                        <div th:if="${eachPro.rate == 5}">
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-price" th:if="${eachPro.priceSale == 0}">
+                                        <!-- $14.00 <span>$35.00</span> -->
+                                        <h4 class="product-price" style="margin-top: 33px;"
+                                            th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
+                                            &nbsp;Vnđ</h4>
+                                    </div>
+                                    <div class="product-price" th:if="${eachPro.priceSale != 0}">
+                                        <!-- $14.00 <span>$35.00</span> -->
+                                        <h4 class="product-price" style="margin-top: 33px;"
+                                            th:text="${#numbers.formatDecimal(eachPro.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'">
+                                            &nbsp;Vnđ</h4>
+                                        <span style="text-decoration: line-through"
+                                              th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">629.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="loading-more">
+                    <i class="icon_loading"></i> <a href="#"> Loading More </a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Shop Section End -->
 
-	<div th:replace="fragments/panigatorHome :: content(page = ${page})"></div>
+<div th:replace="fragments/panigatorHome :: content(page = ${page})"></div>
 
 
-	<!-- Partner Logo Section Begin -->
-	<div th:replace="fragments/navHome :: partner-logo"></div>
-	<!-- Partner Logo Section End -->
+<!-- Partner Logo Section Begin -->
+<div th:replace="fragments/navHome :: partner-logo"></div>
+<!-- Partner Logo Section End -->
 
-	<!-- Footer Section Begin -->
-	<div th:replace="fragments/navHome :: footer"></div>
-	<!-- Footer Section End -->
+<!-- Footer Section Begin -->
+<div th:replace="fragments/navHome :: footer"></div>
+<!-- Footer Section End -->
 
-	<div th:replace="fragments/navHome :: quickview"></div>
+<div th:replace="fragments/navHome :: quickview"></div>
 
-	<!-- Js Plugins -->
-	<div th:replace="fragments/initHome :: commonScript"></div>
+<!-- Js Plugins -->
+<div th:replace="fragments/initHome :: commonScript"></div>
 
-	<script th:inline="javascript">
-		var currUrl = /*[[@{/}]]*/"";
-		var pageIndex = /*[[${session.pageIndex}]]*/"";
-	</script>
-	<script>
-		function quickView(id) {
-			$.ajax({
-				url : currUrl + '/home/single-product.html',
-				method : 'GET',
-				data : {
-					'id' : id
-				},
-				contentType : 'application/x-www-form-urlencoded',
-				success : function(response) {
-					var data = JSON.parse(response);
-					$('#quickCart').attr(
-							'href',
-							window.location.origin + $('#path').val()
-									+ 'cart/add/' + id + '.html');
-					$('#imageQuick').attr('src', data.mainImg);
-					$('#nameQuick').text(data.name);
-					$('#price').text(
-							formatPriceString(data.price) + '' + ' Vnđ');
-					$('#price_sale').text(
-							formatPriceString(data.priceSale) + ' Vnđ');
-					$('#info').text(data.info);
-					if (data.quantity >= 1) {
-						$('#status').text("Còn hàng");
-						$('#status').addClass("status-success");
-						$('#status').removeClass("status-warning");
-						$('.quick-add-to-cart').css('display', 'block');
-					} else {
-						$('#status').text("Hết hàng");
-						$('#status').addClass("status-warning");
-						$('#status').removeClass("status-success");
-						$('.quick-add-to-cart').css('display', 'none');
-					}
-				}
-			})
-		}
+<script th:inline="javascript">
+    var currUrl = /*[[@{/}]]*/"";
+    var pageIndex = /*[[${session.pageIndex}]]*/"";
+</script>
+<script>
+    function quickView(id) {
+        $.ajax({
+            url: currUrl + '/home/single-product.html',
+            method: 'GET',
+            data: {
+                'id': id
+            },
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (response) {
+                var data = JSON.parse(response);
+                $('#quickCart').attr(
+                    'href',
+                    window.location.origin + $('#path').val()
+                    + 'cart/add/' + id + '.html');
+                $('#imageQuick').attr('src', data.mainImg);
+                $('#nameQuick').text(data.name);
+                $('#price').text(
+                    formatPriceString(data.price) + '' + ' Vnđ');
+                $('#price_sale').text(
+                    formatPriceString(data.priceSale) + ' Vnđ');
+                $('#info').text(data.info);
+                if (data.quantity >= 1) {
+                    $('#status').text("Còn hàng");
+                    $('#status').addClass("status-success");
+                    $('#status').removeClass("status-warning");
+                    $('.quick-add-to-cart').css('display', 'block');
+                } else {
+                    $('#status').text("Hết hàng");
+                    $('#status').addClass("status-warning");
+                    $('#status').removeClass("status-success");
+                    $('.quick-add-to-cart').css('display', 'none');
+                }
+            }
+        })
+    }
 
-		function formatPriceString(priceStr) {
-			if (typeof priceStr === 'number') {
-				priceStr = priceStr.toString();
-				if (priceStr.startsWith('-')) {
-					priceStr = priceStr.substring(1, priceStr.length);
-				}
-			}
-			return priceStr.replace(/(?=(?:\d{3})+$)(?!^)/g, ',');
-		}
-	</script>
-	<script>
-		var click = 0;
-		$('.like').click(function() {
-			if (click != 1) {
-				$(this).addClass('down', 100);
-				$(this).transition({
-					scale : 1.1
-				}, {
-					duration : 200
-				});
-				$(this).transition({
-					scale : 1
-				}, {
-					duration : 200
-				});
-				$(this).transition({
-					perspective : '100px',
-					rotateX : '180deg'
-				}, {
-					duration : 400,
-					queue : false
-				});
-				click = 1;
-			} else {
-				$(this).removeClass('down', 100);
-				$(this).transition({
-					scale : 1.1
-				}, {
-					duration : 200
-				});
-				$(this).transition({
-					scale : 1
-				}, {
-					duration : 200
-				});
-				$(this).transition({
-					perspective : '100px',
-					rotateX : '0deg'
-				}, {
-					duration : 400,
-					queue : false
-				});
-				click = 0;
-			}
-		});
-	</script>
+    function formatPriceString(priceStr) {
+        if (typeof priceStr === 'number') {
+            priceStr = priceStr.toString();
+            if (priceStr.startsWith('-')) {
+                priceStr = priceStr.substring(1, priceStr.length);
+            }
+        }
+        return priceStr.replace(/(?=(?:\d{3})+$)(?!^)/g, ',');
+    }
+</script>
+<script>
+    var click = 0;
+    $('.like').click(function () {
+        if (click != 1) {
+            $(this).addClass('down', 100);
+            $(this).transition({
+                scale: 1.1
+            }, {
+                duration: 200
+            });
+            $(this).transition({
+                scale: 1
+            }, {
+                duration: 200
+            });
+            $(this).transition({
+                perspective: '100px',
+                rotateX: '180deg'
+            }, {
+                duration: 400,
+                queue: false
+            });
+            click = 1;
+        } else {
+            $(this).removeClass('down', 100);
+            $(this).transition({
+                scale: 1.1
+            }, {
+                duration: 200
+            });
+            $(this).transition({
+                scale: 1
+            }, {
+                duration: 200
+            });
+            $(this).transition({
+                perspective: '100px',
+                rotateX: '0deg'
+            }, {
+                duration: 400,
+                queue: false
+            });
+            click = 0;
+        }
+    });
+</script>
 </body>
 
 </html>
