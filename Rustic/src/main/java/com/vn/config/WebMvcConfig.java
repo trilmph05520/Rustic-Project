@@ -114,6 +114,34 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter  {
     
     
     
+    @Bean(name = "localeResolver")
+    public LocaleResolver getLocaleResolver()  {
+        CookieLocaleResolver resolver= new CookieLocaleResolver();
+        resolver.setCookieDomain("myAppLocaleCookie");
+        // 60 minutes 
+        resolver.setCookieMaxAge(60*60); 
+        return resolver;
+    } 
+     
+    @Bean(name = "messageSource")
+    public MessageSource getMessageResource()  {
+        ReloadableResourceBundleMessageSource messageResource= new ReloadableResourceBundleMessageSource();
+         
+        // Đọc vào file i18n/messages_xxx.properties
+        // Ví dụ: i18n/messages_en.properties
+        messageResource.setBasename("classpath:i18n/messages");
+        messageResource.setDefaultEncoding("UTF-8");
+        return messageResource;
+    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor localeInterceptor = new LocaleChangeInterceptor();
+        localeInterceptor.setParamName("lang");
+         
+         
+        registry.addInterceptor(localeInterceptor).addPathPatterns("/*");
+    }
+
     
     
     
