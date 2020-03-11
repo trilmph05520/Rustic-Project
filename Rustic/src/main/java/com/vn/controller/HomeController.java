@@ -1,50 +1,72 @@
 package com.vn.controller;
 
-import com.google.common.base.Strings;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.vn.common.Constants;
-import com.vn.common.GoogleUtils;
-import com.vn.common.ThymeleafUtil;
-import com.vn.config.GoogleMailSender;
-import com.vn.jpa.*;
-import com.vn.model.AuthUserModel;
-import com.vn.model.BillProfileModel;
-import com.vn.model.Cart;
-import com.vn.model.InfomationModel;
-import com.vn.model.ProductQuickViewModel;
-import com.vn.service.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-import com.vn.validation.service.InfomationFormValidator;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
-import java.io.IOException;
-import java.math.BigInteger;
-import java.util.*;
+import com.google.common.base.Strings;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.vn.common.Constants;
+import com.vn.common.ThymeleafUtil;
+import com.vn.config.GoogleMailSender;
+import com.vn.jpa.AuthUser;
+import com.vn.jpa.Bill;
+import com.vn.jpa.Category;
+import com.vn.jpa.GmailGoogle;
+import com.vn.jpa.Infomation;
+import com.vn.jpa.Product;
+import com.vn.jpa.Product_Bill;
+import com.vn.jpa.Report;
+import com.vn.jpa.Review;
+import com.vn.model.AuthUserModel;
+import com.vn.model.BillProfileModel;
+import com.vn.model.Cart;
+import com.vn.model.InfomationModel;
+import com.vn.model.ProductQuickViewModel;
+import com.vn.service.AuthUserService;
+import com.vn.service.BankInfoService;
+import com.vn.service.BillService;
+import com.vn.service.CategoryService;
+import com.vn.service.GmailGoogleService;
+import com.vn.service.InfomationService;
+import com.vn.service.ProductService;
+import com.vn.service.Product_BillService;
+import com.vn.service.ReviewService;
+import com.vn.validation.service.InfomationFormValidator;
 
 @Controller
 public class HomeController {
@@ -75,16 +97,16 @@ public class HomeController {
 
     @Resource
     private GmailGoogleService gmailGoogleService;
-    
+
     @Resource
     private BillService billService;
-    
+
     @Resource
     private Product_BillService prBillService;
 
     @Resource
     private BankInfoService bankService;
-    
+
     @ModelAttribute("report")
     public Report report(Model model) {
         model.addAttribute("mapError", new HashedMap<String, String>());
@@ -100,42 +122,25 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/home/login-google", method = {RequestMethod.GET})
-    public String loginGoogle(@RequestParam("code") String code, HttpSession session) throws IOException {
-        if (code == null || code.isEmpty()) {
-            return "home/login";
-        } else {
-            String accessToken = GoogleUtils.getToken(code);
-            GmailGoogle googlePojo = GoogleUtils.getUserInfo(accessToken);
-            try {
-                gmailGoogleService.insert(googlePojo);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            session.setAttribute("userGoogle", googlePojo);
-            return "redirect:/";
-        }
-    }
 
     @RequestMapping(value = "/home/login.html", method = RequestMethod.POST)
     public String loginPageSuccsess(HttpSession session, @RequestParam("user") String user,
                                     @RequestParam("password") String pass, Model model) {
-    	if(session.getAttribute("userLogin") != null) {
-    		 return "redirect:/";
-    	}else {
-    		 AuthUser authUser = authUserService.findByUsername(user);
-    	        if (authUser != null) {
-    	            if (passwordEncoder.matches(pass, authUser.getPassword())) {
-    	                session.setAttribute("userLogin", authUser);
-    	                return "redirect:/";
-    	            }
-    	        }
-    	        Map<String, String> mapError = new HashedMap<String, String>();
-    	        model.addAttribute("athUser", new AuthUserModel());
-    	        model.addAttribute("mapError", mapError);
-    	        model.addAttribute("errorLogin", "Sai tài khoản hoặc mật khẩu");
-    	        return "home/login";
-    	}
+        if (session.getAttribute("userLogin") != null) {
+            return "redirect:/";
+        } else {
+            AuthUser authUser = authUserService.findByUsername(user);
+            if (authUser != null) {
+                if (passwordEncoder.matches(pass, authUser.getPassword())) {
+                    session.setAttribute("userLogin", authUser);
+                    return "redirect:/";
+                }
+                model.addAttribute("errorLogin", "Sai tài khoản hoặc mật khẩu");
+            } else {
+                model.addAttribute("errorLogin", "Sai tài khoản hoặc mật khẩu");
+            }
+            return "home/login";
+        }
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
@@ -147,6 +152,7 @@ public class HomeController {
         List<Product> newProduct = productService.lsProductDateDesc();
         List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
         Map<Long, List> mapLsId = new HashMap<>();
+        List<Category> lstCatePr = new ArrayList<Category>();
         for (Category each : category) {
             if (each.getParent() == null) {
                 List ls = new ArrayList();
@@ -154,8 +160,10 @@ public class HomeController {
                 List lsCategoryChildren = new ArrayList();
                 ls.add(lsCategoryChildren);
                 mapLsId.put(each.getId(), ls);
+                lstCatePr.add(each);
             }
         }
+        session.setAttribute("categoryNavPr", lstCatePr);
         for (Category eachCateChildren : category) {
             if (eachCateChildren.getParent() != null) {
                 ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
@@ -169,6 +177,43 @@ public class HomeController {
         model.addAttribute("newProduct", newProduct);
         model.addAttribute("page", product);
         ModelAndView modelAndView = new ModelAndView("home/index");
+        return modelAndView;
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @RequestMapping(value = {"/home/shop.html"}, method = RequestMethod.GET)
+    public ModelAndView shop(Model model, Pageable pageable, HttpSession session) {
+        Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+        Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
+        Page<Product> product = productService.findAllByIsdelete("N", _pageable);
+        List<Product> newProduct = productService.lsProductDateDesc();
+        List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+        Map<Long, List> mapLsId = new HashMap<>();
+        List<Category> lstCatePr = new ArrayList<Category>();
+        for (Category each : category) {
+            if (each.getParent() == null) {
+                List ls = new ArrayList();
+                ls.add(each.getName());
+                List lsCategoryChildren = new ArrayList();
+                ls.add(lsCategoryChildren);
+                mapLsId.put(each.getId(), ls);
+                lstCatePr.add(each);
+            }
+        }
+        session.setAttribute("categoryNavPr", lstCatePr);
+        for (Category eachCateChildren : category) {
+            if (eachCateChildren.getParent() != null) {
+                ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
+                List lsCategoryInfo = new ArrayList();
+                lsCategoryInfo.add(eachCateChildren.getId());
+                lsCategoryInfo.add(eachCateChildren.getName());
+                lsChildren.add(lsCategoryInfo);
+            }
+        }
+        session.setAttribute("categoryNav", mapLsId);
+        model.addAttribute("newProduct", newProduct);
+        model.addAttribute("page", product);
+        ModelAndView modelAndView = new ModelAndView("home/shop");
         return modelAndView;
     }
 
@@ -243,7 +288,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/home/cart.html", method = RequestMethod.GET)
-    public ModelAndView viewCart(HttpSession session,Pageable pageable, Model model) {
+    public ModelAndView viewCart(HttpSession session, Pageable pageable, Model model) {
         AuthUser authUser = (AuthUser) session.getAttribute("userLogin");
         GmailGoogle gmailGoogle = (GmailGoogle) session.getAttribute("userGoogle");
         if (authUser != null) {
@@ -260,13 +305,14 @@ public class HomeController {
             model.addAttribute("email", gmailGoogle.getEmail());
         }
         ModelAndView modelAndView = new ModelAndView("home/cart");
-        if(session.getAttribute("myCartItems") == null){
-        	Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+        if (session.getAttribute("myCartItems") == null) {
+            Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
             Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
             Page<Product> product = productService.findAllByIsdelete("N", _pageable);
             List<Product> newProduct = productService.lsProductDateDesc();
             List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
             Map<Long, List> mapLsId = new HashMap<>();
+            List<Category> lstCatePr = new ArrayList<Category>();
             for (Category each : category) {
                 if (each.getParent() == null) {
                     List ls = new ArrayList();
@@ -274,8 +320,10 @@ public class HomeController {
                     List lsCategoryChildren = new ArrayList();
                     ls.add(lsCategoryChildren);
                     mapLsId.put(each.getId(), ls);
+                    lstCatePr.add(each);
                 }
             }
+            session.setAttribute("categoryNavPr", lstCatePr);
             for (Category eachCateChildren : category) {
                 if (eachCateChildren.getParent() != null) {
                     ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
@@ -288,14 +336,15 @@ public class HomeController {
             session.setAttribute("categoryNav", mapLsId);
             model.addAttribute("newProduct", newProduct);
             model.addAttribute("page", product);
-        	modelAndView = new ModelAndView("home/index");
-        }else if(((HashMap<Long, Cart>) session.getAttribute("myCartItems")).isEmpty()) {
-        	Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+            modelAndView = new ModelAndView("redirect:/");
+        } else if (((HashMap<Long, Cart>) session.getAttribute("myCartItems")).isEmpty()) {
+            Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
             Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
             Page<Product> product = productService.findAllByIsdelete("N", _pageable);
             List<Product> newProduct = productService.lsProductDateDesc();
             List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
             Map<Long, List> mapLsId = new HashMap<>();
+            List<Category> lstCatePr = new ArrayList<Category>();
             for (Category each : category) {
                 if (each.getParent() == null) {
                     List ls = new ArrayList();
@@ -303,8 +352,10 @@ public class HomeController {
                     List lsCategoryChildren = new ArrayList();
                     ls.add(lsCategoryChildren);
                     mapLsId.put(each.getId(), ls);
+                    lstCatePr.add(each);
                 }
             }
+            session.setAttribute("categoryNavPr", lstCatePr);
             for (Category eachCateChildren : category) {
                 if (eachCateChildren.getParent() != null) {
                     ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
@@ -317,7 +368,7 @@ public class HomeController {
             session.setAttribute("categoryNav", mapLsId);
             model.addAttribute("newProduct", newProduct);
             model.addAttribute("page", product);
-        	modelAndView = new ModelAndView("home/index");
+            modelAndView = new ModelAndView("redirect:/");
         }
         return modelAndView;
     }
@@ -335,20 +386,22 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("home/contact");
         return modelAndView;
     }
-    
+
     @RequestMapping(value = "/home/blog.html", method = RequestMethod.GET)
     public ModelAndView viewBlog(Model model) {
         ModelAndView modelAndView = new ModelAndView("home/blog");
         return modelAndView;
     }
-    
+
     @RequestMapping(value = "/home/register.html", method = RequestMethod.GET)
     public ModelAndView viewRegister(Model model) {
+        Map<String, String> mapError = new HashedMap<String, String>();
+        model.addAttribute("authUser", new AuthUserModel());
+        model.addAttribute("mapError", mapError);
         ModelAndView modelAndView = new ModelAndView("home/register");
         return modelAndView;
     }
-    
-    
+
     @RequestMapping(value = "/home/faq.html", method = RequestMethod.GET)
     public ModelAndView viewFAQ(Model model) {
         ModelAndView modelAndView = new ModelAndView("home/faq");
@@ -358,23 +411,23 @@ public class HomeController {
     @RequestMapping(value = "/home/profile.html", method = RequestMethod.GET)
     public ModelAndView profilePage(HttpSession session, Model model, Pageable pageable) {
         try {
-            if (session.getAttribute("userLogin") == null && session.getAttribute("userGoogle") == null) {
+            if (session.getAttribute("userLogin") == null) {
                 Map<String, String> mapError = new HashedMap<String, String>();
-                model.addAttribute("athUser", new AuthUserModel());
+                model.addAttribute("authUser", new AuthUserModel());
                 model.addAttribute("mapError", mapError);
                 ModelAndView modelAndView = new ModelAndView("home/login");
                 return modelAndView;
             } else {
                 AuthUser authUser = null;
                 Infomation inf = null;
-                InfomationModel infModel =  new InfomationModel();
+                InfomationModel infModel = new InfomationModel();
                 if (session.getAttribute("userLogin") != null) {
                     authUser = (AuthUser) session.getAttribute("userLogin");
                     inf = infomationService.findByAuthUserId(authUser.getId());
                     if (inf == null) {
                         inf = new Infomation();
                     }
-                    
+
                     infModel.setFirstName(authUser.getFirstName());
                     infModel.setLastName(authUser.getLastName());
                     infModel.setProvince(inf.getProvince());
@@ -385,30 +438,10 @@ public class HomeController {
                     infModel.setAtmNumberBank(inf.getAtmNumber());
                     infModel.setAddress(inf.getAddress());
                     infModel.setEmailUser(authUser.getEmail());
-                } else if (session.getAttribute("userGoogle") != null) {
-                    GmailGoogle gmailGG = (GmailGoogle) session.getAttribute("userGoogle");
-                    authUser = authUserService.findByEmail(gmailGG.getEmail());
-                    if (authUser != null) {
-                        inf = infomationService.findByAuthUserId(authUser.getId());
-                        if (inf == null) {
-                            inf = new Infomation();
-                        }else {
-                        	 infModel.setFirstName(authUser.getFirstName());
-                             infModel.setLastName(authUser.getLastName());
-                             infModel.setProvince(inf.getProvince());
-                             infModel.setTown(inf.getTown());
-                             infModel.setGender(authUser.getGender());
-                             infModel.setPhone(inf.getPhone());
-                             infModel.setBank(inf.getBank());
-                             infModel.setAtmNumberBank(inf.getAtmNumber());
-                             infModel.setAddress(inf.getAddress());
-                             infModel.setEmailUser(authUser.getEmail());
-                        }
-                    } 
                 }
                 Long id = authUser.getId();
                 Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "createDate"));
-                Pageable _page = new PageRequest(pageable.getPageNumber(), 20, sort);
+                Pageable _page = new PageRequest(pageable.getPageNumber(), 3, sort);
                 Page<BillProfileModel> lsBill = billService.pageBillForShowProfileUser(id, _page);
                 if (lsBill.getContent() != null) {
                     model.addAttribute("lsBill", lsBill);
@@ -427,33 +460,34 @@ public class HomeController {
 
     @RequestMapping(value = "/home/profile.html", method = RequestMethod.POST)
     public String profileSave(HttpSession session, Model model,
-                                    @ModelAttribute("profile") @Valid InfomationModel infomationModel, BindingResult result, Pageable pageable) {
-    	Map<String, String> mapError = new HashedMap<String, String>();
-    	AuthUser authUser = authUserService.findOne(((AuthUser) session.getAttribute("userLogin")).getId());
+                              @ModelAttribute("profile") @Valid InfomationModel infomationModel, BindingResult result,
+                              Pageable pageable) {
+        Map<String, String> mapError = new HashedMap<String, String>();
+        AuthUser authUser = authUserService.findOne(((AuthUser) session.getAttribute("userLogin")).getId());
         try {
             infoFormValidator.validateReportForm(infomationModel, result);
-        	if(result.hasErrors()) {
-        		for(Object obj : result.getAllErrors()) {
-        			if(obj instanceof ObjectError) {
-        				mapError.put(((ObjectError) obj).getCode(), ((ObjectError) obj).getDefaultMessage());
-        			}
-        		}
-        		Long id = authUser.getId();
+            if (result.hasErrors()) {
+                for (Object obj : result.getAllErrors()) {
+                    if (obj instanceof ObjectError) {
+                        mapError.put(((ObjectError) obj).getCode(), ((ObjectError) obj).getDefaultMessage());
+                    }
+                }
+                Long id = authUser.getId();
                 Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "createDate"));
                 Pageable _page = new PageRequest(pageable.getPageNumber(), 20, sort);
                 Page<BillProfileModel> lsBill = billService.pageBillForShowProfileUser(id, _page);
                 if (lsBill.getContent() != null) {
-                	model.addAttribute("lsBill", lsBill);
+                    model.addAttribute("lsBill", lsBill);
 
                 }
-        		model.addAttribute("mapError", mapError);
-        		model.addAttribute("bankInfo", bankService.findAll());
-        		return "home/profile";
-        	}else {
-        		Infomation infomation = null;
+                model.addAttribute("mapError", mapError);
+                model.addAttribute("bankInfo", bankService.findAll());
+                return "home/profile";
+            } else {
+                Infomation infomation = null;
                 infomation = infomationService.findByAuthUserId(authUser.getId());
                 if (infomation == null) {
-                	infomation = new Infomation();
+                    infomation = new Infomation();
                 }
                 authUser.setEmail(infomationModel.getEmailUser());
                 authUser.setFirstName(infomationModel.getFirstName());
@@ -474,21 +508,21 @@ public class HomeController {
                 } else {
                     infomationService.update(infomation);
                 }
-        	}
+            }
         } catch (Exception e) {
-        	Long id = authUser.getId();
+            Long id = authUser.getId();
             Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "createDate"));
             Pageable _page = new PageRequest(pageable.getPageNumber(), 20, sort);
             Page<BillProfileModel> lsBill = billService.pageBillForShowProfileUser(id, _page);
             if (lsBill.getContent() != null) {
-            	model.addAttribute("lsBill", lsBill);
+                model.addAttribute("lsBill", lsBill);
 
             }
-    		model.addAttribute("mapError", mapError);
-    		model.addAttribute("bankInfo", bankService.findAll());
-        	mapError.put("errorProfile", "Lỗi không xác định");
-			model.addAttribute("mapError", mapError);
-			return "home/profile";
+            model.addAttribute("mapError", mapError);
+            model.addAttribute("bankInfo", bankService.findAll());
+            mapError.put("errorProfile", "Lỗi không xác định");
+            model.addAttribute("mapError", mapError);
+            return "home/profile";
         }
         return "redirect:/home/profile.html";
     }
@@ -496,21 +530,20 @@ public class HomeController {
     @RequestMapping(value = "/home/logout.html", method = RequestMethod.GET)
     public String logout(HttpSession session) {
         session.removeAttribute("userLogin");
-        session.removeAttribute("userGoogle");
         return "redirect:/home/login.html";
     }
 
     @RequestMapping(value = "/home/{user}/reset.html", method = RequestMethod.GET)
-    public ModelAndView resetPassword(Model model, @PathVariable("user") String user,HttpSession session) {
-    	if (session.getAttribute("userLogin") == null && session.getAttribute("userGoogle") == null) {
+    public ModelAndView resetPassword(Model model, @PathVariable("user") String user, HttpSession session) {
+        if (session.getAttribute("userLogin") == null) {
             Map<String, String> mapError = new HashedMap<String, String>();
             model.addAttribute("athUser", new AuthUserModel());
             model.addAttribute("mapError", mapError);
             ModelAndView modelAndView = new ModelAndView("home/login");
             return modelAndView;
-        }else {
-        	 ModelAndView modelAndView = new ModelAndView("home/reset-password");
-             return modelAndView;
+        } else {
+            ModelAndView modelAndView = new ModelAndView("home/reset-password");
+            return modelAndView;
         }
     }
 
@@ -560,19 +593,25 @@ public class HomeController {
                 }
                 responseMap.put("password", pass);
                 responseMap.put("userName", authUser.getUserName());
-                new Thread(() -> {
-                    try {
-                        final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath(
-                                "html/MailForgetPassword.html", (HashMap<String, Object>) responseMap);
-                        mailSender.sendSimpleMailWarningTLS("ÔTôKê<tanbv.dev@gmail.com>", email,
-                                "[ÔTôKê] Cấp Lại Mật Khẩu", htmlContent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }).start();
-                authUser.setPassword(passwordEncoder.encode(pass));
-                authUserService.update(authUser);
-                response.put("success", "Quý khách vui lòng truy cập email để nhận lại mật khẩu mới");
+                boolean statusSend = false;
+//                new Thread(() -> {
+                try {
+                    final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath(
+                            "html/MailForgetPassword.html", (HashMap<String, Object>) responseMap);
+                    mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", email,
+                            "[Rustic] Cấp Lại Mật Khẩu", htmlContent);
+                    statusSend = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+//                }).start();
+                if (statusSend) {
+                    authUser.setPassword(passwordEncoder.encode(pass));
+                    authUserService.update(authUser);
+                    response.put("success", "Quý khách vui lòng truy cập email để nhận lại mật khẩu mới");
+                } else {
+                    response.put("err", "Lỗi hệ thống");
+                }
             } else {
                 response.put("err", "Không tìm thấy địa chỉ email");
             }
@@ -599,55 +638,61 @@ public class HomeController {
         }
         return "home/product";
     }
-    
-    
+
     @RequestMapping(value = "/home/review/{id}.html")
     public String revire(Model model, @PathVariable("id") Long id, HttpSession session) {
-    	if(reviewService.countRateByBillId(id)>0) {
-    		return "redirect:/";
-    	}else {
-    		List<Product_Bill> lstPrBill = prBillService.findByBill_Id(id);
-        	model.addAttribute("lstBillPr", lstPrBill);
-        	model.addAttribute("rate", 1);
-        	model.addAttribute("description", "");
-        	session.setAttribute("idBill", id);
-        	return "home/review";
-    	}
+        if (reviewService.countRateByBillId(id) > 0) {
+            return "redirect:/";
+        } else {
+            List<Product_Bill> lstPrBill = prBillService.findByBill_Id(id);
+            model.addAttribute("lstBillPr", lstPrBill);
+            model.addAttribute("rate", 1);
+            model.addAttribute("description", "");
+            session.setAttribute("idBill", id);
+            return "home/review";
+        }
     }
     
+    @RequestMapping(value = "/home/checkOut.html", method = RequestMethod.GET)
+    public ModelAndView checkOut(Model model, Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("home/check-out");
+        return modelAndView;
+    }
+
     @SuppressWarnings("unchecked")
-	@RequestMapping(value = "/home/reviewSubmit.html", method = RequestMethod.POST)
-    public @ResponseBody String submit(@RequestBody List<Object> lst,HttpSession session) {
+    @RequestMapping(value = "/home/reviewSubmit.html", method = RequestMethod.POST)
+    public @ResponseBody
+    String submit(@RequestBody List<Object> lst, HttpSession session) {
         try {
-        	Review review = null;
-        	Product product = null;
-        	LinkedHashMap<String, String> map = null;
-        	long id = (long) session.getAttribute("idBill");
-        	Bill bill = billService.findOne(id);
-        	Date date = new Date();
-        	for(Object obj : lst) {
-        		map = (LinkedHashMap<String, String>) obj;
-        		review = new Review();
-        		product = productService.findOne(Long.parseLong(map.get("id")));
-        		review.setProduct(product);
-        		review.setRate(Integer.parseInt(map.get("rate")));
-        		review.setDescription(map.get("description"));
-        		review.setEmail(bill.getEmail());
-        		review.setName(bill.getName());
-        		review.setStatus(0);
-        		review.setCreateDate(date);
-        		review.setBill(bill);
-        		reviewService.insert(review);
-        	}
-        } catch(JSONException _instance) {
+            Review review = null;
+            Product product = null;
+            LinkedHashMap<String, String> map = null;
+            long id = (long) session.getAttribute("idBill");
+            Bill bill = billService.findOne(id);
+            Date date = new Date();
+            for (Object obj : lst) {
+                map = (LinkedHashMap<String, String>) obj;
+                review = new Review();
+                product = productService.findOne(Long.parseLong(map.get("id")));
+                review.setProduct(product);
+                review.setRate(Integer.parseInt(map.get("rate")));
+                review.setDescription(map.get("description"));
+                review.setEmail(bill.getEmail());
+                review.setName(bill.getName());
+                review.setStatus(0);
+                review.setCreateDate(date);
+                review.setBill(bill);
+                reviewService.insert(review);
+            }
+        } catch (JSONException _instance) {
         }
 
-    	return "Json String";
+        return "Json String";
     }
-    
-    class review{
-    	int id;
-    	int rate;
-    	String description;
+
+    class review {
+        int id;
+        int rate;
+        String description;
     }
 }

@@ -1,0 +1,80 @@
+<div th:fragment="content" th:remove="tag">
+	<!-- <div th:if="${not #lists.isEmpty(page.content)}">
+		       <div class="pagination pull-left no-margin" style="margin: 0px!important;">
+								<span> Showing <span th:text="${(page.number * page.size)+1}"></span>
+										to <span th:text="${(page.number * page.size)+ page.numberOfElements}"></span>  of
+										 <span th:text="${page.totalElements}"></span> entries</span>
+		       </div>
+		<div class="pagination pull-right no-margin"
+			style="margin: 0px !important;">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination" style="margin: 0px !important;">
+					<li class="first page-item" th:if="${not page.first}"><a
+						th:href="@{${pageUrl}(page=${0},size=${page.size})}" href="#"><i
+							class="fa fa-angle-double-left"></i> </a></li>
+					<li class="prev page-item" th:if="${page.hasPrevious()}"><a
+						th:href="@{${pageUrl}(page=${page.number-1},size=${page.size})}"
+						href="#"> <i class="fa fa-angle-left"></i>
+					</a></li>
+					<th:block
+						th:each="pageNumber : ${#numbers.sequence(page.number - 5, page.number + 5)}">
+						<li class="active page-item"
+							th:if="${pageNumber eq (page.number+1) and pageNumber gt 0 and  pageNumber lt (page.totalPages +1) }">
+							<a href="#"
+							th:href="@{${pageUrl}(page=${pageNumber-1},size=${page.size})}"
+							th:title="${pageNumber}" th:text="${pageNumber}"></a>
+						</li>
+						<li class="page-item"
+							th:if="${pageNumber ne (page.number+1) and pageNumber gt 0 and  pageNumber lt (page.totalPages +1) }">
+							<a href="#"
+							th:href="@{${pageUrl}(page=${pageNumber-1},size=${page.size})}"
+							th:title="${pageNumber}" th:text="${pageNumber}"></a>
+						</li>
+					</th:block>
+					<li class="next page-item" th:if="${page.hasNext()}"><a
+						th:href="@{${pageUrl}(page=${page.number+1},size=${page.size})}"
+						href="#"> <i class="fa fa-angle-right"></i>
+					</a></li>
+					<li class="Last page-item" th:if="${not page.last}"><a
+						th:href="@{${pageUrl}(page=${page.totalPages-1},size=${page.size})}"
+						href="#"><i class="fa fa-angle-double-right"></i></a></li>
+				</ul>
+			</nav>
+		</div>
+	</div> -->
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item first" th:if="${not page.first}"><a
+				class="page-link"
+				th:href="@{${pageUrl}(page=${0},size=${page.size})}">First</a></li>
+			<li class="page-item prev" th:if="${page.hasPrevious()}"><a
+				class="page-link"
+				th:href="@{${pageUrl}(page=${page.number-1},size=${page.size})}">Previous</a></li>
+
+			<th:block
+				th:each="pageNumber : ${#numbers.sequence(page.number - 5, page.number + 5)}">
+				<li class="active page-item"
+					th:if="${pageNumber eq (page.number+1) and pageNumber gt 0 and  pageNumber lt (page.totalPages +1) }">
+					<a class="page-link"
+					th:href="@{${pageUrl}(page=${pageNumber-1},size=${page.size})}"
+					th:title="${pageNumber}" th:text="${pageNumber}"></a>
+				</li>
+				<li class="page-item"
+					th:if="${pageNumber ne (page.number+1) and pageNumber gt 0 and  pageNumber lt (page.totalPages +1) }">
+					<a class="page-link"
+					th:href="@{${pageUrl}(page=${pageNumber-1},size=${page.size})}"
+					th:title="${pageNumber}" th:text="${pageNumber}"></a>
+				</li>
+			</th:block>
+
+			<!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+			<li class="page-item next" th:if="${page.hasNext()}"><a
+				class="page-link"
+				th:href="@{${pageUrl}(page=${page.number+1},size=${page.size})}">Next</a></li>
+			<li class="page-item last" th:if="${not page.last}"><a class="page-link"
+				th:href="@{${pageUrl}(page=${page.totalPages-1},size=${page.size})}">Last</a></li>
+		</ul>
+	</nav>
+	<br />
+</div>

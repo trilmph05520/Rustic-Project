@@ -1,5 +1,6 @@
 package com.vn.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -152,11 +153,15 @@ public class CartController {
 	}
 
 	public double totalPrice(HashMap<Long, Cart> cartItems) {
-		int count = 0;
+		BigDecimal count = BigDecimal.ZERO;
 		for (Map.Entry<Long, Cart> list : cartItems.entrySet()) {
-			count += list.getValue().getProduct().getPrice() * list.getValue().getQuantity();
+			if(list.getValue().getProduct().getPriceSale() == 0) {
+				count = count.add(new BigDecimal(list.getValue().getProduct().getPrice()).multiply(new BigDecimal(list.getValue().getQuantity())));
+			}else {
+				count = count.add(new BigDecimal(list.getValue().getProduct().getPriceSale()).multiply(new BigDecimal(list.getValue().getQuantity())));
+			}
 		}
-		return count;
+		return count.doubleValue();
 	}
 
 	@SuppressWarnings("unchecked")
