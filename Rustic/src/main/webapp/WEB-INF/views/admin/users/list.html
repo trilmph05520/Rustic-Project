@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
-<head>
 <div th:replace="fragments/initAdmin :: head"></div>
-</head>
 <style>
 .readonly {
 	background: white !important;
@@ -98,8 +96,8 @@
 											th:text="${#dates.format(eachRow.createdDate, 'dd/MM/yyyy')}"></td>
 										<td><a type="button" class="btn btn-danger"
 											th:onclick="'deleteConfirm(\'' + ${eachRow.userName} + '\');'"
-											data-toggle="tooltip" title="Xóa Khách hàng"> <i
-												class="glyphicon glyphicon-trash"></i></a></td>
+											data-toggle="modal" data-target="#productModal"
+											th:text="Delete"> </a></td>
 										<td><a
 											th:onclick="'detailUser(\'' + ${eachRow.id} + '\');'"
 											type="button" class="btn btn-success" data-toggle="modal"
@@ -292,8 +290,7 @@
 						$('#emailUser').val(data.emailUser);
 						$('#bank').val(data.bank);
 						$('#atmNumber').val(data.atmNumberBank);
-						$('#birthday').val(
-								moment(data.birthday).format('DD/MM/YYYY'));
+						$('#birthday').val(data.birthday);
 						$('#company').val(data.company);
 						$('#phone').val(data.phone);
 						$('#province').val(data.province);
@@ -319,10 +316,10 @@
 		function deleteConfirm(key) {
 			var id = key;
 
-			$('#modal-title-notification').text('Xác nhận xóa danh mục')
+			$('#modal-title-notification').text('Xác nhận xóa khách hàng')
 
 			$('#name').text(
-					'Bạn có chắc chắn muốn xóa khách: ' + key + ' - '
+					'Bạn có chắc chắn muốn xóa khách hàng: ' + key + ' - '
 							+ ' không ? Bấm Delete để xác nhận.');
 
 			$('#delete').click(
