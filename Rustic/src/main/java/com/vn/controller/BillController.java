@@ -46,7 +46,7 @@ public class BillController {
     @Resource
     private RejectService rejectService;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     private String DELETE = "N";
 
     @RequestMapping(value = "list.html", method = {RequestMethod.GET, RequestMethod.POST})
