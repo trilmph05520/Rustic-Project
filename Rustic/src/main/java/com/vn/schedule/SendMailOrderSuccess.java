@@ -26,7 +26,7 @@ public class SendMailOrderSuccess {
                 responseMap.put("id", each.getId());
                 GoogleMailSender mailSender = new GoogleMailSender();
                 final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailThankiuCustomer.html", (HashMap<String, Object>) responseMap);
-                mailSender.sendSimpleMailWarningTLS("ÔTôKê<tanbv.dev@gmail.com>", each.getEmail(), "[ÔTôKê] EMail cảm ơn Quý Khách", htmlContent);
+                mailSender.sendSimpleMailWarningTLS("RUSTIC<trilmph05520@fpt.edu.vn>", each.getEmail(), "[Rustic] EMail cảm ơn Quý Khách", htmlContent);
                 each.setMailStatus(Bill.MAILSTATUS.PAID.value());
                 billService.update(each);
                 Thread.sleep(500);

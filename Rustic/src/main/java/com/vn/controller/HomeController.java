@@ -46,7 +46,6 @@ import com.vn.config.GoogleMailSender;
 import com.vn.jpa.AuthUser;
 import com.vn.jpa.Bill;
 import com.vn.jpa.Category;
-import com.vn.jpa.GmailGoogle;
 import com.vn.jpa.Infomation;
 import com.vn.jpa.Product;
 import com.vn.jpa.Product_Bill;
@@ -61,7 +60,6 @@ import com.vn.service.AuthUserService;
 import com.vn.service.BankInfoService;
 import com.vn.service.BillService;
 import com.vn.service.CategoryService;
-import com.vn.service.GmailGoogleService;
 import com.vn.service.InfomationService;
 import com.vn.service.ProductService;
 import com.vn.service.Product_BillService;
@@ -94,9 +92,6 @@ public class HomeController {
 
     @Resource
     private InfomationFormValidator infoFormValidator;
-
-    @Resource
-    private GmailGoogleService gmailGoogleService;
 
     @Resource
     private BillService billService;
@@ -290,7 +285,6 @@ public class HomeController {
     @RequestMapping(value = "/home/cart.html", method = RequestMethod.GET)
     public ModelAndView viewCart(HttpSession session, Pageable pageable, Model model) {
         AuthUser authUser = (AuthUser) session.getAttribute("userLogin");
-        GmailGoogle gmailGoogle = (GmailGoogle) session.getAttribute("userGoogle");
         if (authUser != null) {
             Infomation infomation = infomationService.findByAuthUserId(authUser.getId());
             model.addAttribute("name", authUser.getFullName());
@@ -299,10 +293,6 @@ public class HomeController {
                 model.addAttribute("mobile", infomation.getPhone());
                 model.addAttribute("address", infomation.getAddress());
             }
-        }
-        if (gmailGoogle != null) {
-            model.addAttribute("name", gmailGoogle.getName());
-            model.addAttribute("email", gmailGoogle.getEmail());
         }
         ModelAndView modelAndView = new ModelAndView("home/cart");
         if (session.getAttribute("myCartItems") == null) {
@@ -441,11 +431,10 @@ public class HomeController {
                 }
                 Long id = authUser.getId();
                 Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "createDate"));
-                Pageable _page = new PageRequest(pageable.getPageNumber(), 3, sort);
+                Pageable _page = new PageRequest(pageable.getPageNumber(), 10, sort);
                 Page<BillProfileModel> lsBill = billService.pageBillForShowProfileUser(id, _page);
                 if (lsBill.getContent() != null) {
                     model.addAttribute("lsBill", lsBill);
-
                 }
                 model.addAttribute("profile", infModel);
                 model.addAttribute("bankInfo", bankService.findAll());
@@ -654,8 +643,83 @@ public class HomeController {
     }
     
     @RequestMapping(value = "/home/checkOut.html", method = RequestMethod.GET)
-    public ModelAndView checkOut(Model model, Pageable pageable) {
+    public ModelAndView checkOut(Model model, Pageable pageable, HttpSession session) {
+        AuthUser authUser = (AuthUser) session.getAttribute("userLogin");
+        if (authUser != null) {
+            Infomation infomation = infomationService.findByAuthUserId(authUser.getId());
+            model.addAttribute("name", authUser.getFullName());
+            model.addAttribute("email", authUser.getEmail());
+            if (infomation != null) {
+                model.addAttribute("mobile", infomation.getPhone());
+                model.addAttribute("address", infomation.getAddress());
+            }
+        }
         ModelAndView modelAndView = new ModelAndView("home/check-out");
+        if (session.getAttribute("myCartItems") == null) {
+            Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+            Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
+            Page<Product> product = productService.findAllByIsdelete("N", _pageable);
+            List<Product> newProduct = productService.lsProductDateDesc();
+            List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+            Map<Long, List> mapLsId = new HashMap<>();
+            List<Category> lstCatePr = new ArrayList<Category>();
+            for (Category each : category) {
+                if (each.getParent() == null) {
+                    List ls = new ArrayList();
+                    ls.add(each.getName());
+                    List lsCategoryChildren = new ArrayList();
+                    ls.add(lsCategoryChildren);
+                    mapLsId.put(each.getId(), ls);
+                    lstCatePr.add(each);
+                }
+            }
+            session.setAttribute("categoryNavPr", lstCatePr);
+            for (Category eachCateChildren : category) {
+                if (eachCateChildren.getParent() != null) {
+                    ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
+                    List lsCategoryInfo = new ArrayList();
+                    lsCategoryInfo.add(eachCateChildren.getId());
+                    lsCategoryInfo.add(eachCateChildren.getName());
+                    lsChildren.add(lsCategoryInfo);
+                }
+            }
+            session.setAttribute("categoryNav", mapLsId);
+            model.addAttribute("newProduct", newProduct);
+            model.addAttribute("page", product);
+            modelAndView = new ModelAndView("redirect:/");
+        } else if (((HashMap<Long, Cart>) session.getAttribute("myCartItems")).isEmpty()) {
+            Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+            Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
+            Page<Product> product = productService.findAllByIsdelete("N", _pageable);
+            List<Product> newProduct = productService.lsProductDateDesc();
+            List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+            Map<Long, List> mapLsId = new HashMap<>();
+            List<Category> lstCatePr = new ArrayList<Category>();
+            for (Category each : category) {
+                if (each.getParent() == null) {
+                    List ls = new ArrayList();
+                    ls.add(each.getName());
+                    List lsCategoryChildren = new ArrayList();
+                    ls.add(lsCategoryChildren);
+                    mapLsId.put(each.getId(), ls);
+                    lstCatePr.add(each);
+                }
+            }
+            session.setAttribute("categoryNavPr", lstCatePr);
+            for (Category eachCateChildren : category) {
+                if (eachCateChildren.getParent() != null) {
+                    ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
+                    List lsCategoryInfo = new ArrayList();
+                    lsCategoryInfo.add(eachCateChildren.getId());
+                    lsCategoryInfo.add(eachCateChildren.getName());
+                    lsChildren.add(lsCategoryInfo);
+                }
+            }
+            session.setAttribute("categoryNav", mapLsId);
+            model.addAttribute("newProduct", newProduct);
+            model.addAttribute("page", product);
+            modelAndView = new ModelAndView("redirect:/");
+        }
         return modelAndView;
     }
 

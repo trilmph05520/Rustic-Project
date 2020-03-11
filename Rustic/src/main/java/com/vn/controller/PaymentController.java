@@ -47,9 +47,6 @@ public class PaymentController {
     private ProductService productService;
 
     @Resource
-    private JavaMailSender mailSender;
-
-    @Resource
     private Product_BillService productBillService;
 
     @Resource
@@ -72,7 +69,6 @@ public class PaymentController {
     @RequestMapping(value = "online/list.html", method = RequestMethod.GET)
     public String paymentOnline(HttpSession session, Model model) {
         AuthUser authUser = (AuthUser) session.getAttribute("userLogin");
-        GmailGoogle gmailGoogle = (GmailGoogle) session.getAttribute("userGoogle");
         if (authUser != null) {
             model.addAttribute("name", authUser.getFullName());
             model.addAttribute("email", authUser.getEmail());
@@ -81,10 +77,6 @@ public class PaymentController {
                 model.addAttribute("mobile", infomation.getPhone());
                 model.addAttribute("address", infomation.getAddress());
             }
-        }
-        if (gmailGoogle != null) {
-            model.addAttribute("name", gmailGoogle.getName());
-            model.addAttribute("email", gmailGoogle.getEmail());
         }
         return "home/payment";
     }
@@ -147,69 +139,69 @@ public class PaymentController {
         Map<String, Object> responseMapMail = new HashMap<>();
         try {
             AuthUser authUser = (AuthUser) session.getAttribute("userLogin");
-            GmailGoogle gmailGoogle = (GmailGoogle) session.getAttribute("userGoogle");
-            if (authUser == null && gmailGoogle == null) {
-                responeMap.put("authUser", "Bạn vui lòng đăng nhập trước khi thanh toán");
+            if (authUser == null) {
+                responeMap.put("authUser", "Xin vui lòng đăng nhập trước khi thanh toán");
             } else {
                 AuthUser user = new AuthUser();
                 Bill bill = new Bill();
                 if (authUser != null) {
                     user.setId(authUser.getId());
                     bill.setAuthUser(user);
-                } else {
-                    AuthUser userAutoEmail = authUserService.findByEmail(billModel.getEmail());
-                    if (userAutoEmail == null) {
-                        authUser = new AuthUser();
-                        List<Role> roles = new ArrayList<>();
-                        roles.add(authRoleService.findOne(2l));
-                        Date createdDate = new DateTime().toDate();
-                        String password = RandomStringUtils.randomAlphanumeric(6).toUpperCase();
-                        String salt = "5876695f8e4e1811";
-                        String encryptPassword = "";
-                        encryptPassword = passwordEncoder.encode(password);
-                        authUser.setCreatedDate(createdDate);
-                        authUser.setEmail(gmailGoogle.getEmail());
-                        authUser.setFirstName(billModel.getName().split(" ")[0]);
-                        authUser.setMiddleName(billModel.getName().split(" ")[1]);
-                        String lastName = billModel.getName().split(" ")[2];
-                        authUser.setLastName(lastName);
-                        authUser.setFullName(billModel.getName());
-                        authUser.setGender("0");
-                        authUser.setIsVerified((byte) 1);
-                        authUser.setModifiedDate(null);
-                        String userName = AppUtil.convertUnicode(billModel.getName().split(" ")[2].toLowerCase() + billModel.getName().split(" ")[0].substring(0, 1).toLowerCase() + billModel.getName().split(" ")[1].substring(0, 1).toLowerCase());
-
-                        while (authUserService.checkExistByUserName(userName)) {
-                            userName = userName + i;
-                            i = i++;
-                        }
-                        authUser.setUserName(userName);
-                        authUser.setSalt(salt);
-                        authUser.setPassword(encryptPassword);
-                        authUser.setStatus((byte) 1);
-                        authUser.setUserType((byte) 2);
-                        authUser.setAuthRoles(roles);
-                        authUserService.create(authUser);
-                        bill.setAuthUser(authUser);
-                        responseMapMail.put("userName", userName);
-                        responseMapMail.put("password", password);
-                        responseMapMail.put("name", billModel.getName());
-                        new Thread(
-                                () -> {
-                                    try {
-                                        GoogleMailSender mailSender = new GoogleMailSender();
-                                        final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailAutoCreateAccount.html", (HashMap<String, Object>) responseMapMail);
-                                        mailSender.sendSimpleMailWarningTLS("ÔTôKê<tanbv.dev@gmail.com>", billModel.getEmail(), "[ÔTôKê] EMail Tạo Tài Khoản Tự Động", htmlContent);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                        ).start();
-                    } else {
-                        user.setId(userAutoEmail.getId());
-                        bill.setAuthUser(user);
-                    }
                 }
+//                else {
+//                    AuthUser userAutoEmail = authUserService.findByEmail(billModel.getEmail());
+//                    if (userAutoEmail == null) {
+//                        authUser = new AuthUser();
+//                        List<Role> roles = new ArrayList<>();
+//                        roles.add(authRoleService.findOne(2l));
+//                        Date createdDate = new DateTime().toDate();
+//                        String password = RandomStringUtils.randomAlphanumeric(6).toUpperCase();
+//                        String salt = "5876695f8e4e1811";
+//                        String encryptPassword = "";
+//                        encryptPassword = passwordEncoder.encode(password);
+//                        authUser.setCreatedDate(createdDate);
+//                        authUser.setEmail(gmailGoogle.getEmail());
+//                        authUser.setFirstName(billModel.getName().split(" ")[0]);
+//                        authUser.setMiddleName(billModel.getName().split(" ")[1]);
+//                        String lastName = billModel.getName().split(" ")[2];
+//                        authUser.setLastName(lastName);
+//                        authUser.setFullName(billModel.getName());
+//                        authUser.setGender("0");
+//                        authUser.setIsVerified((byte) 1);
+//                        authUser.setModifiedDate(null);
+//                        String userName = AppUtil.convertUnicode(billModel.getName().split(" ")[2].toLowerCase() + billModel.getName().split(" ")[0].substring(0, 1).toLowerCase() + billModel.getName().split(" ")[1].substring(0, 1).toLowerCase());
+//
+//                        while (authUserService.checkExistByUserName(userName)) {
+//                            userName = userName + i;
+//                            i = i++;
+//                        }
+//                        authUser.setUserName(userName);
+//                        authUser.setSalt(salt);
+//                        authUser.setPassword(encryptPassword);
+//                        authUser.setStatus((byte) 1);
+//                        authUser.setUserType((byte) 2);
+//                        authUser.setAuthRoles(roles);
+//                        authUserService.create(authUser);
+//                        bill.setAuthUser(authUser);
+////                        responseMapMail.put("userName", userName);
+////                        responseMapMail.put("password", password);
+////                        responseMapMail.put("name", billModel.getName());
+////                        new Thread(
+////                                () -> {
+////                                    try {
+////                                        GoogleMailSender mailSender = new GoogleMailSender();
+////                                        final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailAutoCreateAccount.html", (HashMap<String, Object>) responseMapMail);
+////                                        mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", billModel.getEmail(), "[Rustic] EMail Tạo Tài Khoản Tự Động", htmlContent);
+////                                    } catch (Exception e) {
+////                                        e.printStackTrace();
+////                                    }
+////                                }
+////                        ).start();
+//                    } else {
+//                        user.setId(userAutoEmail.getId());
+//                        bill.setAuthUser(user);
+//                    }
+//                }
                 if (responeMap.size() == 0) {
                 	boolean checkPro = true;
                     String code = RandomStringUtils.randomAlphanumeric(10).toUpperCase();
@@ -263,15 +255,13 @@ public class PaymentController {
                             }
                         }	
                     }
-                    
-                    
                     responseMapMail.put("bill", bill);
                     new Thread(
                             () -> {
                                 try {
                                     GoogleMailSender mailSender = new GoogleMailSender();
                                     final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailCustomerOrderProduct.html", (HashMap<String, Object>) responseMapMail);
-                                    mailSender.sendSimpleMailWarningTLS("ÔTôKê<tanbv.dev@gmail.com>", billModel.getEmail(), "[ÔTôKê] EMail đơn đặt hàng Quý Khách", htmlContent);
+                                    mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", billModel.getEmail(), "[Rustic] Email đơn đặt hàng Quý Khách", htmlContent);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -388,62 +378,47 @@ public class PaymentController {
             if (authUser != null) {
                 user.setId(authUser.getId());
                 bill.setAuthUser(user);
-            } else {
-                GmailGoogle gmailGoogle = (GmailGoogle) session.getAttribute("userGoogle");
-                AuthUser userAutoEmail = authUserService.findByEmail(model.getEmail());
-                if (userAutoEmail == null) {
-                    authUser = new AuthUser();
-                    List<Role> roles = new ArrayList<>();
-                    roles.add(authRoleService.findOne(2l));
-                    Date createdDate = new DateTime().toDate();
-                    String password = RandomStringUtils.randomAlphanumeric(6).toUpperCase();
-                    String salt = "5876695f8e4e1811";
-                    String encryptPassword = "";
-                    encryptPassword = passwordEncoder.encode(password);
-                    authUser.setCreatedDate(createdDate);
-                    authUser.setEmail(gmailGoogle.getEmail());
-                    authUser.setFirstName(model.getName().split(" ")[0]);
-                    authUser.setMiddleName(model.getName().split(" ")[1]);
-                    String lastName = model.getName().split(" ")[2];
-                    authUser.setLastName(lastName);
-                    authUser.setFullName(model.getName());
-                    authUser.setGender("0");
-                    authUser.setIsVerified((byte) 1);
-                    authUser.setModifiedDate(null);
-                    String userName = AppUtil.convertUnicode(model.getName().split(" ")[2].toLowerCase() + model.getName().split(" ")[0].substring(0, 1).toLowerCase() + model.getName().split(" ")[1].substring(0, 1).toLowerCase());
-//                    String userName = gmailGoogle.getEmail().split("@")[0];
-
-                    while (authUserService.checkExistByUserName(userName)) {
-                        userName = userName + i;
-                        i++;
-                    }
-                    authUser.setUserName(userName);
-                    authUser.setSalt(salt);
-                    authUser.setPassword(encryptPassword);
-                    authUser.setStatus((byte) 1);
-                    authUser.setUserType((byte) 2);
-                    authUser.setAuthRoles(roles);
-                    authUserService.create(authUser);
-                    bill.setAuthUser(authUser);
-                    responseMapMail.put("userName", userName);
-                    responseMapMail.put("password", password);
-                    responseMapMail.put("name", model.getName());
-                    new Thread(
-                            () -> {
-                                try {
-                                    GoogleMailSender mailSender = new GoogleMailSender();
-                                    final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailAutoCreateAccount.html", (HashMap<String, Object>) responseMapMail);
-                                    mailSender.sendSimpleMailWarningTLS("ÔTôKê<tanbv.dev@gmail.com>", model.getEmail(), "[ÔTôKê] EMail Tạo Tài Khoản Tự Động", htmlContent);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                    ).start();
-                } else {
-                    user.setId(userAutoEmail.getId());
-                    bill.setAuthUser(user);
-                }
             }
+//            else {
+//                AuthUser userAutoEmail = authUserService.findByEmail(model.getEmail());
+//                if (userAutoEmail == null) {
+//                    authUser = new AuthUser();
+//                    List<Role> roles = new ArrayList<>();
+//                    roles.add(authRoleService.findOne(2l));
+//                    Date createdDate = new DateTime().toDate();
+//                    String password = RandomStringUtils.randomAlphanumeric(6).toUpperCase();
+//                    String salt = "5876695f8e4e1811";
+//                    String encryptPassword = "";
+//                    encryptPassword = passwordEncoder.encode(password);
+//                    authUser.setCreatedDate(createdDate);
+//                    authUser.setEmail(gmailGoogle.getEmail());
+//                    authUser.setFirstName(model.getName().split(" ")[0]);
+//                    authUser.setMiddleName(model.getName().split(" ")[1]);
+//                    String lastName = model.getName().split(" ")[2];
+//                    authUser.setLastName(lastName);
+//                    authUser.setFullName(model.getName());
+//                    authUser.setGender("0");
+//                    authUser.setIsVerified((byte) 1);
+//                    authUser.setModifiedDate(null);
+//                    String userName = AppUtil.convertUnicode(model.getName().split(" ")[2].toLowerCase() + model.getName().split(" ")[0].substring(0, 1).toLowerCase() + model.getName().split(" ")[1].substring(0, 1).toLowerCase());
+//
+//                    while (authUserService.checkExistByUserName(userName)) {
+//                        userName = userName + i;
+//                        i++;
+//                    }
+//                    authUser.setUserName(userName);
+//                    authUser.setSalt(salt);
+//                    authUser.setPassword(encryptPassword);
+//                    authUser.setStatus((byte) 1);
+//                    authUser.setUserType((byte) 2);
+//                    authUser.setAuthRoles(roles);
+//                    authUserService.create(authUser);
+//                    bill.setAuthUser(authUser);
+//                } else {
+//                    user.setId(userAutoEmail.getId());
+//                    bill.setAuthUser(user);
+//                }
+//            }
             try {
                 if (billService.checkExistByCode(code)) {
                     code = RandomStringUtils.randomAlphanumeric(10).toUpperCase();
@@ -494,7 +469,7 @@ public class PaymentController {
                                 try {
                                     GoogleMailSender mailSender = new GoogleMailSender();
                                     final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailCustomerOrderProduct.html", (HashMap<String, Object>) responseMapMail);
-                                    mailSender.sendSimpleMailWarningTLS("ÔTôKê<tanbv.dev@gmail.com>", model.getEmail(), "[ÔTôKê] EMail đơn đặt hàng Quý Khách", htmlContent);
+                                    mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", model.getEmail(), "[Rustic] Email đơn đặt hàng Quý Khách", htmlContent);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }

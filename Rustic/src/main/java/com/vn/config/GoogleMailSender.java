@@ -1,16 +1,8 @@
 package com.vn.config;
 
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailException;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.util.List;
 import java.util.Properties;
 
 public class GoogleMailSender {
