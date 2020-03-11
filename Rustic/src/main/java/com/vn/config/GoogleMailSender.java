@@ -19,8 +19,8 @@ public class GoogleMailSender {
     protected Integer smtpPort = 465;
     protected boolean smtpAuth = true;
     protected String socketClass = "javax.net.ssl.SSLSocketFactory";
-    protected String authUserName = "tanbv.dev@gmail.com";
-    protected String authPassword = "abcABC1234";
+    protected String authUserName = "trilmph05520@fpt.edu.vn";
+    protected String authPassword = "TRi07121995";
 
     public void sendSimpleMailWarningTLS(String from, String to, String subject, String message)
             throws Exception {
