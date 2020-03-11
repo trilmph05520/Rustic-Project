@@ -34,12 +34,14 @@ public class InfomationFormValidatorImpl implements Validator, InfomationFormVal
 	public void validate(Object target, Errors errors) {
 		InfomationModel infomation = (InfomationModel) target;
 		if(infomation!=null) {
-			this.phoneValidate(infomation.getPhone(), errors, infomation);
+			if(infomation.getPhone()!=null && !infomation.getPhone().isEmpty()) {
+				this.phoneValidate(infomation.getPhone(), errors, infomation);
+			}
 			if (this.isBlank(infomation.getFirstName())) {
 				errors.reject("firstName", "Không được để trống họ !");
 			}
 			if (this.isBlank(infomation.getLastName())) {
-				errors.reject("lastName", "Không được để trống tên !");
+				errors.reject("l astName", "Không được để trống tên !");
 			}
 			if(this.isBlank(infomation.getGender())) {
 				errors.reject("gender", "Không được để trống giới tính !");
@@ -55,7 +57,7 @@ public class InfomationFormValidatorImpl implements Validator, InfomationFormVal
 	private void phoneValidate(String phone, Errors errors, InfomationModel infomation) {
         String phoneExist = infomation.getPhone();
      
-        this.infomationService.findByPhone(phoneExist);
+//        this.infomationService.findByPhone(phoneExist);
         
         String phonePattern = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
         Pattern pattern = Pattern.compile(phonePattern);

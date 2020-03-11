@@ -166,19 +166,19 @@
                                                                 <h6
                                                                         th:text="|${cart.value.product.name}|">Kabino
                                                                     Bedside Table</h6></a>
-                                                            <p th:id="pricecart+${cart.value.product.id}"
+                                                            <p th:class="subtotal+${cart.value.product.id}"
                                                                th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
                                                                th:text="|${#numbers.formatDecimal(new java.math.BigDecimal(cart.value.product.price) * new java.math.BigDecimal(cart.value.quantity), 0, 'COMMA', 0,'POINT')} VND|">
                                                                 $60.00
                                                                 x 1</p>
-                                                            <p th:id="pricecart+${cart.value.product.id}"
+                                                            <p th:class="subtotal+${cart.value.product.id}"
                                                                th:if="${cart.value.product.priceSale != 0}"
                                                                th:text="|${#numbers.formatDecimal(new java.math.BigDecimal(cart.value.product.priceSale) * new java.math.BigDecimal(cart.value.quantity), 0, 'COMMA', 0,'POINT')} VND|">
                                                                 $60.00
                                                                 x 1</p>
                                                             <p>
                                                                 <span><strong>SL: </strong></span> <span
-                                                                    th:id="quantitycart+${cart.value.product.id}"
+                                                                    th:class="quantitycart+${cart.value.product.id}"
                                                                     th:text="|${cart.value.quantity}|"></span>
                                                             </p>
                                                         </div>
