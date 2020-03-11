@@ -101,12 +101,12 @@
 							sec:authorize="hasAnyAuthority('Administrators')"><a
 							class="nav-link" th:href="@{/staff/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">Employee</span>
+								class="nav-link-text" th:utext="#{lable.employee}"></span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/user/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">Customer</span>
+								class="nav-link-text" th:utext="#{lable.customer}"></span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/category') ? 'active':''}"
@@ -118,7 +118,7 @@
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/product') ? 'active':''}"
 							th:href="@{/product/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" th:utext="#{lable.products}"></span>
+								class="nav-link-text" th:utext="#{lable.product}"></span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/bill/list.html}"> <i
@@ -133,7 +133,7 @@
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/review/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">Review</span>
+								class="nav-link-text" th:utext="#{lable.review}"></span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/report/list.html}"> <i
