@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
-<head>
 <div th:replace="fragments/initAdmin :: head"></div>
-</head>
 <style>
 .readonly {
 	background: white !important;
@@ -30,7 +28,7 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0">Customer</h3>
+							<h3 class="text-white mb-0" th:utext="#{lable.customer}"></h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
 								<form role="form" th:object="${userSearchingForm}"
@@ -39,13 +37,13 @@
 										<div class="col-lg-4 col-12">
 											<div>
 												<input class="form-control" id="txtUserName" name="userName"
-													type="text" placeholder="User name" th:value="*{userName}">
+													type="text" th:placeholder="#{lable.username}" th:value="*{userName}">
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
 												<input class="form-control" id="txtEmail" name="email"
-													type="text" placeholder="Email" th:value="*{email}">
+													type="text" th:placeholder="#{lable.email}" th:value="*{email}">
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
@@ -78,11 +76,11 @@
 								<thead class="thead-dark">
 									<tr>
 										<th class="col">#</th>
-										<th class="col">User name</th>
-										<th class="col">Tên đầy đủ</th>
-										<th class="col">Email</th>
-										<th class="col">Trạng thái Account</th>
-										<th class="col">Ngày tạo</th>
+										<th class="col" th:utext="#{lable.username}"></th>
+										<th class="col" th:utext="#{lable.fullname}"></th>
+										<th class="col" th:utext="#{lable.email}"></th>
+										<th class="col"th:utext="#{lable.statusaccount}"></th>
+										<th class="col" th:utext="#{lable.createdate}"></th>
 										<th class="col">#</th>
 										<th class="col">#</th>
 									</tr>
@@ -98,8 +96,8 @@
 											th:text="${#dates.format(eachRow.createdDate, 'dd/MM/yyyy')}"></td>
 										<td><a type="button" class="btn btn-danger"
 											th:onclick="'deleteConfirm(\'' + ${eachRow.userName} + '\');'"
-											data-toggle="tooltip" title="Xóa Khách hàng"> <i
-												class="glyphicon glyphicon-trash"></i></a></td>
+											data-toggle="modal" data-target="#productModal"
+											th:text="Delete"> </a></td>
 										<td><a
 											th:onclick="'detailUser(\'' + ${eachRow.id} + '\');'"
 											type="button" class="btn btn-success" data-toggle="modal"
@@ -292,8 +290,7 @@
 						$('#emailUser').val(data.emailUser);
 						$('#bank').val(data.bank);
 						$('#atmNumber').val(data.atmNumberBank);
-						$('#birthday').val(
-								moment(data.birthday).format('DD/MM/YYYY'));
+						$('#birthday').val(data.birthday);
 						$('#company').val(data.company);
 						$('#phone').val(data.phone);
 						$('#province').val(data.province);
@@ -319,10 +316,10 @@
 		function deleteConfirm(key) {
 			var id = key;
 
-			$('#modal-title-notification').text('Xác nhận xóa danh mục')
+			$('#modal-title-notification').text('Xác nhận xóa khách hàng')
 
 			$('#name').text(
-					'Bạn có chắc chắn muốn xóa khách: ' + key + ' - '
+					'Bạn có chắc chắn muốn xóa khách hàng: ' + key + ' - '
 							+ ' không ? Bấm Delete để xác nhận.');
 
 			$('#delete').click(

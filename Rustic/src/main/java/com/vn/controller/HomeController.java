@@ -1,6 +1,5 @@
 package com.vn.controller;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,7 +41,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.vn.common.Constants;
-import com.vn.common.GoogleUtils;
 import com.vn.common.ThymeleafUtil;
 import com.vn.config.GoogleMailSender;
 import com.vn.jpa.AuthUser;
@@ -653,6 +651,12 @@ public class HomeController {
             session.setAttribute("idBill", id);
             return "home/review";
         }
+    }
+    
+    @RequestMapping(value = "/home/checkOut.html", method = RequestMethod.GET)
+    public ModelAndView checkOut(Model model, Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("home/check-out");
+        return modelAndView;
     }
 
     @SuppressWarnings("unchecked")

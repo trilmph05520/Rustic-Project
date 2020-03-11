@@ -1,93 +1,88 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <div th:fragment="partner-logo">
-        <div class="partner-logo">
-            <div class="container">
-                <div class="logo-carousel owl-carousel">
-                    <div class="logo-item">
-                        <div class="tablecell-inner">
-                            <img
-                                    th:src="@{/static/rank/bac.png}"
-                                    alt="">
-                        </div>
-                    </div>
-                    <div class="logo-item">
-                        <div class="tablecell-inner">
-                            <img
-                                    th:src="@{/static/rank/vang.png}"
-                                    alt="">
-                        </div>
-                    </div>
-                    <!-- <div class="logo-item">
+	<div th:fragment="partner-logo">
+		<div class="partner-logo">
+			<div class="container">
+				<div class="logo-carousel owl-carousel">
+					<div class="logo-item">
+						<div class="tablecell-inner">
+							<img th:src="@{/static/rank/bac.png}" alt="">
+						</div>
+					</div>
+					<div class="logo-item">
+						<div class="tablecell-inner">
+							<img th:src="@{/static/rank/vang.png}" alt="">
+						</div>
+					</div>
+					<!-- <div class="logo-item">
                         <div class="tablecell-inner">
                             <img th:src="@{/assets/img/logoRustic.png}" alt="">
                         </div>
                     </div> -->
-                    <div class="logo-item">
-                        <div class="tablecell-inner">
-                            <img
-                                    th:src="@{/static/rank/bachkim.png}"
-                                    alt="">
-                        </div>
-                    </div>
-                    <div class="logo-item">
-                        <div class="tablecell-inner">
-                            <img
-                                    th:src="@{/static/rank/kimcuong.png}"
-                                    alt="">
-                        </div>
-                    </div>
-                    <div class="logo-item">
-                        <div class="tablecell-inner">
-                            <img
-                                    th:src="@{/static/rank/thachdau.png}"
-                                    alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					<div class="logo-item">
+						<div class="tablecell-inner">
+							<img th:src="@{/static/rank/bachkim.png}" alt="">
+						</div>
+					</div>
+					<div class="logo-item">
+						<div class="tablecell-inner">
+							<img th:src="@{/static/rank/kimcuong.png}" alt="">
+						</div>
+					</div>
+					<div class="logo-item">
+						<div class="tablecell-inner">
+							<img th:src="@{/static/rank/thachdau.png}" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-    <div th:fragment="header">
-        <script>
-            function remove(id) {
-                var path = window.location.pathname.split("/")[1];
-                $.ajax({
-                    url: window.location.origin + '/' + path + '/'
-                        + 'cart/remove/' + id + '.html',
-                    method: 'GET',
-                });
-                location.reload();
+	<div th:fragment="header">
+		<script>
+			function remove(id) {
+				var path = window.location.pathname.split("/")[1];
+				$.ajax({
+					url : window.location.origin + '/' + path + '/'
+							+ 'cart/remove/' + id + '.html',
+					method : 'GET',
+				});
+				location.reload();
 
-            }
-        </script>
-        <header class="header-section">
-            <div class="header-top">
-                <div class="container">
-                    <div class="ht-left">
-                        <div class="mail-service">
-                            <i class=" fa fa-envelope"></i> trilmph05520@fpt.edu.vn
-                        </div>
-                        <div class="phone-service">
-                            <i class=" fa fa-phone"></i> 0983231999
-                        </div>
-                    </div>
-                    <div class="ht-right">
-                        <a th:if="${session.userLogin == null}" th:href="@{/home/login.html}" class="login-panel"
-                           th:utext="#{lable.login}"><i class="fa fa-user"></i></a>
-                        <a th:if="${session.userLogin != null}" th:href="@{/home/logout.html}" class="login-panel"
-                           th:utext="#{lable.logout}"><i class="fa fa-user"></i></a>
-                        <a th:if="${session.userLogin != null}" th:href="@{/home/profile.html}" class="login-panel" style="padding-right: 20px;"
-                           th:utext="#{lable.profile}"><i class="fa fa-user"></i></a>
+			}
+		</script>
+		<header class="header-section">
+			<div class="header-top">
+				<div class="container">
+					<div class="ht-left">
+						<div class="mail-service">
+							<i class=" fa fa-envelope"></i> trilmph05520@fpt.edu.vn
+						</div>
+						<div class="phone-service">
+							<i class=" fa fa-phone"></i> 0983231999
+						</div>
+					</div>
+					<div class="ht-right">
+						<a th:if="${session.userLogin == null}"
+							th:href="@{/home/login.html}" class="login-panel"
+							th:utext="#{lable.login}"><i class="fa fa-user"></i></a> <a
+							th:if="${session.userLogin != null}"
+							th:href="@{/home/logout.html}" class="login-panel"
+							th:utext="#{lable.logout}"><i class="fa fa-user"></i></a> <a
+							th:if="${session.userLogin != null}"
+							th:href="@{/home/profile.html}" class="login-panel"
+							style="padding-right: 20px;" th:utext="#{lable.profile}"><i
+							class="fa fa-user"></i></a>
 
 
-                        <div class="lan-selector">
-                            <select class="language_drop" name="countries" id="countries"
-                                    style="width: 300px;">
 
-                                <!-- 						<option th:href="@{/Rustic/?lang=en}" value='yt'
+						<div class="lan-selector">
+							<select class="language_drop" name="countries" id="countries"
+								style="width: 300px;">
+
+								<!-- 						<option th:href="@{/Rustic/?lang=en}" value='yt'
                                     th:data-image="@{/assets/img/flag-1.jpg}"
                                     data-imagecss="flag yt" data-title="English"><a
                                         th:href="@{/Rustic/?lang=en}">English</a></option>
@@ -95,214 +90,207 @@
                                     data-imagecss="flag yu" data-title="Bangladesh"><a
                                         th:href="@{/Rustic/?lang=vi}">Viet</a></option> -->
 
-                                <option th:href="@{/Rustic/?lang=en}" value='yt'
-                                        th:data-image="@{/assets/img/flag-1.jpg}"
-                                        data-imagecss="flag yt" data-title="English">English
-                                </option>
-                                <option value='yu' th:data-image="@{/assets/img/vietnam.png}"
-                                        data-imagecss="flag yu" data-title="Bangladesh">Vietnamese
-                                </option>
+								<option th:href="@{/Rustic/?lang=en}" value='yt'
+									th:data-image="@{/assets/img/flag-1.jpg}"
+									data-imagecss="flag yt" data-title="English">English</option>
+								<option th:href="@{/Rustic/?lang=en}" value='yu'
+									th:data-image="@{/assets/img/vietnam.png}"
+									data-imagecss="flag yu" data-title="Bangladesh">Vietnamese</option>
 
-                            </select>
-                        </div>
-                        <div class="top-social">
-                            <a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
-                                class="ti-twitter-alt"></i></a> <a href="#"><i
-                                class="ti-linkedin"></i></a> <a href="#"><i class="ti-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="inner-header">
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2">
-                            <div class="logo">
-                                <a th:href="@{/}"> <img
-                                        th:src="@{/assets/img/logoRustic.png}" width="88px"
-                                        height="23px" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7">
-                            <div class="advanced-search">
-                                <button type="button" class="category-btn">All
-                                    Categories
-                                </button>
-                                <div class="input-group">
-                                    <input type="text" placeholder="What do you need?">
-                                    <button type="button">
-                                        <i class="ti-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 text-right col-md-3">
-                            <ul class="nav-right">
-                                <li class="heart-icon"><a href="#"> <i
-                                        class="icon_heart_alt"></i> <span>1</span>
-                                </a></li>
-                                <li class="cart-icon"><a th:href="@{/home/cart.html}">
-                                    <i class="icon_bag_alt"></i> <span class="cart-quantity"
-                                                                       th:if="${session.myCartNum != 0}"
-                                                                       th:text="${session.myCartNum}">3</span> <span
-                                        class="cart-quantity"
-                                        th:if="${session.myCartNum == null || session.myCartNum==0}">0</span>
-                                </a>
-                                    <div class="cart-hover"
-                                         th:if="${session.myCartItems != null} and ${session.myCartTotal != 0}">
-                                        <div class="select-items">
-                                            <table>
-                                                <tbody>
-                                                <tr th:each="cart : ${session.myCartItems}">
-                                                    <td class="si-pic"><a
-                                                            th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}"><img
-                                                            th:src="|${cart.value.product.mainImg}|" alt=""
-                                                            width="72px" height="72px"></a></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <a
-                                                                    th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}">
-                                                                <h6
-                                                                        th:text="|${cart.value.product.name}|">Kabino
-                                                                    Bedside Table</h6></a>
-                                                            <p th:id="pricecart+${cart.value.product.id}"
-                                                               th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
-                                                               th:text="|${#numbers.formatDecimal(new java.math.BigDecimal(cart.value.product.price) * new java.math.BigDecimal(cart.value.quantity), 0, 'COMMA', 0,'POINT')} VND|">
-                                                                $60.00
-                                                                x 1</p>
-                                                            <p th:id="pricecart+${cart.value.product.id}"
-                                                               th:if="${cart.value.product.priceSale != 0}"
-                                                               th:text="|${#numbers.formatDecimal(new java.math.BigDecimal(cart.value.product.priceSale) * new java.math.BigDecimal(cart.value.quantity), 0, 'COMMA', 0,'POINT')} VND|">
-                                                                $60.00
-                                                                x 1</p>
-                                                            <p>
-                                                                <span><strong>SL: </strong></span> <span
-                                                                    th:id="quantitycart+${cart.value.product.id}"
-                                                                    th:text="|${cart.value.quantity}|"></span>
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close"><a
-                                                            th:onclick="'remove(\'' +  ${cart.value.product.id} + '\')'"><i
-                                                            class="ti-close"></i></a></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="select-total">
-                                            <span>total:</span>
-                                            <h5 id="totalPriceCart"
-                                                th:text="${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')} + ' VND'">
-                                                $120.00</h5>
-                                        </div>
-                                        <div class="select-button">
-                                            <a th:href="@{/home/cart.html}" class="primary-btn view-card">VIEW
-                                                CARD</a> <a th:href="@{/home/cart.html?payment=true}"
-                                                            class="primary-btn checkout-btn">CHECK OUT</a>
-                                        </div>
-                                    </div>
-                                </li>
+							</select>
+						</div>
+						<div class="top-social">
+							<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
+								class="ti-twitter-alt"></i></a> <a href="#"><i
+								class="ti-linkedin"></i></a> <a href="#"><i class="ti-pinterest"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="inner-header">
+					<div class="row">
+						<div class="col-lg-2 col-md-2">
+							<div class="logo">
+								<a th:href="@{/}"> <img
+									th:src="@{/assets/img/logoRustic.png}" width="88px"
+									height="23px" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-7 col-md-7">
+							<div class="advanced-search">
+								<button type="button" class="category-btn">All
+									Categories</button>
+								<div class="input-group">
+									<input type="text" placeholder="What do you need?">
+									<button type="button">
+										<i class="ti-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 text-right col-md-3">
+							<ul class="nav-right">
+								<li class="heart-icon"><a href="#"> <i
+										class="icon_heart_alt"></i> <span>1</span>
+								</a></li>
+								<li class="cart-icon"><a th:href="@{/home/cart.html}">
+										<i class="icon_bag_alt"></i> <span class="cart-quantity"
+										th:if="${session.myCartNum != 0}"
+										th:text="${session.myCartNum}">3</span> <span
+										class="cart-quantity"
+										th:if="${session.myCartNum == null || session.myCartNum==0}">0</span>
+								</a>
+									<div class="cart-hover"
+										th:if="${session.myCartItems != null} and ${session.myCartTotal != 0}">
+										<div class="select-items">
+											<table>
+												<tbody>
+													<tr th:each="cart : ${session.myCartItems}">
+														<td class="si-pic"><a
+															th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}"><img
+																th:src="|${cart.value.product.mainImg}|" alt=""
+																width="72px" height="72px"></a></td>
+														<td class="si-text">
+															<div class="product-selected">
+																<a
+																	th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}">
+																	<h6 th:text="|${cart.value.product.name}|">Kabino
+																		Bedside Table</h6>
+																</a>
+																<p th:class="subtotal+${cart.value.product.id}"
+																	th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
+																	th:text="|${#numbers.formatDecimal(new java.math.BigDecimal(cart.value.product.price) * new java.math.BigDecimal(cart.value.quantity), 0, 'COMMA', 0,'POINT')} VND|">
+																	$60.00 x 1</p>
+																<p th:class="subtotal+${cart.value.product.id}"
+																	th:if="${cart.value.product.priceSale != 0}"
+																	th:text="|${#numbers.formatDecimal(new java.math.BigDecimal(cart.value.product.priceSale) * new java.math.BigDecimal(cart.value.quantity), 0, 'COMMA', 0,'POINT')} VND|">
+																	$60.00 x 1</p>
+																<p>
+																	<span><strong>SL: </strong></span> <span
+																		th:class="quantitycart+${cart.value.product.id}"
+																		th:text="|${cart.value.quantity}|"></span>
+																</p>
+															</div>
+														</td>
+														<td class="si-close"><a
+															th:onclick="'remove(\'' +  ${cart.value.product.id} + '\')'"><i
+																class="ti-close"></i></a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="select-total">
+											<span>total:</span>
+											<h5 id="totalPriceCart"
+												th:text="${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')} + ' VND'">
+												$120.00</h5>
+										</div>
+										<div class="select-button">
+											<a th:href="@{/home/cart.html}" class="primary-btn view-card">VIEW
+												CARD</a> <a th:href="@{/home/cart.html?payment=true}"
+												class="primary-btn checkout-btn">CHECK OUT</a>
+										</div>
+									</div></li>
 
-                                <!-- <li class="cart-price">$150.00</li> -->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="nav-item">
-                <div class="container">
-                    <div class="nav-depart">
-                        <div class="depart-btn">
+								<!-- <li class="cart-price">$150.00</li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="nav-item">
+				<div class="container">
+					<div class="nav-depart">
+						<div class="depart-btn">
 
-                            <i class="ti-menu"><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>
+							<i class="ti-menu"><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>
 
-                            <!-- 							<i class="ti-menu" ><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>   -->
+							<!-- 							<i class="ti-menu" ><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>   -->
 
-                            <ul class="depart-hover"
-                                style="height: 400px; overflow-y: scroll;">
-                                <li th:each="eachCate : ${session.categoryNav}"><span
-                                        th:each="cateChilren : ${eachCate.value[1]}"> <a
-                                        th:href="@{/home/{id}/product.html(id=${cateChilren[0]})}"
-                                        th:text="${cateChilren[1]}">Iphone</a>
+							<ul class="depart-hover"
+								style="height: 400px; overflow-y: scroll;">
+								<li th:each="eachCate : ${session.categoryNav}"><span
+									th:each="cateChilren : ${eachCate.value[1]}"> <a
+										th:href="@{/home/{id}/product.html(id=${cateChilren[0]})}"
+										th:text="${cateChilren[1]}">Iphone</a>
 								</span></li>
 
-                            </ul>
-                        </div>
-                    </div>
-                    <nav class="nav-menu mobile-menu">
-                        <ul>
+							</ul>
+						</div>
+					</div>
+					<nav class="nav-menu mobile-menu">
+						<ul>
 
-                            <!-- 							<li class="active"><a href="./index.html"
+							<!-- 							<li class="active"><a href="./index.html"
                                 th:utext="#{lable.Collection}"></a></li>
                                     <li><a href="./shop.html" th:utext="#{lable.Contact}"></a></li> -->
 
-                            <!-- 		<li class="active"><a href="./index.html" th:utext="#{lable.Collection}"></a></li> -->
-                            <li><a th:href="@{/}">Home</a></li>
-                            <li><a th:href="@{/home/shop.html}" th:utext="#{lable.Shop}"></a></li>
-                            <li><a th:utext="#{lable.Collection}"></a>
-                                <ul class="dropdown" style="height: 400px; overflow-y: scroll;"
-                                    th:if="${session.categoryNavPr != null && session.categoryNavPr.size() > 10}">
-                                    <li th:each="eachCatePr : ${session.categoryNavPr}"><a
-                                            th:href="@{/home/{id}/product.html(id=${eachCatePr.id})}"
-                                            th:text="${eachCatePr.name}">Iphone</a></li>
-                                </ul>
-                                <ul class="dropdown"
-                                    th:if="${session.categoryNavPr != null && session.categoryNavPr.size() < 10}">
-                                    <li th:each="eachCatePr : ${session.categoryNavPr}"><a
-                                            th:href="@{/home/{id}/list/product.html(id=${eachCatePr.id})}"
-                                            th:text="${eachCatePr.name}">Iphone</a></li>
-                                </ul>
-                            </li>
+							<!-- 		<li class="active"><a href="./index.html" th:utext="#{lable.Collection}"></a></li> -->
+							<li><a th:href="@{/}">Home</a></li>
+							<li><a th:href="@{/home/shop.html}" th:utext="#{lable.Shop}"></a></li>
+							<li><a th:utext="#{lable.Collection}"></a>
+								<ul class="dropdown" style="height: 400px; overflow-y: scroll;"
+									th:if="${session.categoryNavPr != null && session.categoryNavPr.size() > 10}">
+									<li th:each="eachCatePr : ${session.categoryNavPr}"><a
+										th:href="@{/home/{id}/product.html(id=${eachCatePr.id})}"
+										th:text="${eachCatePr.name}">Iphone</a></li>
+								</ul>
+								<ul class="dropdown"
+									th:if="${session.categoryNavPr != null && session.categoryNavPr.size() < 10}">
+									<li th:each="eachCatePr : ${session.categoryNavPr}"><a
+										th:href="@{/home/{id}/list/product.html(id=${eachCatePr.id})}"
+										th:text="${eachCatePr.name}">Iphone</a></li>
+								</ul></li>
 
-                            <li><a th:href="@{/home/blog.html}">Blog</a></li>
-                            <li><a th:href="@{/home/contact.html}"
-                                   th:utext="#{lable.Contact}"></a></li>
-                            <li><a href="#" th:utext="#{lable.pages}">pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./check-out.html">Checkout</a></li>
-                                    <li><a th:href="@{/home/faq.html}">Faq</a></li>
-                                    <li><a th:href="@{/home/register.html}">Register</a></li>
-                                    <li><a th:href="@{/home/login.html}">Login</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div id="mobile-menu-wrap"></div>
-                </div>
-            </div>
-        </header>
-    </div>
+							<li><a th:href="@{/home/blog.html}">Blog</a></li>
+							<li><a th:href="@{/home/contact.html}"
+								th:utext="#{lable.Contact}"></a></li>
+							<li><a href="#" th:utext="#{lable.pages}">pages</a>
+								<ul class="dropdown">
+									<li><a href="./blog-details.html">Blog Details</a></li>
+									<li><a href="./shopping-cart.html">Shopping Cart</a></li>
+									<li><a href="./check-out.html">Checkout</a></li>
+									<li><a th:href="@{/home/faq.html}">Faq</a></li>
+									<li><a th:href="@{/home/register.html}">Register</a></li>
+									<li><a th:href="@{/home/login.html}">Login</a></li>
+								</ul></li>
+						</ul>
+					</nav>
+					<div id="mobile-menu-wrap"></div>
+				</div>
+			</div>
+		</header>
+	</div>
 
 
-    <div th:fragment="footer">
-        <footer class="footer-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="footer-left">
-                            <div class="footer-logo">
-                                <a href="#"><img th:src="@{/assets/img/logoRustic.png}"
-                                                 width="88px" height="23px" alt=""></a>
-                            </div>
-                            <ul>
-                                <li>Address: Xuan La, Tay Ho, Ha Noi</li>
-                                <li>Phone: 0983231999</li>
-                                <li>Email: trilmph05520@fpt.edu.vn</li>
-                            </ul>
-                            <div class="footer-social">
-                                <a href="https://www.facebook.com/mt.minhtri"><i
-                                        class="fa fa-facebook"></i></a> <a href="#"><i
-                                    class="fa fa-instagram"></i></a>
-                                <!-- <a href="#"><i
+	<div th:fragment="footer">
+		<footer class="footer-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="footer-left">
+							<div class="footer-logo">
+								<a href="#"><img th:src="@{/assets/img/logoRustic.png}"
+									width="88px" height="23px" alt=""></a>
+							</div>
+							<ul>
+								<li>Address: Xuan La, Tay Ho, Ha Noi</li>
+								<li>Phone: 0983231999</li>
+								<li>Email: trilmph05520@fpt.edu.vn</li>
+							</ul>
+							<div class="footer-social">
+								<a href="https://www.facebook.com/mt.minhtri"><i
+									class="fa fa-facebook"></i></a> <a href="#"><i
+									class="fa fa-instagram"></i></a>
+								<!-- <a href="#"><i
                                     class="fa fa-twitter"></i></a> <a href="#"><i
                                     class="fa fa-pinterest"></i></a> -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-lg-2 offset-lg-1">
+							</div>
+						</div>
+					</div>
+					<!-- <div class="col-lg-2 offset-lg-1">
                         <div class="footer-widget">
                             <h5>Information</h5>
                             <ul>
@@ -335,77 +323,79 @@
                             </form>
                         </div>
                     </div> -->
-                </div>
-            </div>
-            <div class="copyright-reserved">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="copyright-text">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                All rights reserved | This template is made with <i
-                                    class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                                    href="https://colorlib.com" target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </div>
-                            <div class="payment-pic">
-                                <img th:src="@{/assets/img/payment-method.png}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+				</div>
+			</div>
+			<div class="copyright-reserved">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="copyright-text">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;
+								<script>
+									document.write(new Date().getFullYear());
+								</script>
+								All rights reserved | This template is made with <i
+									class="fa fa-heart-o" aria-hidden="true"></i> by <a
+									href="https://colorlib.com" target="_blank">Colorlib</a>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</div>
+							<div class="payment-pic">
+								<img th:src="@{/assets/img/payment-method.png}" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
 
-    <!-- START QUICKVIEW PRODUCT -->
-    <div id="quickview-wrapper" th:fragment="quickview">
-        <!-- Modal -->
-        <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Chi tiết sản phẩm</h5>
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="modal-product clearfix">
-                            <div class="row">
-                                <div class="product-images col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6">
-                                    <div class="main-image images">
-                                        <img alt="" src="" id="imageQuick">
-                                    </div>
-                                </div>
-                                <!-- .product-images -->
-                                <div class="product-info col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6">
-                                    <h4 id="nameQuick">SamSung A50</h4>
-                                    <div class="price-box-3">
-                                        <div class="s-price-box">
-                                           Giá :  <span class="new-price" id="price"></span>
-											<span class="old-price" id="price_sale"></span>
-                                        </div>
-                                    </div>
-                                    Trạng thái : <label id="status" class="see-all"></label>
-                                    <div class="quick-add-to-cart">
-                                        <!--											<div class="numbers-row">-->
-                                        <!--												<input type="number" id="french-hens" value="1">-->
-                                        <!--											</div>-->
-                                        <!-- 	<a href=""
+	<!-- START QUICKVIEW PRODUCT -->
+	<div id="quickview-wrapper" th:fragment="quickview">
+		<!-- Modal -->
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Chi tiết sản phẩm</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product clearfix">
+							<div class="row">
+								<div
+									class="product-images col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6">
+									<div class="main-image images">
+										<img alt="" src="" id="imageQuick">
+									</div>
+								</div>
+								<!-- .product-images -->
+								<div
+									class="product-info col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6">
+									<h4 id="nameQuick">SamSung A50</h4>
+									<div class="price-box-3">
+										<div class="s-price-box">
+											Giá : <span class="new-price" id="price"></span> <span
+												class="old-price" id="price_sale"></span>
+										</div>
+									</div>
+									Trạng thái : <label id="status" class="see-all"></label>
+									<div class="quick-add-to-cart">
+										<!--											<div class="numbers-row">-->
+										<!--												<input type="number" id="french-hens" value="1">-->
+										<!--											</div>-->
+										<!-- 	<a href=""
                                             style="line-height: 45px; height: 45px; border-radius: 5px; font-size: 17px;"
                                             id="quickCart" class="btn btn-warning" type="submit">Thêm
                                             vào giỏ </a> -->
-                                        <a href="#" class="primary-btn pd-cart" id="quickCart"
-                                           type="submit">Add To Cart</a>
-                                    </div>
-                                    <div class="quick-desc" id="info">Hello, Every body.</div>
-                                    <!-- <div class="social-sharing">
+										<a href="#" class="primary-btn pd-cart" id="quickCart"
+											type="submit">Add To Cart</a>
+									</div>
+									<div class="quick-desc" id="info">Hello, Every body.</div>
+									<!-- <div class="social-sharing">
                                         <div class="widget widget_socialsharing_widget">
                                             <h3 class="widget-title-modal">Chia sẻ sản phẩm</h3>
                                             <ul class="social-icons clearfix">
@@ -421,21 +411,21 @@
                                             </ul>
                                         </div>
                                     </div> -->
-                                </div>
-                                <!-- .product-info -->
-                            </div>
-                            <!-- .modal-product -->
-                        </div>
-                    </div>
-                    <!-- .modal-body -->
-                </div>
-                <!-- .modal-content -->
-            </div>
-            <!-- .modal-dialog -->
-        </div>
-        <!-- END Modal -->
-    </div>
-    <!-- END QUICKVIEW PRODUCT -->
+								</div>
+								<!-- .product-info -->
+							</div>
+							<!-- .modal-product -->
+						</div>
+					</div>
+					<!-- .modal-body -->
+				</div>
+				<!-- .modal-content -->
+			</div>
+			<!-- .modal-dialog -->
+		</div>
+		<!-- END Modal -->
+	</div>
+	<!-- END QUICKVIEW PRODUCT -->
 
 </div>
 
