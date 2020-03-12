@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="fragments/initAdmin :: head"></div>
 <style>
@@ -213,7 +213,7 @@
 	</div>
 
 
-	<div class="modal fade" id="billModal" tabindex="-1" role="dialog">
+	<!-- <div class="modal fade" id="billModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header" style="height: 50px;">
@@ -267,13 +267,84 @@
 							</div>
 						</div>
 					</div>
-					<!-- .product-info -->
+					.product-info
 				</div>
-				<!-- .modal-product -->
+				.modal-product
 			</div>
-			<!-- .modal-body -->
+			.modal-body
 		</div>
+	</div> -->
+	<!-- START QUICKVIEW PRODUCT -->
+	<div id="quickview-wrapper" th:fragment="quickview">
+		<!-- Modal -->
+		<div class="modal fade" id="billModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Chi tiết hóa đơn</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product clearfix">
+							<div class="row">
+								<div class="col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+									style="margin-top: 10px;">
+									<h4>Thông tin sản phẩm</h4>
+								</div>
+								<div class="col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+									style="margin-top: 10px;">
+									<h4>Thông tin hóa đơn</h4>
+								</div>
+							</div>
+							<div class="row">
+								<!-- .product-images -->
+								<div id="leftDetail"
+									class="product-info col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6">
+								</div>
+								<div class="col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6">
+									<div class="col-lg-12"
+										style="margin-top: 10px; padding: 0px !important;">
+										<span style="display: inline-flex; width: 100%;">Tên
+											KH:&nbsp;
+											<p id="nameCustomer"></p>
+										</span> <span style="display: inline-flex; width: 100%;">Mã
+											HĐ:&nbsp;
+											<p id="codeBill"></p>
+										</span> <span style="display: inline-flex; width: 100%;">Email:&nbsp;
+											<p id="emailCustomer"></p>
+										</span> <span style="display: inline-flex; width: 100%;">SĐT:&nbsp;
+											<p id="mobileCustomer"></p>
+										</span> <span style="display: inline-flex; width: 100%;">Địa
+											chỉ:&nbsp;
+											<p id="addressCustomer"></p>
+										</span> <span style="display: inline-flex; width: 100%;">Ngày
+											đặt hàng:&nbsp;
+											<p id="createdBill"></p>
+										</span> <span style="display: inline-flex; width: 100%;">PTTT:&nbsp;
+											<p id="paymentBill"></p>
+										</span> <span style="display: inline-flex; width: 100%;">Trang
+											thái:&nbsp;
+											<p id="statusBill"></p>
+										</span>
+									</div>
+								</div>
+								<!-- .product-info -->
+							</div>
+							<!-- .modal-product -->
+						</div>
+					</div>
+					<!-- .modal-body -->
+				</div>
+				<!-- .modal-content -->
+			</div>
+			<!-- .modal-dialog -->
+		</div>
+		<!-- END Modal -->
 	</div>
+	<!-- END QUICKVIEW PRODUCT -->
 
 	<!-- .modal-content -->
 	<div th:replace="fragments/navAdmin :: modal-delete"></div>

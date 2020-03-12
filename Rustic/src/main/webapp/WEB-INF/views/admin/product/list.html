@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
 <div th:replace="fragments/initAdmin :: head"></div>
-</head>
 
 <body>
 	<!-- Sidenav -->
@@ -31,21 +29,6 @@
 								<form role="form" th:action="@{/product/list.html}"
 									method="POST">
 									<div class="row">
-										<!-- <div class="col-lg-4">
-											<label>Từ ngày - đến ngày</label>
-											<div class="input-prepend input-group">
-												<span class="add-on input-group-addon"><i
-													class="glyphicon glyphicon-calendar fa fa-calendar"></i></span> <input
-													type="text" name="from_date" id="from_date" hidden="true"
-													th:value="${from_date}" /> <input type="text"
-													name="to_date" id="to_date" hidden="true"
-													th:value="${to_date}" /> <input type="text"
-													style="width: 100%" id="timePicker"
-													class="form-control span4" value=" - "
-													th:value="${from_date} + ' - ' + ${to_date}"
-													readonly="readonly" />
-											</div>
-										</div> -->
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
 												<div class="form-group">

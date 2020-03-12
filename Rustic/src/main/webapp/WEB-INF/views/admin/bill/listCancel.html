@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="fragments/initAdmin :: head"></div>
 <style>
@@ -117,8 +117,8 @@
 								<!-- <a th:href="@{/product/add.html}"
 									sec:authorize="hasAnyAuthority('Administrators','Staffs')"
 									class="btn btn-sm btn-primary" th:utext="#{lable.new}"></a>  -->
-								<a th:href="@{/bill/listCancel.html}" class="btn btn-sm btn-neutral"
-									th:utext="#{lable.refresh}"></a>
+								<a th:href="@{/bill/listCancel.html}"
+									class="btn btn-sm btn-neutral" th:utext="#{lable.refresh}"></a>
 							</div>
 						</div>
 						<div class="table-responsive">
@@ -214,31 +214,37 @@
 	</div>
 
 
-	<div class="modal fade" id="billModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header" style="height: 50px;">
-					<label>Chi tiết hóa đơn</label>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" style="padding-top: 0px !important;">
-					<div class="modal-product clearfix">
-						<div class="product-info">
+	<!-- START QUICKVIEW PRODUCT -->
+	<div id="quickview-wrapper" th:fragment="quickview">
+		<!-- Modal -->
+		<div class="modal fade" id="billModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Chi tiết hóa đơn</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-product clearfix">
 							<div class="row">
-								<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+								<div class="col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+									style="margin-top: 10px;">
 									<h4>Thông tin sản phẩm</h4>
 								</div>
-								<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+								<div class="col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+									style="margin-top: 10px;">
 									<h4>Thông tin hóa đơn</h4>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-6 col-sm-6" style="margin-top: 10px;"
-									id="leftDetail"></div>
-								<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
+								<!-- .product-images -->
+								<div id="leftDetail"
+									class="product-info col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6">
+								</div>
+								<div class="col-sx-12 col-sm-6 col-lg-6 col-md-6 col-xl-6">
 									<div class="col-lg-12"
 										style="margin-top: 10px; padding: 0px !important;">
 										<span style="display: inline-flex; width: 100%;">Tên
@@ -265,16 +271,20 @@
 										</span>
 									</div>
 								</div>
+								<!-- .product-info -->
 							</div>
+							<!-- .modal-product -->
 						</div>
 					</div>
-					<!-- .product-info -->
+					<!-- .modal-body -->
 				</div>
-				<!-- .modal-product -->
+				<!-- .modal-content -->
 			</div>
-			<!-- .modal-body -->
+			<!-- .modal-dialog -->
 		</div>
+		<!-- END Modal -->
 	</div>
+	<!-- END QUICKVIEW PRODUCT -->
 
 	<!-- .modal-content -->
 

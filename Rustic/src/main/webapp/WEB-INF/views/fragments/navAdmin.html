@@ -152,14 +152,11 @@
 					</h6>
 					<!-- Navigation -->
 					<ul class="navbar-nav mb-md-3">
-						<!-- <li class="nav-item"><a class="nav-link" href="login.html">
-								<i class="ni ni-key-25 text-info"></i> <span
-								class="nav-link-text">Login</span>
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="register.html">
-								<i class="ni ni-circle-08 text-pink"></i> <span
-								class="nav-link-text">Register</span>
-						</a></li> -->
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators')"><a
+							class="nav-link" th:href="@{/account/list.html}"><i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Account List</span></a></li>
 						<li class="nav-item"><a class="nav-link" href="profile.html">
 								<i class="ni ni-single-02 text-yellow"></i> <span
 								class="nav-link-text">Profile</span>

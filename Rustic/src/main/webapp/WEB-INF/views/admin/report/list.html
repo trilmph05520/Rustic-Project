@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/initAdmin :: head"></div>
+<style>
+.text-table-header {
+	text-align: left;
+	font-family: "Segoe UI";
+	vertical-align: inherit;
+}
+
+.text-table-body {
+	text-align: left;
+	vertical-align: inherit;
+	font-family: "Segoe UI";
+	font-size: 15px;
+}
+</style>
+<body>
+	<!-- Sidenav -->
+	<!-- Sidenav -->
+	<div th:replace="fragments/navAdmin :: slide-bar"></div>
+	<!-- Main content -->
+	<div class="main-content" id="panel">
+		<!-- Topnav -->
+		<div th:replace="fragments/navAdmin :: top-nav"></div>
+		<!-- Header -->
+		<!-- Header -->
+
+		<!-- Page content -->
+		<div class="container-fluid mt--6"
+			style="margin-top: 25px !important;">
+
+			<!-- Dark table -->
+			<div class="row">
+				<div class="col">
+					<div class="card bg-default shadow">
+						<div class="card-header bg-transparent border-0">
+							<h3 class="text-white mb-0">Report</h3>
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5">
+								<form role="form" th:action="@{/report/list.html}" method="POST">
+									<div class="row">
+										<div class="input-daterange datepicker row align-items-center">
+											<div class="col">
+												<div class="form-group">
+													<label class="text-white" th:utext="#{lable.sincedate}"></label>
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<span class="input-group-text"><i
+																class="ni ni-calendar-grid-58"></i></span>
+														</div>
+														<input class="form-control" placeholder="Start date"
+															type="text" value="06/18/2020" name="from_date"
+															id="from_date" th:value="${from_date}">
+													</div>
+												</div>
+											</div>
+											<div class="col">
+												<div class="form-group">
+													<label class="text-white" th:utext="#{lable.todate}"></label>
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<span class="input-group-text"><i
+																class="ni ni-calendar-grid-58"></i></span>
+														</div>
+														<input class="form-control" placeholder="End date"
+															type="text" value="06/22/2020" name="to_date"
+															id="to_date" th:value="${to_date}">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-4 col-12">
+											<div>
+												<label class="text-white" th:utext="#{lable.name}"></label>
+												<input class="form-control" id="name" name="name"
+													type="text" placeholder="Name" th:value="${name}">
+											</div>
+										</div>
+										<div class="col-lg-2 col-12 text-right">
+											<div>
+												<label>&nbsp;</label>
+												<div>
+													<button type="submit" id="btnSearch"
+														class="btn btn-primary" th:utext="#{lable.search}"></button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5 text-right">
+								<a th:href="@{/report/list.html}" class="btn btn-sm btn-neutral"
+									th:utext="#{lable.refresh}"></a>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-dark table-flush">
+								<thead class="thead-dark">
+									<tr>
+										<th class="text-table-header">STT</th>
+										<th class="text-table-header">Tên</th>
+										<th class="text-table-header">Email</th>
+										<th class="text-table-header">SĐT</th>
+										<th class="text-table-header">Vấn đề</th>
+										<th class="text-table-header">Ý kiến</th>
+										<th class="text-table-header">Trạng thái</th>
+										<th class="text-table-header">#</th>
+									</tr>
+								</thead>
+								<tbody th:if="${page}!=null">
+									<tr th:each="eachRow,iterStat :${page}">
+										<td class="text-table-body" th:text="${iterStat.count}"></td>
+										<td class="text-table-body" th:text="${eachRow.name}"></td>
+										<td class="text-table-body" th:text="${eachRow.email}"></td>
+										<td class="text-table-body" th:text="${eachRow.mobile}"></td>
+										<td class="text-table-body" th:text="${eachRow.problem}"></td>
+										<td class="text-table-body" th:text="${eachRow.opinion}"></td>
+										<td class="text-table-body" style="text-align: center;">
+											<button class="btn btn-success"
+												th:if="${eachRow.repply != null and not #lists.isEmpty(eachRow.repply)}">Đã
+												phản hồi</button>
+											<button class="btn btn-warning"
+												th:if="${eachRow.repply == null || #lists.isEmpty(eachRow.repply)}">Chưa
+												phản hồi</button>
+										</td>
+										<td class="text-table-body"><a
+											th:href="@{/report/{id}/reply.html(id=${eachRow.id})}"
+											th:if="${eachRow.repply == null || #lists.isEmpty(eachRow.repply)}"
+											data-toggle="tooltip" title="Phản hồi">
+												<button class="btn btn-info btn-circle">
+													<i class="fa fa-reply"></i>
+												</button>
+										</a> <label
+											th:if="${eachRow.repply != null || not #lists.isEmpty(eachRow.repply)}">&nbsp;</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- Card footer -->
+						<div class="card-footer py-4">
+							<div
+								th:replace="fragments/panigatorAdmin :: content(page = ${page})">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer -->
+				<!-- <div th:replace="fragments/navAdmin :: footer"></div> -->
+			</div>
+		</div>
+	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+
+	<div th:replace="fragments/initAdmin :: commonScript"></div>
+
+
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var currUrl = /*[[@{/}]]*/"";
+		/*]]>*/
+	</script>
+</body>
+
+</html>
