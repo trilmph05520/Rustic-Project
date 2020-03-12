@@ -1,36 +1,33 @@
 package com.vn.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.vn.jpa.Category;
-import com.vn.jpa.Product_Bill;
-import com.vn.model.ChartDashboardBillOrder;
-import com.vn.model.KeyValueStringIntegerModel;
-import com.vn.service.BillService;
-import com.vn.service.CategoryService;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import com.vn.service.Product_BillService;
-import com.vn.service.RejectService;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.joda.time.DateTime;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.vn.model.ChartDashboardBillOrder;
+import com.vn.model.KeyValueStringIntegerModel;
+import com.vn.service.BillService;
+import com.vn.service.CategoryService;
+import com.vn.service.Product_BillService;
+import com.vn.service.RejectService;
 
 @Controller
 @RequestMapping("/admin/")
@@ -49,7 +46,7 @@ public class AdminController {
     private RejectService rejectService;
 
     private static Date date = new Date();
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     @RequestMapping(value = "login.html", method = RequestMethod.GET)
     public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model) {

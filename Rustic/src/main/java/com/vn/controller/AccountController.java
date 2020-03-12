@@ -122,14 +122,28 @@ public class AccountController {
 			model.addAttribute("allRoles", allRoles);
 			return "admin/account/user_add";
 		}
-		List<Long> roleIds = user.getRoles();
+//		List<Long> roleIds = user.getRoles();
 		List<Role> roles = new ArrayList<>();
-		if (roleIds != null) {
-			for (Long roleId : roleIds) {
-				Role eachRole = authRoleService.findOne(roleId);
-				roles.add(eachRole);
-			}
+//		if (roleIds != null) {
+//		for (Long roleId : roleIds) {
+//			Role eachRole = authRoleService.findOne(roleId);
+//			roles.add(eachRole);
+//		}
+//		}
+
+		// Admin
+		if (user.getUserType() == 0) {
+			roles.add(authRoleService.findOne(1l));
 		}
+		// NV
+		else if (user.getUserType() == 1) {
+			roles.add(authRoleService.findOne(3l));
+		}
+		// KH
+		else if (user.getUserType() == 2) {
+			roles.add(authRoleService.findOne(2l));
+		}
+
 		Date createdDate = new DateTime().toDate();
 		String password = user.getPassword();
 		String salt = "5876695f8e4e1811";
@@ -202,13 +216,19 @@ public class AccountController {
 			model.addAttribute("allRoles", allRoles);
 			return "admin/account/user_update";
 		}
-		List<Long> listRole = user.getRoles();
+//		List<Long> listRole = user.getRoles();
 		List<Role> roles = new ArrayList<>();
-		if (listRole != null) {
-			for (Long each : listRole) {
-				Role eachRole = authRoleService.findOne(each);
-				roles.add(eachRole);
-			}
+		// Admin
+		if (user.getUserType() == 0) {
+			roles.add(authRoleService.findOne(1l));
+		}
+		// NV
+		else if (user.getUserType() == 1) {
+			roles.add(authRoleService.findOne(3l));
+		}
+		// KH
+		else if (user.getUserType() == 2) {
+			roles.add(authRoleService.findOne(2l));
 		}
 		Date createdDate = new DateTime().toDate();
 		authUser.setCreatedDate(createdDate);
@@ -333,7 +353,7 @@ public class AccountController {
 			authUserService.create(authUser);
 			return "redirect:/home/login.html";
 		} catch (Exception e) {
-			mapError.put("errorUnknown","Lỗi không xác định");
+			mapError.put("errorUnknown", "Lỗi không xác định");
 			model.addAttribute("mapError", mapError);
 			return null;
 		}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/initAdmin :: head"></div>
+<style>
+.readonly {
+	background: white !important;
+}
+</style>
+
+<body>
+	<!-- Sidenav -->
+	<!-- Sidenav -->
+	<div th:replace="fragments/navAdmin :: slide-bar"></div>
+	<!-- Main content -->
+	<div class="main-content" id="panel">
+		<!-- Topnav -->
+		<div th:replace="fragments/navAdmin :: top-nav"></div>
+		<!-- Header -->
+		<!-- Header -->
+
+		<!-- Page content -->
+		<div class="container-fluid mt--6"
+			style="margin-top: 25px !important;">
+
+			<!-- Dark table -->
+			<div class="row">
+				<div class="col">
+					<div class="card bg-default shadow">
+						<div class="card-header bg-transparent border-0">
+							<h3 class="text-white mb-0">Account</h3>
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5 text-right">
+								<form role="form" th:object="${userSearchingForm}"
+									th:action="@{/account/list.html}" method="POST">
+									<div class="row">
+										<div class="col-lg-4 col-12">
+											<div>
+												<input class="form-control" id="txtUserName" name="userName"
+													type="text" th:placeholder="#{lable.username}"
+													th:value="*{userName}">
+											</div>
+										</div>
+										<div class="col-lg-4 col-12">
+											<div>
+												<input class="form-control" id="txtEmail" name="email"
+													type="text" th:placeholder="#{lable.email}"
+													th:value="*{email}">
+											</div>
+										</div>
+										<div class="col-lg-4 col-12">
+											<div>
+												<button type="submit" id="btnSearch" class="btn btn-primary">Tìm
+													kiếm</button>
+											</div>
+										</div>
+									</div>
+									<div
+										style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+										th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
+								</form>
+							</div>
+							<input type="hidden" name="user_list_ss"
+								th:value="${user_list_ss}" />
+							<hr class="my-4" />
+							<div class="col-lg-12 col-5 text-right">
+								<a th:href="@{/account/add.html}"
+									sec:authorize="hasAnyAuthority('Administrators')"
+									class="btn btn-sm btn-primary" th:utext="#{lable.new}"></a> <a
+									th:href="@{/account/list.html(user_list_ss=${user_list_ss})}"
+									class="btn btn-sm btn-neutral">Reset</a>
+							</div>
+						</div>
+						<div class="alert alert-danger"
+							th:if="${not #strings.isEmpty(not_found_message)}"
+							th:text="${not_found_message}"></div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-dark table-flush">
+								<thead class="thead-dark">
+									<tr>
+										<th class="text-center">#</th>
+										<th class="text-center">User name</th>
+										<th class="text-center">Tên đầy đủ</th>
+										<th class="text-center">Email</th>
+										<th class="text-center">Trạng thái Account</th>
+										<th class="text-center">Loại Account</th>
+										<th class="text-center">Ngày tạo</th>
+										<th class="text-center">#</th>
+										<th class="text-center">#</th>
+										<th class="text-center">#</th>
+									</tr>
+								</thead>
+								<tbody class="list" th:if="${page.content} != null">
+									<tr th:each="eachRow, iterStat : ${page.content}">
+										<td class="text-center" th:text="${iterStat.count}"></td>
+										<td class="text-center" th:text="${eachRow.userName}"></td>
+										<td class="text-center" th:text="${eachRow.fullName}"></td>
+										<td class="text-center" th:text="${eachRow.email}"></td>
+										<td class="text-center"
+											th:text="${user_status.get(eachRow.status)}"></td>
+										<td class="text-center"
+											th:text="${user_types.get(eachRow.userType)}"></td>
+										<td class="text-center"
+											th:text="${#dates.format(eachRow.createdDate, 'dd/MM/yyyy')}"></td>
+										<td><a
+											th:href="@{/account/{id}/update.html(id=${eachRow.id})}">
+												<button class="btn btn-info btn-circle">
+													<i class="fa fa-edit"></i>
+												</button>
+										</a></td>
+										<td><a type="button" class="btn btn-warning"
+											data-toggle="modal" data-target="#productModal"
+											th:onclick="'deleteConfirm(\'' + ${eachRow.userName} + '\');'"
+											title="Xóa Tài Khoản">Delete</a></td>
+										<td><a
+											th:onclick="'resetPasswordConfirm(\'' + ${eachRow.userName} + '\');'"
+											data-toggle="modal" data-target="#productModal"
+											title="Reset mật khẩu Tài Khoản">
+												<button class="btn btn-info btn-circle">Reset
+													Password</button>
+										</a></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<!-- Card footer -->
+						<div class="card-footer py-4">
+							<div
+								th:replace="fragments/panigatorAdmin :: content(page = ${page})">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer -->
+				<!-- <div th:replace="fragments/navAdmin :: footer"></div> -->
+			</div>
+		</div>
+	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+
+	<!-- Optional JS -->
+	<!-- 	<script th:src="@{/assets/vendor/chart.js/dist/Chart.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/dist/Chart.extension.js}"></script> -->
+	<!-- Argon JS -->
+	<div th:replace="fragments/initAdmin :: commonScript"></div>
+
+	<div th:replace="fragments/navAdmin :: modal-delete"></div>
+
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var currUrl = /*[[@{/}]]*/"";
+		/*]]>*/
+	</script>
+
+
+	<script type="text/javascript">
+		function deleteConfirm(key) {
+			var id = key;
+
+			$('#modal-title-notification').text('Xác Nhận xóa Tài Khoản')
+
+			$('#name').text(
+					'Bạn có chắc chắn muốn xóa Tài khoản có userName là  '
+							+ key + ' không ? Bấm Delete để xách nhận.');
+
+			$('#delete').click(
+					function() {
+						$.ajax({
+							url : window.location.origin + currUrl
+									+ 'account/delete/' + id + '/list.html',
+							method : 'GET',
+							success : function() {
+								window.location.href = window.location.origin
+										+ currUrl + 'account/list.html';
+							}
+						});
+					});
+		}
+
+		function resetPasswordConfirm(key) {
+			var id = key;
+
+			$('#modal-title-notification').text(
+					'Xác Nhận Reset mật khẩu Tài Khoản')
+
+			$('#name')
+					.text(
+							'Bạn có chắc chắn muốn thiêt lập lại mật khẩu Tài khoản có userName là '
+									+ key
+									+ ' về mật khẩu mặc định không ? Bấm Reset để xách nhận.');
+
+			$('#delete').text('Reset');
+
+			$('#delete').click(
+					function() {
+						$.ajax({
+							url : window.location.origin + currUrl
+									+ 'account/reset/' + id + '/list.html',
+							method : 'GET',
+							success : function() {
+								window.location.href = window.location.origin
+										+ currUrl + 'account/list.html';
+							}
+						});
+					});
+		}
+	</script>
+</body>
+
+</html>
