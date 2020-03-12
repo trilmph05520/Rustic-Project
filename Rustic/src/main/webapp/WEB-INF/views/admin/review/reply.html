@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/initAdmin :: head"></div>
+<style>
+.readonly {
+	background: white !important;
+}
+</style>
+<body>
+	<!-- Sidenav -->
+	<!-- Sidenav -->
+	<div th:replace="fragments/navAdmin :: slide-bar"></div>
+	<!-- Main content -->
+	<div class="main-content" id="panel">
+		<!-- Topnav -->
+		<div th:replace="fragments/navAdmin :: top-nav"></div>
+		<!-- Header -->
+		<!-- Header -->
+		<!-- Page content -->
+
+		<div class="col-xl-8 order-xl-1">
+			<div class="card">
+				<div class="card-header">
+					<div class="row align-items-center">
+						<div class="col-8">
+							<h3 class="mb-0">Trả lời phản hồi khách hàng</h3>
+						</div>
+
+					</div>
+				</div>
+				<div class="card-body">
+					<form th:object="${review}"
+						th:action="@{/review/{id}/reply.html(id=${review.id})}"
+						method="POST">
+						<input type="hidden" name="id" id="id" th:value="*{id}" />
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Tên KH</label>
+									<div>
+										<input class="form-control readonly" type="text"
+											id="form-field-name" th:field="*{name}" readonly />
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Tên SP</label>
+									<div>
+										<input class="form-control readonly" type="text"
+											id="form-field-nameProduct" th:field="*{product.name}"
+											readonly />
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6" >
+								<div class="form-group">
+									<label>Ý kiến</label>
+									<div>
+										<textarea placeholder="Ý kiến..."
+											class="form-control readonly" id="form-field-opinion"
+											th:field="*{description}" style="height: 100%;" readonly />
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6" >
+								<div class="form-group" >
+									<label>Trả lời</label>
+									<div>
+										<textarea placeholder="Trả lời đánh giá..."
+											class="form-control" id="form-field-reply"
+											th:field="*{reply}" style="height: 100%;" maxlength="256" />
+										<div th:if="${err} != null"
+											style="color: red; font-weight: bold; font-size: 13px; margin-top: 5px;"
+											th:text="${err}"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12 col-5 text-right">
+								<a class="btn btn-sm btn-neutral"
+									th:href="@{/review/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
+									href="/review/list">Bỏ qua</a>
+								<button type="submit" class="btn btn-sm btn-neutral">Cập
+									nhật</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/initAdmin :: commonScript"></div>
+
+</body>
+
+</html>
