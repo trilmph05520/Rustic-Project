@@ -3,17 +3,18 @@
 
 <div th:replace="fragments/initAdmin :: head"></div>
 <style>
-    .text-table-header {
-        text-align: left;
-        font-family: "Segoe UI";
-        vertical-align: inherit;
-    }
-    .text-table-body {
-        text-align: left;
-        vertical-align: inherit;
-        font-family: "Segoe UI";
-        font-size: 15px;
-    }
+.text-table-header {
+	text-align: left;
+	font-family: "Segoe UI";
+	vertical-align: inherit;
+}
+
+.text-table-body {
+	text-align: left;
+	vertical-align: inherit;
+	font-family: "Segoe UI";
+	font-size: 15px;
+}
 </style>
 <body>
 	<!-- Sidenav -->
@@ -35,10 +36,10 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0" th:utext="#{lable.category}"></h3>
+							<h3 class="text-white mb-0">Report</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
-								<form role="form" th:action="@{/review/list.html}" method="POST">
+								<form role="form" th:action="@{/report/list.html}" method="POST">
 									<div class="row">
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
@@ -91,7 +92,7 @@
 							</div>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
-								<a th:href="@{/review/list.html}" class="btn btn-sm btn-neutral"
+								<a th:href="@{/report/list.html}" class="btn btn-sm btn-neutral"
 									th:utext="#{lable.refresh}"></a>
 							</div>
 						</div>
@@ -99,15 +100,13 @@
 							<table class="table align-items-center table-dark table-flush">
 								<thead class="thead-dark">
 									<tr>
-										<th class="text-table-header">#</th>
-										<th class="text-table-header" th:utext="#{lable.name}"></th>
-										<th class="text-table-header" th:utext="#{lable.email}"></th>
-										<th class="text-table-header" th:utext="#{lable.described}"></th>
-										<th class="text-table-header"
-											th:utext="#{lable.feedbackstatus}"></th>
-										<th class="text-table-header" th:utext="#{lable.status}"></th>
-										<th class="text-table-header">#</th>
-										<th class="text-table-header">#</th>
+										<th class="text-table-header">STT</th>
+										<th class="text-table-header">Tên</th>
+										<th class="text-table-header">Email</th>
+										<th class="text-table-header">SĐT</th>
+										<th class="text-table-header">Vấn đề</th>
+										<th class="text-table-header">Ý kiến</th>
+										<th class="text-table-header">Trạng thái</th>
 										<th class="text-table-header">#</th>
 									</tr>
 								</thead>
@@ -116,39 +115,27 @@
 										<td class="text-table-body" th:text="${iterStat.count}"></td>
 										<td class="text-table-body" th:text="${eachRow.name}"></td>
 										<td class="text-table-body" th:text="${eachRow.email}"></td>
-										<td class="text-table-body" th:text="${eachRow.description}"></td>
+										<td class="text-table-body" th:text="${eachRow.mobile}"></td>
+										<td class="text-table-body" th:text="${eachRow.problem}"></td>
+										<td class="text-table-body" th:text="${eachRow.opinion}"></td>
 										<td class="text-table-body" style="text-align: center;">
 											<button class="btn btn-success"
-												th:if="${eachRow.reply != null}">Đã phản hồi</button>
+												th:if="${eachRow.repply != null and not #lists.isEmpty(eachRow.repply)}">Đã
+												phản hồi</button>
 											<button class="btn btn-warning"
-												th:if="${eachRow.reply == null}">Chưa phản hồi</button>
-										</td>
-										<td class="text-table-body" style="text-align: center;">
-											<button class="btn btn-success"
-												th:if="${eachRow.status == 1}">Đã duyệt</button>
-											<button class="btn btn-warning"
-												th:if="${eachRow.status == 0}">Chưa duyệt</button>
+												th:if="${eachRow.repply == null || #lists.isEmpty(eachRow.repply)}">Chưa
+												phản hồi</button>
 										</td>
 										<td class="text-table-body"><a
-											th:href="@{/review/reply/{id}/list.html(id=${eachRow.id})}"
-											th:if="${eachRow.reply} == null" data-toggle="tooltip"
-											title="Phản hồi">
+											th:href="@{/report/{id}/reply.html(id=${eachRow.id})}"
+											th:if="${eachRow.repply == null || #lists.isEmpty(eachRow.repply)}"
+											data-toggle="tooltip" title="Phản hồi">
 												<button class="btn btn-info btn-circle">
 													<i class="fa fa-reply"></i>
 												</button>
-										</a> <label th:if="${eachRow.reply} != null">&nbsp;</label></td>
-										<td class="text-table-body"><a
-											th:onclick="'acceptReview(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\');'"
-											th:if="${eachRow.status} == 0" data-toggle="tooltip"
-											title="Duyệt">
-												<button class="btn btn-info btn-circle">
-													<i class="fa fa-check"></i>
-												</button>
-										</a> <label th:if="${eachRow.status} == 1">&nbsp;</label></td>
-										<td><a type="button" class="btn btn-warning" href="#"
-											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'"
-											data-toggle="tooltip" title="Xóa Đánh Giá"><i
-												class="glyphicon glyphicon-trash"></i></a></td>
+										</a> <label
+											th:if="${eachRow.repply != null || not #lists.isEmpty(eachRow.repply)}">&nbsp;</label>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -171,38 +158,12 @@
 
 	<div th:replace="fragments/initAdmin :: commonScript"></div>
 
-	<div th:replace="fragments/navAdmin :: modal-delete"></div>
 
 
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		var currUrl = /*[[@{/}]]*/"";
 		/*]]>*/
-	</script>
-
-	<script type="text/javascript">
-		function deleteConfirm(name, key) {
-			var id = key;
-
-			$('#modal-title-notification').text('Xác nhận xóa đánh giá')
-
-			$('#name').text(
-					'Bạn có chắc chắn muốn xóa đánh giá: ' + key + ' - ' + name
-							+ ' không ? Bấm Delete để xác nhận.');
-
-			$('#delete').click(
-					function() {
-						$.ajax({
-							url : window.location.origin + currUrl
-									+ 'review/delete/' + id + '/list.html',
-							method : 'GET',
-							success : function() {
-								window.location.href = window.location.origin
-										+ currUrl + 'review/list.html';
-							}
-						});
-					});
-		}
 	</script>
 </body>
 

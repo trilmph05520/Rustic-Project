@@ -44,7 +44,7 @@ public class ReportController {
     @Resource
     private ReportFormValidator reportFormValidator;
 
-    private SimpleDateFormat sdf_ddMMyyyHHmm = new SimpleDateFormat("dd/MM/yyy HH:mm");
+    private SimpleDateFormat sdf_ddMMyyyHHmm = new SimpleDateFormat("MM/dd/yyyy");
 
     @RequestMapping(value = "list.html", method = {RequestMethod.GET, RequestMethod.POST})
     @PreAuthorize("hasAnyAuthority('Administrators','Staffs')")
