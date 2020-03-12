@@ -86,8 +86,8 @@
                     </div> -->
                     <div class="place-order" style="min-height: 404px;">
                         <h4>Thông tin của bạn</h4>
-                        <div class="order-total" style="height: 350px!important;">
-                            <ul class="order-table">
+                        <div class="order-total">
+                            <ul class="order-table" style="margin-bottom: 25px!important;">
                                 <li>Sản phẩm <span>Tiền</span></li>
                                 <li class="fw-normal" th:each="cart : ${session.myCartItems}">
                                     [[${cart.value.product.name} + ' x ' +

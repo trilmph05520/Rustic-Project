@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <div th:replace="fragments/initHome :: head"></div>
-</head>
+
+<div th:replace="fragments/initHome :: head"></div>
 <style>
+    .custom-control-input{
+        opacity: 1;
+        position: unset!important;
+    }
     .disable-call-ajax{
         cursor: none!important;
     }
@@ -132,7 +135,7 @@
             width: 63% !important;
             margin-left: 0px !important;
             border-radius: 5px;
-            margin-left: 10px !important;
+            /*margin-left: 10px !important;*/
         }
 
         .infoLeft .head .upper-case {
@@ -166,7 +169,7 @@
             width: 63% !important;
             margin-left: 0px !important;
             border-radius: 5px;
-            margin-left: 10px !important;
+            /*margin-left: 10px !important;*/
         }
 
         .infoLeft .head .upper-case {
@@ -384,7 +387,7 @@
         background: #ff9800 !important;
         color: white;
         height: 40px;
-        width: 100px;
+        /*width: 100px;*/
         padding: 0px 10px;
         font-size: 16px;
         border-radius: 5px;
@@ -571,30 +574,44 @@
 </style>
 
 <body>
-<input type="hidden" id="contextPath" th:value="@{/}"/>
-<!-- START HEADER AREA -->
-<header class="header-area header-wrapper">
-    <!-- header-top-bar -->
-    <div th:replace="fragments/navHome :: header"></div>
-    <!-- header-middle-area -->
-</header>
-<!-- END HEADER AREA -->
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-<!-- START MOBILE MENU AREA -->
-<div th:replace="fragments/navHome :: menuMobile"></div>
-<!-- END MOBILE MENU AREA -->
-<!--    <div class="wrapper">-->
+<!-- Header Section Begin -->
+<div th:replace="fragments/navHome :: header"></div>
+<!-- Header End -->
+
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text product-more">
+                    <a href="./index.html"><i class="fa fa-home"></i> Home</a><span>Payment Online</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
+
+<!-- Shopping Cart Section Begin -->
+<input type="hidden" id="contextPath" th:value="@{/}"/>
+<input type="hidden" id="login" th:value="${session.userLogin}">
+<br>
 <div class="row" style="width: 85%!important;margin: 0px auto;margin-bottom: 30px;color: black;">
-    <div class="col col-xs-12 col-sm-4 col-md-4 col-lg-4 infoRight">
+    <div class="col col-xs-12 col-sm-4 col-md-4 col-lg-4 infoRight" style="max-height: 800px;">
         <div class="col col-xs-12 col-sm-12 col-md-12" style="border-bottom: 1px solid #E8E8E8;margin-top: 0px;font-size: 17px;font-weight: bold;
 					padding-bottom: 8px;padding-left: 0px;">
             Thông tin sản phẩm
         </div>
-        <div th:each="each : ${session.myCartItems}" style="margin-top: 10px;display: inline-flex;">
-            <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px; width: 35%;">
+        <div th:each="each : ${session.myCartItems}" style="margin-top: 10px;">
+            <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px;">
                 <img th:src="${each.value.product.mainImg}"/>
             </div>
-            <div class="row" style="width: 60%;margin-left: 15px;line-height: 30px;">
+            <div class="row" style="width: 93%;margin-left: 15px;line-height: 30px;">
                 <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
                     <div class="txtLeft">Tên sản phẩm</div>
                     <div class="txtRight" th:text="${each.value.product.name}">IPhone</div>
@@ -609,13 +626,6 @@
                 <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
                     <div class="txtLeft">Số lượng</div>
                     <div class="txtRight" th:text="${each.value.quantity}">3</div>
-                </div>
-                <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
-                    <div class="txtLeft">Thuế VAT(1%)</div>
-                    <div class="txtRight"
-                         th:text="${#numbers.formatDecimal((each.value.product.price * each.value.quantity)*0.01, 0, 'COMMA', 0,'POINT')}">
-                        500,000,000 VNĐ
-                    </div>
                 </div>
                 <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
                     <div class="txtLeft">Thành tiền</div>
@@ -651,14 +661,14 @@
     </div>
     <div class="col col-xs-12 col-sm-8 col-md-8 col-lg-8 infoLeft">
         <div class="head">
-            <div class="upper-case" style="float: left;width: 74%;height: 30px;line-height: 30px;">
+            <div class="upper-case" style="float: left;width: 100%!important;height: 30px;line-height: 30px;margin-bottom: 5px;">
                 <img th:src="@{/assets/img/tt_camket_ttoan.svg}" class="icon_camket"/>&nbsp;&nbsp;Thanh toán an toàn
             </div>
             <div>
-                <img th:src="@{/assets/img/global_seal_110x45.png}" class="group-imgcheck"/>
-                <img th:src="@{/assets/img/verify4.png}" class="group-imgcheck"/>
+<!--                <img th:src="@{/assets/img/global_seal_110x45.png}" class="group-imgcheck"/>-->
+<!--                <img th:src="@{/assets/img/verify4.png}" class="group-imgcheck"/>-->
             </div>
-            <div class="content-head">Website ÔTôKê được Bộ Công Thương cấp phép chính thức hoạt động thương mại
+            <div class="content-head">Website Rustic được Bộ Công Thương cấp phép chính thức hoạt động thương mại
                 điện tử, trên nền tảng thanh toán về giao dịch an toàn và không lưu trữ thông tin thẻ của bạn.
             </div>
         </div>
@@ -666,7 +676,7 @@
             <div class="first-content row">
                 <p class="icon-select">1</p>
                 <h5>&nbsp;&nbsp;Thông tin khách hàng</h5>
-                <div class="formFirst">
+                <div class="formFirst" style="width: 100%;">
                     <div class="col col-xs-12 col-sm-12 col-md-12">
                         <input type="text" id="name" name="name" class="form-control"
                                placeholder="Họ và tên đầy đủ (VD: Bùi Văn Tấn)" th:value="${name}"/>
@@ -683,7 +693,7 @@
                         <span style="color: red;font-size: 13px;" id="mobileError"></span>
                     </div>
                     <div class="col col-xs-12 col-sm-12 col-md-12">
-                        <textarea name="address" id="address" placeholder="Địa chỉ..." th:text="${address}"></textarea>
+                        <textarea name="address" id="address" class="form-control" placeholder="Địa chỉ..." th:text="${address}"></textarea>
                         <span style="color: red;font-size: 13px;" id="addressError"></span>
                     </div>
                 </div>
@@ -693,22 +703,22 @@
                 <h5>&nbsp;&nbsp;Phương thức thanh toán</h5>
                 <div class="col col-xs-12 col-sm-12 col-md-12">
                     <form id="paymentSelected">
-                        <div class="custom-control custom-radio" style="float:left;">
-                            <input type="radio" class="custom-control-input" name="payment" value="1">
-                            <img th:src="@{/assets/img/pttt_2.svg}" class="icon-pttt" style="float: left;"/>
-                            <p style="float: left;width: 85%;margin-bottom: 5px;font-size: 16px; color: black;">
-                                Chuyển khoản trực tiếp
-                            </p>
-                            <div class="infoPayment">Chuyển khoản đến tài khoản ngân hàng của Yohomestay tại quầy giao
-                                dịch ngân hàng, cây ATM, qua mobile banking, hoặc chuyển khoản qua internet.
-                            </div>
-                        </div>
-                        <div class="detailOptionPayment animated jackInTheBox" id="paymentType1" style="display: none;">
-                            <div class="row">
-                                <div class="col col-xs-12 col-sm-12 col-md-12" id="paymentLive">
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="custom-control custom-radio" style="float:left;">-->
+<!--                            <input type="radio" class="custom-control-input" name="payment" value="1">-->
+<!--                            <img th:src="@{/assets/img/pttt_2.svg}" class="icon-pttt" style="float: left;"/>-->
+<!--                            <p style="float: left;width: 85%;margin-bottom: 5px;font-size: 16px; color: black;">-->
+<!--                                Chuyển khoản trực tiếp-->
+<!--                            </p>-->
+<!--                            <div class="infoPayment">Chuyển khoản đến tài khoản ngân hàng của Yohomestay tại quầy giao-->
+<!--                                dịch ngân hàng, cây ATM, qua mobile banking, hoặc chuyển khoản qua internet.-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="detailOptionPayment animated jackInTheBox" id="paymentType1" style="display: none;">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col col-xs-12 col-sm-12 col-md-12" id="paymentLive">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -795,7 +805,7 @@
                 </div>
                 <div class="col col-xs-12 col-sm-12 col-md-12" style="display: flex;margin-top: 10px;">
                     <button id="paying" class="btn-call-ajax selectOptionPayment btn">Thanh toán</button>
-                    <a th:href="@{/home/cart.html}" class="selectOptionPayment btn"
+                    <a th:href="@{/home/checkOut.html}" class="selectOptionPayment btn"
                        style="padding-top: 5px;background: #E8E8E8!important;color: black">Hủy bỏ</a>
                 </div>
             </div>
@@ -803,16 +813,24 @@
     </div>
 </div>
 </div>
-<!-- START FOOTER AREA -->
-<div th:replace="fragments/navHome :: footer"></div>
-<!-- END FOOTER AREA -->
 
-<!--</div>-->
-<!-- Body main wrapper end -->
+<!-- Shopping Cart Section End -->
+
+<!-- Partner Logo Section Begin -->
+<div th:replace="fragments/navHome :: partner-logo"></div>
+<!-- Partner Logo Section End -->
+
+<!-- Footer Section Begin -->
+<div th:replace="fragments/navHome :: footer"></div>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
 <div th:replace="fragments/initHome :: commonScript"></div>
+
 <script th:inline="javascript">
+    /*<![CDATA[*/
     var currUrl = /*[[@{/}]]*/"";
-    var pageIndex = /*[[${session.pageIndex}]]*/"";
+    /*]]>*/
 </script>
 <script>
     $(document)

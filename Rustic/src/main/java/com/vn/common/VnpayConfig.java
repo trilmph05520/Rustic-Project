@@ -28,9 +28,9 @@ public class VnpayConfig {
     private static final Logger logger = LoggerFactory.getLogger(VnpayConfig.class);
 
     public static String vnp_PayUrl = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_Returnurl = "http://localhost:8284/Rustic/payment/vnpay-transaction-result";
-    public static String vnp_TmnCode = "QFFJOYEW";
-    public static String vnp_HashSecret = "AJQGVLDDCBGRLZJARAEQDOFYJPKHSWDU";
+    public static String vnp_Returnurl = "http://localhost:8284/Rustic_war/payment/vnpay-result";
+    public static String vnp_TmnCode = "CMOU083H";
+    public static String vnp_HashSecret = "GVPLODATQPKSOOYGDDAVNHWKKZUBQDDO";
     public static String vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
 
     public static String md5(String message) {

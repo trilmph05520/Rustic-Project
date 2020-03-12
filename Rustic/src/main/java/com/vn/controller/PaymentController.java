@@ -81,7 +81,7 @@ public class PaymentController {
         return "home/payment";
     }
 
-    @RequestMapping(value = "vnpay-transaction-result", method = RequestMethod.GET)
+    @RequestMapping(value = "vnpay-result", method = RequestMethod.GET)
     public String resultPayment(HttpSession session, HttpServletRequest request) {
         try {
             Map fields = new HashMap();
