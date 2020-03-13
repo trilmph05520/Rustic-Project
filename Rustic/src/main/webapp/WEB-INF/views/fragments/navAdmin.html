@@ -52,8 +52,8 @@
 								<div class="dropdown-header noti-title">
 									<h6 class="text-overflow m-0">Welcome!</h6>
 								</div>
-								<a th:href="@{/profile/detail.html}" class="dropdown-item"> <i
-									class="ni ni-single-02"></i> <span>My profile</span>
+								<a th:href="@{/profile/detail.html}" class="dropdown-item">
+									<i class="ni ni-single-02"></i> <span>My profile</span>
 								</a> <a th:href="@{/account/change_password.html}"
 									class="dropdown-item"> <i class="ni ni-key-25"></i> <span>Change
 										Password</span>
@@ -100,13 +100,14 @@
 								class="nav-link-text">Google</span>
 						</a></li> -->
 						<li class="nav-item"
-							th:classappend="${#httpServletRequest.getRequestURI().contains('/staff') ? 'active':''}"
 							sec:authorize="hasAnyAuthority('Administrators')"><a
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/staff') ? 'active':''}"
 							class="nav-link" th:href="@{/staff/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text" th:utext="#{lable.employee}"></span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/user') ? 'active':''}"
 							th:href="@{/user/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text" th:utext="#{lable.customer}"></span>
@@ -124,21 +125,25 @@
 								class="nav-link-text" th:utext="#{lable.product}"></span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/bill/list.html') ? 'active':''}"
 							th:href="@{/bill/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Bill</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/listCancel.html') ? 'active':''}"
 							th:href="@{/bill/listCancel.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Bill Cancel</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/review') ? 'active':''}"
 							th:href="@{/review/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text" th:utext="#{lable.review}"></span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/report') ? 'active':''}"
 							th:href="@{/report/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Report</span>
@@ -157,14 +162,18 @@
 					<ul class="navbar-nav mb-md-3">
 						<li class="nav-item"
 							sec:authorize="hasAnyAuthority('Administrators')"><a
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/account/list.html') ? 'active':''}"
 							class="nav-link" th:href="@{/account/list.html}"><i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Account List</span></a></li>
-						<li class="nav-item"><a class="nav-link" th:href="@{/profile/detail.html}">
-								<i class="ni ni-single-02 text-yellow"></i> <span
+						<li class="nav-item"><a class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/profile') ? 'active':''}"
+							th:href="@{/profile/detail.html}"> <i
+								class="ni ni-single-02 text-yellow"></i> <span
 								class="nav-link-text">Profile</span>
 						</a></li>
 						<li class="nav-item"><a
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/change_password') ? 'active':''}"
 							th:href="@{/account/change_password.html}" class="nav-link">
 								<i class="ni ni-key-25"></i> <span>Change Password</span>
 						</a></li>
