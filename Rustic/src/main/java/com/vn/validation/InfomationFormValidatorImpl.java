@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.vn.jpa.Infomation;
 import com.vn.model.InfomationModel;
 import com.vn.service.InfomationService;
 import com.vn.validation.service.InfomationFormValidator;

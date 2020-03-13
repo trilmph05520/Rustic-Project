@@ -1,6 +1,31 @@
 package com.vn.controller;
 
-import com.google.common.base.Strings;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.apache.commons.collections4.map.HashedMap;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vn.common.Constants;
@@ -11,21 +36,6 @@ import com.vn.model.InfomationModel;
 import com.vn.model.UserAccountSearchingForm;
 import com.vn.service.AuthUserService;
 import com.vn.service.InfomationService;
-import org.apache.commons.collections4.map.HashedMap;
-import org.springframework.data.domain.*;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/staff/")
@@ -87,7 +97,7 @@ public class StaffController {
     }
 
     @RequestMapping(value = "detail.html", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyAuthority('Administrators')")
+    @PreAuthorize("hasAnyAuthority('Administrators','Staff')")
     public @ResponseBody
     String detail(Model model, @RequestParam("id") Long id) throws Exception{
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

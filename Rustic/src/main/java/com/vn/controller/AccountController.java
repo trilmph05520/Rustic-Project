@@ -303,6 +303,15 @@ public class AccountController {
 				model.addAttribute("old_password", oldPass);
 				model.addAttribute("new_password", newPass);
 				model.addAttribute("verify_password", vertifyPass);
+				if (newPass.isEmpty()) {
+					model.addAttribute("err", "Không được để trống mật khẩu mới");
+				} else {
+					if (!passwordEncoder.matches(oldPass, authUser.getPassword())) {
+						model.addAttribute("err", "Sai mật khẩu cũ");
+					} else if (!newPass.equals(vertifyPass)) {
+						model.addAttribute("err", "Mật khẩu mới không trùng với xác nhận mật khẩu");
+					}
+				}
 				return "admin/change_password";
 			}
 		} catch (Exception ex) {

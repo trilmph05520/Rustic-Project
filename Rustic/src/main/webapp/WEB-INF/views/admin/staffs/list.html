@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
 <div th:replace="fragments/initAdmin :: head"></div>
-</head>
 <style>
 .readonly {
 	background: white !important;
@@ -39,18 +37,21 @@
 										<div class="col-lg-4 col-12">
 											<div>
 												<input class="form-control" id="txtUserName" name="userName"
-													type="text" th:placeholder="#{lable.username}" th:value="*{userName}">
+													type="text" th:placeholder="#{lable.username}"
+													th:value="*{userName}">
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
 												<input class="form-control" id="txtEmail" name="email"
-													type="text" th:placeholder="#{lable.email}" th:value="*{email}">
+													type="text" th:placeholder="#{lable.email}"
+													th:value="*{email}">
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
-												<button type="submit" id="btnSearch" class="btn btn-primary" th:utext="#{lable.search}"></button>
+												<button type="submit" id="btnSearch" class="btn btn-primary"
+													th:utext="#{lable.search}"></button>
 											</div>
 										</div>
 									</div>
@@ -78,7 +79,7 @@
 										<th class="col" th:utext="#{lable.username}"></th>
 										<th class="col" th:utext="#{lable.fullname}"></th>
 										<th class="col" th:utext="#{lable.email}"></th>
-										<th class="col"th:utext="#{lable.statusaccount}"></th>
+										<th class="col" th:utext="#{lable.statusaccount}"></th>
 										<th class="col" th:utext="#{lable.createdate}"></th>
 										<th class="col">#</th>
 										<th class="col">#</th>
@@ -95,8 +96,8 @@
 											th:text="${#dates.format(eachRow.createdDate, 'dd/MM/yyyy')}"></td>
 										<td><a type="button" class="btn btn-danger"
 											th:onclick="'deleteConfirm(\'' + ${eachRow.userName} + '\');'"
-											data-toggle="tooltip" title="Xóa Khách hàng"> <i
-												class="glyphicon glyphicon-trash"></i></a></td>
+											data-toggle="modal" data-target="#productModal"
+											th:text="Delete"> Delete</a></td>
 										<td><a
 											th:onclick="'detailUser(\'' + ${eachRow.id} + '\');'"
 											type="button" class="btn btn-success" data-toggle="modal"
@@ -289,8 +290,7 @@
 						$('#emailUser').val(data.emailUser);
 						$('#bank').val(data.bank);
 						$('#atmNumber').val(data.atmNumberBank);
-						$('#birthday').val(
-								moment(data.birthday).format('DD/MM/YYYY'));
+						$('#birthday').val(data.birthday);
 						$('#company').val(data.company);
 						$('#phone').val(data.phone);
 						$('#province').val(data.province);
