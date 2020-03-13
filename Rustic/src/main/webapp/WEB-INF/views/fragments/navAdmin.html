@@ -50,17 +50,16 @@
 						</a>
 							<div class="dropdown-menu  dropdown-menu-right ">
 								<div class="dropdown-header noti-title">
-									<h6 class="text-overflow m-0">Welcome!</h6>
+									<h6 class="text-overflow m-0">Chào Mừng!</h6>
 								</div>
 								<a th:href="@{/profile/detail.html}" class="dropdown-item">
-									<i class="ni ni-single-02"></i> <span>My profile</span>
+									<i class="ni ni-single-02"></i> <span>Hồ sơ của tôi</span>
 								</a> <a th:href="@{/account/change_password.html}"
-									class="dropdown-item"> <i class="ni ni-key-25"></i> <span>Change
-										Password</span>
+									class="dropdown-item"> <i class="ni ni-key-25"></i> <span>Đổi mật khẩu</span>
 								</a>
 								<div class="dropdown-divider"></div>
 								<a th:href="@{/logout.html}" class="dropdown-item"> <i
-									class="ni ni-user-run"></i> <span>Logout</span>
+									class="ni ni-user-run"></i> <span>Thoát</span>
 								</a>
 							</div></li>
 					</ul>
@@ -146,7 +145,7 @@
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/report') ? 'active':''}"
 							th:href="@{/report/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">phản hồi</span>
+								class="nav-link-text">Phản hồi</span>
 						</a></li>
 						<!-- <li class="nav-item"><a class="nav-link" href="upgrade.html">
 								<i class="ni ni-send text-dark"></i> <span class="nav-link-text">Upgrade</span>
@@ -219,10 +218,10 @@
 							class="nav-link"> <span class="nav-link-inner--text">Dashboard</span>
 						</a></li>
 						<li class="nav-item"><a href="login.html" class="nav-link">
-								<span class="nav-link-inner--text">Login</span>
+								<span class="nav-link-inner--text">Đăng nhập</span>
 						</a></li>
 						<li class="nav-item"><a href="register.html" class="nav-link">
-								<span class="nav-link-inner--text">Register</span>
+								<span class="nav-link-inner--text">Đăng kí</span>
 						</a></li>
 					</ul>
 					<hr class="d-lg-none" />
