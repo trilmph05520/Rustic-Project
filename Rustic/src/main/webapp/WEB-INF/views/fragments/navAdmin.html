@@ -52,7 +52,7 @@
 								<div class="dropdown-header noti-title">
 									<h6 class="text-overflow m-0">Welcome!</h6>
 								</div>
-								<a href="#!" class="dropdown-item"> <i
+								<a th:href="@{/profile/detail.html}" class="dropdown-item"> <i
 									class="ni ni-single-02"></i> <span>My profile</span>
 								</a> <a th:href="@{/account/change_password.html}"
 									class="dropdown-item"> <i class="ni ni-key-25"></i> <span>Change
@@ -160,7 +160,7 @@
 							class="nav-link" th:href="@{/account/list.html}"><i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Account List</span></a></li>
-						<li class="nav-item"><a class="nav-link" href="profile.html">
+						<li class="nav-item"><a class="nav-link" th:href="@{/profile/detail.html}">
 								<i class="ni ni-single-02 text-yellow"></i> <span
 								class="nav-link-text">Profile</span>
 						</a></li>
