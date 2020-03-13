@@ -234,7 +234,7 @@
 						<div class="card-header">
 							<div class="row align-items-center">
 								<div class="col-8">
-									<h3 class="mb-0" th:utext="#{lable.addproduct}"></h3>
+									<h3 class="mb-0" >Thêm sản phẩm</h3>
 								</div>
 								<!-- <div class="col-4 text-right">
 									<a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -243,19 +243,19 @@
 						</div>
 						<div class="card-body">
 							<form>
-								<h6 class="heading-small text-muted mb-4"th:utext="#{lable.productinformation}"></h6>
+								<h6 class="heading-small text-muted mb-4">Thông tin sản phẩm</h6>
 								<div class="pl-lg-4">
 									<div class="row">
 										<div class="col-lg-3">
 											<div class="form-group">
-												<label th:utext="#{lable.avtImg}"></label><span class="error">
+												<label>Hình đại diện</label><span class="error">
 													*</span>
 												<div>
 													<div class="group-hinhanh">
 														<div class="wrap-custom-file">
 															<input type="file" name="image1" class="imgUpload"
 																id="image1" accept=".gif,.jpg,.png,.jpeg" /> <label
-																for="image1"> <span  th:utext="#{lable.choosephoto}"></span>
+																for="image1"> <span>Chọn ảnh</span>
 															</label>
 														</div>
 													</div>
@@ -267,7 +267,7 @@
 										</div>
 										<div class="col-lg-9" style="border-left: 2px solid #aaa;">
 											<div class="form-group">
-												<label th:utext="#{lable.imgdetail}">t</label><span class="error">
+												<label th>Chi tiết ảnh</label><span class="error">
 													*</span>
 												<div>
 													<div class="detail-step row-card-hinhanh-chit-tiet">
@@ -295,10 +295,10 @@
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label th:utext="#{lable.productportfolio}"></label><span class="error"> *</span>
+												<label>Thông tin sản phẩm</label><span class="error"> *</span>
 												<div>
 													<select class="form-control" id="form-field-cateChildren">
-														<option value="0" th:utext="#{lable.productportfolio}"></option>
+														<option value="0">Thông tin sản phẩm</option>
 														<option th:each="eachCate : ${category}"
 															th:value="${eachCate.id}" th:text="${eachCate.name}"></option>
 													</select>
@@ -307,10 +307,10 @@
 										</div>
 										<div class="col-lg-6" style="margin-bottom: 20px;">
 											<div class="form-group">
-												<label th:utext="#{lable.category}"></label><span class="error"> *</span>
+												<label >Danh Mục</label><span class="error"> *</span>
 												<div>
 													<select class="form-control" id="form-field-cate-children">
-														<option value="" th:utext="#{lable.category}">M</option>
+														<option value="" >Danh mục</option>
 													</select>
 												</div>
 												<span
@@ -320,10 +320,10 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label th:utext="#{lable.productname}"></label><span class="error"> *</span>
+												<label >Tên sản phẩm</label><span class="error"> *</span>
 												<div>
 													<input type="text" class="form-control" id="name"
-														placeholder="" maxlength="64" /> <span
+														placeholder="Tên sản phẩm" maxlength="64" /> <span
 														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
 														id="nameError"></span>
 												</div>
@@ -331,7 +331,7 @@
 										</div>
 										<div class="col-lg-6" style="margin-bottom: 20px;">
 											<div class="form-group">
-												<label th:utext="#{lable.amount}"></label><span class="error"> *</span>
+												<label>Số lượng</label><span class="error"> *</span>
 												<div>
 													<input type="text" class="form-control" id="quantity"
 														value="1" maxlength="11" /> <span
@@ -342,7 +342,7 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label th:utext="#{lable.price}"></label><span class="error"> *</span>
+												<label>Giá</label><span class="error"> *</span>
 												<div>
 													<input type="text" class="form-control"
 														placeholder="Giá sản phẩm" id="price" /> <span
@@ -353,7 +353,7 @@
 										</div>
 										<div class="col-lg-6" style="margin-bottom: 20px;">
 											<div class="form-group">
-												<label th:utext="#{lable.discount}"></label>
+												<label>Giảm giá</label>
 												<div>
 													<input type="text" class="form-control"
 														placeholder="Giảm giá" id="priceSale" /> <span
@@ -364,7 +364,7 @@
 										</div>
 										<div class="col-lg-6" style="height: 100px;">
 											<div class="form-group" style="height: 100px;">
-												<label th:utext="#{lable.described}"></label><span class="error"> *</span>
+												<label>mô tả</label><span class="error"> *</span>
 												<div style="height: 100px;">
 													<textarea class="form-control"
 														placeholder="" id="description"
@@ -377,7 +377,7 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label th:utext="#{lable.productportfoli}"></label><span class="error">
+												<label >Thông tin sản phẩm</label><span class="error">
 													*</span>
 												<div>
 													<textarea class="form-control"
@@ -395,9 +395,9 @@
 											<div class="form-group">
 												<a
 													th:href="@{/product/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
-													href="/account/list" class="btn btn-sm btn-neutral" th:utext="#{lable.cancel}"></a>
+													href="/account/list" class="btn btn-sm btn-neutral">Thoát</a>
 												<button type="button" id="addProduct"
-													class="btn btn-sm btn-neutral" th:utext="#{lable.save}"></button>
+													class="btn btn-sm btn-neutral" >Lưu</button>
 											</div>
 										</div>
 									</div>

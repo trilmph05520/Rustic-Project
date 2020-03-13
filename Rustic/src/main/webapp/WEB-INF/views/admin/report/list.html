@@ -44,7 +44,7 @@
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" th:utext="#{lable.sincedate}"></label>
+													<label class="text-white">Từ ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -58,7 +58,7 @@
 											</div>
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" th:utext="#{lable.todate}"></label>
+													<label class="text-white" >Đến ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -73,7 +73,7 @@
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
-												<label class="text-white" th:utext="#{lable.name}"></label>
+												<label class="text-white" >Tên</label>
 												<input class="form-control" id="name" name="name"
 													type="text" placeholder="Name" th:value="${name}">
 											</div>
@@ -83,7 +83,7 @@
 												<label>&nbsp;</label>
 												<div>
 													<button type="submit" id="btnSearch"
-														class="btn btn-primary" th:utext="#{lable.search}"></button>
+														class="btn btn-primary" >Tìm kiếm</button>
 												</div>
 											</div>
 										</div>
@@ -93,7 +93,7 @@
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
 								<a th:href="@{/report/list.html}" class="btn btn-sm btn-neutral"
-									th:utext="#{lable.refresh}"></a>
+								>Làm mới</a>
 							</div>
 						</div>
 						<div class="table-responsive">

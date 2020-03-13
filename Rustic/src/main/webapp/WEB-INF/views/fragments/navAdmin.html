@@ -104,49 +104,49 @@
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/staff') ? 'active':''}"
 							class="nav-link" th:href="@{/staff/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" th:utext="#{lable.employee}"></span>
+								class="nav-link-text" >Nhân Viên</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/user') ? 'active':''}"
 							th:href="@{/user/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" th:utext="#{lable.customer}"></span>
+								class="nav-link-text">Khách hàng</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/category') ? 'active':''}"
 							th:href="@{/category/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" th:utext="#{lable.category}"></span>
+								class="nav-link-text" >Danh mục</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/product') ? 'active':''}"
 							th:href="@{/product/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" th:utext="#{lable.product}"></span>
+								class="nav-link-text" >Sản phẩm</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/bill/list.html') ? 'active':''}"
 							th:href="@{/bill/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">Bill</span>
+								class="nav-link-text">Hóa đơn</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/listCancel.html') ? 'active':''}"
 							th:href="@{/bill/listCancel.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">Bill Cancel</span>
+								class="nav-link-text">Hủy hóa đơn</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/review') ? 'active':''}"
 							th:href="@{/review/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" th:utext="#{lable.review}"></span>
+								class="nav-link-text" >Xem chi tiết</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/report') ? 'active':''}"
 							th:href="@{/report/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">Report</span>
+								class="nav-link-text">phản hồi</span>
 						</a></li>
 						<!-- <li class="nav-item"><a class="nav-link" href="upgrade.html">
 								<i class="ni ni-send text-dark"></i> <span class="nav-link-text">Upgrade</span>
@@ -156,7 +156,7 @@
 					<hr class="my-3">
 					<!-- Heading -->
 					<h6 class="navbar-heading p-0 text-muted">
-						<span class="docs-normal">Account</span>
+						<span class="docs-normal">Tài khoản</span>
 					</h6>
 					<!-- Navigation -->
 					<ul class="navbar-nav mb-md-3">
@@ -165,17 +165,17 @@
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/account/list.html') ? 'active':''}"
 							class="nav-link" th:href="@{/account/list.html}"><i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">Account List</span></a></li>
+								class="nav-link-text">Danh sách tài khoản</span></a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/profile') ? 'active':''}"
 							th:href="@{/profile/detail.html}"> <i
 								class="ni ni-single-02 text-yellow"></i> <span
-								class="nav-link-text">Profile</span>
+								class="nav-link-text">Hồ sơ</span>
 						</a></li>
 						<li class="nav-item"><a
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/change_password') ? 'active':''}"
 							th:href="@{/account/change_password.html}" class="nav-link">
-								<i class="ni ni-key-25"></i> <span>Change Password</span>
+								<i class="ni ni-key-25"></i> <span>Đổi mật khẩu</span>
 						</a></li>
 					</ul>
 				</div>

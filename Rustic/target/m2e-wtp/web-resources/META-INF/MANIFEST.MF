@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: duyet
-Build-Jdk: 11.0.5
+Built-By: #Lion_#QT
+Build-Jdk: 1.8.0_221
 Created-By: Maven Integration for Eclipse
 

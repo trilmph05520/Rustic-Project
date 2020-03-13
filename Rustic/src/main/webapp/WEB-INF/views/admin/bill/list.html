@@ -40,7 +40,7 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0">Bill</h3>
+							<h3 class="text-white mb-0">Hóa đơn</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
 								<form role="form" th:action="@{/bill/list.html}" method="POST">
@@ -48,7 +48,7 @@
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" th:utext="#{lable.sincedate}"></label>
+													<label class="text-white">Từ ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -62,7 +62,7 @@
 											</div>
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" th:utext="#{lable.todate}"></label>
+													<label class="text-white">Đến ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -96,14 +96,14 @@
 											<label class="text-white">Mã hóa đơn</label>
 											<div>
 												<input type="text" class="form-control" name="code"
-													th:value="${code}" />
+													th:value="${code}" placeholder="Tìm kiếm" />
 											</div>
 										</div>
 										<div class="col-sm-2">
 											<label>&nbsp;</label>
 											<div>
 												<button type="submit" id="btnSearch" class="btn btn-primary"
-													th:utext="#{lable.search}"></button>
+												>Tìm kiếm</button>
 											</div>
 										</div>
 									</div>
@@ -117,7 +117,7 @@
 									sec:authorize="hasAnyAuthority('Administrators','Staffs')"
 									class="btn btn-sm btn-primary" th:utext="#{lable.new}"></a>  -->
 								<a th:href="@{/bill/list.html}" class="btn btn-sm btn-neutral"
-									th:utext="#{lable.refresh}"></a>
+									>Làm mới</a>
 							</div>
 						</div>
 						<div class="table-responsive">

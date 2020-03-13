@@ -37,14 +37,14 @@
 										<div class="col-lg-4 col-12">
 											<div>
 												<input class="form-control" id="txtUserName" name="userName"
-													type="text" th:placeholder="#{lable.username}"
+													type="text" placeholder="tên tài khoản"
 													th:value="*{userName}">
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
 												<input class="form-control" id="txtEmail" name="email"
-													type="text" th:placeholder="#{lable.email}"
+													type="text" placeholder="email"
 													th:value="*{email}">
 											</div>
 										</div>
@@ -66,9 +66,9 @@
 							<div class="col-lg-12 col-5 text-right">
 								<a th:href="@{/account/add.html}"
 									sec:authorize="hasAnyAuthority('Administrators')"
-									class="btn btn-sm btn-primary" th:utext="#{lable.new}"></a> <a
+									class="btn btn-sm btn-primary" >Thêm mới</a> <a
 									th:href="@{/account/list.html(user_list_ss=${user_list_ss})}"
-									class="btn btn-sm btn-neutral">Reset</a>
+									class="btn btn-sm btn-neutral">Làm mới</a>
 							</div>
 						</div>
 						<div class="alert alert-danger"
@@ -111,13 +111,12 @@
 										<td><a type="button" class="btn btn-warning"
 											data-toggle="modal" data-target="#productModal"
 											th:onclick="'deleteConfirm(\'' + ${eachRow.userName} + '\');'"
-											title="Xóa Tài Khoản">Delete</a></td>
+											title="Xóa Tài Khoản">Xóa</a></td>
 										<td><a
 											th:onclick="'resetPasswordConfirm(\'' + ${eachRow.userName} + '\');'"
 											data-toggle="modal" data-target="#productModal"
 											title="Reset mật khẩu Tài Khoản">
-												<button class="btn btn-info btn-circle">Reset
-													Password</button>
+												<button class="btn btn-info btn-circle">Làm mới mật khẩu</button>
 										</a></td>
 									</tr>
 

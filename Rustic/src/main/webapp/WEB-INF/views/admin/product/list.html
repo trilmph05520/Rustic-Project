@@ -23,7 +23,7 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0" th:utext="#{lable.listproduct}"></h3>
+							<h3 class="text-white mb-0" >Danh sách sản phẩm</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
 								<form role="form" th:action="@{/product/list.html}"
@@ -32,7 +32,7 @@
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" th:utext="#{lable.sincedate}"></label>
+													<label class="text-white" >Từ ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -46,7 +46,7 @@
 											</div>
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" th:utext="#{lable.todate}"></label>
+													<label class="text-white" >Đến ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -63,13 +63,13 @@
 											<label class="text-white">Tên sản phẩm</label>
 											<div>
 												<input type="text" placeholder="" name="name"
-													id="name" class="form-control" th:value="${name}" />
+													id="name" class="form-control" th:value="${name}"/>
 											</div>
 										</div>
 										<div class="col-sm-2">
 											<label>&nbsp;</label>
 											<div>
-												<button type="submit" id="btnSearch" class="btn btn-primary" th:utext="#{lable.search}"></button>
+												<button type="submit" id="btnSearch" class="btn btn-primary">Tìm kiếm</button>
 											</div>
 										</div>
 									</div>
@@ -81,9 +81,9 @@
 							<div class="col-lg-12 col-5 text-right">
 								<a th:href="@{/product/add.html}"
 									sec:authorize="hasAnyAuthority('Administrators','Staffs')"
-									class="btn btn-sm btn-primary" th:utext="#{lable.new}"></a> <a
+									class="btn btn-sm btn-primary">Thêm mới</a> <a
 									th:href="@{/category/list.html(category_list_ss=${category_list_ss})}"
-									class="btn btn-sm btn-neutral" th:utext="#{lable.refresh}"></a>
+									class="btn btn-sm btn-neutral">Làm mới</a>
 							</div>
 						</div>
 						<div class="table-responsive">
@@ -91,13 +91,13 @@
 								<thead class="thead-dark">
 									<tr>
 										<th scope="col">#</th>
-										<th scope="col" th:utext="#{lable.name}"></th>
-										<th scope="col"th:utext="#{lable.price}"></th>
-										<th scope="col"th:utext="#{lable.discount}">Giảm giá</th>
-										<th scope="col"th:utext="#{lable.amount}">Số lượng</th>
-										<th scope="col"th:utext="#{lable.described}">Miêu tả</th>
-										<th scope="col"th:utext="#{lable.information}">Thông tin</th>
-										<th scope="col"th:utext="#{lable.status}">Trạng thái</th>
+										<th scope="col" >Tên</th>
+										<th scope="col">Giá</th>	
+										<th scope="col">Giảm giá</th>
+										<th scope="col">Số lượng</th>
+										<th scope="col">Miêu tả</th>
+										<th scope="col">Thông tin</th>
+										<th scope="col">Trạng thái</th>
 										<th scope="col" class="text-center">#</th>
 										<th scope="col" class="text-center">#</th>
 									</tr>
