@@ -77,8 +77,10 @@ public class PaymentController {
                 model.addAttribute("mobile", infomation.getPhone());
                 model.addAttribute("address", infomation.getAddress());
             }
+            return "home/payment";
+        }else{
+            return  "redirect:/";
         }
-        return "home/payment";
     }
 
     @RequestMapping(value = "vnpay-result", method = RequestMethod.GET)

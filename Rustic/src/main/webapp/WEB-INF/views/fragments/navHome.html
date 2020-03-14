@@ -132,9 +132,9 @@
 						</div>
 						<div class="col-lg-3 text-right col-md-3">
 							<ul class="nav-right">
-								<li class="heart-icon"><a href="#"> <i
-										class="icon_heart_alt"></i> <span>1</span>
-								</a></li>
+<!--								<li class="heart-icon"><a href="#"> <i-->
+<!--										class="icon_heart_alt"></i> <span>1</span>-->
+<!--								</a></li>-->
 								<li class="cart-icon"><a th:href="@{/home/cart.html}">
 										<i class="icon_bag_alt"></i> <span class="cart-quantity"
 										th:if="${session.myCartNum != 0}"
@@ -189,7 +189,7 @@
 										</div>
 										<div class="select-button">
 											<a th:href="@{/home/cart.html}" class="primary-btn view-card">VIEW
-												CARD</a> <a th:href="@{/home/cart.html?payment=true}"
+												CARD</a> <a th:href="@{/home/checkOut.html}"
 												class="primary-btn checkout-btn">CHECK OUT</a>
 										</div>
 									</div></li>

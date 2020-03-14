@@ -239,9 +239,9 @@
                                     th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}"><img
                                     th:src="${eachPro.mainImg}" alt="" width="245px" height="300px"></a>
                             <div class="sale" th:if="${eachPro.priceSale != 0}">Sale</div>
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
-                            </div>
+<!--                            <div class="icon">-->
+<!--                                <i class="icon_heart_alt"></i>-->
+<!--                            </div>-->
                             <ul>
                                 <li class="w-icon active" th:if="${eachPro.quantity} > 0"><a
                                         th:href="@{/cart/add/{productId}.html(productId = ${eachPro.id})}"><i

@@ -2,11 +2,7 @@ package com.vn.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.vn.jpa.Bill;
-import com.vn.jpa.Product;
-import com.vn.jpa.Product_Bill;
-import com.vn.jpa.Reject;
-import com.vn.jpa.Report;
+import com.vn.jpa.*;
 import com.vn.model.RejectModel;
 import com.vn.service.BillService;
 import com.vn.service.ProductService;
@@ -19,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,14 +43,23 @@ public class RejectController {
  	}
 
     @RequestMapping(value = "{id}/home.html", method = RequestMethod.GET)
-    public String reject(@PathVariable("id") Long id, Model model) {
-        List<Product_Bill> lsProductBill = productBillService.findByBill_Id(id);
-        Bill bill = billService.findOne(id);
-        if (bill != null) {
-            model.addAttribute("bill", bill);
+    public String reject(@PathVariable("id") Long id, Model model, HttpSession session) {
+        AuthUser authUser = (AuthUser) session.getAttribute("userLogin");
+        if(authUser != null){
+            Bill checkAuth = billService.findOne(id);
+            if(checkAuth.getAuthUser().getId() != authUser.getId()){
+                return "redirect:/";
+            }
+            List<Product_Bill> lsProductBill = productBillService.findByBill_Id(id);
+            Bill bill = billService.findOne(id);
+            if (bill != null) {
+                model.addAttribute("bill", bill);
+            }
+            model.addAttribute("reject", lsProductBill);
+            return "home/reject";
+        }else{
+            return "redirect:/";
         }
-        model.addAttribute("reject", lsProductBill);
-        return "home/reject";
     }
 
     @RequestMapping(value = "home.html", method = RequestMethod.POST)
