@@ -140,7 +140,7 @@ public class HomeController {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public ModelAndView index(Model model, Pageable pageable, HttpSession session) {
+    public ModelAndView indexs(Model model, Pageable pageable, HttpSession session) {
         Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
         Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
         Page<Product> product = productService.findAllByIsdelete("N", _pageable);
@@ -161,11 +161,12 @@ public class HomeController {
         session.setAttribute("categoryNavPr", lstCatePr);
         for (Category eachCateChildren : category) {
             if (eachCateChildren.getParent() != null) {
-                ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
-                List lsCategoryInfo = new ArrayList();
-                lsCategoryInfo.add(eachCateChildren.getId());
-                lsCategoryInfo.add(eachCateChildren.getName());
-                lsChildren.add(lsCategoryInfo);
+            	if(mapLsId.get(eachCateChildren.getParent().getId()).get(1)!=null) {
+            		ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
+                	List lsCategoryInfo = new ArrayList();
+                	lsCategoryInfo.add(eachCateChildren.getId());
+	                lsCategoryInfo.add(eachCateChildren.getName());
+	                lsChildren.add(lsCategoryInfo);							
             }
         }
         session.setAttribute("categoryNav", mapLsId);
@@ -174,6 +175,10 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("home/index");
         return modelAndView;
     }
+		return null;
+    }
+   
+  
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @RequestMapping(value = {"/home/shop.html"}, method = RequestMethod.GET)
@@ -198,8 +203,9 @@ public class HomeController {
         session.setAttribute("categoryNavPr", lstCatePr);
         for (Category eachCateChildren : category) {
             if (eachCateChildren.getParent() != null) {
+            	if(mapLsId.get(eachCateChildren.getParent().getId()).get(1) != null) {
                 ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
-                List lsCategoryInfo = new ArrayList();
+                List lsCategoryInfo = new ArrayList(); 
                 lsCategoryInfo.add(eachCateChildren.getId());
                 lsCategoryInfo.add(eachCateChildren.getName());
                 lsChildren.add(lsCategoryInfo);
@@ -210,6 +216,8 @@ public class HomeController {
         model.addAttribute("page", product);
         ModelAndView modelAndView = new ModelAndView("home/shop");
         return modelAndView;
+    }
+		return null;
     }
 
     @RequestMapping(value = "/home/{id}/single-product.html", method = {RequestMethod.GET})

@@ -67,7 +67,7 @@
 					<div class="ht-right">
 						<a th:if="${session.userLogin == null}"
 							th:href="@{/home/login.html}" class="login-panel"
-							th:utext="#{lable.login}"><i class="fa fa-user"></i></a> <a
+							>Đăng nhập <i class="fa fa-user"></i></a> <a
 							th:if="${session.userLogin != null}"
 							th:href="@{/home/logout.html}" class="login-panel"
 							th:utext="#{lable.logout}"><i class="fa fa-user"></i></a> <a
@@ -120,10 +120,9 @@
 						</div>
 						<div class="col-lg-7 col-md-7">
 							<div class="advanced-search">
-								<button type="button" class="category-btn">All
-									Categories</button>
+								<button type="button" class="category-btn">Tất cả danh mục</button>
 								<div class="input-group">
-									<input type="text" placeholder="What do you need?">
+									<input type="text" placeholder="Bạn cần gì?">
 									<button type="button">
 										<i class="ti-search"></i>
 									</button>
@@ -205,7 +204,7 @@
 					<div class="nav-depart">
 						<div class="depart-btn">
 
-							<i class="ti-menu"><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>
+							<i class="ti-menu" ><span >Tất cả danh mục</span></i>
 
 							<!-- 							<i class="ti-menu" ><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>   -->
 
@@ -228,9 +227,9 @@
                                     <li><a href="./shop.html" th:utext="#{lable.Contact}"></a></li> -->
 
 							<!-- 		<li class="active"><a href="./index.html" th:utext="#{lable.Collection}"></a></li> -->
-							<li><a th:href="@{/}">Home</a></li>
-							<li><a th:href="@{/home/shop.html}" th:utext="#{lable.Shop}"></a></li>
-							<li><a th:utext="#{lable.Collection}"></a>
+							<li><a th:href="@{/}">Trang chủ</a></li>
+							<li><a th:href="@{/home/shop.html}" >Shop</a></li>
+							<li><a>Bộ sưu tập</a>
 								<ul class="dropdown" style="height: 400px; overflow-y: scroll;"
 									th:if="${session.categoryNavPr != null && session.categoryNavPr.size() > 10}">
 									<li th:each="eachCatePr : ${session.categoryNavPr}"><a
@@ -246,15 +245,15 @@
 
 							<li><a th:href="@{/home/blog.html}">Blog</a></li>
 							<li><a th:href="@{/home/contact.html}"
-								th:utext="#{lable.Contact}"></a></li>
-							<li><a href="#" th:utext="#{lable.pages}">pages</a>
+								>Liên hệ</a></li>
+							<li><a href="#" >Trang</a>
 								<ul class="dropdown">
-									<li><a href="./blog-details.html">Blog Details</a></li>
-									<li><a href="./shopping-cart.html">Shopping Cart</a></li>
-									<li><a href="./check-out.html">Checkout</a></li>
+									<li><a href="./blog-details.html">Chi tiết bog</a></li>
+									<li><a href="./shopping-cart.html">Thẻ mua sắm</a></li>
+									<li><a href="./check-out.html">Tahnh toán</a></li>
 									<li><a th:href="@{/home/faq.html}">Faq</a></li>
-									<li><a th:href="@{/home/register.html}">Register</a></li>
-									<li><a th:href="@{/home/login.html}">Login</a></li>
+									<li><a th:href="@{/home/register.html}">Đăng kí</a></li>
+									<li><a th:href="@{/home/login.html}">Đăng nhập</a></li>
 								</ul></li>
 						</ul>
 					</nav>
@@ -276,8 +275,8 @@
 									width="88px" height="23px" alt=""></a>
 							</div>
 							<ul>
-								<li>Address: Xuan La, Tay Ho, Ha Noi</li>
-								<li>Phone: 0983231999</li>
+								<li>Địa chỉ: Xuân La, Tây Hồ,Hà Nội</li>
+								<li>Số điện thoại: 0983231999</li>
 								<li>Email: trilmph05520@fpt.edu.vn</li>
 							</ul>
 							<div class="footer-social">
@@ -392,7 +391,7 @@
                                             id="quickCart" class="btn btn-warning" type="submit">Thêm
                                             vào giỏ </a> -->
 										<a href="#" class="primary-btn pd-cart" id="quickCart"
-											type="submit">Add To Cart</a>
+											type="submit">Thêm vào giỏ hàng</a>
 									</div>
 									<div class="quick-desc" id="info">Hello, Every body.</div>
 									<!-- <div class="social-sharing">

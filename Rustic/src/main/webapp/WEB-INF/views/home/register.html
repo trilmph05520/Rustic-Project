@@ -24,8 +24,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href="#"><i class="fa fa-home"></i> Home</a>
-                    <span>Register</span>
+                    <a href="#"><i class="fa fa-home"></i> Trang chủ</a>
+                    <span>Đăng kí</span>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
     <div class="container">
         <div class="col-lg-12 offset-lg-12">
             <div class="register-form">
-                <h2>Register</h2>
+                <h2>Đăng kí</h2>
                 <form th:action="@{/account/save.html}" th:object="${authUser}" method="POST">
                     <div
                             th:if="${mapError != null && mapError.containsKey('errorUnknown') != null}"
@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="group-input">
-                                <label for="userName">UserName *</label>
+                                <label for="userName">Tên đăng nhập *</label>
                                 <input type="text" th:field="*{userName}" name="userName" id="userName">
                                 <div
                                         th:if="${mapError != null && mapError.containsKey('userName') != null}"
@@ -121,7 +121,7 @@
                     <div class="row">
                         <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="group-input">
-                                <label for="password">Password *</label>
+                                <label for="password">Mật khẩu *</label>
                                 <input type="password" th:field="*{password}" name="passWord" id="password">
                                 <div
                                         th:if="${mapError != null && mapError.containsKey('password') != null}"
@@ -131,7 +131,7 @@
                         </div>
                         <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="group-input">
-                                <label for="verifyPassword">Cofirm Password *</label>
+                                <label for="verifyPassword">Nhập lại mật khẩu *</label>
                                 <input type="password" th:field="*{verifyPassword}" name="verifyPassword"
                                        id="verifyPassword">
                                 <div
@@ -142,10 +142,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="site-btn register-btn">REGISTER</button>
+                    <button type="submit" class="site-btn register-btn">ĐĂNG KÍ</button>
                 </form>
                 <div class="switch-login">
-                    <a th:href="@{/home/login.html}" class="or-login">Or Login</a>
+                    <a th:href="@{/home/login.html}" class="or-login">Hoặc Đăng nhập</a>
                 </div>
             </div>
         </div>

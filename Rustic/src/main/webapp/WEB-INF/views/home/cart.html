@@ -20,8 +20,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text product-more">
-						<a th:href="@{/}"><i class="fa fa-home"></i> Home</a> <a
-							th:href="@{/home/shop.html}">Shop</a> <span>Shopping Cart</span>
+						<a th:href="@{/}"><i class="fa fa-home"></i> Trang chủ</a> <a
+							th:href="@{/home/shop.html}">Shop</a> <span>Giỏ hàng</span>
 					</div>
 				</div>
 			</div>
@@ -39,10 +39,10 @@
 							<thead>
 								<tr>
 									<th>Image</th>
-									<th class="p-name">Product Name</th>
-									<th>Price</th>
-									<th>Quantity</th>
-									<th>Total</th>
+									<th class="p-name">Tên sản phẩm</th>
+									<th>Giá</th>
+									<th>Số lượng</th>
+									<th>Tổng</th>
 									<th><i class="ti-close"></i></th>
 								</tr>
 							</thead>
@@ -92,7 +92,7 @@
 						<div class="col-lg-4">
 							<div class="cart-buttons">
 								<a th:href="@{/home/shop.html}"
-									class="primary-btn continue-shop">Continue shopping</a>
+									class="primary-btn continue-shop">Tiếp tục mua hàng</a>
 								<!-- <a
 									href="#" class="primary-btn up-cart">Update cart</a> -->
 							</div>
@@ -107,12 +107,12 @@
 						<div class="col-lg-4 offset-lg-4">
 							<div class="proceed-checkout">
 								<ul>
-									<li class="subtotal">Subtotal <span class="totalPriceCart"
+									<li class="subtotal">Tổng phụ<span class="totalPriceCart"
 										th:text="${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')} + ' VND'">$240.00</span></li>
-									<li class="cart-total">Total <span class="totalPriceCart"
+									<li class="cart-total">Tổng<span class="totalPriceCart"
 										th:text="${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')} + ' VND'">$240.00</span></li>
 								</ul>
-								<a th:href="@{/home/checkOut.html}" class="proceed-btn">PROCEED TO CHECK OUT</a>
+								<a th:href="@{/home/checkOut.html}" class="proceed-btn">Tiến hành kiểm tra</a>
 							</div>
 						</div>
 					</div>

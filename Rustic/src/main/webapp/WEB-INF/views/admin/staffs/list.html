@@ -51,7 +51,7 @@
 										<div class="col-lg-4 col-12">
 											<div>
 												<button type="submit" id="btnSearch" class="btn btn-primary"
-													>Search</button>
+													>Tìm kiếm</button>
 											</div>
 										</div>
 									</div>
@@ -97,7 +97,7 @@
 										<td><a type="button" class="btn btn-danger"
 											th:onclick="'deleteConfirm(\'' + ${eachRow.userName} + '\');'"
 											data-toggle="modal" data-target="#productModal"
-											th:text="Delete"> Delete</a></td>
+											th:text="Xóa">Xóa</a></td>
 										<td><a
 											th:onclick="'detailUser(\'' + ${eachRow.id} + '\');'"
 											type="button" class="btn btn-success" data-toggle="modal"
@@ -320,7 +320,7 @@
 
 			$('#name').text(
 					'Bạn có chắc chắn muốn xóa nhân viên: ' + key + ' - '
-							+ name + ' không ? Bấm Delete để xác nhận.');
+							+ name + ' không ? Bấm Xóa để xác nhận.');
 
 			$('#delete').click(
 					function() {
