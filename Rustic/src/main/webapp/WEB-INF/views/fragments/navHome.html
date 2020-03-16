@@ -78,17 +78,17 @@
 
 
 
-						<div class="lan-selector">
+						<!-- <div class="lan-selector">
 							<select class="language_drop" name="countries" id="countries"
 								style="width: 300px;">
 
-								<!-- 						<option th:href="@{/Rustic/?lang=en}" value='yt'
+														<option th:href="@{/Rustic/?lang=en}" value='yt'
                                     th:data-image="@{/assets/img/flag-1.jpg}"
                                     data-imagecss="flag yt" data-title="English"><a
                                         th:href="@{/Rustic/?lang=en}">English</a></option>
                                 <option value='yu' th:data-image="@{/assets/img/flag-2.jpg}"
                                     data-imagecss="flag yu" data-title="Bangladesh"><a
-                                        th:href="@{/Rustic/?lang=vi}">Viet</a></option> -->
+                                        th:href="@{/Rustic/?lang=vi}">Viet</a></option>
 
 								<option th:href="@{/Rustic/?lang=en}" value='yt'
 									th:data-image="@{/assets/img/flag-1.jpg}"
@@ -98,7 +98,7 @@
 									data-imagecss="flag yu" data-title="Bangladesh">Vietnamese</option>
 
 							</select>
-						</div>
+						</div> -->
 						<div class="top-social">
 							<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
 								class="ti-twitter-alt"></i></a> <a href="#"><i
@@ -131,9 +131,9 @@
 						</div>
 						<div class="col-lg-3 text-right col-md-3">
 							<ul class="nav-right">
-								<li class="heart-icon"><a href="#"> <i
-										class="icon_heart_alt"></i> <span>1</span>
-								</a></li>
+<!--								<li class="heart-icon"><a href="#"> <i-->
+<!--										class="icon_heart_alt"></i> <span>1</span>-->
+<!--								</a></li>-->
 								<li class="cart-icon"><a th:href="@{/home/cart.html}">
 										<i class="icon_bag_alt"></i> <span class="cart-quantity"
 										th:if="${session.myCartNum != 0}"
@@ -188,7 +188,7 @@
 										</div>
 										<div class="select-button">
 											<a th:href="@{/home/cart.html}" class="primary-btn view-card">VIEW
-												CARD</a> <a th:href="@{/home/cart.html?payment=true}"
+												CARD</a> <a th:href="@{/home/checkOut.html}"
 												class="primary-btn checkout-btn">CHECK OUT</a>
 										</div>
 									</div></li>
@@ -248,9 +248,15 @@
 								>Liên hệ</a></li>
 							<li><a href="#" >Trang</a>
 								<ul class="dropdown">
+<<<<<<< HEAD
 									<li><a href="./blog-details.html">Chi tiết bog</a></li>
 									<li><a href="./shopping-cart.html">Thẻ mua sắm</a></li>
 									<li><a href="./check-out.html">Tahnh toán</a></li>
+=======
+								<!-- 	<li><a href="./blog-details.html">Blog Details</a></li>
+									<li><a href="./shopping-cart.html">Shopping Cart</a></li>
+									<li><a href="./check-out.html">Checkout</a></li> -->
+>>>>>>> d83db3f8a9a8c1c5817e23633ab170214c2cb86c
 									<li><a th:href="@{/home/faq.html}">Faq</a></li>
 									<li><a th:href="@{/home/register.html}">Đăng kí</a></li>
 									<li><a th:href="@{/home/login.html}">Đăng nhập</a></li>

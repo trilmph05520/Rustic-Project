@@ -238,10 +238,17 @@
                             <a
                                     th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}"><img
                                     th:src="${eachPro.mainImg}" alt="" width="245px" height="300px"></a>
+<<<<<<< HEAD
                             <div class="sale" th:if="${eachPro.priceSale != 0}">Giảm giá</div>
                             <div class="icon">
                                 <i class="icon_heart_alt"></i>
                             </div>
+=======
+                            <div class="sale" th:if="${eachPro.priceSale != 0}">Sale</div>
+<!--                            <div class="icon">-->
+<!--                                <i class="icon_heart_alt"></i>-->
+<!--                            </div>-->
+>>>>>>> d83db3f8a9a8c1c5817e23633ab170214c2cb86c
                             <ul>
                                 <li class="w-icon active" th:if="${eachPro.quantity} > 0"><a
                                         th:href="@{/cart/add/{productId}.html(productId = ${eachPro.id})}"><i

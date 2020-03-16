@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.google.common.base.Strings;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.common.base.Strings;
 import com.vn.common.Constants;
 import com.vn.jpa.Category;
 import com.vn.service.CategoryService;
@@ -86,7 +85,7 @@ public class CategoryController {
             model.addAttribute("title", "Thêm mới danh mục");
         } else {
             Category category = categoryService.findOne(id);
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             model.addAttribute("category", category);
             if(category.getDate() == null) {
             	category.setDate(new Date());
@@ -114,7 +113,7 @@ public class CategoryController {
 			return "admin/categorys/cate_edit";
 		}
 		if (category.getId() == null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			category.setIsDelete("N");
 			category.setDate(sdf.parse(date));
 			categoryService.insert(category);

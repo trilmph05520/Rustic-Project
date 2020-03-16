@@ -2,6 +2,8 @@ package com.vn.jpa;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -115,9 +117,11 @@ public class Reject implements Serializable {
     }
 
     @PrePersist
-    public void pre(){
+    public void pre() throws ParseException{
         if(this.createdDate == null){
-            this.createdDate = new Date();
+        	Date create = new Date();
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            this.createdDate = sdf.parse(sdf.format(create));
         }
     }
 }

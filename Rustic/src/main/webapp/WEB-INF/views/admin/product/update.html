@@ -227,7 +227,7 @@
 		<!-- Header -->
 		<!-- Header -->
 		<!-- Page content -->
-		<div class="container-fluid mt--6">
+		<div class="container-fluid mt--6" style="margin-top: 25px !important;">
 			<input type="hidden" id="idProduct" th:value="${product.id}">
 			<input type="hidden" id="idCateChildren"
 				th:value="${product.category.id}"> <input type="hidden"
@@ -239,7 +239,7 @@
 						<div class="card-header">
 							<div class="row align-items-center">
 								<div class="col-8">
-									<h3 class="mb-0" >Sửa sản phẩm</h3>
+									<h3 class="mb-0">Sửa sản phẩm</h3>
 								</div>
 								<!-- <div class="col-4 text-right">
 									<a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -248,167 +248,172 @@
 						</div>
 						<div class="card-body">
 							<form>
-								<h6 class="heading-small text-muted mb-4">Thông tin sản phẩm</h6>
-								<div class="pl-lg-4">
-									<div class="row">
-										<div class="col-lg-3">
-											<div class="form-group">
-												<label>Hình đại diện</label><span class="error">
-													*</span>
-												<div>
+								<div
+									style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+									id="error"></div>
+								<div class="row">
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label>Hình ảnh đại diện</label><span class="error"> *</span>
+											<div>
+												<div class="group-hinhanh">
+													<div class="wrap-custom-file">
+														<input type="file" name="image1" class="imgUpload"
+															id="image1" accept=".gif,.jpg,.png,.jpeg" /> <label
+															for="image1"
+															th:style="'background-image:url(' + ${product.mainImg} + ');'">
+														</label>
+													</div>
+												</div>
+												<input type="text" name="mainImg" id="mainImg" hidden /> <span
+													style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+													id="mainError"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-9" style="border-left: 2px solid #aaa;">
+										<div class="form-group">
+											<label>Hình ảnh chi tiết</label><span class="error"> *</span>
+											<div>
+												<div class="detail-step row-card-hinhanh-chit-tiet">
 													<div class="group-hinhanh">
-														<div class="wrap-custom-file">
-															<input type="file" name="image1" class="imgUpload"
-																id="image1" accept=".gif,.jpg,.png,.jpeg" /> <label
-																for="image1"> <span>Chọn ảnh</span>
+														<div class="wrap-custom-fileadd" id="addSubImages">
+															<input type="file" name="addSubImage" class="imgAddSub"
+																id="addSubImage" accept=".gif,.jpg,.png,.jpeg" /> <label
+																for="addSubImage"
+																style="display: flex; align-items: center; justify-content: center;">
+																<span style="margin-top: 0px !important;"> <i
+																	class="fa fa-plus" style="font-size: 50px;"></i>
+															</span>
 															</label>
 														</div>
 													</div>
-													<input type="text" name="mainImg" id="mainImg" hidden /> <span
+													<span
 														style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
-														id="mainError"></span>
+														id="subError"></span>
 												</div>
-											</div>
-										</div>
-										<div class="col-lg-9" style="border-left: 2px solid #aaa;">
-											<div class="form-group">
-												<label th>Chi tiết ảnh</label><span class="error">
-													*</span>
-												<div>
-													<div class="detail-step row-card-hinhanh-chit-tiet">
-														<div class="group-hinhanh">
-															<div class="wrap-custom-fileadd" id="addSubImages">
-																<input type="file" name="addSubImage" class="imgAddSub"
-																	id="addSubImage" accept=".gif,.jpg,.png,.jpeg" /> <label
-																	for="addSubImage"
-																	style="display: flex; align-items: center; justify-content: center;">
-																	<span style="margin-top: 0px !important;"> <i
-																		class="fa fa-plus" style="font-size: 50px;"></i>
-																</span>
-																</label>
-															</div>
-															<br> <span
-																style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
-																id="subError"></span>
-														</div>
-
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label>Thông tin sản phẩm</label><span class="error"> *</span>
-												<div>
-													<select class="form-control" id="form-field-cateChildren">
-														<option value="0">Thông tin sản phẩm</option>
-														<option th:each="eachCate : ${category}"
-															th:value="${eachCate.id}" th:text="${eachCate.name}"></option>
-													</select>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6" style="margin-bottom: 20px;">
-											<div class="form-group">
-												<label >Danh Mục</label><span class="error"> *</span>
-												<div>
-													<select class="form-control" id="form-field-cate-children">
-														<option value="" >Danh mục</option>
-													</select>
-												</div>
-												<span
-													style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
-													id="idCateError"></span>
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label >Tên sản phẩm</label><span class="error"> *</span>
-												<div>
-													<input type="text" class="form-control" id="name"
-														placeholder="Tên sản phẩm" maxlength="64" /> <span
-														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
-														id="nameError"></span>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6" style="margin-bottom: 20px;">
-											<div class="form-group">
-												<label>Số lượng</label><span class="error"> *</span>
-												<div>
-													<input type="text" class="form-control" id="quantity"
-														value="1" maxlength="11" /> <span
-														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
-														id="quantityError"></span>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label>Giá</label><span class="error"> *</span>
-												<div>
-													<input type="text" class="form-control"
-														placeholder="Giá sản phẩm" id="price" /> <span
-														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
-														id="priceError"></span>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6" style="margin-bottom: 20px;">
-											<div class="form-group">
-												<label>Giảm giá</label>
-												<div>
-													<input type="text" class="form-control"
-														placeholder="Giảm giá" id="priceSale" /> <span
-														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
-														id="priceSaleError"></span>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6" style="height: 100px;">
-											<div class="form-group" style="height: 100px;">
-												<label>mô tả</label><span class="error"> *</span>
-												<div style="height: 100px;">
-													<textarea class="form-control"
-														placeholder="" id="description"
-														style="height: 100px;" maxlength="256"></textarea>
-													<span
-														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
-														id="descriptionError"></span>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label >Thông tin sản phẩm</label><span class="error">
-													*</span>
-												<div>
-													<textarea class="form-control"
-														placeholder="Thông tin sản phẩm" id="info"
-														style="height: 100px;" maxlength="256"></textarea>
-													<span
-														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
-														id="infoError"></span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row  text-right">
-										<div class="col-lg-12 col-5">
-											<div class="form-group">
-												<a
-													th:href="@{/product/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
-													href="/account/list" class="btn btn-sm btn-neutral">Thoát</a>
-												<button type="button" id="addProduct"
-													class="btn btn-sm btn-neutral" >Lưu</button>
 											</div>
 										</div>
 									</div>
 								</div>
-
-							</form>						</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label>Danh mục SP</label>
+											<div>
+												<select class="form-control" id="form-field-cateChildren">
+													<option th:each="eachCate : ${category}"
+														th:value="${eachCate.id}" th:text="${eachCate.name}"
+														th:selected="${eachCate.id == product.category.parent.id}"></option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6" style="margin-bottom: 20px;">
+										<div class="form-group">
+											<label>Loại DM</label><span class="error"> *</span>
+											<div>
+												<select class="form-control" id="form-field-cate-children">
+												</select>
+											</div>
+											<span
+												style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+												id="idCateError"></span>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label>Tên sản phẩm</label><span class="error"> *</span>
+											<div>
+												<input type="text" class="form-control" id="name"
+													placeholder="Tên sản phẩm" th:value="${product.name}"
+													maxlength="64" /> <span
+													style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+													id="nameError"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6" style="margin-bottom: 20px;">
+										<div class="form-group">
+											<label>Số lượng</label><span class="error"> *</span>
+											<div>
+												<input type="text" class="form-control" id="quantity"
+													maxlength="11" th:value="${product.quantity}" /> <span
+													style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+													id="quantityError"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label>Giá sản phẩm</label><span class="error"> *</span>
+											<div>
+												<input type="text" class="form-control"
+													placeholder="Giá sản phẩm" id="price"
+													th:value="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0,'POINT')}" />
+												<span
+													style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+													id="priceError"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label>Giá giảm</label>
+											<div>
+												<input type="text" class="form-control"
+													placeholder="Giảm giá" id="priceSale"
+													th:value="${#numbers.formatDecimal(product.priceSale, 0, 'COMMA', 0,'POINT')}" />
+												<span
+													style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+													id="priceSaleError"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6" style="height: 100px;">
+										<div class="form-group" style="height: 100px;">
+											<label>Mô tả</label><span class="error"> *</span>
+											<div style="height: 100px;">
+												<textarea class="form-control"
+													placeholder="Miêu tả sản phẩm" id="description"
+													th:text="${product.description}" style="height: 100px;"
+													maxlength="256"></textarea>
+												<span
+													style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+													id="descriptionError"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label>Thông tin sản phẩm</label><span class="error">
+												*</span>
+											<div>
+												<textarea class="form-control"
+													placeholder="Thông tin sản phẩm" id="info"
+													th:text="${product.info}" style="height: 100px;"
+													maxlength="256"></textarea>
+												<span
+													style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+													id="infoError"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row text-right" >
+									<div class="col-lg-12 col-5">
+										<div class="form-group">
+											<a
+												th:href="@{/product/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
+												href="/account/list" class="btn btn-sm btn-neutral">Bỏ
+												qua</a>
+											<button type="button" id="updateProduct"
+												class="btn btn-sm btn-neutral">Lưu</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -447,14 +452,7 @@
         $('#form-field-cate-children').val($('#idCateChildren').val()).trigger('change');
     }, 100);
 </script>
-	<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
-            defaultDate: new Date(),
-            format: 'DD/MM/YYYY HH:mm'
-        });
-    });
-</script>
+
 	<script>
     function formatNumberString(numberStr) {
         if (typeof numberStr === 'number') {
@@ -659,7 +657,6 @@
                 contentType: 'application/json;charset=utf-8',
                 success: function (response) {
                     var data = JSON.parse(response);
-                    console.log(data);
                     removeSub = [];
                     var data = JSON.parse(response);
                     if (data.name != null) {

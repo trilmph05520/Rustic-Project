@@ -1,15 +1,32 @@
 package com.vn.jpa;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "report")
 @NamedQuery(name = "Report.findAll", query = "SELECT r FROM Report r")
 public class Report implements Serializable {
 
-    public static final Long serializable = 1L;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public static final Long serializable = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -115,9 +132,11 @@ public class Report implements Serializable {
     }
 
     @PrePersist
-    public void prePersis(){
+    public void pre() throws ParseException{
         if(this.createdDate == null){
-            this.createdDate = new Date();
+        	Date create = new Date();
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            this.createdDate = sdf.parse(sdf.format(create));
         }
     }
 }

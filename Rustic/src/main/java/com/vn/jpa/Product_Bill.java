@@ -1,8 +1,22 @@
 package com.vn.jpa;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "product_bill")
@@ -92,9 +106,11 @@ public class Product_Bill implements Serializable {
     }
 
     @PrePersist
-    public void pre(){
+    public void pre() throws ParseException{
         if(this.createdDate == null){
-            this.createdDate = new Date();
+        	Date create = new Date();
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            this.createdDate = sdf.parse(sdf.format(create));
         }
     }
 }

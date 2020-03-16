@@ -1,18 +1,18 @@
 package com.vn.controller;
 
-import com.google.common.base.Strings;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.vn.common.Constants;
-import com.vn.common.FileUtils;
-import com.vn.jpa.Category;
-import com.vn.jpa.Product;
-import com.vn.jpa.Product_Bill;
-import com.vn.model.CategoryModel;
-import com.vn.model.ProductModel;
-import com.vn.service.CategoryService;
-import com.vn.service.ProductService;
-import com.vn.service.Product_BillService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -23,15 +23,25 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import com.google.common.base.Strings;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.vn.common.Constants;
+import com.vn.common.FileUtils;
+import com.vn.jpa.Category;
+import com.vn.jpa.Product;
+import com.vn.model.CategoryModel;
+import com.vn.model.ProductModel;
+import com.vn.service.CategoryService;
+import com.vn.service.ProductService;
 
 @Controller
 @RequestMapping("/product/")
@@ -277,7 +287,6 @@ public class ProductController {
             if (responseMap.size() == 0) {
                 if (model.getMainImg() != null) {
                     String mainImg = product.getMainImg();
-                    boolean isSaveSuccess = true;
                     if (!Strings.isNullOrEmpty(mainImg)) {
                         mainImg = FileUtils.changeWebSourcePathToFilePath(mainImg, filePathMain, sorceWebPathMain);
                         boolean deleteMain = FileUtils.deleteSingleImage(mainImg);

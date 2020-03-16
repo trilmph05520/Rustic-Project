@@ -1,11 +1,24 @@
 package com.vn.jpa;
 
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "category")
@@ -29,10 +42,10 @@ public class Category implements Serializable {
 	@JoinColumn(name = "parent_id", nullable = true)
 	private Category parent;
 
-	@OneToMany(mappedBy = "parent" , fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
 	private List<Category> children = new ArrayList<Category>();
 
-	@Column(name = "isactive" , columnDefinition = "CHAR")
+	@Column(name = "isactive", columnDefinition = "CHAR")
 	private String isActive;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -94,7 +107,7 @@ public class Category implements Serializable {
 	}
 
 	public void setIsDelete(String isDelete) {
-		if(isDelete == null) {
+		if (isDelete == null) {
 			isDelete = "N";
 		}
 		this.isDelete = isDelete;
@@ -118,8 +131,9 @@ public class Category implements Serializable {
 
 	@PrePersist
 	 public void prePersist( ) {
-		 if(this.date == null )
-			 this.date = new Date();
+		 if(this.date == null ) {
+		    this.date = new Date();
+		 }
 	 }
 
 	public static enum status {
