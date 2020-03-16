@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/initHome :: head"></div>
+
+<body>
+	<!-- Body main wrapper start -->
+	<div class="wrapper">
+
+		<div id="preloder">
+			<div class="loader"></div>
+		</div>
+
+		<!-- Header Section Begin -->
+		<div th:replace="fragments/navHome :: header"></div>
+		<!-- Header End -->
+
+		<!-- Breadcrumb Section Begin -->
+		<div class="breacrumb-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="breadcrumb-text">
+							<a th:href="@{/}"><i class="fa fa-home"></i> Home</a> <span>Cảm ơn</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Start page content -->
+		<section id="page-content" class="page-wrapper" style="margin-top:3%">
+
+			<!-- ABOUT SECTION START -->
+			<div class="about-section mb-80">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="section-title text-left "
+								style="word-wrap: break-word; margin-left: 5%">
+								<h2 style="color: green; font-family: Arial">
+									Rustic cảm ơn những góp ý chân thành của khách hàng đã gửi đến
+									cho shop, đó là động lực giúp Rustic phục vụ tốt
+									hơn từng ngày !
+								</h2>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- ABOUT SECTION END -->
+
+		</section>
+		<!-- End page content -->
+
+		<!-- START FOOTER AREA -->
+		<div th:replace="fragments/navHome :: footer"></div>
+		<!-- END FOOTER AREA -->
+	</div>
+	<!-- Body main wrapper end -->
+	<div th:replace="fragments/initHome :: commonScript"></div>
+</body>
+
+</html>

@@ -18,7 +18,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-						<a href="#"><i class="fa fa-home"></i> Home</a> <span>Contact</span>
+						<a th:href="@{/}"><i class="fa fa-home"></i> Home</a> <span>Contact</span>
 					</div>
 				</div>
 			</div>
@@ -32,8 +32,7 @@
 			<div class="map-inner">
 				<iframe
 					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14893.21450209243!2d105.79649432737656!3d21.060532075697036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aae0e9366e67%3A0xa97d4f16c44b3197!2zWHXDom4gTGEsIFTDonkgSOG7kywgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1582604005772!5m2!1svi!2s"
-					 height="610" frameborder="0" style="border: 0;"
-					allowfullscreen=""></iframe>
+					height="610" frameborder="0" style="border: 0;" allowfullscreen=""></iframe>
 				<div class="icon">
 					<i class="fa fa-map-marker"></i>
 				</div>
@@ -88,17 +87,58 @@
 						<div class="leave-comment">
 							<h4>Leave A Comment</h4>
 							<p>Our staff will call back later and answer your questions.</p>
-							<form action="#" class="comment-form">
+							<form id="contact-form" th:object="${report}" class="comment-form"
+								th:action="@{/report/save.html}" method="post">
 								<div class="row">
-									<div class="col-lg-6">
-										<input type="text" placeholder="Your name">
+									<div class="col-md-12">
+										<h4 class="blog-section-title border-left mb-30">Góp ý</h4>
+										<div
+											th:if="${mapError != null && mapError.containsKey('error') != null}"
+											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+											th:each="err: ${mapError.get('error')}" th:text="${err}"></div>
 									</div>
-									<div class="col-lg-6">
-										<input type="text" placeholder="Your email">
+
+									<div class="col-md-6">
+										<input type="text" th:field="*{name}" name="name"
+											placeholder="Tên của bạn..." maxlength="64">
+										<div
+											th:if="${mapError != null && mapError.containsKey('name') != null}"
+											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+											th:each="err: ${mapError.get('name')}" th:text="${err}"></div>
 									</div>
-									<div class="col-lg-12">
-										<textarea placeholder="Your message"></textarea>
-										<button type="submit" class="site-btn">Send message</button>
+									<div class="col-md-6">
+										<input type="text" th:field="*{email}" name="email"
+											placeholder="Email..." maxlength="45">
+										<div
+											th:if="${mapError != null && mapError.containsKey('email') != null}"
+											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+											th:each="err: ${mapError.get('email')}" th:text="${err}"></div>
+									</div>
+									<div class="col-md-6">
+										<input type="text" th:field="*{problem}" name="subject"
+											placeholder="Vấn đề của bạn..." maxlength="128">
+										<div
+											th:if="${mapError != null && mapError.containsKey('problem') != null}"
+											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+											th:each="err: ${mapError.get('problem')}" th:text="${err}"></div>
+									</div>
+									<div class="col-md-6">
+										<input type="text" th:field="*{mobile}" name="phone"
+											placeholder="Số điện thoại..." maxlength="12">
+										<div
+											th:if="${mapError != null && mapError.containsKey('mobile') != null}"
+											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+											th:each="err: ${mapError.get('mobile')}" th:text="${err}"></div>
+									</div>
+									<div class="col-md-12">
+										<textarea class="custom-textarea" th:field="*{opinion}"
+											name="message" placeholder="Ý kiến của bạn" maxlength="128"></textarea>
+										<div
+											th:if="${mapError != null && mapError.containsKey('opinion') != null}"
+											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+											th:each="err: ${mapError.get('opinion')}" th:text="${err}"></div>
+										<button type="submit" class="site-btn">Gửi
+											góp ý</button>
 									</div>
 								</div>
 							</form>

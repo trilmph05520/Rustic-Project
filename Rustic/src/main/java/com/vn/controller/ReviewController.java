@@ -130,7 +130,7 @@ public class ReviewController {
                             try {
                                 GoogleMailSender mailSender = new GoogleMailSender();
                                 final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailThankiuReviewAndReport.html", (HashMap<String, Object>) map);
-                                mailSender.sendSimpleMailWarningTLS("ÔTôKê<tanbv.dev@gmail.com>", review.getEmail(), "[ÔTôKê] EMail cảm ơn Quý Khách", htmlContent);
+                                mailSender.sendSimpleMailWarningTLS("Rustic<tanbv.dev@gmail.com>", review.getEmail(), "[Rustic] EMail cảm ơn Quý Khách", htmlContent);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

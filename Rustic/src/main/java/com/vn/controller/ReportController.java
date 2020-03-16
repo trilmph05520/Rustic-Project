@@ -133,7 +133,7 @@ public class ReportController {
                reportService.update(report1);
                Map<String, Object> map = new HashMap<>();
                map.put("name", report1.getName());
-               map.put("text", "ÔTôKê cảm ơn Quý khách đã có ý kiến góp ý cho chúng tôi.");
+               map.put("text", "Rustic cảm ơn Quý khách đã có ý kiến góp ý cho chúng tôi.");
                map.put("problem", "Vấn đề của Quý khách gặp phải là: " + report1.getProblem());
                map.put("opinion", "Ý kiến của Quý khách là: " + report1.getOpinion());
                map.put("rep", "Cảm ơn Quý khách, " + report1.getRepply());
@@ -142,7 +142,7 @@ public class ReportController {
                            try {
                                GoogleMailSender mailSender = new GoogleMailSender();
                                final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailThankiuReviewAndReport.html", (HashMap<String, Object>) map);
-                               mailSender.sendSimpleMailWarningTLS("ÔTôKê<tanbv.dev@gmail.com>", report1.getEmail(), "[ÔTôKê] EMail cảm ơn Quý Khách", htmlContent);
+                               mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", report1.getEmail(), "[Rustic] EMail cảm ơn Quý Khách", htmlContent);
                            } catch (Exception e) {
                                e.printStackTrace();
                            }
