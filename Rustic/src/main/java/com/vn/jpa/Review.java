@@ -2,6 +2,8 @@ package com.vn.jpa;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -9,7 +11,12 @@ import java.util.Date;
 @NamedQuery(name = "Review.findAll", query = "SELECT r FROM Review r")
 public class Review implements Serializable {
 
-    public static final Long serializable = 2L;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public static final Long serializable = 2L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -141,9 +148,11 @@ public class Review implements Serializable {
 	}
 
 	@PrePersist
-    public void prePersist() {
-        if (this.createDate == null) {
-            this.createDate = new Date();
+	public void pre() throws ParseException{
+        if(this.createDate == null){
+        	Date create = new Date();
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            this.createDate = sdf.parse(sdf.format(create));
         }
     }
 

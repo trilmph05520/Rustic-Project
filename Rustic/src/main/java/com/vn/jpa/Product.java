@@ -1,6 +1,7 @@
 package com.vn.jpa;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -213,13 +214,11 @@ public class Product implements Serializable {
 //    }
 
     @PrePersist
-    public void prePersist(){
+    public void prePersist() throws ParseException{
         if(this.createDate == null){
         	Date create = new Date();
-        	create.setHours(0);
-        	create.setMinutes(0);
-        	create.setSeconds(0);
-            this.createDate = create;
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            this.createDate = sdf.parse(sdf.format(create));
         }
     }
 }

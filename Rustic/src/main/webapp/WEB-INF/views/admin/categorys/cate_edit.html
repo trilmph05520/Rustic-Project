@@ -18,7 +18,7 @@
 				<div class="card-header">
 					<div class="row align-items-center">
 						<div class="col-8">
-							<h3 class="mb-0" >Sửa Danh Mục</h3>
+							<h3 class="mb-0" th:text="${title}"></h3>
 						</div>
 
 					</div>
@@ -71,7 +71,7 @@
 										<label class="form-control-label"
 										>Ngày tao</label> <input type="text"
 											name="date" class="form-control"
-											th:value="${#calendars.format(#calendars.createNow(), 'dd/MM/yyyy HH:mm:ss')}"
+											th:value="${#calendars.format(#calendars.createNow(), 'dd/MM/yyyy')}"
 											readonly="readonly">
 									</div>
 									<div class="form-group" th:if="${date != null}">

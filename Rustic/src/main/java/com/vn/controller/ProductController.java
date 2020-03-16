@@ -287,7 +287,6 @@ public class ProductController {
             if (responseMap.size() == 0) {
                 if (model.getMainImg() != null) {
                     String mainImg = product.getMainImg();
-                    boolean isSaveSuccess = true;
                     if (!Strings.isNullOrEmpty(mainImg)) {
                         mainImg = FileUtils.changeWebSourcePathToFilePath(mainImg, filePathMain, sorceWebPathMain);
                         boolean deleteMain = FileUtils.deleteSingleImage(mainImg);
