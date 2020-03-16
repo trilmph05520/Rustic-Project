@@ -18,11 +18,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-<<<<<<< HEAD
-						<a href="#"><i class="fa fa-home"></i> Trang chủ</a> <span>Liên hệ</span>
-=======
-						<a th:href="@{/}"><i class="fa fa-home"></i> Home</a> <span>Contact</span>
->>>>>>> d83db3f8a9a8c1c5817e23633ab170214c2cb86c
+						<a th:href="@{/}"><i class="fa fa-home"></i> Trang chủ</a> <span>Liên
+							hệ</span>
 					</div>
 				</div>
 			</div>
@@ -89,16 +86,12 @@
 				<div class="col-lg-6 offset-lg-1">
 					<div class="contact-form">
 						<div class="leave-comment">
-<<<<<<< HEAD
 							<h4>Đẻ lại bình luận</h4>
-							<p>Nhân viên của chúng tôi sẽ gọi lại sau và trả lời các câu hỏi của bạn.</p>
-							<form action="#" class="comment-form">
-=======
-							<h4>Leave A Comment</h4>
-							<p>Our staff will call back later and answer your questions.</p>
-							<form id="contact-form" th:object="${report}" class="comment-form"
-								th:action="@{/report/save.html}" method="post">
->>>>>>> d83db3f8a9a8c1c5817e23633ab170214c2cb86c
+							<p>Nhân viên của chúng tôi sẽ gọi lại sau và trả lời các câu
+								hỏi của bạn.</p>
+							<form id="contact-form" th:object="${report}"
+								class="comment-form" th:action="@{/report/save.html}"
+								method="post">
 								<div class="row">
 									<div class="col-md-12">
 										<h4 class="blog-section-title border-left mb-30">Góp ý</h4>
@@ -140,21 +133,14 @@
 											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 											th:each="err: ${mapError.get('mobile')}" th:text="${err}"></div>
 									</div>
-<<<<<<< HEAD
-									<div class="col-lg-12">
-										<textarea placeholder="Your message"></textarea>
-										<button type="submit" class="site-btn">Gửi tin nhắn</button>
-=======
 									<div class="col-md-12">
 										<textarea class="custom-textarea" th:field="*{opinion}"
-											name="message" placeholder="Ý kiến của bạn" maxlength="128"></textarea>
+												name="message" placeholder="Ý kiến của bạn" maxlength="128"></textarea>
 										<div
 											th:if="${mapError != null && mapError.containsKey('opinion') != null}"
 											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 											th:each="err: ${mapError.get('opinion')}" th:text="${err}"></div>
-										<button type="submit" class="site-btn">Gửi
-											góp ý</button>
->>>>>>> d83db3f8a9a8c1c5817e23633ab170214c2cb86c
+										<button type="submit" class="site-btn">Gửi góp ý</button>
 									</div>
 								</div>
 							</form>

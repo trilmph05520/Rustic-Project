@@ -66,9 +66,9 @@
 					</div>
 					<div class="ht-right">
 						<a th:if="${session.userLogin == null}"
-							th:href="@{/home/login.html}" class="login-panel"
-							>Đăng nhập <i class="fa fa-user"></i></a> <a
-							th:if="${session.userLogin != null}"
+							th:href="@{/home/login.html}" class="login-panel">Đăng
+							nhập <i class="fa fa-user"></i>
+						</a> <a th:if="${session.userLogin != null}"
 							th:href="@{/home/logout.html}" class="login-panel"
 							th:utext="#{lable.logout}"><i class="fa fa-user"></i></a> <a
 							th:if="${session.userLogin != null}"
@@ -120,7 +120,7 @@
 						</div>
 						<div class="col-lg-7 col-md-7">
 							<div class="advanced-search">
-								<button type="button" class="category-btn">Tất cả danh mục</button>
+								<button type="button" class="category-btn">Tìm kiếm  </button>
 								<div class="input-group">
 									<input type="text" placeholder="Bạn cần gì?">
 									<button type="button">
@@ -131,9 +131,9 @@
 						</div>
 						<div class="col-lg-3 text-right col-md-3">
 							<ul class="nav-right">
-<!--								<li class="heart-icon"><a href="#"> <i-->
-<!--										class="icon_heart_alt"></i> <span>1</span>-->
-<!--								</a></li>-->
+								<!--								<li class="heart-icon"><a href="#"> <i-->
+								<!--										class="icon_heart_alt"></i> <span>1</span>-->
+								<!--								</a></li>-->
 								<li class="cart-icon"><a th:href="@{/home/cart.html}">
 										<i class="icon_bag_alt"></i> <span class="cart-quantity"
 										th:if="${session.myCartNum != 0}"
@@ -204,10 +204,7 @@
 					<div class="nav-depart">
 						<div class="depart-btn">
 
-							<i class="ti-menu" ><span >Tất cả danh mục</span></i>
-
-							<!-- 							<i class="ti-menu" ><span th:utext="#{lable.ALLDEPARTMENTS}"></span></i>   -->
-
+							<i class="ti-menu"><span>Danh mục</span></i>
 							<ul class="depart-hover"
 								style="height: 400px; overflow-y: scroll;">
 								<li th:each="eachCate : ${session.categoryNav}"><span
@@ -221,14 +218,8 @@
 					</div>
 					<nav class="nav-menu mobile-menu">
 						<ul>
-
-							<!-- 							<li class="active"><a href="./index.html"
-                                th:utext="#{lable.Collection}"></a></li>
-                                    <li><a href="./shop.html" th:utext="#{lable.Contact}"></a></li> -->
-
-							<!-- 		<li class="active"><a href="./index.html" th:utext="#{lable.Collection}"></a></li> -->
 							<li><a th:href="@{/}">Trang chủ</a></li>
-							<li><a th:href="@{/home/shop.html}" >Shop</a></li>
+							<li><a th:href="@{/home/shop.html}">Shop</a></li>
 							<li><a>Bộ sưu tập</a>
 								<ul class="dropdown" style="height: 400px; overflow-y: scroll;"
 									th:if="${session.categoryNavPr != null && session.categoryNavPr.size() > 10}">
@@ -244,22 +235,15 @@
 								</ul></li>
 
 							<li><a th:href="@{/home/blog.html}">Blog</a></li>
-							<li><a th:href="@{/home/contact.html}"
-								>Liên hệ</a></li>
-							<li><a href="#" >Trang</a>
+							<li><a th:href="@{/home/contact.html}">Liên hệ</a></li>
+							<li><a href="#">Trang</a>
 								<ul class="dropdown">
-<<<<<<< HEAD
-									<li><a href="./blog-details.html">Chi tiết bog</a></li>
-									<li><a href="./shopping-cart.html">Thẻ mua sắm</a></li>
-									<li><a href="./check-out.html">Tahnh toán</a></li>
-=======
-								<!-- 	<li><a href="./blog-details.html">Blog Details</a></li>
+									<li><a th:href="@{/home/faq.html}">FAQ</a></li>
+									<li><a th:href="@{/home/register.html}">Đăng ký</a></li>
+									<li><a th:href="@{/home/login.html}">Đăng nhập</a></li>
+									<!-- 	<li><a href="./blog-details.html">Blog Details</a></li>
 									<li><a href="./shopping-cart.html">Shopping Cart</a></li>
 									<li><a href="./check-out.html">Checkout</a></li> -->
->>>>>>> d83db3f8a9a8c1c5817e23633ab170214c2cb86c
-									<li><a th:href="@{/home/faq.html}">Faq</a></li>
-									<li><a th:href="@{/home/register.html}">Đăng kí</a></li>
-									<li><a th:href="@{/home/login.html}">Đăng nhập</a></li>
 								</ul></li>
 						</ul>
 					</nav>
