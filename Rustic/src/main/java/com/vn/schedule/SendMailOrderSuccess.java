@@ -5,18 +5,20 @@ import com.vn.config.GoogleMailSender;
 import com.vn.jpa.Bill;
 import com.vn.service.BillService;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class SendMailOrderSuccess {
 
     @Resource
     private BillService billService;
 
-    @Scheduled(cron = "0 1 * * * ?") // 10 phút chạy 1 lần gửi mail cho KH đã nhận được hàng do nhân viên cập nhật Trạng thái
+    @Scheduled(cron = "0/15 * * * * ?") // 10 phút chạy 1 lần gửi mail cho KH đã nhận được hàng do nhân viên cập nhật Trạng thái
     private void scheduleSendMailCusOrderSuccess(){
         try {
             List<Bill> lsbill = billService.findByTypeStatusAndMailStatus(Bill.STATUSPAYMENT.PAID.value(), Bill.MAILSTATUS.UNPAID.value());
