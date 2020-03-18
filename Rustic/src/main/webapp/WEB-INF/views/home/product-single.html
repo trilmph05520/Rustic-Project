@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 
@@ -218,10 +218,12 @@
 									<div class="pt" th:data-imgbigurl="${product.mainImg}">
 										<img th:src="${product.mainImg}" alt="" height="153px">
 									</div>
-									<div class="pt" th:each="eachSubImg : ${subImg}"
+									<th:block th:each="eachSubImg : ${subImg}">
+									<div class="pt" 
 										th:data-imgbigurl="${eachSubImg}">
 										<img th:src="${eachSubImg}" alt="" height="153px">
 									</div>
+									</th:block>
 								</div>
 							</div>
 						</div>
@@ -258,8 +260,8 @@
 											class="fa fa-star"></i>
 									</div>
 									<span class="text-black-5" th:if="${countRate} != 0"
-										th:text="'( ' + ${countRate} + ' Rating )'">( 27 Rating
-										)</span> <span class="text-black-5" th:if="${countRate} == 0">(
+										th:text="'( ' + ${countRate} + ' Rating )'">( 27 Rating)</span> 
+										<span class="text-black-5" th:if="${countRate} == 0">(
 										0 Rating )</span>
 								</div>
 								<div class="pd-desc">
@@ -281,33 +283,6 @@
 											$495.00</h4>
 									</div>
 								</div>
-								<!-- 			<div class="pd-color">
-                                <h6>Color</h6>
-                                <div class="pd-color-choose">
-                                    <div class="cc-item">
-                                        <input type="radio" id="cc-black"> <label
-                                            for="cc-black"></label>
-                                    </div>
-                                    <div class="cc-item">
-                                        <input type="radio" id="cc-yellow"> <label
-                                            for="cc-yellow" class="cc-yellow"></label>
-                                    </div>
-                                </div>
-                            </div> -->
-								<!-- <div class="pd-size-choose">
-                                <div class="sc-item">
-                                    <input type="radio" id="sm-size"> <label for="sm-size">s</label>
-                                </div>
-                                <div class="sc-item">
-                                    <input type="radio" id="md-size"> <label for="md-size">m</label>
-                                </div>
-                                <div class="sc-item">
-                                    <input type="radio" id="lg-size"> <label for="lg-size">l</label>
-                                </div>
-                                <div class="sc-item">
-                                    <input type="radio" id="xl-size"> <label for="xl-size">xs</label>
-                                </div>
-                            </div> -->
 								<div class="quantity" th:if="${product.quantity > 0}">
 									<div class="pro-qty">
 										<input type="text"
@@ -332,16 +307,8 @@
 										style="font-weight: normal;"></span> , <span
 										th:text="${product.category.parent.name}"
 										style="font-weight: normal;"></span></li>
-									<!-- <li><span>TAGS</span>: Clothing, T-shirt, Woman</li> -->
 								</ul>
-								<!-- <div class="pd-share">
-                                <div class="p-code">Sku : 00012</div>
-                                <div class="pd-social">
-                                    <a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
-                                        class="ti-twitter-alt"></i></a> <a href="#"><i
-                                        class="ti-linkedin"></i></a>
-                                </div>
-                            </div> -->
+							
 							</div>
 						</div>
 					</div>
@@ -376,65 +343,11 @@
 										</div>
 									</div>
 								</div>
-								<!-- <div class="tab-pane fade" id="tab-2" role="tabpanel">
-                                <div class="specification-table">
-                                    <table>
-                                        <tr>
-                                            <td class="p-catagory">Customer Rating</td>
-                                            <td>
-                                                <div class="pd-rating">
-                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                        class="fa fa-star-o"></i> <span>(5)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Price</td>
-                                            <td>
-                                                <div class="p-price">$495.00</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Add To Cart</td>
-                                            <td>
-                                                <div class="cart-add">+ add to cart</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Availability</td>
-                                            <td>
-                                                <div class="p-stock">22 in stock</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Weight</td>
-                                            <td>
-                                                <div class="p-weight">1,3kg</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Size</td>
-                                            <td>
-                                                <div class="p-size">Xxl</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Color</td>
-                                            <td><span class="cs-color"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Sku</td>
-                                            <td>
-                                                <div class="p-code">00012</div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div> -->
+								
 								<div class="tab-pane fade" id="tab-2" role="tabpanel">
 									<div class="customer-review-option" th:if="${review} != null">
-										<div class="comment-option" th:each="eachReview : ${review}">
+									<th:block th:each="eachReview : ${review}">
+										<div class="comment-option" >
 											<div class="co-item">
 												<div class="avatar-pic">
 													<img th:src="@{/assets/img/product-single/avatar-1.png}"
@@ -466,6 +379,7 @@
 												</div>
 											</div>
 										</div>
+										</th:block>
 									</div>
 									<div th:if="${#lists.isEmpty(review)}">Chưa có đánh giá
 										nào cho sản phẩm.</div>
@@ -494,7 +408,8 @@
 			<div class="row">
 				<div class="col-lg-12 offset-lg-1">
 					<div class=" product-slider owl-carousel">
-						<div th:each="eachRe : ${proRelationship}">
+					<th:block th:each="eachRe : ${proRelationship}">
+						<div >
 							<div class="product-item">
 								<div style="width: 84%; text-align: right; float: left;">
 									<span th:if="${eachRe.quantity <= 0}"
@@ -514,17 +429,16 @@
 													class="icon_bag_alt"></i></a></li>
 											<li class="quick-view"><a
 												th:onclick="'quickView(\'' + ${eachRe.id} + '\')'"
-												data-toggle="modal" data-target="#productModal">+ Quick
-													View</a></li>
+												data-toggle="modal" data-target="#productModal">+ Xem chi tiết</a></li>
 											<!-- <li class="w-icon"><a href="#"><i
                                                 class="fa fa-random"></i></a></li> -->
 										</ul>
 									</div>
 									<div class="pi-text">
-										<div class="catagory-name">Coat</div>
+										<div class="catagory-name">Tên sản phẩm</div>
 										<a
 											th:href="@{/home/{id}/single-product.html(id = ${eachRe.id})}">
-											<h5 th:text="${eachRe.name}">Pure Pineapple</h5>
+											<h5 th:text="${eachRe.name}">Dứa</h5>
 										</a>
 										<div class="pd-rating">
 											<div th:if="${eachRe.rate == 1}">
@@ -571,6 +485,7 @@
 								</div>
 							</div>
 						</div>
+						</th:block>
 					</div>
 				</div>
 			</div>
@@ -585,7 +500,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<h2>New Products</h2>
+						<h2>Sản phẩm mới</h2>
 					</div>
 				</div>
 			</div>
@@ -594,7 +509,8 @@
 			<div class="row">
 				<div class="col-lg-12 offset-lg-1">
 					<div class=" product-slider owl-carousel">
-						<div th:each="eachNew : ${newProduct}">
+					<th:block th:each="eachNew : ${newProduct}">
+						<div >
 							<div class="product-item ">
 								<div style="width: 84%; text-align: right; float: left;">
 									<span th:if="${eachNew.quantity <= 0}"
@@ -604,7 +520,7 @@
 											th:href="@{/home/{id}/single-product.html(id = ${eachNew.id})}"><img
 											th:src="${eachNew.mainImg}" alt=""
 											style="height: 300px; object-fit: cover;"> </a>
-										<div class="sale" th:if="${eachNew.priceSale != 0}">Sale</div>
+										<div class="sale" th:if="${eachNew.priceSale != 0}">Giảm giá</div>
 										<div class="icon">
 											<!--                                        <i class="icon_heart_alt"></i>-->
 										</div>
@@ -614,17 +530,16 @@
 													class="icon_bag_alt"></i></a></li>
 											<li class="quick-view"><a
 												th:onclick="'quickView(\'' + ${eachNew.id} + '\')'"
-												data-toggle="modal" data-target="#productModal">+ Quick
-													View</a></li>
+												data-toggle="modal" data-target="#productModal">+ Xem chi tiết</a></li>
 											<!-- <li class="w-icon"><a href="#"><i
                                                 class="fa fa-random"></i></a></li> -->
 										</ul>
 									</div>
 									<div class="pi-text">
-										<div class="catagory-name">Coat</div>
+										<div class="catagory-name">Tên sản mới</div>
 										<a
 											th:href="@{/home/{id}/single-product.html(id = ${eachNew.id})}">
-											<h5 th:text="${eachNew.name}">Pure Pineapple</h5>
+											<h5 th:text="${eachNew.name}">Tên</h5>
 										</a>
 										<div class="pd-rating">
 											<div th:if="${eachNew.rate == 1}">
@@ -671,6 +586,7 @@
 								</div>
 							</div>
 						</div>
+						</th:block>
 					</div>
 				</div>
 			</div>
@@ -757,7 +673,7 @@
 		}
 
 		function formatPriceString(priceStr) {
-			if (typeof priceStr === 'number') {
+			if (typeof priceStr === 'numbers') {
 				priceStr = priceStr.toString();
 				if (priceStr.startsWith('-')) {
 					priceStr = priceStr.substring(1, priceStr.length);

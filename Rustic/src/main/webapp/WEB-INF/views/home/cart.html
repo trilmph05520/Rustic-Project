@@ -38,7 +38,7 @@
 						<table>
 							<thead>
 								<tr>
-									<th>Image</th>
+									<th>Ảnh</th>
 									<th class="p-name">Tên sản phẩm</th>
 									<th>Giá</th>
 									<th>Số lượng</th>
@@ -112,7 +112,7 @@
 									<li class="cart-total">Tổng<span class="totalPriceCart"
 										th:text="${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')} + ' VND'">$240.00</span></li>
 								</ul>
-								<a th:href="@{/home/checkOut.html}" class="proceed-btn">Tiến hành kiểm tra</a>
+								<a th:href="@{/home/checkOut.html}" class="proceed-btn">Thanh toán</a>
 							</div>
 						</div>
 					</div>

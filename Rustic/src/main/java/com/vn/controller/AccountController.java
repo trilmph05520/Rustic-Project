@@ -122,15 +122,7 @@ public class AccountController {
 			model.addAttribute("allRoles", allRoles);
 			return "admin/account/user_add";
 		}
-//		List<Long> roleIds = user.getRoles();
 		List<Role> roles = new ArrayList<>();
-//		if (roleIds != null) {
-//		for (Long roleId : roleIds) {
-//			Role eachRole = authRoleService.findOne(roleId);
-//			roles.add(eachRole);
-//		}
-//		}
-
 		// Admin
 		if (user.getUserType() == 0) {
 			roles.add(authRoleService.findOne(1l));

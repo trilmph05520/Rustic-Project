@@ -5,12 +5,13 @@ import com.vn.config.GoogleMailSender;
 import com.vn.jpa.Bill;
 import com.vn.service.BillService;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Component
 public class SendMailOrderSuccess {
 
     @Resource
