@@ -11,17 +11,14 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
-=======
 
->>>>>>> f1f1b3925b548c9d1f423d462bc459448fedd18b
 @Component
 public class SendMailOrderSuccess {
 
     @Resource
     private BillService billService;
 
-    @Scheduled(cron = "0/15 * * * * ?") // 10 phút chạy 1 lần gửi mail cho KH đã nhận được hàng do nhân viên cập nhật Trạng thái
+    @Scheduled(cron = "0/15 * * * * ?") // 15 phút chạy 1 lần gửi mail cho KH đã nhận được hàng do nhân viên cập nhật Trạng thái
     private void scheduleSendMailCusOrderSuccess(){
         try {
             List<Bill> lsbill = billService.findByTypeStatusAndMailStatus(Bill.STATUSPAYMENT.PAID.value(), Bill.MAILSTATUS.UNPAID.value());
