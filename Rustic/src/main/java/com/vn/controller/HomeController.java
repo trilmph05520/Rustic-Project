@@ -160,21 +160,20 @@ public class HomeController {
 		session.setAttribute("categoryNavPr", lstCatePr);
 		for (Category eachCateChildren : category) {
 			if (eachCateChildren.getParent() != null) {
-//				if (mapLsId.get(eachCateChildren.getParent().getId()).get(1) != null) {
+				if (mapLsId.get(eachCateChildren.getParent().getId()).get(1) != null) {
 					ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
 					List lsCategoryInfo = new ArrayList();
 					lsCategoryInfo.add(eachCateChildren.getId());
 					lsCategoryInfo.add(eachCateChildren.getName());
 					lsChildren.add(lsCategoryInfo);
-//				}
+				}
 			}
-			session.setAttribute("categoryNav", mapLsId);
-			model.addAttribute("newProduct", newProduct);
-			model.addAttribute("page", product);
-			ModelAndView modelAndView = new ModelAndView("home/index");
-			return modelAndView;
 		}
-		return null;
+		session.setAttribute("categoryNav", mapLsId);
+		model.addAttribute("newProduct", newProduct);
+		model.addAttribute("page", product);
+		ModelAndView modelAndView = new ModelAndView("home/index");
+		return modelAndView;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -208,13 +207,13 @@ public class HomeController {
 					lsChildren.add(lsCategoryInfo);
 				}
 			}
-			session.setAttribute("categoryNav", mapLsId);
-			model.addAttribute("newProduct", newProduct);
-			model.addAttribute("page", product);
-			ModelAndView modelAndView = new ModelAndView("home/shop");
-			return modelAndView;
 		}
-		return null;
+		session.setAttribute("categoryNav", mapLsId);
+		model.addAttribute("newProduct", newProduct);
+		model.addAttribute("page", product);
+		ModelAndView modelAndView = new ModelAndView("home/shop");
+		return modelAndView;
+
 	}
 
 	@RequestMapping(value = "/home/{id}/single-product.html", method = { RequestMethod.GET })

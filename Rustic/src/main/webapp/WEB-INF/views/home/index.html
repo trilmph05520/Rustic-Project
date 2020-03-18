@@ -240,8 +240,12 @@
 								<a
 									th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}"><img
 									th:src="${eachPro.mainImg}" alt="" width="245px" height="300px"></a>
-								<div class="sale" th:if="${eachPro.priceSale != 0}">Giảm giá</div>
-
+								<div class="sale"
+									th:if="${eachPro.priceSale != 0 && eachPro.quantity > 0}">Giảm
+									giá</div>
+								<div class="sale"
+									style="font-size: 15px; border: 2px dotted; padding: 6px; color: white; position: absolute; border-radius: 50%; background: coral; text-align: center; margin-top: 5px;"
+									th:if="${eachPro.quantity <= 0}">Hết</div>
 								<ul>
 									<li class="w-icon active" th:if="${eachPro.quantity} > 0"><a
 										th:href="@{/cart/add/{productId}.html(productId = ${eachPro.id})}"><i

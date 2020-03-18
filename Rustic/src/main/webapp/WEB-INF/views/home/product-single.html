@@ -219,10 +219,9 @@
 										<img th:src="${product.mainImg}" alt="" height="153px">
 									</div>
 									<th:block th:each="eachSubImg : ${subImg}">
-									<div class="pt" 
-										th:data-imgbigurl="${eachSubImg}">
-										<img th:src="${eachSubImg}" alt="" height="153px">
-									</div>
+										<div class="pt" th:data-imgbigurl="${eachSubImg}">
+											<img th:src="${eachSubImg}" alt="" height="153px">
+										</div>
 									</th:block>
 								</div>
 							</div>
@@ -260,8 +259,8 @@
 											class="fa fa-star"></i>
 									</div>
 									<span class="text-black-5" th:if="${countRate} != 0"
-										th:text="'( ' + ${countRate} + ' Rating )'">( 27 Rating)</span> 
-										<span class="text-black-5" th:if="${countRate} == 0">(
+										th:text="'( ' + ${countRate} + ' Rating )'">( 27
+										Rating)</span> <span class="text-black-5" th:if="${countRate} == 0">(
 										0 Rating )</span>
 								</div>
 								<div class="pd-desc">
@@ -308,7 +307,7 @@
 										th:text="${product.category.parent.name}"
 										style="font-weight: normal;"></span></li>
 								</ul>
-							
+
 							</div>
 						</div>
 					</div>
@@ -343,42 +342,42 @@
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="tab-pane fade" id="tab-2" role="tabpanel">
 									<div class="customer-review-option" th:if="${review} != null">
-									<th:block th:each="eachReview : ${review}">
-										<div class="comment-option" >
-											<div class="co-item">
-												<div class="avatar-pic">
-													<img th:src="@{/assets/img/product-single/avatar-1.png}"
-														alt="">
-												</div>
-												<div class="avatar-text">
-													<!-- <div class="at-rating">
+										<th:block th:each="eachReview : ${review}">
+											<div class="comment-option">
+												<div class="co-item">
+													<div class="avatar-pic">
+														<img th:src="@{/assets/img/product-single/avatar-1.png}"
+															alt="">
+													</div>
+													<div class="avatar-text">
+														<!-- <div class="at-rating">
                                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                                         class="fa fa-star-o"></i>
                                                 </div> -->
-													<h5 th:text="${eachReview.name}">
-														Brandon Kelley <span>27 Aug 2019</span>
-													</h5>
-													<p class="mb-10"
-														th:text="${#dates.format(eachReview.createDate,'dd/MM/yyyy HH:mm')}">
-														27 Jun, 2017 at 2:30pm</p>
-													<div class="at-reply" th:text="${eachReview.description}">Nice
-														!</div>
-													<div th:if="${eachReview.reply}">
-														<div class="card-slide-down">
-															<div class="card-slide-title">
-																<p class="slide-title-left">Phản hồi</p>
-																<i class="fa fa-angle-down"></i>
+														<h5 th:text="${eachReview.name}">
+															Brandon Kelley <span>27 Aug 2019</span>
+														</h5>
+														<p class="mb-10"
+															th:text="${#dates.format(eachReview.createDate,'dd/MM/yyyy HH:mm')}">
+															27 Jun, 2017 at 2:30pm</p>
+														<div class="at-reply" th:text="${eachReview.description}">Nice
+															!</div>
+														<div th:if="${eachReview.reply}">
+															<div class="card-slide-down">
+																<div class="card-slide-title">
+																	<p class="slide-title-left">Phản hồi</p>
+																	<i class="fa fa-angle-down"></i>
+																</div>
+																<p class="hiddenRep" th:text="${eachReview.reply}"></p>
 															</div>
-															<p class="hiddenRep" th:text="${eachReview.reply}"></p>
 														</div>
 													</div>
 												</div>
 											</div>
-										</div>
 										</th:block>
 									</div>
 									<div th:if="${#lists.isEmpty(review)}">Chưa có đánh giá
@@ -408,83 +407,86 @@
 			<div class="row">
 				<div class="col-lg-12 offset-lg-1">
 					<div class=" product-slider owl-carousel">
-					<th:block th:each="eachRe : ${proRelationship}">
-						<div >
-							<div class="product-item">
-								<div style="width: 84%; text-align: right; float: left;">
-									<span th:if="${eachRe.quantity <= 0}"
-										style="font-size: 15px; border: 2px dotted; padding: 6px; color: white; position: absolute; border-radius: 50%; background: coral; text-align: center; margin-top: 5px;">Hết</span>
-									<div class="pi-pic">
-										<a
-											th:href="@{/home/{id}/single-product.html(id = ${eachRe.id})}"><img
-											th:src="${eachRe.mainImg}" alt=""
-											style="height: 300px; object-fit: cover;"> </a>
-										<div class="sale" th:if="${eachRe.priceSale != 0}">Sale</div>
-										<div class="icon">
-											<!--                                        <i class="icon_heart_alt"></i>-->
-										</div>
-										<ul>
-											<li class="w-icon active" th:if="${eachRe.quantity} > 0"><a
-												th:href="@{/cart/add/{productId}.html(productId = ${eachRe.id})}"><i
-													class="icon_bag_alt"></i></a></li>
-											<li class="quick-view"><a
-												th:onclick="'quickView(\'' + ${eachRe.id} + '\')'"
-												data-toggle="modal" data-target="#productModal">+ Xem chi tiết</a></li>
-											<!-- <li class="w-icon"><a href="#"><i
+						<th:block th:each="eachRe : ${proRelationship}">
+							<div>
+								<div class="product-item">
+									<div style="width: 84%; text-align: right; float: left;">
+										<div class="pi-pic">
+											<a
+												th:href="@{/home/{id}/single-product.html(id = ${eachRe.id})}"><img
+												th:src="${eachRe.mainImg}" alt=""
+												style="height: 300px; object-fit: cover;"> </a>
+											<div class="sale"
+												th:if="${eachRe.priceSale != 0 && eachRe.quantity > 0}">Sale</div>
+											<div class="sale"
+												style="font-size: 15px; border: 2px dotted; padding: 6px; color: white; position: absolute; border-radius: 50%; background: coral; text-align: center; margin-top: 5px;"
+												th:if="${eachRe.quantity <= 0}">Hết</div>
+											<div class="icon">
+												<!--                                        <i class="icon_heart_alt"></i>-->
+											</div>
+											<ul>
+												<li class="w-icon active" th:if="${eachRe.quantity} > 0"><a
+													th:href="@{/cart/add/{productId}.html(productId = ${eachRe.id})}"><i
+														class="icon_bag_alt"></i></a></li>
+												<li class="quick-view"><a
+													th:onclick="'quickView(\'' + ${eachRe.id} + '\')'"
+													data-toggle="modal" data-target="#productModal">+ Xem
+														chi tiết</a></li>
+												<!-- <li class="w-icon"><a href="#"><i
                                                 class="fa fa-random"></i></a></li> -->
-										</ul>
-									</div>
-									<div class="pi-text">
-										<div class="catagory-name">Tên sản phẩm</div>
-										<a
-											th:href="@{/home/{id}/single-product.html(id = ${eachRe.id})}">
-											<h5 th:text="${eachRe.name}">Dứa</h5>
-										</a>
-										<div class="pd-rating">
-											<div th:if="${eachRe.rate == 1}">
-												<i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachRe.rate == 2}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachRe.rate == 3}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachRe.rate == 4}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachRe.rate == 5}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i>
-											</div>
+											</ul>
 										</div>
-										<div class="product-price" th:if="${eachRe.priceSale == 0}">
-											<!-- $14.00 <span>$35.00</span> -->
-											<h4 class="product-price" style="margin-top: 33px;"
-												th:text="${#numbers.formatDecimal(eachRe.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
-												&nbsp;Vnđ</h4>
-										</div>
-										<div class="product-price" th:if="${eachRe.priceSale != 0}">
-											<!-- $14.00 <span>$35.00</span> -->
-											<h4 class="product-price" style="margin-top: 33px;"
-												th:text="${#numbers.formatDecimal(eachRe.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'">
-												&nbsp;Vnđ</h4>
-											<span style="text-decoration: line-through"
-												th:text="${#numbers.formatDecimal(eachRe.price, 0, 'COMMA', 0,'POINT')} + ' VND'">629.99</span>
+										<div class="pi-text">
+											<div class="catagory-name">Tên sản phẩm</div>
+											<a
+												th:href="@{/home/{id}/single-product.html(id = ${eachRe.id})}">
+												<h5 th:text="${eachRe.name}">Dứa</h5>
+											</a>
+											<div class="pd-rating">
+												<div th:if="${eachRe.rate == 1}">
+													<i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
+														class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
+														class="fa fa-star-o"></i>
+												</div>
+												<div th:if="${eachRe.rate == 2}">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
+														class="fa fa-star-o"></i>
+												</div>
+												<div th:if="${eachRe.rate == 3}">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
+														class="fa fa-star-o"></i>
+												</div>
+												<div th:if="${eachRe.rate == 4}">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star-o"></i>
+												</div>
+												<div th:if="${eachRe.rate == 5}">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i>
+												</div>
+											</div>
+											<div class="product-price" th:if="${eachRe.priceSale == 0}">
+												<!-- $14.00 <span>$35.00</span> -->
+												<h4 class="product-price" style="margin-top: 33px;"
+													th:text="${#numbers.formatDecimal(eachRe.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
+													&nbsp;Vnđ</h4>
+											</div>
+											<div class="product-price" th:if="${eachRe.priceSale != 0}">
+												<!-- $14.00 <span>$35.00</span> -->
+												<h4 class="product-price" style="margin-top: 33px;"
+													th:text="${#numbers.formatDecimal(eachRe.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'">
+													&nbsp;Vnđ</h4>
+												<span style="text-decoration: line-through"
+													th:text="${#numbers.formatDecimal(eachRe.price, 0, 'COMMA', 0,'POINT')} + ' VND'">629.99</span>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 						</th:block>
 					</div>
 				</div>
@@ -509,83 +511,85 @@
 			<div class="row">
 				<div class="col-lg-12 offset-lg-1">
 					<div class=" product-slider owl-carousel">
-					<th:block th:each="eachNew : ${newProduct}">
-						<div >
-							<div class="product-item ">
-								<div style="width: 84%; text-align: right; float: left;">
-									<span th:if="${eachNew.quantity <= 0}"
-										style="font-size: 15px; border: 2px dotted; padding: 6px; color: white; position: absolute; border-radius: 50%; background: coral; text-align: center; margin-top: 5px;">Hết</span>
-									<div class="pi-pic">
-										<a
-											th:href="@{/home/{id}/single-product.html(id = ${eachNew.id})}"><img
-											th:src="${eachNew.mainImg}" alt=""
-											style="height: 300px; object-fit: cover;"> </a>
-										<div class="sale" th:if="${eachNew.priceSale != 0}">Giảm giá</div>
-										<div class="icon">
-											<!--                                        <i class="icon_heart_alt"></i>-->
-										</div>
-										<ul>
-											<li class="w-icon active" th:if="${eachNew.quantity} > 0"><a
-												th:href="@{/cart/add/{productId}.html(productId = ${eachNew.id})}"><i
-													class="icon_bag_alt"></i></a></li>
-											<li class="quick-view"><a
-												th:onclick="'quickView(\'' + ${eachNew.id} + '\')'"
-												data-toggle="modal" data-target="#productModal">+ Xem chi tiết</a></li>
-											<!-- <li class="w-icon"><a href="#"><i
+						<th:block th:each="eachNew : ${newProduct}">
+							<div>
+								<div class="product-item ">
+									<div style="width: 84%; text-align: right; float: left;">
+										<div class="pi-pic">
+											<a
+												th:href="@{/home/{id}/single-product.html(id = ${eachNew.id})}"><img
+												th:src="${eachNew.mainImg}" alt=""
+												style="height: 300px; object-fit: cover;"> </a>
+											<div class="sale" th:if="${eachNew.priceSale != 0 && eachNew.quantity > 0}">Giảm
+												giá</div>
+											<span class="sale" th:if="${eachNew.quantity <= 0}"
+												style="font-size: 15px; border: 2px dotted; padding: 6px; color: white; position: absolute; border-radius: 50%; background: coral; text-align: center; margin-top: 5px;">Hết</span>
+											<div class="icon">
+												<!--                                        <i class="icon_heart_alt"></i>-->
+											</div>
+											<ul>
+												<li class="w-icon active" th:if="${eachNew.quantity} > 0"><a
+													th:href="@{/cart/add/{productId}.html(productId = ${eachNew.id})}"><i
+														class="icon_bag_alt"></i></a></li>
+												<li class="quick-view"><a
+													th:onclick="'quickView(\'' + ${eachNew.id} + '\')'"
+													data-toggle="modal" data-target="#productModal">+ Xem
+														chi tiết</a></li>
+												<!-- <li class="w-icon"><a href="#"><i
                                                 class="fa fa-random"></i></a></li> -->
-										</ul>
-									</div>
-									<div class="pi-text">
-										<div class="catagory-name">Tên sản mới</div>
-										<a
-											th:href="@{/home/{id}/single-product.html(id = ${eachNew.id})}">
-											<h5 th:text="${eachNew.name}">Tên</h5>
-										</a>
-										<div class="pd-rating">
-											<div th:if="${eachNew.rate == 1}">
-												<i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachNew.rate == 2}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachNew.rate == 3}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachNew.rate == 4}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star-o"></i>
-											</div>
-											<div th:if="${eachNew.rate == 5}">
-												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i>
-											</div>
+											</ul>
 										</div>
-										<div class="product-price" th:if="${eachNew.priceSale == 0}">
-											<!-- $14.00 <span>$35.00</span> -->
-											<h4 class="product-price" style="margin-top: 33px;"
-												th:text="${#numbers.formatDecimal(eachNew.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
-												&nbsp;Vnđ</h4>
-										</div>
-										<div class="product-price" th:if="${eachNew.priceSale != 0}">
-											<!-- $14.00 <span>$35.00</span> -->
-											<h4 class="product-price" style="margin-top: 33px;"
-												th:text="${#numbers.formatDecimal(eachNew.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'">
-												&nbsp;Vnđ</h4>
-											<span style="text-decoration: line-through"
-												th:text="${#numbers.formatDecimal(eachNew .price, 0, 'COMMA', 0,'POINT')} + ' VND'">629.99</span>
+										<div class="pi-text">
+											<div class="catagory-name">Tên sản mới</div>
+											<a
+												th:href="@{/home/{id}/single-product.html(id = ${eachNew.id})}">
+												<h5 th:text="${eachNew.name}">Tên</h5>
+											</a>
+											<div class="pd-rating">
+												<div th:if="${eachNew.rate == 1}">
+													<i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
+														class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
+														class="fa fa-star-o"></i>
+												</div>
+												<div th:if="${eachNew.rate == 2}">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
+														class="fa fa-star-o"></i>
+												</div>
+												<div th:if="${eachNew.rate == 3}">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
+														class="fa fa-star-o"></i>
+												</div>
+												<div th:if="${eachNew.rate == 4}">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star-o"></i>
+												</div>
+												<div th:if="${eachNew.rate == 5}">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i>
+												</div>
+											</div>
+											<div class="product-price" th:if="${eachNew.priceSale == 0}">
+												<!-- $14.00 <span>$35.00</span> -->
+												<h4 class="product-price" style="margin-top: 33px;"
+													th:text="${#numbers.formatDecimal(eachNew.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
+													&nbsp;Vnđ</h4>
+											</div>
+											<div class="product-price" th:if="${eachNew.priceSale != 0}">
+												<!-- $14.00 <span>$35.00</span> -->
+												<h4 class="product-price" style="margin-top: 33px;"
+													th:text="${#numbers.formatDecimal(eachNew.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'">
+													&nbsp;Vnđ</h4>
+												<span style="text-decoration: line-through"
+													th:text="${#numbers.formatDecimal(eachNew .price, 0, 'COMMA', 0,'POINT')} + ' VND'">629.99</span>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 						</th:block>
 					</div>
 				</div>

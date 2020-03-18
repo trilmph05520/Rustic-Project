@@ -4,61 +4,64 @@
 
 <div th:replace="fragments/initHome :: head"></div>
 <style>
-	/*css quickview*/
-	.modal-dialog.modal-lg{
-		margin-top: 50px;
-	}
-	.modal-content {
-		min-height: 400px;
-		height: 100%;
-	}
-	.product-info {
-		line-height: 28px;
-	}
+/*css quickview*/
+.modal-dialog.modal-lg {
+	margin-top: 50px;
+}
 
-	.product-images #imageQuick {
-		height: 300px;
-	}
+.modal-content {
+	min-height: 400px;
+	height: 100%;
+}
 
-	.product-info h4 {
-		font-weight: bold;
-	}
+.product-info {
+	line-height: 28px;
+}
 
-	.product-info .s-price-box {
-		margin-top : 10px;
-		margin-bottom: 5px;
-	}
+.product-images #imageQuick {
+	height: 300px;
+}
 
-	.product-info .new-price{
-		font-weight: bold;
-	}
+.product-info h4 {
+	font-weight: bold;
+}
 
-	.product-info .old-price {
-		text-decoration: line-through;
-		font-weight: 550;
-	}
+.product-info .s-price-box {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
 
-	.product-info #status {
-		font-size: 13px;
-		padding: 2px;
-		display: inline;
-	}
+.product-info .new-price {
+	font-weight: bold;
+}
 
-	.product-info #quickCart {
-		margin-top: 10px;
-		padding: 6px;
-		transition: all .3s;
-	}
-	.product-info #quickCart:hover{
-		background: black;
-		color: white;
-		transition: all .3s;
-	}
+.product-info .old-price {
+	text-decoration: line-through;
+	font-weight: 550;
+}
 
-	.product-info #info{
-		margin-top: 10px;
-	}
-	/*end css quickview*/
+.product-info #status {
+	font-size: 13px;
+	padding: 2px;
+	display: inline;
+}
+
+.product-info #quickCart {
+	margin-top: 10px;
+	padding: 6px;
+	transition: all .3s;
+}
+
+.product-info #quickCart:hover {
+	background: black;
+	color: white;
+	transition: all .3s;
+}
+
+.product-info #info {
+	margin-top: 10px;
+}
+/*end css quickview*/
 .status-success {
 	color: white !important;
 	background: #0fa145 !important;
@@ -174,9 +177,14 @@
 											th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}"><img
 											th:src="${eachPro.mainImg}" alt="" width="100%"
 											height="295px"> </a>
-										<div class="sale pp-sale" th:if="${eachPro.priceSale != 0}">Giảm giá</div>
+										<div class="sale"
+											th:if="${eachPro.priceSale != 0 && eachPro.quantity > 0}">Giảm
+											giá</div>
+										<div class="sale"
+											style="font-size: 15px; border: 2px dotted; padding: 6px; color: white; position: absolute; border-radius: 50%; background: coral; text-align: center; margin-top: 5px;"
+											th:if="${eachPro.quantity <= 0}">Hết</div>
 										<div class="icon">
-<!--											<i class="icon_heart_alt"></i>-->
+											<!--											<i class="icon_heart_alt"></i>-->
 										</div>
 										<ul>
 											<li class="w-icon active" th:if="${eachPro.quantity} > 0"><a
@@ -184,13 +192,15 @@
 													class="icon_bag_alt"></i></a></li>
 											<li class="quick-view"><a
 												th:onclick="'quickView(\'' + ${eachPro.id} + '\')'"
-												data-toggle="modal" data-target="#productModal">+ Xem chi tiết</a></li>
+												data-toggle="modal" data-target="#productModal">+ Xem
+													chi tiết</a></li>
 											<!-- <li class="w-icon"><a href="#"><i
 													class="fa fa-random"></i></a></li> -->
 										</ul>
 									</div>
 									<div class="pi-text">
-										<div class="catagory-name" th:text="${eachPro.category.name}">Khăn tắm</div>
+										<div class="catagory-name" th:text="${eachPro.category.name}">Khăn
+											tắm</div>
 										<a
 											th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}">
 											<h5 th:text="${eachPro.name}">Dứa</h5>
