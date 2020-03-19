@@ -284,7 +284,7 @@ public class BillController {
 	}
 
 	@RequestMapping(value = "accept/{id}/payment.html", method = RequestMethod.GET)
-	@PreAuthorize("hasAnyAuthority('Administrators','Staffs')")
+	@PreAuthorize("hasAnyAuthority('Administrators','Staffs','Shipper')")
 	public String acceptPayment(@PathVariable("id") Long id, HttpSession session) {
 		try {
 			Bill bill = billService.findOne(id);
