@@ -40,7 +40,7 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0"> Hủy Hóa đơn</h3>
+							<h3 class="text-white mb-0"> Yêu cầu hủy Hóa đơn</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
 								<form role="form" th:action="@{/bill/list.html}" method="POST">
@@ -147,7 +147,7 @@
 											th:if="${eachRow.payment == 0}">Thanh toán trực tiếp</span> <span
 											th:if="${eachRow.payment == 1}">Thanh toán online</span></td>
 										<td class="text-table-body"
-											th:text="${#numbers.formatDecimal(eachRow.total, 0, 'COMMA', 0,'POINT')}"></td>
+											th:text="${#numbers.formatDecimal(eachRow.total, 0, 'COMMA', 0,'POINT')  + ' VND'}"></td>
 										<td class="text-table-body" style="text-align: center;">
 											<button class="btn btn-success"
 												th:if="${eachRow.status == 1}">Đã Thanh Toán</button>

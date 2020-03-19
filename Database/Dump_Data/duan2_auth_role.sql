@@ -21,7 +21,7 @@
 
 LOCK TABLES `auth_role` WRITE;
 /*!40000 ALTER TABLE `auth_role` DISABLE KEYS */;
-INSERT INTO `auth_role` VALUES (1,'Administrators','Administrators',NULL,1),(2,'Users','Users',NULL,1),(3,'Staffs','Staffs',NULL,1);
+INSERT INTO `auth_role` VALUES (1,'Administrators','Administrators',NULL,1),(2,'Users','Users',NULL,1),(3,'Staffs','Staffs',NULL,1),(4,'Shipper','Shipper',NULL,1);
 /*!40000 ALTER TABLE `auth_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-25  9:11:46
+-- Dump completed on 2020-03-19 16:22:50

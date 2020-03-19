@@ -3,11 +3,13 @@ package com.vn.controller;
 import com.google.common.base.Strings;
 import com.vn.common.Constants;
 import com.vn.jpa.AuthUser;
+import com.vn.jpa.Infomation;
 import com.vn.jpa.Role;
 import com.vn.model.AuthUserModel;
 import com.vn.model.UserAccountSearchingForm;
 import com.vn.service.AuthRoleService;
 import com.vn.service.AuthUserService;
+import com.vn.service.InfomationService;
 import com.vn.validation.service.UserFormValidator;
 import org.apache.commons.collections4.map.HashedMap;
 import org.joda.time.DateTime;
@@ -43,6 +45,9 @@ public class AccountController {
 
 	@Resource
 	private UserFormValidator userFormValidator;
+	
+	@Resource
+	private InfomationService infomationService;
 
 	@RequestMapping(value = "list.html")
 	@PreAuthorize("hasAnyAuthority('Administrators')")
@@ -81,6 +86,7 @@ public class AccountController {
 		user_types.put((byte) 0, "Admin");
 		user_types.put((byte) 1, "Nhân viên");
 		user_types.put((byte) 2, "Khách hàng");
+		user_types.put((byte) 3, "Nhân viên giao hàng");
 
 		session.removeAttribute(user_list_ss);
 		user_list_ss = UUID.randomUUID().toString();
@@ -134,6 +140,11 @@ public class AccountController {
 		// KH
 		else if (user.getUserType() == 2) {
 			roles.add(authRoleService.findOne(2l));
+		}
+		
+		//SHIP
+		else if (user.getUserType() == 3) {
+			roles.add(authRoleService.findOne(4l));
 		}
 
 		Date createdDate = new DateTime().toDate();
@@ -222,6 +233,12 @@ public class AccountController {
 		else if (user.getUserType() == 2) {
 			roles.add(authRoleService.findOne(2l));
 		}
+		
+		//Ship
+		else if (user.getUserType() == 3) {
+			roles.add(authRoleService.findOne(4l));
+		}
+		
 		Date createdDate = new DateTime().toDate();
 		authUser.setCreatedDate(createdDate);
 		authUser.setEmail(user.getEmail());
@@ -249,6 +266,9 @@ public class AccountController {
 			return "403";
 		}
 		authUserService.delete(authUser);
+		Infomation inf = infomationService.findByAuthUserId(authUser.getId());
+		if(inf != null)
+			infomationService.delete(inf);
 		return "redirect:/account/list.html";
 	}
 

@@ -1,21 +1,26 @@
 package com.vn.service;
 
-import com.vn.jpa.Bill;
-import com.vn.model.BillProfileModel;
-import com.vn.model.ChartDashboardBillOrder;
-import com.vn.model.KeyValueStringIntegerModel;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Date;
-import java.util.List;
+import com.vn.jpa.AuthUser;
+import com.vn.jpa.Bill;
+import com.vn.model.BillProfileModel;
+import com.vn.model.ChartDashboardBillOrder;
 
 public interface BillService {
 
     Page<Bill> findAll(Pageable pageable);
 
     Page<Bill> findAllBill(Date fromDate, Date toDate, Integer status,String code, String isDelete ,Pageable pageable);
+    
+    Page<Bill> findAllBillByType(Date fromDate, Date toDate, Integer typeStatus, String isDelete ,Pageable pageable);
 
+    Page<Bill> findAllBillByShip(Date fromDate, Date toDate, AuthUser ship, String isDelete ,Pageable pageable);
+    
     Bill insert(Bill bill);
 
     Bill update(Bill bill);

@@ -8,10 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.collections4.map.HashedMap;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.vn.jpa.AuthUser;
 import com.vn.jpa.Infomation;
-import com.vn.model.BillProfileModel;
 import com.vn.model.InfomationModel;
 import com.vn.service.AuthUserService;
 import com.vn.service.BankInfoService;
@@ -102,7 +98,7 @@ public class ProfileController {
 				}
 				model.addAttribute("mapError", mapError);
 				model.addAttribute("bankInfo", bankService.findAll());
-				return "home/profile";
+				return "admin/profile";
 			} else {
 				Infomation infomation = null;
 				infomation = infomationService.findByAuthUserId(authUser.getId());

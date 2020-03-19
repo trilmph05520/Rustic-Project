@@ -1,23 +1,25 @@
 package com.vn.service.imple;
 
-import com.vn.jpa.Bill;
-import com.vn.model.BillProfileModel;
-import com.vn.model.ChartDashboardBillOrder;
-import com.vn.model.KeyValueStringIntegerModel;
-import com.vn.repository.BillRepo;
-import com.vn.service.BillService;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.transaction.Transactional;
+
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.vn.jpa.AuthUser;
+import com.vn.jpa.Bill;
+import com.vn.model.BillProfileModel;
+import com.vn.model.ChartDashboardBillOrder;
+import com.vn.repository.BillRepo;
+import com.vn.service.BillService;
 
 @Service(value = "billService")
 @Transactional
@@ -110,5 +112,16 @@ public class BillServiceImpl implements BillService {
         PageImpl<BillProfileModel> pageResponse = new PageImpl<>(response, pageable, lsObject.getTotalElements());
         return pageResponse;
     }
+
+	@Override
+	public Page<Bill> findAllBillByType(Date fromDate, Date toDate, Integer typeStatus, String isDelete,
+			Pageable pageable) {
+		return billRepo.findAllBillTypeParam(fromDate, toDate, typeStatus, isDelete, pageable);
+	}
+
+	@Override
+	public Page<Bill> findAllBillByShip(Date fromDate, Date toDate, AuthUser ship, String isDelete, Pageable pageable) {
+		return billRepo.findAllBillByShip(fromDate, toDate, ship, isDelete, pageable);
+	}
 
 }

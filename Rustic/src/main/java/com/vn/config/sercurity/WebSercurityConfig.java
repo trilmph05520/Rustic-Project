@@ -72,7 +72,7 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/webjars/**", "/resources/**", "/assets/**", "/fonts/**", "/ws/**").permitAll()
 //                .antMatchers("/fbuser/user-blocked.html").permitAll()
-                .antMatchers("/**").hasAnyAuthority("Administrators","Staffs")
+                .antMatchers("/**").hasAnyAuthority("Administrators","Staffs","Shipper")
                 .anyRequest().authenticated()
                 .and()
                     .exceptionHandling().accessDeniedPage("/error/403.html?accessDinied=true")

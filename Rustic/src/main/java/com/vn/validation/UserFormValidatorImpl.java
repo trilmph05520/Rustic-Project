@@ -60,7 +60,7 @@ public class UserFormValidatorImpl implements Validator, UserFormValidator {
 
     private void middleNameValidate(String middleName, Errors errors) {
     	if(this.isBlank(middleName)) {
-    		errors.reject("middleName" , "Tên không được để trống");
+    		errors.reject("middleName" , "Tên đệm không được để trống");
     	}
     	else if (this.checkLength(middleName, 15)) {
             errors.reject("middleName", "Tên đệm không được quá 15 ký tự");

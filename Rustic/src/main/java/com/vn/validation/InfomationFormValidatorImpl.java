@@ -33,14 +33,18 @@ public class InfomationFormValidatorImpl implements Validator, InfomationFormVal
 	public void validate(Object target, Errors errors) {
 		InfomationModel infomation = (InfomationModel) target;
 		if(infomation!=null) {
-			if(infomation.getPhone()!=null && !infomation.getPhone().isEmpty()) {
-				this.phoneValidate(infomation.getPhone(), errors, infomation);
+			if (this.isBlank(infomation.getPhone())) {
+				errors.reject("phone", "Không được để trống số điện thoại !");
+			}else {
+				if(infomation.getPhone()!=null && !infomation.getPhone().isEmpty()) {
+					this.phoneValidate(infomation.getPhone(), errors, infomation);
+				}
 			}
 			if (this.isBlank(infomation.getFirstName())) {
 				errors.reject("firstName", "Không được để trống họ !");
 			}
 			if (this.isBlank(infomation.getLastName())) {
-				errors.reject("l astName", "Không được để trống tên !");
+				errors.reject("lastName", "Không được để trống tên !");
 			}
 			if(this.isBlank(infomation.getGender())) {
 				errors.reject("gender", "Không được để trống giới tính !");

@@ -55,7 +55,8 @@
 								<a th:href="@{/profile/detail.html}" class="dropdown-item">
 									<i class="ni ni-single-02"></i> <span>Hồ sơ của tôi</span>
 								</a> <a th:href="@{/account/change_password.html}"
-									class="dropdown-item"> <i class="ni ni-key-25"></i> <span>Đổi mật khẩu</span>
+									class="dropdown-item"> <i class="ni ni-key-25"></i> <span>Đổi
+										mật khẩu</span>
 								</a>
 								<div class="dropdown-divider"></div>
 								<a th:href="@{/logout.html}" class="dropdown-item"> <i
@@ -85,7 +86,8 @@
 				<div class="collapse navbar-collapse" id="sidenav-collapse-main">
 					<!-- Nav items -->
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"
+						sec:authorize="hasAnyAuthority('Administrators','Staffs')"><a class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/dashboard') ? 'active':''}"
 							th:href="@{/admin/dashboard.html}"> <i
 								class="ni ni-tv-2 text-primary"></i> <span class="nav-link-text">Dashboard</span>
@@ -100,48 +102,78 @@
 						</a></li> -->
 						<li class="nav-item"
 							sec:authorize="hasAnyAuthority('Administrators')"><a
-							th:classappend="${#httpServletRequest.getRequestURI().contains('/staff') ? 'active':''}"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/Staffs') ? 'active':''}"
 							class="nav-link" th:href="@{/staff/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" >Nhân Viên</span>
+								class="nav-link-text">Nhân Viên</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs')"><a
+							class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/user') ? 'active':''}"
 							th:href="@{/user/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Khách hàng</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs')"><a
+							class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/category') ? 'active':''}"
 							th:href="@{/category/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" >Danh mục</span>
+								class="nav-link-text">Danh mục</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs')"><a
+							class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/product') ? 'active':''}"
 							th:href="@{/product/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" >Sản phẩm</span>
+								class="nav-link-text">Sản phẩm</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs')"><a
+							class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/bill/list.html') ? 'active':''}"
 							th:href="@{/bill/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Hóa đơn</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs','Shipper')"><a
+							class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/bill/listNotGive.html') ? 'active':''}"
+							th:href="@{/bill/listNotGive.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Hóa đơn chưa giao</span>
+						</a></li>
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs','Shipper')"><a
+							class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/bill/listReceipt.html') ? 'active':''}"
+							th:href="@{/bill/listReceipt.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Hóa đơn đã nhận</span>
+						</a></li>
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffss')"><a
+							class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/listCancel.html') ? 'active':''}"
 							th:href="@{/bill/listCancel.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text">Hủy hóa đơn</span>
+								class="nav-link-text">Yêu cầu hủy hóa đơn</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs')"><a
+							class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/review') ? 'active':''}"
 							th:href="@{/review/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span
-								class="nav-link-text" >Đánh giá</span>
+								class="nav-link-text">Đánh giá</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs')"><a
+							class="nav-link"
 							th:classappend="${#httpServletRequest.getRequestURI().contains('/report') ? 'active':''}"
 							th:href="@{/report/list.html}"> <i
 								class="ni ni-bullet-list-67 text-default"></i> <span

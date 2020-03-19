@@ -38,8 +38,9 @@ CREATE TABLE `bill` (
   `email` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mail_status` tinyint(4) DEFAULT NULL,
   `id_auth_user` bigint(20) DEFAULT NULL,
+  `id_shipper` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ CREATE TABLE `bill` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-25  9:11:35
+-- Dump completed on 2020-03-19 16:21:17

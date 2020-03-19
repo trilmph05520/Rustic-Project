@@ -107,9 +107,9 @@
 										<td class="text-table-body" th:text="${iterStat.count}"></td>
 										<td class="text-table-body" th:text="${eachRow.name}"></td>
 										<td class="text-table-body"
-											th:text="${#numbers.formatDecimal(eachRow.price, 0, 'COMMA', 0,'POINT')}"></td>
+											th:text="${#numbers.formatDecimal(eachRow.price, 0, 'COMMA', 0,'POINT') + ' VND'}"></td>
 										<td class="text-table-body"
-											th:text="${#numbers.formatDecimal(eachRow.priceSale, 0, 'COMMA', 0,'POINT')}"></td>
+											th:text="${#numbers.formatDecimal(eachRow.priceSale, 0, 'COMMA', 0,'POINT') + ' VND'}"></td>
 										<td class="text-table-body" th:text="${eachRow.quantity}"></td>
 										<td class="text-table-body" th:text="${eachRow.description}"></td>
 										<td class="text-table-body" th:text="${eachRow.info}"></td>

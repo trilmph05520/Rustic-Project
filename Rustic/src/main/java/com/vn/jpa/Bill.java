@@ -76,6 +76,9 @@ public class Bill implements Serializable {
     @JoinColumn(name = "id_auth_user")
     private AuthUser authUser;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_shipper")
+    private AuthUser shipper;
 
     public Bill() {
     }
@@ -207,8 +210,16 @@ public class Bill implements Serializable {
     public void setTypeStatus(Integer typeStatus) {
         this.typeStatus = typeStatus;
     }
+    
+    public AuthUser getShipper() {
+		return shipper;
+	}
 
-    @PrePersist
+	public void setShipper(AuthUser shipper) {
+		this.shipper = shipper;
+	}
+
+	@PrePersist
     public void prePersist() throws ParseException {
     	if (this.createDate == null) {
 			Date create = new Date();
@@ -231,7 +242,8 @@ public class Bill implements Serializable {
     }
 
     public static enum STATUSPAYMENT {
-        PAID(0) /*KH đã nhận*/, UNPAID(1) /*KH đã hủy*/, BOOM(2) /*KH không nhận hàng*/, DELIVERY(3) /* đang giao hàng*/, PACKAING(4) /*đang đóng gói*/, ORDER(5) /*xác nhận đơn*/;
+        PAID(0) /*KH đã nhận*/, UNPAID(1) /*KH đã hủy*/, BOOM(2) /*KH không nhận hàng*/, DELIVERY(3) /* đang giao hàng*/, PACKAING(4) /*đang đóng gói*/, ORDER(5) /*xác nhận đơn*/
+		, WAITDELIVERY(6) /* Chờ người giao */ ;
         private final Integer value;
 
         private STATUSPAYMENT(Integer value) {

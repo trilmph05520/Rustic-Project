@@ -43,7 +43,8 @@
 							<h3 class="text-white mb-0">Hóa đơn</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
-								<form role="form" th:action="@{/bill/list.html}" method="POST">
+								<form role="form" th:action="@{/bill/listNotGive.html}"
+									method="POST">
 									<div class="row">
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
@@ -75,30 +76,6 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-2">
-											<label class="text-white">Trạng thái</label>
-											<div>
-												<select class=" form-control" name="status"
-													th:value="${status}">
-													<option value="0"
-														th:attr="selected =${status}== '0' ? 'selected'">Tất
-														cả</option>
-													<option value="1"
-														th:attr="selected =${status}== '1' ? 'selected'">Đã
-														thanh toán</option>
-													<option value="2"
-														th:attr="selected =${status}== '2' ? 'selected'">Chưa
-														thanh toán</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-lg-2">
-											<label class="text-white">Mã hóa đơn</label>
-											<div>
-												<input type="text" class="form-control" name="code"
-													th:value="${code}" placeholder="Tìm kiếm" />
-											</div>
-										</div>
 										<div class="col-sm-2">
 											<label>&nbsp;</label>
 											<div>
@@ -109,15 +86,10 @@
 									</div>
 								</form>
 							</div>
-							<input type="hidden" name="category_list_ss"
-								th:value="${category_list_ss}" />
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
-								<!-- <a th:href="@{/product/add.html}"
-									sec:authorize="hasAnyAuthority('Administrators','Staffs')"
-									class="btn btn-sm btn-primary" th:utext="#{lable.new}"></a>  -->
-								<a th:href="@{/bill/list.html}" class="btn btn-sm btn-neutral">Làm
-									mới</a>
+								<a th:href="@{/bill/listNotGive.html}"
+									class="btn btn-sm btn-neutral">Làm mới</a>
 							</div>
 						</div>
 						<div class="table-responsive">
@@ -132,7 +104,6 @@
 										<th class="text-table-header">Tổng tiền</th>
 										<th class="text-table-header">Trạng thái TToán</th>
 										<th class="text-table-header">Trạng thái HĐ</th>
-										<th class="text-table-header text-center">#</th>
 										<th class="text-table-header text-center">#</th>
 										<th class="text-table-header text-center">#</th>
 									</tr>
@@ -170,22 +141,10 @@
 											<button class="btn btn-success" th:case="'6'">Chờ
 												người giao</button>
 										</td>
-										<td class="text-table-body"><a
-											th:onclick="'acceptPayment(\'' + ${eachRow.code} + '\',\'' + ${eachRow.id} + '\')'"
-											data-toggle="modal" data-target="#productModal"
-											th:if="${eachRow.status == 2} and ${eachRow.typeStatus} != 1 and ${eachRow.typeStatus} != 2">
-												<button class="btn btn-info btn-circle">
-													<i class="fa fa-check"></i>
-												</button>
-										</a> <label th:if="${eachRow.status} == 1">&nbsp;</label></td>
-										<td>
-											<button type="button" class="btn btn-info btn-circle"
-												th:onclick="'updateStatusType(\'' + ${eachRow.id} + '\')'"
-												data-toggle="modal" data-target="#updateStatusPayment"
-												title="Cập nhật trạng thái đơn hàng">
-												<i class="fa fa-edit"></i>
-											</button>
-										</td>
+										<td><a
+											th:href="@{/bill/{id}/acceptBill.html(id=${eachRow.id})}"><button
+													type="button" class="btn btn-info btn-circle">Nhận
+													đơn</button></a></td>
 										<td>
 											<button type="button"
 												th:onclick="'billDetail(\'' + ${eachRow.id} + '\')'"
@@ -215,67 +174,7 @@
 	</div>
 
 
-	<!-- <div class="modal fade" id="billModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header" style="height: 50px;">
-					<label>Chi tiết hóa đơn</label>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" style="padding-top: 0px !important;">
-					<div class="modal-product clearfix">
-						<div class="product-info">
-							<div class="row">
-								<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
-									<h4>Thông tin sản phẩm</h4>
-								</div>
-								<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
-									<h4>Thông tin hóa đơn</h4>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6 col-sm-6" style="margin-top: 10px;"
-									id="leftDetail"></div>
-								<div class="col-lg-6 col-sm-6" style="margin-top: 10px;">
-									<div class="col-lg-12"
-										style="margin-top: 10px; padding: 0px !important;">
-										<span style="display: inline-flex; width: 100%;">Tên
-											KH:&nbsp;
-											<p id="nameCustomer"></p>
-										</span> <span style="display: inline-flex; width: 100%;">Mã
-											HĐ:&nbsp;
-											<p id="codeBill"></p>
-										</span> <span style="display: inline-flex; width: 100%;">Email:&nbsp;
-											<p id="emailCustomer"></p>
-										</span> <span style="display: inline-flex; width: 100%;">SĐT:&nbsp;
-											<p id="mobileCustomer"></p>
-										</span> <span style="display: inline-flex; width: 100%;">Địa
-											chỉ:&nbsp;
-											<p id="addressCustomer"></p>
-										</span> <span style="display: inline-flex; width: 100%;">Ngày
-											đặt hàng:&nbsp;
-											<p id="createdBill"></p>
-										</span> <span style="display: inline-flex; width: 100%;">PTTT:&nbsp;
-											<p id="paymentBill"></p>
-										</span> <span style="display: inline-flex; width: 100%;">Trang
-											thái:&nbsp;
-											<p id="statusBill"></p>
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					.product-info
-				</div>
-				.modal-product
-			</div>
-			.modal-body
-		</div>
-	</div> -->
+
 	<!-- START QUICKVIEW PRODUCT -->
 	<div id="quickview-wrapper" th:fragment="quickview">
 		<!-- Modal -->
@@ -351,80 +250,7 @@
 	<!-- .modal-content -->
 	<div th:replace="fragments/navAdmin :: modal-delete"></div>
 	<!-- Modal -->
-	<div id="updateStatusPayment" class="modal fade" role="dialog">
-		<div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Cập nhật trạng thái đơn hàng</h4>
-
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-lg-6">
-							<input type="hidden" id="idBill" />
-							<div class="form-group">
-								<div>Mã hóa đơn</div>
-								<input class="form-control" id="code" type="text" readonly
-									style="background: white;" />
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="form-group">
-								<div>Tên KH</div>
-								<input class="form-control" id="nameCus" type="text" readonly
-									style="background: white;" />
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="form-group">
-								<div>SĐT</div>
-								<input class="form-control" id="phoneCus" type="text" readonly
-									style="background: white;" />
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="form-group">
-								<div>Email</div>
-								<input class="form-control" id="emailCus" type="text" readonly
-									style="background: white;" />
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="form-group">
-								<div>Địa chỉ</div>
-								<input class="form-control" id="addCus" type="text" readonly
-									style="background: white;" />
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="form-group">
-								<div>Trạng thái</div>
-								<select class="form-control" id="typeStatus">
-									<option value="0">Đã nhận</option>
-									<option value="1">Đã hủy</option>
-									<option value="2">KH không nhận</option>
-									<option value="3">Đang giao hàng</option>
-									<option value="4">Đang đóng gói</option>
-									<option value="5">Đang xác nhận</option>
-									<option value="6">Chờ người giao</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close
-					</button>
-					<button type="button" class="btn btn-primary" id="updateStatus">Cập
-						nhật</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
 	<!-- Argon Scripts -->
 	<!-- Core -->
 
@@ -471,24 +297,7 @@
 </script>
 
 	<script type="text/javascript">
-/*     function acceptPayment(code, id) {
-        BootstrapDialog.show({
-            title: 'Xác Nhận Thanh Toán',
-            message: 'Bạn có muốn xác nhận Thanh toán hóa đơn có mã là ' + code + ' không ? Bấm Xác nhận để xác nhận.',
-            buttons: [{
-                label: 'Bỏ qua',
-                action: function (dialogItself) {
-                    dialogItself.close();
-                }
-            }, {
-                label: 'Xác nhận',
-                cssClass: 'btn-primary',
-                action: function (dialogItself) {
-                    window.location.href = currUrl + 'bill/accept/' + id + '/payment.html';
-                }
-            }]
-        });
-    } */
+
 
     function updateStatusType(id) {
         $.ajax({

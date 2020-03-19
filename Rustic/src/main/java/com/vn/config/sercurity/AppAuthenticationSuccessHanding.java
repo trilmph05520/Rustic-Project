@@ -1,20 +1,20 @@
 package com.vn.config.sercurity;
 
-import com.vn.jpa.AuthUser;
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+import com.vn.jpa.AuthUser;
 
 public class AppAuthenticationSuccessHanding implements AuthenticationSuccessHandler {
     private static final Logger LOG = LoggerFactory.getLogger(AppAuthenticationSuccessHanding.class);
@@ -24,7 +24,7 @@ public class AppAuthenticationSuccessHanding implements AuthenticationSuccessHan
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
         String targetLink = "/";
-        if (authUser.getUserType() == 0){
+        if (authUser.getUserType() == 0 || authUser.getUserType() == 3){
             targetLink = "/admin/dashboard.html";
         }else if(authUser.getUserType() == 1){
             targetLink = "/user/list.html";
