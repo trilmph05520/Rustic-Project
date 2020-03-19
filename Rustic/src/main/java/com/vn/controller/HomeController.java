@@ -734,6 +734,9 @@ public class HomeController {
 			long id = (long) session.getAttribute("idBill");
 			Bill bill = billService.findOne(id);
 			Date date = new Date();
+			date.setHours(0);
+			date.setMinutes(0);
+			date.setSeconds(0);
 			for (Object obj : lst) {
 				map = (LinkedHashMap<String, String>) obj;
 				review = new Review();

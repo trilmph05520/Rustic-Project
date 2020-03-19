@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<div th:replace="fragments/initHome :: head"></div>
+
+<body>
+	<input type="hidden" id="contextPath" th:value="@{/}" />
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header Section Begin -->
+	<div th:replace="fragments/navHome :: header"></div>
+	<!-- Header End -->
+
+	<!-- Breadcrumb Section Begin -->
+	<div class="breacrumb-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb-text product-more">
+						<a th:href="@{/}"><i class="fa fa-home"></i> Trang chủ</a> <span>Đánh
+							giá sản phẩm</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcrumb Section Begin -->
+
+	<!-- Shopping Cart Section Begin -->
+	<section class="shopping-cart spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="cart-table">
+						<table>
+							<thead>
+								<tr>
+									<th>Ảnh</th>
+									<th class="p-name">Tên sản phẩm</th>
+									<th>Chi tết</th>
+									<th>Đánh giá <i class="fa fa-star"></i></th>
+									<th>Nội dung</th>
+								</tr>
+							</thead>
+							<tbody id="cartInfo">
+								<tr th:each="each : ${lstBillPr}" class="data">
+									<td class="cart-pic first-row"><img
+										th:src="${each.product.mainImg}" alt=""></td>
+									<td class="cart-title first-row"><a
+										th:href="@{/home/{id}/single-product.html(id = ${each.product.id})}">
+											<input type="hidden" th:value="${each.product.id}"
+											class="idPr" />
+											<h5 th:text="${each.product.name}"></h5>
+									</a></td>
+									<td><h5 th:text="${each.product.info}"></h5></td>
+									<td><select class="rate-select rate" name="rate">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+
+									</select></td>
+									<td><textarea class="description" cols="20" rows="5"
+											maxlength="256"></textarea></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="col-lg-4 offset-lg-4">
+						<div class="proceed-checkout">
+							<a id="submit" type="submit" class="proceed-btn">Đánh giá</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Shopping Cart Section End -->
+
+	<!-- Partner Logo Section Begin -->
+	<div th:replace="fragments/navHome :: partner-logo"></div>
+	<!-- Partner Logo Section End -->
+
+	<!-- Footer Section Begin -->
+	<div th:replace="fragments/navHome :: footer"></div>
+	<!-- Footer Section End -->
+
+	<!-- Js Plugins -->
+	<div th:replace="fragments/initHome :: commonScript"></div>
+
+	<script th:inline="javascript">
+		var currUrl = /*[[@{/}]]*/"";
+		var pageIndex = /*[[${session.pageIndex}]]*/"";
+	</script>
+
+	<script>
+		$("#submit").on(
+				'click',
+				function(e) {
+					e.preventDefault();
+					var currUrl = /* [[@{/}]] */"";
+					var path = window.location.pathname.split("/")[1];
+					var lst = [];
+					$("#cartInfo tr.data").each(function() {
+						var obj = {
+							id : $(this).find('.idPr').val(),
+							rate : $(this).find('.rate').val(),
+							description : $(this).find('.description').val()
+						};
+						lst.push(obj);
+					});
+					$.ajax({
+						type : "POST",
+						contentType : 'application/json; charset=utf-8',
+						dataType : 'json',
+						url : "/gDirecotry/ajax/searchUserProfiles.html",
+						url : currUrl + '/' + path + '/home/reviewSubmit'
+								+ '.html',
+						data : JSON.stringify(lst),
+						success : function(response) {
+							window.location.href = window.location.origin
+									+ $('#contextPath').val();
+						}
+					});
+					window.location.href = window.location.origin
+							+ $('#contextPath').val();
+				});
+	</script>
+</body>
+
+</html>

@@ -47,7 +47,7 @@
 								</tr>
 							</thead>
 							<tbody id="cartInfo">
-								<tr th:each="cart : ${session.myCartItems}">
+								<tr th:each="cart : ${session.myCartItems}" class="data">
 									<td class="cart-pic first-row"><img
 										th:src="${cart.value.product.mainImg}" alt=""></td>
 									<td class="cart-title first-row"><a
