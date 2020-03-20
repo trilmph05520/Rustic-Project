@@ -631,8 +631,12 @@
                     </div>
                     <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
                         <div class="txtLeft">Giá</div>
-                        <div class="txtRight"
+                        <div class="txtRight" th:if="${each.product.priceSale == 0 || each.product.priceSale == null}"
                              th:text="${#numbers.formatDecimal(each.product.price, 0, 'COMMA', 0,'POINT')}">50,000,000
+                            VNĐ
+                        </div>
+                           <div class="txtRight" th:if="${each.product.priceSale != 0 && each.product.priceSale != null}"
+                             th:text="${#numbers.formatDecimal(each.product.priceSale, 0, 'COMMA', 0,'POINT')}">50,000,000
                             VNĐ
                         </div>
                     </div>
@@ -658,8 +662,12 @@
 <!--                    </div>-->
                     <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
                         <div class="txtLeft">Thành tiền</div>
-                        <div class="txtRight"
-                             th:text="${#numbers.formatDecimal((each.product.price * each.quantity) + (each.product.price * each.quantity * 0.01) , 0, 'COMMA', 0, 'POINT')}">
+                        <div class="txtRight" th:if="${each.product.priceSale == 0 || each.product.priceSale == null}"
+                             th:text="${#numbers.formatDecimal((each.product.price * each.quantity) , 0, 'COMMA', 0, 'POINT')}">
+                            500,000,000 VNĐ
+                        </div>
+                         <div class="txtRight" th:if="${each.product.priceSale != 0 && each.product.priceSale != null}"
+                             th:text="${#numbers.formatDecimal((each.product.priceSale * each.quantity) , 0, 'COMMA', 0, 'POINT')}">
                             500,000,000 VNĐ
                         </div>
                     </div>
@@ -708,7 +716,6 @@
                         </div>
                     </div>
                 </div>
-                </form>
                 <span id="error" style="color: red;font-size: 15px;"></span>
             </div>
             <div class="col col-xs-12 col-sm-12 col-md-12" style="display: flex;margin-top: 10px;">
@@ -718,7 +725,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Shopping Cart Section End -->

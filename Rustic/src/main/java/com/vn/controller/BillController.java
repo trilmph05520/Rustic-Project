@@ -163,7 +163,7 @@ public class BillController {
 
 			Sort sort = new Sort(Sort.Direction.DESC, "id");
 			Pageable _pageable = new PageRequest(pageable.getPageNumber(), Constants.Paging.SIZE, sort);
-			Page<Bill> page = billService.findAllBillByType(_fromDate, _toDate, 6, DELETE, _pageable);
+			Page<Bill> page = billService.findAllBillByType(_fromDate, _toDate, Bill.STATUSPAYMENT.WAITDELIVERY.value(), DELETE, _pageable);
 			model.addAttribute("page", page);
 			session.setAttribute("from_date", sdf.format(_fromDate));
 			session.setAttribute("to_date", sdf.format(_toDate));
@@ -226,7 +226,7 @@ public class BillController {
 	}
 
 	@RequestMapping(value = "listCancel.html", method = { RequestMethod.GET, RequestMethod.POST })
-//  @PreAuthorize("hasAnyAuthority('Administrators','Staffs')")
+	@PreAuthorize("hasAnyAuthority('Administrators','Staffs')")
 	public String listCancel(Model model, HttpSession session, HttpServletRequest request, Pageable pageable,
 			@RequestParam(value = "from_date", defaultValue = "") String fromDate,
 			@RequestParam(value = "to_date", defaultValue = "") String toDate,

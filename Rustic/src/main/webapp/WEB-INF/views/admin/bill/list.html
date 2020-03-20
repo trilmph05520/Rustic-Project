@@ -132,6 +132,7 @@
 										<th class="text-table-header">Tổng tiền</th>
 										<th class="text-table-header">Trạng thái TToán</th>
 										<th class="text-table-header">Trạng thái HĐ</th>
+										<th class="text-table-header">Người giao</th>
 										<th class="text-table-header text-center">#</th>
 										<th class="text-table-header text-center">#</th>
 										<th class="text-table-header text-center">#</th>
@@ -169,7 +170,11 @@
 												xác nhận</button>
 											<button class="btn btn-success" th:case="'6'">Chờ
 												người giao</button>
+											<button class="btn btn-success" th:case="'7'">Yêu
+												cầu hủy</button>
 										</td>
+										<th class="text-table-body" th:if="${eachRow.shipper != null}" th:text="${eachRow.shipper.userName}"></th>
+										<th class="text-table-body" th:if="${eachRow.shipper == null}">&nbsp;</th>
 										<td class="text-table-body"><a
 											th:onclick="'acceptPayment(\'' + ${eachRow.code} + '\',\'' + ${eachRow.id} + '\')'"
 											data-toggle="modal" data-target="#productModal"

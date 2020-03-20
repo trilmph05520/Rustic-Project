@@ -1,19 +1,33 @@
 package com.vn.jpa;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "reject")
 @NamedQuery(name = "Reject.findAll",query = "SELECT r FROM Reject r")
 public class Reject implements Serializable {
 
-    private static final Long serizlizable = 1L;
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,6 +52,10 @@ public class Reject implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
+    
+
+    @Column(name = "status", columnDefinition = "TINYINT")
+    private int status;
 
     public Reject() {
     }
@@ -51,8 +69,22 @@ public class Reject implements Serializable {
         this.address = address;
         this.createdDate = createdDate;
     }
+    
+    public Reject(Long id, String name, String reason, String code, String email, String mobile, String address,
+			Date createdDate, int status) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.reason = reason;
+		this.code = code;
+		this.email = email;
+		this.mobile = mobile;
+		this.address = address;
+		this.createdDate = createdDate;
+		this.status = status;
+	}
 
-    public String getAddress() {
+	public String getAddress() {
         return address;
     }
 
@@ -115,8 +147,17 @@ public class Reject implements Serializable {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+    
 
-    @PrePersist
+    public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	@PrePersist
     public void pre() throws ParseException{
         if(this.createdDate == null){
         	Date create = new Date();

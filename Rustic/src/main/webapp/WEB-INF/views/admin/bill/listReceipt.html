@@ -141,6 +141,8 @@
 												xác nhận</button>
 											<button class="btn btn-success" th:case="'6'">Chờ
 												người giao</button>
+											<button class="btn btn-success" th:case="'7'">Yêu
+												cầu hủy</button>
 										</td>
 										<td class="text-table-body"><a
 											th:onclick="'acceptPayment(\'' + ${eachRow.code} + '\',\'' + ${eachRow.id} + '\')'"
@@ -150,12 +152,14 @@
 													<i class="fa fa-check"></i>
 												</button>
 										</a> <label th:if="${eachRow.status} == 1">&nbsp;</label></td>
-										<td><a th:if="${eachRow.status  != 1 && eachRow.typeStatus != 0}"
+										<td><a
+											th:if="${eachRow.status  != 1 && eachRow.typeStatus != 0}"
 											th:href="@{/bill/{id}/cancelBill.html(id=${eachRow.id})}"><button
 													type="button" class="btn btn-info btn-circle">Hủy
 													đơn</button></a></td>
 										<td>
-											<button type="button" th:if="${eachRow.status  != 1 && eachRow.typeStatus != 0}"
+											<button type="button"
+												th:if="${eachRow.status  != 1 && eachRow.typeStatus != 0}"
 												th:onclick="'billDetail(\'' + ${eachRow.id} + '\')'"
 												class="btn btn-default btn-circle" data-toggle="modal"
 												data-target="#billModal" title="Hóa đơn chi tiết">

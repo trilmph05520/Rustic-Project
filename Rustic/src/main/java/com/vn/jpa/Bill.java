@@ -243,7 +243,7 @@ public class Bill implements Serializable {
 
     public static enum STATUSPAYMENT {
         PAID(0) /*KH đã nhận*/, UNPAID(1) /*KH đã hủy*/, BOOM(2) /*KH không nhận hàng*/, DELIVERY(3) /* đang giao hàng*/, PACKAING(4) /*đang đóng gói*/, ORDER(5) /*xác nhận đơn*/
-		, WAITDELIVERY(6) /* Chờ người giao */ ;
+		, WAITDELIVERY(6) /* Chờ người giao */ , REJECT(7) /* Yêu cầu hủy đơn */;
         private final Integer value;
 
         private STATUSPAYMENT(Integer value) {
