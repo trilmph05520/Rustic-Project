@@ -6,47 +6,56 @@
 				<div class="logo-carousel owl-carousel">
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/sat.png}" alt=""  width="300%" height="300%">
+							<img th:src="@{/static/rank/sat.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/dong.png}" alt="" width="300%" height="300%">
+							<img th:src="@{/static/rank/dong.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/bac.png}" alt="" width="300%" height="300%">
+							<img th:src="@{/static/rank/bac.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/vang.png}" alt="" width="300%" height="300%">
+							<img th:src="@{/static/rank/vang.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/bachkim.png}" alt="" width="300%" height="300%">
+							<img th:src="@{/static/rank/bachkim.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/kimcuong.png}" alt="" width="300%" height="300%">
+							<img th:src="@{/static/rank/kimcuong.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/caothu.png}" alt="" width="300%" height="300%">
+							<img th:src="@{/static/rank/caothu.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/daicaothu.png}" alt="" width="300%" height="300%">
+							<img th:src="@{/static/rank/daicaothu.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/thachdau.png}" alt="" width="300%" height="300%">
+							<img th:src="@{/static/rank/thachdau.png}" alt="" width="300%"
+								height="300%">
 						</div>
 					</div>
 				</div>
@@ -111,15 +120,21 @@
 							</div>
 						</div>
 						<div class="col-lg-7 col-md-7">
-							<div class="advanced-search">
-								<button type="button" class="category-btn">Tìm kiếm</button>
-								<div class="input-group">
-									<input type="text" placeholder="Bạn cần gì?">
-									<button type="button">
-										<i class="ti-search"></i>
-									</button>
+
+							<form th:action="@{/home/search.html}" method="POST">
+								<div class="advanced-search">
+									<button type="button" class="category-btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tìm
+										kiếm &nbsp;&nbsp;</button>
+									<div class="input-group">
+										<input type="text" name="name" placeholder="Bạn cần gì?"
+											th:value="${session.search}">
+										<button type="submit">
+											<i class="ti-search"></i>
+										</button>
+									</div>
 								</div>
-							</div>
+							</form>
+
 						</div>
 						<div class="col-lg-3 text-right col-md-3">
 							<ul class="nav-right">
@@ -299,6 +314,7 @@
 
 	<!-- START QUICKVIEW PRODUCT -->
 	<div id="quickview-wrapper" th:fragment="quickview">
+		<input type="hidden" th:value="@{/}" id="path" />
 		<!-- Modal -->
 		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
 			<div class="modal-dialog modal-lg" role="document">
@@ -334,7 +350,7 @@
 										<a href="#" class="primary-btn pd-cart" id="quickCart"
 											type="submit">Thêm vào giỏ hàng</a>
 									</div>
-									<div class="quick-desc" id="info">Hello, Every body.</div>
+									<div class="quick-desc" id="info" style="overflow: hidden;">Hello, Every body.</div>
 								</div>
 								<!-- .product-info -->
 							</div>

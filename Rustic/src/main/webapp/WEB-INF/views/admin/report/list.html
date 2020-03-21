@@ -58,7 +58,7 @@
 											</div>
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" >Đến ngày</label>
+													<label class="text-white">Đến ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -73,9 +73,9 @@
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
-												<label class="text-white" >Tên</label>
-												<input class="form-control" id="name" name="name"
-													type="text" placeholder="Name" th:value="${name}">
+												<label class="text-white">Tên</label> <input
+													class="form-control" id="name" name="name" type="text"
+													placeholder="Name" th:value="${name}">
 											</div>
 										</div>
 										<div class="col-lg-2 col-12 text-right">
@@ -83,7 +83,7 @@
 												<label>&nbsp;</label>
 												<div>
 													<button type="submit" id="btnSearch"
-														class="btn btn-primary" >Tìm kiếm</button>
+														class="btn btn-primary">Tìm kiếm</button>
 												</div>
 											</div>
 										</div>
@@ -92,8 +92,8 @@
 							</div>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
-								<a th:href="@{/report/list.html}" class="btn btn-sm btn-neutral"
-								>Làm mới</a>
+								<a th:href="@{/report/list.html}" class="btn btn-sm btn-neutral">Làm
+									mới</a>
 							</div>
 						</div>
 						<div class="table-responsive">
@@ -116,8 +116,18 @@
 										<td class="text-table-body" th:text="${eachRow.name}"></td>
 										<td class="text-table-body" th:text="${eachRow.email}"></td>
 										<td class="text-table-body" th:text="${eachRow.mobile}"></td>
-										<td class="text-table-body" th:text="${eachRow.problem}"></td>
-										<td class="text-table-body" th:text="${eachRow.opinion}"></td>
+										<td class="text-table-body"
+											th:if="${eachRow.problem != null && #strings.length(eachRow.problem) < 30}"
+											th:text="${eachRow.problem}"></td>
+										<td class="text-table-body"
+											th:if="${eachRow.problem != null && #strings.length(eachRow.problem) > 30}"
+											th:text="${#strings.substring(eachRow.problem,0,30) + '...'}"></td>
+										<td class="text-table-body"
+											th:if="${eachRow.opinion != null && #strings.length(eachRow.opinion) < 30}"
+											th:text="${eachRow.opinion}"></td>
+										<td class="text-table-body"
+											th:if="${eachRow.opinion != null && #strings.length(eachRow.opinion) > 30}"
+											th:text="${#strings.substring(eachRow.opinion,0,30) + '...'}"></td>
 										<td class="text-table-body" style="text-align: center;">
 											<button class="btn btn-success"
 												th:if="${eachRow.repply != null and not #lists.isEmpty(eachRow.repply)}">Đã

@@ -23,7 +23,7 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0" >Danh sách sản phẩm</h3>
+							<h3 class="text-white mb-0">Danh sách sản phẩm</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
 								<form role="form" th:action="@{/product/list.html}"
@@ -32,7 +32,7 @@
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" >Từ ngày</label>
+													<label class="text-white">Từ ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -46,7 +46,7 @@
 											</div>
 											<div class="col">
 												<div class="form-group">
-													<label class="text-white" >Đến ngày</label>
+													<label class="text-white">Đến ngày</label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
@@ -62,14 +62,15 @@
 										<div class="col-lg-3">
 											<label class="text-white">Tên sản phẩm</label>
 											<div>
-												<input type="text" placeholder="" name="name"
-													id="name" class="form-control" th:value="${name}"/>
+												<input type="text" placeholder="" name="name" id="name"
+													class="form-control" th:value="${name}" />
 											</div>
 										</div>
 										<div class="col-sm-2">
 											<label>&nbsp;</label>
 											<div>
-												<button type="submit" id="btnSearch" class="btn btn-primary">Tìm kiếm</button>
+												<button type="submit" id="btnSearch" class="btn btn-primary">Tìm
+													kiếm</button>
 											</div>
 										</div>
 									</div>
@@ -91,8 +92,8 @@
 								<thead class="thead-dark">
 									<tr>
 										<th scope="col">#</th>
-										<th scope="col" >Tên</th>
-										<th scope="col">Giá</th>	
+										<th scope="col">Tên</th>
+										<th scope="col">Giá</th>
 										<th scope="col">Giảm giá</th>
 										<th scope="col">Số lượng</th>
 										<th scope="col">Miêu tả</th>
@@ -111,23 +112,32 @@
 										<td class="text-table-body"
 											th:text="${#numbers.formatDecimal(eachRow.priceSale, 0, 'COMMA', 0,'POINT') + ' VND'}"></td>
 										<td class="text-table-body" th:text="${eachRow.quantity}"></td>
-										<td class="text-table-body" th:text="${eachRow.description}"></td>
-										<td class="text-table-body" th:text="${eachRow.info}"></td>
+										<td class="text-table-body"
+											th:if="${eachRow.description != null && #strings.length(eachRow.description) < 30}"
+											th:text="${eachRow.description}"></td>
+										<td class="text-table-body"
+											th:if="${eachRow.description != null && #strings.length(eachRow.description) > 30}"
+											th:text="${#strings.substring(eachRow.description,0,30) + '...'}"></td>
+										<td class="text-table-body"
+											th:if="${eachRow.info != null && #strings.length(eachRow.info) < 30}"
+											th:text="${eachRow.info}"></td>
+										<td class="text-table-body"
+											th:if="${eachRow.info != null && #strings.length(eachRow.info) > 30}"
+											th:text="${#strings.substring(eachRow.info,0,30) + '...'}"></td>
 										<td class="text-table-body" style="text-align: center;">
 											<button class="btn btn-warning"
-												th:if="${eachRow.quantity <= 0}"th:utext="#{lable.Outofstock}"></button>
+												th:if="${eachRow.quantity <= 0}"
+												th:utext="#{lable.Outofstock}"></button>
 											<button class="btn btn-success"
 												th:if="${eachRow.quantity > 0}" th:utext="#{lable.stocking}"></button>
 										</td>
 										<td scope="row"><a type="button" class="btn btn-warning"
-											th:href="@{/product/{id}/update.html(id=${eachRow.id})}" th:utext="#{lable.edit}"></a>
-
-										</td>
+											th:href="@{/product/{id}/update.html(id=${eachRow.id})}"
+											th:utext="#{lable.edit}"></a></td>
 										<td scope="row"><a type="button" class="btn btn-danger"
 											data-toggle="modal" data-target="#productModal"
-											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'"th:utext="#{lable.delete}"></a>
-
-										</td>
+											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'"
+											th:utext="#{lable.delete}"></a></td>
 
 									</tr>
 

@@ -372,7 +372,8 @@ public class AccountController {
 			authUser.setUserType((byte) 2);
 			authUser.setAuthRoles(roles);
 			authUserService.create(authUser);
-			return "redirect:/home/login.html";
+			session.setAttribute("userLogin", authUser);
+			return "redirect:/";
 		} catch (Exception e) {
 			mapError.put("errorUnknown", "Lỗi không xác định");
 			model.addAttribute("mapError", mapError);

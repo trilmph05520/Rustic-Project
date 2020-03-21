@@ -56,7 +56,12 @@
 											class="idPr" />
 											<h5 th:text="${each.product.name}"></h5>
 									</a></td>
-									<td><h5 th:text="${each.product.info}"></h5></td>
+									<td class="text-table-body"
+										th:if="${each.product.info != null && #strings.length(each.product.info) < 30}"
+										th:text="${each.product.info}"></td>
+									<td class="text-table-body"
+										th:if="${each.product.info != null && #strings.length(each.product.info) > 30}"
+										th:text="${#strings.substring(each.product.info,0,30) + '...'}"></td>
 									<td><select class="rate-select rate" name="rate">
 											<option value="1">1</option>
 											<option value="2">2</option>
@@ -72,9 +77,10 @@
 						</table>
 					</div>
 
-					<div class="col-lg-4 offset-lg-4">
-						<div class="proceed-checkout">
-							<a id="submit" type="submit" class="proceed-btn">Đánh giá</a>
+					<div class="col-lg-12 offset-lg-12">
+						<div class="proceed-checkout" style="float: right">
+							<button id="submit" type="submit" class="site-btn register-btn">Đánh
+								giá</button>
 						</div>
 					</div>
 				</div>
