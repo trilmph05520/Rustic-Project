@@ -14,11 +14,6 @@
 							<img th:src="@{/static/rank/vang.png}" alt="">
 						</div>
 					</div>
-					<!-- <div class="logo-item">
-                        <div class="tablecell-inner">
-                            <img th:src="@{/assets/img/logoRustic.png}" alt="">
-                        </div>
-                    </div> -->
 					<div class="logo-item">
 						<div class="tablecell-inner">
 							<img th:src="@{/static/rank/bachkim.png}" alt="">
@@ -76,33 +71,10 @@
 							style="padding-right: 20px;" th:utext="#{lable.profile}"><i
 							class="fa fa-user"></i></a>
 
-
-
-						<!-- <div class="lan-selector">
-							<select class="language_drop" name="countries" id="countries"
-								style="width: 300px;">
-
-														<option th:href="@{/Rustic/?lang=en}" value='yt'
-                                    th:data-image="@{/assets/img/flag-1.jpg}"
-                                    data-imagecss="flag yt" data-title="English"><a
-                                        th:href="@{/Rustic/?lang=en}">English</a></option>
-                                <option value='yu' th:data-image="@{/assets/img/flag-2.jpg}"
-                                    data-imagecss="flag yu" data-title="Bangladesh"><a
-                                        th:href="@{/Rustic/?lang=vi}">Viet</a></option>
-
-								<option th:href="@{/Rustic/?lang=en}" value='yt'
-									th:data-image="@{/assets/img/flag-1.jpg}"
-									data-imagecss="flag yt" data-title="English">English</option>
-								<option th:href="@{/Rustic/?lang=en}" value='yu'
-									th:data-image="@{/assets/img/vietnam.png}"
-									data-imagecss="flag yu" data-title="Bangladesh">Vietnamese</option>
-
-							</select>
-						</div> -->
 						<div class="top-social">
-							<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
-								class="ti-twitter-alt"></i></a> <a href="#"><i
-								class="ti-linkedin"></i></a> <a href="#"><i class="ti-pinterest"></i></a>
+							<a href="https://www.facebook.com/mt.minhtri" target="blank"><i
+								class="ti-facebook"></i></a> <a href="#"><i
+								class="fa fa-instagram"></i></a>
 						</div>
 					</div>
 				</div>
@@ -131,9 +103,6 @@
 						</div>
 						<div class="col-lg-3 text-right col-md-3">
 							<ul class="nav-right">
-								<!--								<li class="heart-icon"><a href="#"> <i-->
-								<!--										class="icon_heart_alt"></i> <span>1</span>-->
-								<!--								</a></li>-->
 								<li class="cart-icon"><a th:href="@{/home/cart.html}">
 										<i class="icon_bag_alt"></i> <span class="cart-quantity"
 										th:if="${session.myCartNum != 0}"
@@ -206,7 +175,18 @@
 
 							<i class="ti-menu"><span>Danh mục</span></i>
 							<ul class="depart-hover"
+								th:if="${session.categoryNav != null && session.categoryNav.size() > 10}"
 								style="height: 400px; overflow-y: scroll;">
+								<li th:each="eachCate : ${session.categoryNav}"><span
+									th:each="cateChilren : ${eachCate.value[1]}"> <a
+										th:href="@{/home/{id}/product.html(id=${cateChilren[0]})}"
+										th:text="${cateChilren[1]}">Iphone</a>
+								</span></li>
+
+							</ul>
+
+							<ul class="depart-hover"
+								th:if="${session.categoryNav != null && session.categoryNav.size() < 10}">
 								<li th:each="eachCate : ${session.categoryNav}"><span
 									th:each="cateChilren : ${eachCate.value[1]}"> <a
 										th:href="@{/home/{id}/product.html(id=${cateChilren[0]})}"
@@ -241,9 +221,6 @@
 									<li><a th:href="@{/home/faq.html}">FAQ</a></li>
 									<li><a th:href="@{/home/register.html}">Đăng ký</a></li>
 									<li><a th:href="@{/home/login.html}">Đăng nhập</a></li>
-									<!-- 	<li><a href="./blog-details.html">Blog Details</a></li>
-									<li><a href="./shopping-cart.html">Shopping Cart</a></li>
-									<li><a href="./check-out.html">Checkout</a></li> -->
 								</ul></li>
 						</ul>
 					</nav>
@@ -273,45 +250,9 @@
 								<a href="https://www.facebook.com/mt.minhtri"><i
 									class="fa fa-facebook"></i></a> <a href="#"><i
 									class="fa fa-instagram"></i></a>
-								<!-- <a href="#"><i
-                                    class="fa fa-twitter"></i></a> <a href="#"><i
-                                    class="fa fa-pinterest"></i></a> -->
 							</div>
 						</div>
 					</div>
-					<!-- <div class="col-lg-2 offset-lg-1">
-                        <div class="footer-widget">
-                            <h5>Information</h5>
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Checkout</a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">Serivius</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="footer-widget">
-                            <h5>My Account</h5>
-                            <ul>
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">Shopping Cart</a></li>
-                                <li><a href="#">Shop</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="newslatter-item">
-                            <h5>Join Our Newsletter Now</h5>
-                            <p>Get E-mail updates about our latest shop and special
-                                offers.</p>
-                            <form action="#" class="subscribe-form">
-                                <input type="text" placeholder="Enter Your Mail">
-                                <button type="button">Subscribe</button>
-                            </form>
-                        </div>
-                    </div> -->
 				</div>
 			</div>
 			<div class="copyright-reserved">
@@ -324,13 +265,9 @@
 								<script>
 									document.write(new Date().getFullYear());
 								</script>
-								All rights reserved | This template is made with <i
-									class="fa fa-heart-o" aria-hidden="true"></i> by <a
-									href="https://colorlib.com" target="_blank">Colorlib</a>
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</div>
 							<div class="payment-pic">
-								<img th:src="@{/assets/img/payment-method.png}" alt="">
+								<img th:src="@{/assets/img/Text-QR-2.png}" width="50%" height="50%" alt="">
 							</div>
 						</div>
 					</div>
@@ -373,33 +310,10 @@
 									</div>
 									Trạng thái : <label id="status" class="see-all"></label>
 									<div class="quick-add-to-cart">
-										<!--											<div class="numbers-row">-->
-										<!--												<input type="number" id="french-hens" value="1">-->
-										<!--											</div>-->
-										<!-- 	<a href=""
-                                            style="line-height: 45px; height: 45px; border-radius: 5px; font-size: 17px;"
-                                            id="quickCart" class="btn btn-warning" type="submit">Thêm
-                                            vào giỏ </a> -->
 										<a href="#" class="primary-btn pd-cart" id="quickCart"
 											type="submit">Thêm vào giỏ hàng</a>
 									</div>
 									<div class="quick-desc" id="info">Hello, Every body.</div>
-									<!-- <div class="social-sharing">
-                                        <div class="widget widget_socialsharing_widget">
-                                            <h3 class="widget-title-modal">Chia sẻ sản phẩm</h3>
-                                            <ul class="social-icons clearfix">
-                                                <li><a class="facebook" href="#" target="_blank"
-                                                    title="Facebook"> <i class="zmdi zmdi-facebook"></i>
-                                                </a></li>
-                                                <li><a class="twitter" href="#" target="_blank"
-                                                    title="Skype"> <i class="zmdi zmdi-skype"></i>
-                                                </a></li>
-                                                <li><a class="twitter" href="#" target="_blank"
-                                                    title="Instagram"> <i class="zmdi zmdi-instagram"></i>
-                                                </a></li>
-                                            </ul>
-                                        </div>
-                                    </div> -->
 								</div>
 								<!-- .product-info -->
 							</div>
