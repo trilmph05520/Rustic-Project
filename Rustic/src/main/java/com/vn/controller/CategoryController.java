@@ -31,6 +31,7 @@ import com.vn.validation.service.CategoryFormValidator;
 @Controller
 @RequestMapping("/category/")
 public class CategoryController {
+	
 
     @Resource
     private CategoryService categoryService;
@@ -38,6 +39,7 @@ public class CategoryController {
 	@Resource
 	private CategoryFormValidator categoryFormValidator;
 
+	
 
     private String DELETE = "N";
     private String ISACTVE = "Y";

@@ -82,6 +82,7 @@ public class ProfileController {
 		}
 	}
 
+	
 	@RequestMapping(value = "detail.html", method = RequestMethod.POST)
 	public String profileSave(HttpSession session, Model model,
 			@ModelAttribute("profile") @Valid InfomationModel infomationModel, BindingResult result,
