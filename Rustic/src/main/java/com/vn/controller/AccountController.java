@@ -103,6 +103,7 @@ public class AccountController {
 		return "admin/account/user_list";
 	}
 
+	
 	@RequestMapping(value = "add.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Administrators')")
 	public String userAdd(Model model) {
@@ -173,6 +174,7 @@ public class AccountController {
 		return "redirect:/account/list.html";
 	}
 
+	
 	@RequestMapping(value = "{id}/update.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Administrators')")
 	public String updateAccount(Model model, @PathVariable("id") Long id) {
@@ -258,6 +260,7 @@ public class AccountController {
 		return "redirect:/account/list.html";
 	}
 
+	
 	@RequestMapping(value = "delete/{username}/list.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Administrators')")
 	public String deleteAccount(@PathVariable("username") String username) {
