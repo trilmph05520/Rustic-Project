@@ -334,6 +334,7 @@ public class BillController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 		return "redirect:/bill/listReceipt.html";
 	}
