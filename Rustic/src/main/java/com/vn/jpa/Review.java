@@ -28,7 +28,7 @@ public class Review implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createDate;
 
@@ -150,9 +150,7 @@ public class Review implements Serializable {
 	@PrePersist
 	public void pre() throws ParseException{
         if(this.createDate == null){
-        	Date create = new Date();
-        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            this.createDate = sdf.parse(sdf.format(create));
+            this.createDate = new Date();
         }
     }
 

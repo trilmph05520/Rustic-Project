@@ -62,7 +62,7 @@ public class Product implements Serializable {
     @Column(name = "info")
     private String info;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createDate;
 
@@ -216,9 +216,7 @@ public class Product implements Serializable {
     @PrePersist
     public void prePersist() throws ParseException{
         if(this.createDate == null){
-        	Date create = new Date();
-        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            this.createDate = sdf.parse(sdf.format(create));
+            this.createDate = new Date();
         }
     }
 }

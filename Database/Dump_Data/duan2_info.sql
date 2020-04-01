@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.25, for Win64 (x86_64)
 --
--- Host: localhost    Database: duan2
+-- Host: 127.0.0.1    Database: duan2
 -- ------------------------------------------------------
--- Server version	5.7.25-log
+-- Server version	5.7.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +21,7 @@
 
 LOCK TABLES `info` WRITE;
 /*!40000 ALTER TABLE `info` DISABLE KEYS */;
-INSERT INTO `info` VALUES (1,'Thái Bình','Kiến Xương','Quang Bình - Kiến Xương -  Thái Bình','0338070700','1999-08-21','BACABANK','Công ty Cổ phần Viễn Thông Tuổi Trẻ Yotel','212312354534','Từng học tại FPT PolyTechnic','N',2),(4,'HN','HĐ','Tòa nhà Ecolife Capitol, 58 Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội','0377810192',NULL,'',NULL,'',NULL,'N',1);
+INSERT INTO `info` VALUES (1,'Thái Bình','Kiến Xương','Quang Bình - Kiến Xương -  Thái Bình','0338070700','1999-08-21','BACABANK','Công ty Cổ phần Viễn Thông Tuổi Trẻ Yotel','212312354534','Từng học tại FPT PolyTechnic','N',2),(4,'HN','HĐ','Tòa nhà Ecolife Capitol, 58 Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội','0377810192',NULL,'',NULL,'',NULL,'N',1),(5,'Asia','Ha Noi','Xuan La,Xuan Tao,Bac Tu Liem, 105 Xuan La','0983231999',NULL,'NCB',NULL,'9704198526191432',NULL,'N',4),(6,'Asia','Ha Noi','Xuan La,Xuan Tao,Bac Tu Liem, 105 Xuan La','0983231999',NULL,'TPBANK',NULL,'9704198526191432',NULL,'N',3);
 /*!40000 ALTER TABLE `info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 15:22:41
+-- Dump completed on 2020-04-01 16:52:01

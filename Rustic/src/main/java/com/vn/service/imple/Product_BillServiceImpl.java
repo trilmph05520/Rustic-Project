@@ -72,7 +72,7 @@ public class Product_BillServiceImpl implements Product_BillService {
     public List<ChartDashboardBillOrder> listCountBillGrByDateBillId(Date date) {
         List<ChartDashboardBillOrder> response = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        DateTime time = new DateTime(date);
+        DateTime time = new DateTime(date).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0);
         Date fromDate = time.plusDays(-7).toDate();
         Date toDate = time.withTimeAtStartOfDay().toDate();
         List<Object[]> lsObject = product_billRepo.listCountBillGrByDateBillId(fromDate, toDate);

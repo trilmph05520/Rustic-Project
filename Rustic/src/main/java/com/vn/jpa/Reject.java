@@ -49,7 +49,7 @@ public class Reject implements Serializable {
     @Column(name = "address")
     private String address;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createdDate;
     
@@ -160,9 +160,7 @@ public class Reject implements Serializable {
 	@PrePersist
     public void pre() throws ParseException{
         if(this.createdDate == null){
-        	Date create = new Date();
-        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            this.createdDate = sdf.parse(sdf.format(create));
+            this.createdDate = new Date();
         }
     }
 }

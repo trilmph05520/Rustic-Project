@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.25, for Win64 (x86_64)
 --
--- Host: localhost    Database: duan2
+-- Host: 127.0.0.1    Database: duan2
 -- ------------------------------------------------------
--- Server version	5.7.25-log
+-- Server version	5.7.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `vnpay_trans_info`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vnpay_trans_info` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
   `vnp_locale` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
   `vnp_curr_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `vnp_order_info` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `vnpay_trans_info` (
   `code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +53,4 @@ CREATE TABLE `vnpay_trans_info` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 15:20:19
+-- Dump completed on 2020-04-01 16:50:47

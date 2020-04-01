@@ -23,14 +23,14 @@ public class History implements Serializable {
 	@Column(name = "status", columnDefinition = "TINYINT(4)")
 	private int status;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "created_date")
 	private Date createDate;
 
 	@Column(name = "created_by")
 	private String createBy;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "modified_date")
 	private Date modifyDate;
 
@@ -108,14 +108,10 @@ public class History implements Serializable {
 	@PrePersist
 	public void prePersist() throws ParseException {
 		if (this.createDate == null) {
-			Date create = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			this.createDate = sdf.parse(sdf.format(create));
+			this.createDate = new Date();
 		}
 		if (this.modifyDate == null) {
-			Date create = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			this.modifyDate = sdf.parse(sdf.format(create));
+			this.modifyDate = new Date();
 		}
 	}
 }

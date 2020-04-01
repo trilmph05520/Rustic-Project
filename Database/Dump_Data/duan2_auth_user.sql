@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.25, for Win64 (x86_64)
 --
--- Host: localhost    Database: duan2
+-- Host: 127.0.0.1    Database: duan2
 -- ------------------------------------------------------
--- Server version	5.7.25-log
+-- Server version	5.7.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +21,7 @@
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'admin','Nguyễn',NULL,'Duyệt',NULL,'admin@yo.com','0','5876695f8e4e1811','$2a$10$B3oHbYckX3Kn54nVHlhOo.SSS4DGTePm8VfDgl.pZ2cYy69y.2ZFe','2019-09-24 22:21:33',NULL,1,1,0),(2,'duyetndph05701@fpt.edu.vn','Nguyễn','Đình','Duyệt','Nguyễn Đình Duyệt','duyetndph05701@fpt.edu.vn','0','5876695f8e4e1811','$2a$10$l2uAWPHO7La6DuWQmajNZu.PmiVSwr9k5WJl1aNKHHc7L3pkQ3Fey','2020-03-18 08:48:26',NULL,1,1,2),(3,'duyetnguyendinh19','Nguyễn','Đình','Duyệt','Nguyễn Đình Duyệt','duyetnguyendinh19@gmail.com','1','5876695f8e4e1811','$2a$10$DABTWsf/Njzcib6raZTYEOELMuuPvH/p80Z79f7M.MDX.GY8Ykeze','2020-03-19 08:37:30',NULL,1,1,3);
+INSERT INTO `auth_user` VALUES (1,'admin','Nguyễn',NULL,'Duyệt',NULL,'admin@yo.com','0','5876695f8e4e1811','$2a$10$B3oHbYckX3Kn54nVHlhOo.SSS4DGTePm8VfDgl.pZ2cYy69y.2ZFe','2019-09-24',NULL,1,1,0),(2,'duyetndph05701@fpt.edu.vn','Nguyễn','Đình','Duyệt','Nguyễn Đình Duyệt','duyetndph05701@fpt.edu.vn','0','5876695f8e4e1811','$2a$10$l2uAWPHO7La6DuWQmajNZu.PmiVSwr9k5WJl1aNKHHc7L3pkQ3Fey','2020-03-18',NULL,1,1,2),(3,'duyetnguyendinh19','Nguyễn','Đình','Duyệt','Nguyễn Đình Duyệt','duyetnguyendinh19@gmail.com','0','5876695f8e4e1811','$2a$10$iYyRZSKiCgsmGBfZHaAXueIUqAFp9lQ4y0D814s3yUbvyXik5kGAi','2020-03-19',NULL,1,1,3),(4,'luongminhtri.mt1@gmail.com','Nguyễn ','Đình','Duyệt','Nguyễn  Đình Duyệt','luongminhtri.mt1@gmail.com','0','5876695f8e4e1811','$2a$10$pVqi0DOHeKrcsQOHiM2MP.cgsWBQpDkOpcWjd7Eu6iL3PxSdkvErK','2020-03-23',NULL,1,1,2);
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 15:22:41
+-- Dump completed on 2020-04-01 16:52:02

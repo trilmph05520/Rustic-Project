@@ -39,11 +39,11 @@ public class AuthUser implements UserDetails {
 
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createdDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "modified_date")
     private Date modifiedDate;
 

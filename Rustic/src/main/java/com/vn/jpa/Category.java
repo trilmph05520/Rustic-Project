@@ -48,7 +48,7 @@ public class Category implements Serializable {
 	@Column(name = "isactive", columnDefinition = "CHAR")
 	private String isActive;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "created_date")
 	private Date date;
 

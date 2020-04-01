@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.25, for Win64 (x86_64)
 --
--- Host: localhost    Database: duan2
+-- Host: 127.0.0.1    Database: duan2
 -- ------------------------------------------------------
--- Server version	5.7.25-log
+-- Server version	5.7.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -41,4 +41,4 @@ CREATE TABLE `auth_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 15:20:17
+-- Dump completed on 2020-04-01 16:50:46

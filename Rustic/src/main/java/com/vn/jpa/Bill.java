@@ -42,7 +42,7 @@ public class Bill implements Serializable {
     @Column(name = "type_status", columnDefinition = "TINYINT")
     private Integer typeStatus;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createDate;
 
@@ -222,9 +222,7 @@ public class Bill implements Serializable {
 	@PrePersist
     public void prePersist() throws ParseException {
     	if (this.createDate == null) {
-			Date create = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			this.createDate = sdf.parse(sdf.format(create));
+			this.createDate = new Date();
 		}
     }
 

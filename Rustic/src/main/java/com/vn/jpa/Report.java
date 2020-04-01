@@ -47,7 +47,7 @@ public class Report implements Serializable {
     @Column(name = "opinion")
     private String opinion;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createdDate;
 
@@ -134,9 +134,7 @@ public class Report implements Serializable {
     @PrePersist
     public void pre() throws ParseException{
         if(this.createdDate == null){
-        	Date create = new Date();
-        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            this.createdDate = sdf.parse(sdf.format(create));
+            this.createdDate = new Date();
         }
     }
 }

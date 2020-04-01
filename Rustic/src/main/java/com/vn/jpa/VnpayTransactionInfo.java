@@ -16,7 +16,7 @@ public class VnpayTransactionInfo implements Serializable {
     private Long id;
 
     @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date createdDate;
 
     @Column(name="vnp_locale")
