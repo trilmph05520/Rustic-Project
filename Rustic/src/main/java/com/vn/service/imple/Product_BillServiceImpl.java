@@ -69,7 +69,7 @@ public class Product_BillServiceImpl implements Product_BillService {
     @Override
     public List<ChartDashboardBillOrder> listCountBillGrByDateBillId(Date date) {
         List<ChartDashboardBillOrder> response = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         DateTime time = new DateTime(date);
         Date fromDate = time.plusDays(-7).toDate();
         Date toDate = time.withTimeAtStartOfDay().toDate();

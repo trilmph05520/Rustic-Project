@@ -80,7 +80,7 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public List<ChartDashboardBillOrder> listSumTotalForDashboard(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         DateTime time = new DateTime(date);
         Date fromDate = time.plusDays(-7).toDate();
         Date toDate = time.withTimeAtStartOfDay().toDate();
