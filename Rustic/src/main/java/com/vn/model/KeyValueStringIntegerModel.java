@@ -1,14 +1,16 @@
 package com.vn.model;
 
+import java.math.BigDecimal;
+
 public class KeyValueStringIntegerModel {
 
     private String key;
-    private Integer value;
+    private BigDecimal value;
 
     public KeyValueStringIntegerModel() {
     }
 
-    public KeyValueStringIntegerModel(String key, Integer value) {
+    public KeyValueStringIntegerModel(String key, BigDecimal value) {
         this.key = key;
         this.value = value;
     }
@@ -21,11 +23,11 @@ public class KeyValueStringIntegerModel {
         this.key = key;
     }
 
-    public Integer getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 }

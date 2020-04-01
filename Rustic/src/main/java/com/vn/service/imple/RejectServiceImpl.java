@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,8 +61,7 @@ public class RejectServiceImpl implements RejectService {
         List<Object[]> lsObject = rejectRepo.listCountRejectDashBoard(fromDate, toDate);
         for (Object[] each : lsObject) {
             String key = sdf.format(each[0]);
-            BigInteger bigInteger = (BigInteger) each[1];
-            Integer value = Integer.parseInt(String.valueOf(bigInteger));
+            BigDecimal value = new BigDecimal(each[1].toString());
             ChartDashboardBillOrder order = new ChartDashboardBillOrder(key, value);
             response.add(order);
         }

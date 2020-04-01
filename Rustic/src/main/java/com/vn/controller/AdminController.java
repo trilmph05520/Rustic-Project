@@ -1,5 +1,6 @@
 package com.vn.controller;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,7 +67,7 @@ public class AdminController {
             date = time.plusDays(-6).toDate();
             for (int i = 0; i < 7; i++) {
                 String label = sdf.format(date);
-                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, 0);
+                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
                 lsLabel.add(model);
                 date = time.plusDays(-5 + i).toDate();
             }
@@ -74,7 +75,7 @@ public class AdminController {
             for (KeyValueStringIntegerModel each : lsLabel) {
                 for (ChartDashboardBillOrder res : response) {
                     if (each.getKey().compareTo(res.getDate()) == 0) {
-                        each.setValue((int) Float.parseFloat(String.valueOf(res.getTotal())));
+                        each.setValue(res.getTotal());
                     }
                 }
             }
@@ -96,7 +97,7 @@ public class AdminController {
             date = time.plusDays(-6).toDate();
             for (int i = 0; i < 7; i++) {
                 String label = sdf.format(date);
-                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, 0);
+                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
                 lsLabel.add(model);
                 date = time.plusDays(-5 + i).toDate();
             }
@@ -104,7 +105,7 @@ public class AdminController {
             for (KeyValueStringIntegerModel each : lsLabel) {
                 for (ChartDashboardBillOrder res : response) {
                     if (each.getKey().compareTo(res.getDate()) == 0) {
-                        each.setValue((int) Float.parseFloat(String.valueOf(res.getTotal())));
+                        each.setValue(res.getTotal());
                     }
                 }
             }
@@ -126,7 +127,7 @@ public class AdminController {
             date = time.plusDays(-6).toDate();
             for (int i = 0; i < 7; i++) {
                 String label = sdf.format(date);
-                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, 0);
+                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
                 lsLabel.add(model);
                 date = time.plusDays(-5 + i).toDate();
             }
@@ -134,7 +135,7 @@ public class AdminController {
             for (KeyValueStringIntegerModel each : lsLabel) {
                 for (ChartDashboardBillOrder res : response) {
                     if (each.getKey().compareTo(res.getDate()) == 0) {
-                        each.setValue((int) Float.parseFloat(String.valueOf(res.getTotal())));
+                        each.setValue(res.getTotal());
                     }
                 }
             }

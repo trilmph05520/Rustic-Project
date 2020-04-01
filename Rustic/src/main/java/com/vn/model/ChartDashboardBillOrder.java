@@ -1,14 +1,16 @@
 package com.vn.model;
 
+import java.math.BigDecimal;
+
 public class ChartDashboardBillOrder {
 
     private String date;
-    private Integer total;
+    private BigDecimal total;
 
     public ChartDashboardBillOrder() {
     }
 
-    public ChartDashboardBillOrder(String date, Integer total) {
+    public ChartDashboardBillOrder(String date, BigDecimal total) {
         this.date = date;
         this.total = total;
     }
@@ -21,11 +23,11 @@ public class ChartDashboardBillOrder {
         this.date = date;
     }
 
-    public Integer getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 }

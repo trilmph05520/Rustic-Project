@@ -1,5 +1,6 @@
 package com.vn.service.imple;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -88,9 +89,8 @@ public class BillServiceImpl implements BillService {
         List<Object[]> lsObject = billRepo.listSumTotalForDashboard(fromDate, toDate);
         for(Object[] each : lsObject){
             String key = sdf.format(each[0]);
-            Double val = (Double) each[1];
-            Integer value = val.intValue();
-            ChartDashboardBillOrder model = new ChartDashboardBillOrder(key, value);
+            BigDecimal val = new BigDecimal(each[1].toString());
+            ChartDashboardBillOrder model = new ChartDashboardBillOrder(key, val);
             response.add(model);
         }
         return response;
