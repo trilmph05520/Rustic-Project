@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="fragments/initAdmin :: head"></div>
@@ -137,7 +136,7 @@
 										<td scope="row"><a type="button" class="btn btn-danger"
 											data-toggle="modal" data-target="#productModal"
 											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'"
-											th:utext="#{lable.delete}"></a></td>
+											>Xóa</a></td>
 
 									</tr>
 
@@ -186,7 +185,7 @@
 
 			$('#contentDelete').text(
 					'Bạn có chắc chắn muốn xóa sản phẩm: ' + key + ' - ' + name
-							+ ' không ? Bấm Delete để xác nhận.');
+							+ ' không ? Bấm XÓA để xác nhận.');
 
 			$('#delete').click(
 					function() {

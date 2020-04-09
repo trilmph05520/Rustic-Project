@@ -143,6 +143,13 @@
 	<!-- 	<script th:src="@{/assets/vendor/chart.js/dist/Chart.min.js}"></script>
 	<script th:src="@{/assets/vendor/chart.js/dist/Chart.extension.js}"></script> -->
 	<!-- Argon JS -->
+	<!-- Argon Scripts -->
+	<!-- Core -->
+
+	<!-- Optional JS -->
+	<!-- 	<script th:src="@{/assets/vendor/chart.js/dist/Chart.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/dist/Chart.extension.js}"></script> -->
+	<!-- Argon JS -->
 	<div th:replace="fragments/initAdmin :: commonScript"></div>
 
 	<div th:replace="fragments/navAdmin :: modal-delete"></div>
@@ -162,8 +169,8 @@
 			$('#modal-title-notification').text('Xác Nhận xóa Tài Khoản')
 
 			$('#name').text(
-					'Bạn có chắc chắn muốn xóa Tài khoản có userName là  '
-							+ key + ' không ? Bấm Delete để xách nhận.');
+					'Bạn có chắc chắn muốn xóa Tài khoản có tên là là  '
+							+ key + ' không ? Bấm xác nhận để Xóa khỏi danh sách.');
 
 			$('#delete').click(
 					function() {
@@ -183,15 +190,15 @@
 			var id = key;
 
 			$('#modal-title-notification').text(
-					'Xác Nhận Reset mật khẩu Tài Khoản')
+					'Xác Nhận cài lại mật khẩu Tài Khoản')
 
 			$('#name')
 					.text(
-							'Bạn có chắc chắn muốn thiêt lập lại mật khẩu Tài khoản có userName là '
+							'Bạn có chắc chắn muốn thiêt lập lại mật khẩu Tài khoản có tên tài khoản là '
 									+ key
-									+ ' về mật khẩu mặc định không ? Bấm Reset để xách nhận.');
+									+ ' về mật khẩu mặc định không ? Bấm Xác nhận để thay đổi.');
 
-			$('#delete').text('Reset');
+			$('#delete').text('Xác nhận');
 
 			$('#delete').click(
 					function() {

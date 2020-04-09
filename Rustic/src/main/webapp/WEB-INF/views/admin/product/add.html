@@ -8,214 +8,9 @@
 }
 
 /*---------upload ảnh------------*/
-.wrap-custom-file {
-	position: relative;
-	display: inline-block;
-	width: 150px;
-	height: 150px;
-	margin: 10px 10px 5px 20px;
-	text-align: center;
-}
-
-.wrap-custom-file input[type="file"] {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 2px;
-	height: 2px;
-	overflow: hidden;
-	opacity: 0;
-}
-
-.wrap-custom-file label {
-	z-index: 1;
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	width: 100%;
-	overflow: hidden;
-	padding: 0 0.5rem;
-	cursor: pointer;
-	background-color: #fff;
-	border-radius: 4px;
-	-webkit-transition: -webkit-transform 0.4s;
-	transition: -webkit-transform 0.4s;
-	transition: transform 0.4s;
-	transition: transform 0.4s, -webkit-transform 0.4s;
-}
-
-.wrap-custom-file label span {
-	display: block;
-	margin-top: 2rem;
-	font-size: 1.4rem;
-	color: #777;
-	-webkit-transition: color 0.4s;
-	transition: color 0.4s;
-}
-
-.wrap-custom-file label:hover {
-	-webkit-transform: translateY(-0.5rem);
-	transform: translateY(-0.5rem);
-	transition: transform .5s, box-shadow .5s;
-	box-shadow: 2px 2px 5px #b1b1b1;
-}
-
-.wrap-custom-file label:hover span {
-	color: #333;
-}
-
-.wrap-custom-file label {
-	background-size: cover;
-	background-position: center;
-	border: 1px dashed cornflowerblue;
-	border-radius: 10px;
-	/*box-shadow: 2px 2px 5px #cdcdcd;*/
-}
-
-.wrap-custom-file label.file-ok {
-	border: none;
-	box-shadow: 2px 2px 5px #b1b1b1;
-}
-
-.wrap-custom-file label.file-ok span {
-	height: 30px;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	padding: 0.3rem;
-	font-size: 1.1rem;
-	color: #6a0700;
-	background-color: rgba(255, 255, 255, 0.7);
-}
-
-/*---------end upload ảnh--------*/
-.wrap-custom-fileadd {
-	position: relative;
-	display: inline-block;
-	width: 150px;
-	height: 150px;
-	margin: 10px 10px 5px 20px;
-	text-align: center;
-}
-
-.wrap-custom-fileadd input[type="file"] {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 2px;
-	height: 2px;
-	overflow: hidden;
-	opacity: 0;
-}
-
-.wrap-custom-fileadd label {
-	z-index: 1;
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	width: 100%;
-	overflow: hidden;
-	padding: 0 0.5rem;
-	background-color: #fff;
-	border-radius: 4px;
-	-webkit-transition: -webkit-transform 0.4s;
-	transition: -webkit-transform 0.4s;
-	transition: transform 0.4s;
-	transition: transform 0.4s, -webkit-transform 0.4s;
-}
-
-.wrap-custom-fileadd label span {
-	display: block;
-	margin-top: 2rem;
-	font-size: 1.4rem;
-	color: #777;
-	-webkit-transition: color 0.4s;
-	transition: color 0.4s;
-}
-
-.wrap-custom-fileadd label:hover {
-	-webkit-transform: translateY(-0.5rem);
-	transform: translateY(-0.5rem);
-	transition: transform .5s, box-shadow .5s;
-	box-shadow: 2px 2px 5px #b1b1b1;
-}
-
-.wrap-custom-fileadd label:hover span {
-	color: #333;
-}
-
-.wrap-custom-fileadd label {
-	background-size: cover;
-	background-position: center;
-	border: 1px dashed cornflowerblue;
-	border-radius: 10px;
-}
-
-.wrap-custom-fileadd label.file-ok {
-	border: none;
-	box-shadow: 2px 2px 5px #b1b1b1;
-}
-
-.wrap-custom-fileadd label.file-ok span {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	padding: 0.3rem;
-	font-size: 1.1rem;
-	color: #6a0700;
-	background-color: rgba(255, 255, 255, 0.7);
-}
-
-.title-hinhanh-chi-tiet {
-	width: 100%;
-	height: 46px;
-	border-bottom: 1px solid #E8E8E8;
-}
-
-.title-hinhanh-chi-tiet h5 {
-	font-size: 20px;
-	margin-left: 20px;
-	line-height: 46px;
-	margin-top: 10px;
-	font-weight: 500;
-	margin-top: 5px;
-}
-
-.row-card-hinhanh-chit-tiet .group-hinhanh {
-	width: 100%;
-	float: left;
-	margin-bottom: 20px;
-}
-
-.removeIMG {
-	font-size: 13px !important;
-	margin-top: 40px !important;
-}
-
-.removeIMGAdd {
-	font-size: 13px !important;
-}
-
-.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file label:hover {
-	background: #aaaaaa !important;
-}
-
-.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file[id^="idSubImage_"] label:hover span
-	{
-	display: block !important;
-}
-
-.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file[id^="idAddSubImage_"] label:hover span
-	{
-	display: block !important;
-}
 </style>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/product_add.css}" />
 <body>
 	<!-- Sidenav -->
 	<!-- Sidenav -->
@@ -227,14 +22,15 @@
 		<!-- Header -->
 		<!-- Header -->
 		<!-- Page content -->
-		<div class="container-fluid mt--6" style="margin-top: 25px !important;">
+		<div class="container-fluid mt--6"
+			style="margin-top: 25px !important;">
 			<div class="row">
 				<div class="col-xl-12 order-xl-1">
 					<div class="card">
 						<div class="card-header">
 							<div class="row align-items-center">
 								<div class="col-8">
-									<h3 class="mb-0" >Thêm sản phẩm</h3>
+									<h3 class="mb-0">Thêm sản phẩm</h3>
 								</div>
 								<!-- <div class="col-4 text-right">
 									<a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -243,13 +39,13 @@
 						</div>
 						<div class="card-body">
 							<form>
-								<h6 class="heading-small text-muted mb-4">Thông tin sản phẩm</h6>
+								<h6 class="heading-small text-muted mb-4">Thông tin sản
+									phẩm</h6>
 								<div class="pl-lg-4">
 									<div class="row">
 										<div class="col-lg-3">
 											<div class="form-group">
-												<label>Hình đại diện</label><span class="error">
-													*</span>
+												<label>Hình đại diện</label><span class="error"> *</span>
 												<div>
 													<div class="group-hinhanh">
 														<div class="wrap-custom-file">
@@ -267,8 +63,7 @@
 										</div>
 										<div class="col-lg-9" style="border-left: 2px solid #aaa;">
 											<div class="form-group">
-												<label th>Chi tiết ảnh</label><span class="error">
-													*</span>
+												<label th>Chi tiết ảnh</label><span class="error"> *</span>
 												<div>
 													<div class="detail-step row-card-hinhanh-chit-tiet">
 														<div class="group-hinhanh">
@@ -295,7 +90,8 @@
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label>Thông tin sản phẩm</label><span class="error"> *</span>
+												<label>Thông tin sản phẩm</label><span class="error">
+													*</span>
 												<div>
 													<select class="form-control" id="form-field-cateChildren">
 														<option value="0">Thông tin sản phẩm</option>
@@ -307,10 +103,10 @@
 										</div>
 										<div class="col-lg-6" style="margin-bottom: 20px;">
 											<div class="form-group">
-												<label >Danh Mục</label><span class="error"> *</span>
+												<label>Danh Mục</label><span class="error"> *</span>
 												<div>
 													<select class="form-control" id="form-field-cate-children">
-														<option value="" >Danh mục</option>
+														<option value="">Danh mục</option>
 													</select>
 												</div>
 												<span
@@ -320,7 +116,7 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label >Tên sản phẩm</label><span class="error"> *</span>
+												<label>Tên sản phẩm</label><span class="error"> *</span>
 												<div>
 													<input type="text" class="form-control" id="name"
 														placeholder="Tên sản phẩm" maxlength="64" /> <span
@@ -366,9 +162,8 @@
 											<div class="form-group" style="height: 100px;">
 												<label>Mô tả</label><span class="error"> *</span>
 												<div style="height: 100px;">
-													<textarea class="form-control"
-														placeholder="" id="description"
-														style="height: 100px;" maxlength="256"></textarea>
+													<textarea class="form-control" placeholder=""
+														id="description" style="height: 100px;" maxlength="256"></textarea>
 													<span
 														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
 														id="descriptionError"></span>
@@ -377,7 +172,7 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label >Thông tin sản phẩm</label><span class="error">
+												<label>Thông tin sản phẩm</label><span class="error">
 													*</span>
 												<div>
 													<textarea class="form-control"
@@ -397,7 +192,7 @@
 													th:href="@{/product/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
 													href="/account/list" class="btn btn-sm btn-neutral">Thoát</a>
 												<button type="button" id="addProduct"
-													class="btn btn-sm btn-neutral" >Lưu</button>
+													class="btn btn-sm btn-neutral">Lưu</button>
 											</div>
 										</div>
 									</div>
@@ -414,11 +209,25 @@
 	</div>
 	<!-- Argon Scripts -->
 	<!-- Core -->
+
 	<div th:replace="fragments/initAdmin :: commonScript"></div>
 	<script th:inline="javascript">
     /*<![CDATA[*/
     var currUrl = /*[[@{/}]]*/ "";
     /*]]>*/
+    
+</script>
+
+
+
+
+	<script>
+    function formatNumberString(numberStr) {
+        if (typeof numberStr === 'number') {
+            numberStr = numberStr.toString();
+        }
+        return numberStr.replace(/(?=(?:\d{3})+$)(?!^)/g, ',');
+    }
 </script>
 	<script>
     $('#form-field-cateChildren').on('change', function () {
@@ -439,41 +248,7 @@
         });
     });
 </script>
-
-	<script>
-    function formatNumberString(numberStr) {
-        if (typeof numberStr === 'number') {
-            numberStr = numberStr.toString();
-        }
-        return numberStr.replace(/(?=(?:\d{3})+$)(?!^)/g, ',');
-    }
-</script>
-	<script>
-    var that = this;
-    var isFormatNumber = true;
-    if (isFormatNumber !== false) {
-        $('#price').on('keyup', function () {
-            var formattedVal = formatNumberString($('#price').val().replace(/,/g, ''));
-            $('#price').val(formattedVal);
-        });
-    }
-    if (isFormatNumber !== false) {
-        $('#priceSale').on('keyup', function () {
-            var formattedVal = formatNumberString($('#priceSale').val().replace(/,/g, ''));
-            $('#priceSale').val(formattedVal);
-        });
-    }
-    $('#price, #priceSale, #quantity').on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
-        if (/^\d*$/.test(this.value.replace(/,/g, ''))) {
-            this.oldValue = this.value;
-            this.oldSelectionStart = this.selectionStart;
-            this.oldSelectionEnd = this.selectionEnd;
-        } else if (this.hasOwnProperty("oldValue")) {
-            this.value = this.oldValue;
-            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-        }
-    });
-</script>
+	
 	<script type="text/javascript">
     var mainImg = '';
     var that = this;
@@ -661,6 +436,36 @@
         }
     })
     ;
+</script>
+<script>
+    var that = this;
+    var isFormatNumber = true;
+    if (isFormatNumber !== false) {
+        $('#price').on('keyup', function () {
+            var formattedVal = formatNumberString($('#price').val().replace(/,/g, ''));
+            $('#price').val(formattedVal);
+        });
+    }
+    if (isFormatNumber !== false) {
+        $('#priceSale').on('keyup', function () {
+            var formattedVal = formatNumberString($('#priceSale').val().replace(/,/g, ''));
+            $('#priceSale').val(formattedVal);
+        });
+    }
+    $('#price, #priceSale, #quantity').on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+        if (/^\d*$/.test(this.value.replace(/,/g, ''))) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        }
+    });
+    
+    
+    
+    
 </script>
 	<script>
 
