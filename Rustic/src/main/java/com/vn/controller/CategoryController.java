@@ -31,75 +31,73 @@ import com.vn.validation.service.CategoryFormValidator;
 @Controller
 @RequestMapping("/category/")
 public class CategoryController {
-	
 
-    @Resource
-    private CategoryService categoryService;
+	@Resource
+	private CategoryService categoryService;
 
 	@Resource
 	private CategoryFormValidator categoryFormValidator;
 
-	
+	private String DELETE = "N";
+	private String ISACTVE = "Y";
 
-    private String DELETE = "N";
-    private String ISACTVE = "Y";
-
-    @RequestMapping(value = "list.html", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "list.html", method = { RequestMethod.GET, RequestMethod.POST })
 //    @PreAuthorize("hasAnyAuthority('Administrators','Staffs')")
-    private String listCategory(Model model, Pageable pageable,
-                                @RequestParam(value = "txtName", defaultValue = "") String txtName, HttpServletRequest request, HttpSession session) {
-        String not_found_message = "";
-        if (Strings.isNullOrEmpty(txtName) && request.getMethod().equalsIgnoreCase("GET")) {
-            model.addAttribute("txtName", "");
-        }
-        if (request.getMethod().equalsIgnoreCase("POST")) {
-            model.addAttribute("txtName", txtName);
-        }
-        Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
-        Pageable _pageable = new PageRequest(pageable.getPageNumber(), Constants.Paging.SIZE, sort);
-        Page<Category> pageTop = categoryService.findAllCatePage(txtName, DELETE, ISACTVE, _pageable);
-        if (pageTop.getContent().size() == 0) {
-            not_found_message = "Không tìm thấy dữ liệu";
-        }
-        model.addAttribute("page", pageTop);
-        model.addAttribute("not_found_message", not_found_message);
-        return "admin/categorys/cate_list";
-    }
+	private String listCategory(Model model, Pageable pageable,
+			@RequestParam(value = "txtName", defaultValue = "") String txtName, HttpServletRequest request,
+			HttpSession session) {
+		String not_found_message = "";
+		if (Strings.isNullOrEmpty(txtName) && request.getMethod().equalsIgnoreCase("GET")) {
+			model.addAttribute("txtName", "");
+		}
+		if (request.getMethod().equalsIgnoreCase("POST")) {
+			model.addAttribute("txtName", txtName);
+		}
+		Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
+		Pageable _pageable = new PageRequest(pageable.getPageNumber(), Constants.Paging.SIZE, sort);
+		Page<Category> pageTop = categoryService.findAllCatePage(txtName, DELETE, ISACTVE, _pageable);
+		if (pageTop.getContent().size() == 0) {
+			not_found_message = "Không tìm thấy dữ liệu";
+		}
+		model.addAttribute("page", pageTop);
+		model.addAttribute("not_found_message", not_found_message);
+		return "admin/categorys/cate_list";
+	}
 
-    @RequestMapping(value = "delete/{id}/list.html", method = RequestMethod.GET)
+	@RequestMapping(value = "delete/{id}/list.html", method = RequestMethod.GET)
 //    @PreAuthorize("hasAnyAuthority('Administrators')")
-    public String deleteCategory(@PathVariable("id") long id) {
-        Category category = categoryService.findOne(id);
-        if (category == null) {
-            return "403";
-        }
-        category.setIsDelete("Y");
-        categoryService.update(category);
-        return "redirect:/category/list.html";
-    }
+	public String deleteCategory(@PathVariable("id") long id) {
+		Category category = categoryService.findOne(id);
+		if (category == null) {
+			return "403";
+		}
+		category.setIsDelete("Y");
+		categoryService.update(category);
+		return "redirect:/category/list.html";
+	}
 
-    @RequestMapping(value = "{id}/edit.html", method = RequestMethod.GET)
-    public String editCategory(Model model, @PathVariable("id") long id) {
-        if (id == 0) {
-            Category category = new Category();
-            category.setIsActive("Y");
-            model.addAttribute("category", category);
-            model.addAttribute("title", "Thêm mới danh mục");
-        } else {
-            Category category = categoryService.findOne(id);
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            model.addAttribute("category", category);
-            if(category.getDate() == null) {
-            	category.setDate(new Date());
-            }
-            model.addAttribute("date", sdf.format(category.getDate()));
-            model.addAttribute("title", "Sửa danh mục");
-        }
+	@RequestMapping(value = "{id}/edit.html", method = RequestMethod.GET)
+	public String editCategory(Model model, @PathVariable("id") long id) {
+		if (id == 0) {
+			Category category = new Category();
+			category.setIsActive("Y");
+			model.addAttribute("category", category);
+			model.addAttribute("title", "Thêm mới danh mục");
+		} else {
+			Category category = categoryService.findOne(id);
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			model.addAttribute("category", category);
+			if (category.getDate() == null) {
+				category.setDate(new Date());
+			}
+			model.addAttribute("date", sdf.format(category.getDate()));
+			model.addAttribute("title", "Sửa danh mục");
+		}
 
 		model.addAttribute("lstCate", categoryService.findAllCateList(id, "", "N", "Y"));
 
-        return "admin/categorys/cate_edit";
-    }
+		return "admin/categorys/cate_edit";
+	}
 
 	@RequestMapping(value = "save.html", method = RequestMethod.POST)
 	public String saveCategory(@ModelAttribute(value = "category") @Valid Category category, BindingResult result,
@@ -111,7 +109,8 @@ public class CategoryController {
 			} else {
 				model.addAttribute("title", "Sửa danh mục");
 			}
-			model.addAttribute("lstCate", categoryService.findAllCateList(category.getId() == null ? 0 : category.getId(), "", "N", "Y"));
+			model.addAttribute("lstCate",
+					categoryService.findAllCateList(category.getId() == null ? 0 : category.getId(), "", "N", "Y"));
 			return "admin/categorys/cate_edit";
 		}
 		if (category.getId() == null) {

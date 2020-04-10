@@ -74,9 +74,9 @@
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
-																		<label for="fir">Họ <font color="red">*</font></label> <input
-																			type="text" th:field="*{firstName}" name="firstName"
-																			id="firstName">
+																		<label for="fir">Họ <font color="red">*</font></label>
+																		<input type="text" th:field="*{firstName}"
+																			name="firstName" id="firstName">
 																		<div
 																			th:if="${mapError != null && mapError.containsKey('firstName') != null}"
 																			style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
@@ -87,9 +87,9 @@
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
-																		<label for="lastName">Tên <font color="red">*</font></label> <input
-																			type="tel" th:field="*{lastName}" name="lastName"
-																			id="lastName">
+																		<label for="lastName">Tên <font color="red">*</font></label>
+																		<input type="tel" th:field="*{lastName}"
+																			name="lastName" id="lastName">
 																		<div
 																			th:if="${mapError != null && mapError.containsKey('lastName') != null}"
 																			style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
@@ -122,9 +122,10 @@
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
-																		<label for="lastName">Giới tính <font color="red">*</font></label> <select
-																			class="custom-select" name="gender"
-																			style="height: 50px;" th:field="*{gender}">
+																		<label for="lastName">Giới tính <font
+																			color="red">*</font></label> <select class="custom-select"
+																			name="gender" style="height: 50px;"
+																			th:field="*{gender}">
 																			<option value="">Giới tính</option>
 																			<option value="0">Nam</option>
 																			<option value="1">Nữ</option>
@@ -139,8 +140,8 @@
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
-																		<label for="lastName">Số điện thoại <font color="red">*</font></label> <input
-																			type="text" name="phone"
+																		<label for="lastName">Số điện thoại <font
+																			color="red">*</font></label> <input type="text" name="phone"
 																			placeholder="Số điện thoại..." th:field="*{phone}"
 																			maxlength="10">
 																		<div
@@ -245,8 +246,8 @@
 																		class="btn btn-success">Đang xác nhận đơn</span> <span
 																		th:if="${each.typeStatus == 6}"
 																		class="btn btn-success">Chờ người giao</span><span
-																		class="btn btn-danger"
-																		th:if="${each.typeStatus == 7}">Yêu cầu hủy</span></td>
+																		class="btn btn-danger" th:if="${each.typeStatus == 7}">Yêu
+																			cầu hủy</span></td>
 																	<td class="text-table-body" style="text-align: center;">
 																		<span th:if="${each.status == 1}"
 																		class="btn btn-success">Đã thanh toán</span> <span
@@ -320,6 +321,7 @@
 
 			<!-- LOGIN SECTION END -->
 		</div>
+
 
 
 		<!-- Partner Logo Section Begin -->

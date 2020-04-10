@@ -111,6 +111,14 @@
 										<!--                                            </button>-->
 										<!--                                        </a>-->
 										<!--                                    </td>-->
+										<!--                                    <td>-->
+										<!--                                        <a href="#"-->
+										<!--                                           th:onclick="'resetPasswordConfirm(\'' + ${eachRow.userName} + '\');'"-->
+										<!--                                           data-toggle="tooltip" title="Reset mật khẩu Tài Khoản">-->
+										<!--                                            <button class="btn btn-info btn-circle"><i class="fa fa-refresh"></i>-->
+										<!--                                            </button>-->
+										<!--                                        </a>-->
+										<!--                                    </td>-->
 									</tr>
 
 								</tbody>
@@ -129,6 +137,13 @@
 			</div>
 		</div>
 	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+
+	<!-- Optional JS -->
+	<!-- 	<script th:src="@{/assets/vendor/chart.js/dist/Chart.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/dist/Chart.extension.js}"></script> -->
+	<!-- Argon JS -->
 	<!-- Argon Scripts -->
 	<!-- Core -->
 
@@ -263,6 +278,30 @@
 		</div>
 		END Modal
 	</div> -->
+	<!-- <div id="deleteConfirm-wrapper">
+		Modal
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id="name"></p>
+						<button id="delete" class="btn btn-sm btn-danger text-right">Delete</button>
+						.modal-product
+					</div>
+					.modal-body
+				</div>
+				.modal-content
+			</div>
+			.modal-dialog
+		</div>
+		END Modal
+	</div> -->
 
 
 
@@ -274,7 +313,33 @@
 	</script>
 
 
-	<script>
+
+
+	<script type="text/javascript">
+		function deleteConfirm(key, name) {
+			var id = key;
+
+			$('#modal-title-notification').text('Xác nhận xóa danh mục')
+
+			$('#name').text(
+					'Bạn có chắc chắn muốn xóa nhân viên: ' + key + ' - '
+							+ name + ' không ? Bấm Xóa để xác nhận.');
+
+			$('#delete').click(
+					function() {
+						$.ajax({
+							url : window.location.origin + currUrl
+									+ 'staff/delete/' + id + '/list.html',
+							method : 'GET',
+							success : function() {
+								window.location.href = window.location.origin
+										+ currUrl + 'staff/list.html';
+							}
+						});
+					});
+		}
+	</script>
+		<script>
 		function detailUser(id) {
 			$.ajax({
 				url : currUrl + 'staff/detail.html',
@@ -311,31 +376,43 @@
 			})
 		}
 	</script>
-
-	<script type="text/javascript">
-		function deleteConfirm(key, name) {
-			var id = key;
-
-			$('#modal-title-notification').text('Xác nhận xóa danh mục')
-
-			$('#name').text(
-					'Bạn có chắc chắn muốn xóa nhân viên: ' + key + ' - '
-							+ name + ' không ? Bấm Xóa để xác nhận.');
-
-			$('#delete').click(
-					function() {
-						$.ajax({
-							url : window.location.origin + currUrl
-									+ 'staff/delete/' + id + '/list.html',
-							method : 'GET',
-							success : function() {
-								window.location.href = window.location.origin
-										+ currUrl + 'staff/list.html';
-							}
-						});
-					});
+	<!-- 	<script>
+		function detailUser(id) {
+			$.ajax({
+				url : currUrl + 'staff/detail.html',
+				method : 'GET',
+				data : {
+					'id' : id
+				},
+				contentType : 'application/x-www-form-urlencoded',
+				success : function(response) {
+					var data = JSON.parse(response);
+					if (data !== null && data !== '') {
+						$('#nameUser').val(data.nameUser);
+						$('#emailUser').val(data.emailUser);
+						$('#bank').val(data.bank);
+						$('#atmNumber').val(data.atmNumberBank);
+						$('#birthday').val(data.birthday);
+						$('#company').val(data.company);
+						$('#phone').val(data.phone);
+						$('#province').val(data.province);
+						$('#town').val(data.town);
+						$('#address').val(data.address);
+					} else {
+						$('#nameUser').val('');
+						$('#emailUser').val('');
+						$('#bank').val('');
+						$('#atmNumber').val('');
+						$('#birthday').val('');
+						$('#company').val('');
+						$('#phone').val('');
+						$('#province').val('');
+						$('#town').val('');
+					}
+				}
+			})
 		}
-	</script>
+	</script> -->
 </body>
 
 </html>

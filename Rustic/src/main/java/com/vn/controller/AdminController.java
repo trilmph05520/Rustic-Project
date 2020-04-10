@@ -34,116 +34,114 @@ import com.vn.service.RejectService;
 @RequestMapping("/admin/")
 public class AdminController {
 
-    @Resource
-    private CategoryService categoryService;
+	@Resource
+	private CategoryService categoryService;
 
-    @Resource
-    private BillService billService;
+	@Resource
+	private BillService billService;
 
-    @Resource
-    private Product_BillService productBillService;
+	@Resource
+	private Product_BillService productBillService;
 
-    @Resource
-    private RejectService rejectService;
+	@Resource
+	private RejectService rejectService;
 
-    private static Date date = new Date();
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	private static Date date = new Date();
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
-    @RequestMapping(value = "login.html", method = RequestMethod.GET)
-    public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
-        return "admin/login";
-    }
+	@RequestMapping(value = "login.html", method = RequestMethod.GET)
+	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		return "admin/login";
+	}
 
-    //    @PreAuthorize("hasAnyAuthority('Administrators')")
-    @GetMapping(value = {"dashboard.html"})
-    public String index(ModelMap modelMap, HttpSession session) {
-        try {
+	// @PreAuthorize("hasAnyAuthority('Administrators')")
+	@GetMapping(value = { "dashboard.html" })
+	public String index(ModelMap modelMap, HttpSession session) {
+		try {
 //            ngày đó bán được số lượng bao nhiêu từng sản phẩm
-            List<KeyValueStringIntegerModel> ls = productBillService.listCountBillOrGrDateNow();
-            modelMap.addAttribute("lsOrderDateNow", ls);
+			List<KeyValueStringIntegerModel> ls = productBillService.listCountBillOrGrDateNow();
+			modelMap.addAttribute("lsOrderDateNow", ls);
 
-            DateTime time = new DateTime();
-            List<KeyValueStringIntegerModel> lsLabel = new ArrayList<>();
-            date = time.plusDays(-6).toDate();
-            for (int i = 0; i < 7; i++) {
-                String label = sdf.format(date);
-                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
-                lsLabel.add(model);
-                date = time.plusDays(-5 + i).toDate();
-            }
-            List<ChartDashboardBillOrder> response = billService.listSumTotalForDashboard(date);
-            for (KeyValueStringIntegerModel each : lsLabel) {
-                for (ChartDashboardBillOrder res : response) {
-                    if (each.getKey().compareTo(res.getDate()) == 0) {
-                        each.setValue(res.getTotal());
-                    }
-                }
-            }
-            modelMap.addAttribute("lsBill", lsLabel);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "admin/dashboard";
-    }
+			DateTime time = new DateTime();
+			List<KeyValueStringIntegerModel> lsLabel = new ArrayList<>();
+			date = time.plusDays(-6).toDate();
+			for (int i = 0; i < 7; i++) {
+				String label = sdf.format(date);
+				KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
+				lsLabel.add(model);
+				date = time.plusDays(-5 + i).toDate();
+			}
+			List<ChartDashboardBillOrder> response = billService.listSumTotalForDashboard(date);
+			for (KeyValueStringIntegerModel each : lsLabel) {
+				for (ChartDashboardBillOrder res : response) {
+					if (each.getKey().compareTo(res.getDate()) == 0) {
+						each.setValue(res.getTotal());
+					}
+				}
+			}
+			modelMap.addAttribute("lsBill", lsLabel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "admin/dashboard";
+	}
 
-    @RequestMapping(value = "chartBill", method = RequestMethod.GET)
-    public @ResponseBody
-    String dataChartBill() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Map<String, Object> map = new HashMap<>();
-        try {
-            DateTime time = new DateTime();
-            List<KeyValueStringIntegerModel> lsLabel = new ArrayList<>();
-            date = time.plusDays(-6).toDate();
-            for (int i = 0; i < 7; i++) {
-                String label = sdf.format(date);
-                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
-                lsLabel.add(model);
-                date = time.plusDays(-5 + i).toDate();
-            }
-            List<ChartDashboardBillOrder> response = productBillService.listCountBillGrByDateBillId(date);
-            for (KeyValueStringIntegerModel each : lsLabel) {
-                for (ChartDashboardBillOrder res : response) {
-                    if (each.getKey().compareTo(res.getDate()) == 0) {
-                        each.setValue(res.getTotal());
-                    }
-                }
-            }
-            map.put("response", lsLabel);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return gson.toJson(map);
-    }
+	@RequestMapping(value = "chartBill", method = RequestMethod.GET)
+	public @ResponseBody String dataChartBill() {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Map<String, Object> map = new HashMap<>();
+		try {
+			DateTime time = new DateTime();
+			List<KeyValueStringIntegerModel> lsLabel = new ArrayList<>();
+			date = time.plusDays(-6).toDate();
+			for (int i = 0; i < 7; i++) {
+				String label = sdf.format(date);
+				KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
+				lsLabel.add(model);
+				date = time.plusDays(-5 + i).toDate();
+			}
+			List<ChartDashboardBillOrder> response = productBillService.listCountBillGrByDateBillId(date);
+			for (KeyValueStringIntegerModel each : lsLabel) {
+				for (ChartDashboardBillOrder res : response) {
+					if (each.getKey().compareTo(res.getDate()) == 0) {
+						each.setValue(res.getTotal());
+					}
+				}
+			}
+			map.put("response", lsLabel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return gson.toJson(map);
+	}
 
-    @RequestMapping(value = "chartReject", method = RequestMethod.GET)
-    public @ResponseBody
-    String dataChartReject() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Map<String, Object> map = new HashMap<>();
-        try {
-            DateTime time = new DateTime();
-            List<KeyValueStringIntegerModel> lsLabel = new ArrayList<>();
-            date = time.plusDays(-6).toDate();
-            for (int i = 0; i < 7; i++) {
-                String label = sdf.format(date);
-                KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
-                lsLabel.add(model);
-                date = time.plusDays(-5 + i).toDate();
-            }
-            List<ChartDashboardBillOrder> response = rejectService.listCountRejectDashBoard(date);
-            for (KeyValueStringIntegerModel each : lsLabel) {
-                for (ChartDashboardBillOrder res : response) {
-                    if (each.getKey().compareTo(res.getDate()) == 0) {
-                        each.setValue(res.getTotal());
-                    }
-                }
-            }
-            map.put("response", lsLabel);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return gson.toJson(map);
-    }
+	@RequestMapping(value = "chartReject", method = RequestMethod.GET)
+	public @ResponseBody String dataChartReject() {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Map<String, Object> map = new HashMap<>();
+		try {
+			DateTime time = new DateTime();
+			List<KeyValueStringIntegerModel> lsLabel = new ArrayList<>();
+			date = time.plusDays(-6).toDate();
+			for (int i = 0; i < 7; i++) {
+				String label = sdf.format(date);
+				KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(label, BigDecimal.ZERO);
+				lsLabel.add(model);
+				date = time.plusDays(-5 + i).toDate();
+			}
+			List<ChartDashboardBillOrder> response = rejectService.listCountRejectDashBoard(date);
+			for (KeyValueStringIntegerModel each : lsLabel) {
+				for (ChartDashboardBillOrder res : response) {
+					if (each.getKey().compareTo(res.getDate()) == 0) {
+						each.setValue(res.getTotal());
+					}
+				}
+			}
+			map.put("response", lsLabel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return gson.toJson(map);
+	}
 
 }

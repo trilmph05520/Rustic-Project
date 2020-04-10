@@ -1,3 +1,4 @@
+
 package com.vn.common;
 
 import java.io.Serializable;

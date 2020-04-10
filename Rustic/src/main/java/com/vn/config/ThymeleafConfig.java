@@ -12,37 +12,37 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 public class ThymeleafConfig {
-    @Value("${spring.mvc.thymeleaf.cacheable}")
-    boolean cacheable;
+	@Value("${spring.mvc.thymeleaf.cacheable}")
+	boolean cacheable;
 
-    @Bean
-    public SpringResourceTemplateResolver templateResolver() {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setPrefix("/WEB-INF/views/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding("UTF-8");
-        templateResolver.setCacheable(cacheable);
-        return templateResolver;
-    }
+	@Bean
+	public SpringResourceTemplateResolver templateResolver() {
+		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+		templateResolver.setPrefix("/WEB-INF/views/");
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode(TemplateMode.HTML);
+		templateResolver.setCharacterEncoding("UTF-8");
+		templateResolver.setCacheable(cacheable);
+		return templateResolver;
+	}
 
-    @Bean
-    public SpringTemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
-        templateEngine.addDialect(new SpringSecurityDialect());
-        return templateEngine;
-    }
+	@Bean
+	public SpringTemplateEngine templateEngine() {
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver());
+		templateEngine.addDialect(new SpringSecurityDialect());
+		return templateEngine;
+	}
 
-    @Bean
-    public ThymeleafViewResolver thymeleafViewResolver(){
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine());
-        viewResolver.setCharacterEncoding("UTF-8");
-        viewResolver.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        viewResolver.setCache(cacheable);
-        viewResolver.setOrder(2);
-        return viewResolver;
+	@Bean
+	public ThymeleafViewResolver thymeleafViewResolver() {
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		viewResolver.setTemplateEngine(templateEngine());
+		viewResolver.setCharacterEncoding("UTF-8");
+		viewResolver.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		viewResolver.setCache(cacheable);
+		viewResolver.setOrder(2);
+		return viewResolver;
 
-    }
+	}
 }

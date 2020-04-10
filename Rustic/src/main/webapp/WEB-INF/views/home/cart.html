@@ -67,17 +67,19 @@
 									<td class="qua-col first-row">
 										<div class="quantity">
 											<div class="pro-qty">
-												<input type="text" th:id="${cart.value.product.id}" class="qtyInput"
-													th:value="${cart.value.quantity}">
+												<input type="text" th:id="${cart.value.product.id}"
+													class="qtyInput" th:value="${cart.value.quantity}">
 											</div>
 										</div>
 									</td>
-									<td class="total-price first-row"><p th:class="subtotal+${cart.value.product.id}"
+									<td class="total-price first-row"><p
+											th:class="subtotal+${cart.value.product.id}"
 											class="total-price first-row"
 											th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
 											th:with="subtotal=${new java.math.BigDecimal(cart.value.product.price) * new java.math.BigDecimal(cart.value.quantity)}"
 											th:text="${#numbers.formatDecimal(subtotal, 0, 'COMMA', 0, 'POINT')}  + ' VND'"></p>
-										<p class="total-price first-row" th:class="subtotal+${cart.value.product.id}"
+										<p class="total-price first-row"
+											th:class="subtotal+${cart.value.product.id}"
 											th:if="${cart.value.product.priceSale != 0}"
 											th:with="subtotal=${new java.math.BigDecimal(cart.value.product.priceSale) * new java.math.BigDecimal(cart.value.quantity)}"
 											th:text="${#numbers.formatDecimal(subtotal, 0, 'COMMA', 0, 'POINT')}  + ' VND'"></p></td>
@@ -112,7 +114,8 @@
 									<li class="cart-total">Tổng<span class="totalPriceCart"
 										th:text="${#numbers.formatDecimal(session.myCartTotal, 0, 'COMMA', 0,'POINT')} + ' VND'">$240.00</span></li>
 								</ul>
-								<a th:href="@{/home/checkOut.html}" class="proceed-btn">Thanh toán</a>
+								<a th:href="@{/home/checkOut.html}" class="proceed-btn">Thanh
+									toán</a>
 							</div>
 						</div>
 					</div>

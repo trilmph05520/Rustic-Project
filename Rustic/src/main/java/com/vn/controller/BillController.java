@@ -49,10 +49,10 @@ public class BillController {
 
 	@Resource
 	private AuthUserService authSer;
-	
+
 	@Resource
 	private InfomationService infSer;
-	
+
 	@Resource
 	private RejectService rejectService;
 
@@ -67,15 +67,15 @@ public class BillController {
 			@RequestParam(value = "code", defaultValue = "") String code,
 			@RequestParam(value = "status", defaultValue = "0", required = false) Integer status) {
 		try {
-			
-			if(request.getMethod().equalsIgnoreCase("GET")) {
+
+			if (request.getMethod().equalsIgnoreCase("GET")) {
 				AuthUser authUser = authSer.findByUserName(session.getAttribute("account").toString());
 				Infomation inf = infSer.findByAuthUserId(authUser.getId());
-				if(inf == null) {
+				if (inf == null) {
 					return "redirect:/profile/detail.html";
 				}
 			}
-			
+
 			DateTime time = new DateTime();
 			Date _fromDate = time.withTimeAtStartOfDay().toDate();
 			Date _toDate = time.withTime(23, 59, 59, 999).toDate();
@@ -127,15 +127,15 @@ public class BillController {
 			@RequestParam(value = "from_date", defaultValue = "") String fromDate,
 			@RequestParam(value = "to_date", defaultValue = "") String toDate) {
 		try {
-			
-			if(request.getMethod().equalsIgnoreCase("GET")) {
+
+			if (request.getMethod().equalsIgnoreCase("GET")) {
 				AuthUser authUser = authSer.findByUserName(session.getAttribute("account").toString());
 				Infomation inf = infSer.findByAuthUserId(authUser.getId());
-				if(inf == null) {
+				if (inf == null) {
 					return "redirect:/profile/detail.html";
 				}
 			}
-			
+
 			DateTime time = new DateTime();
 			Date _fromDate = time.withTimeAtStartOfDay().toDate();
 			Date _toDate = time.withTime(23, 59, 59, 999).toDate();
@@ -163,7 +163,8 @@ public class BillController {
 
 			Sort sort = new Sort(Sort.Direction.DESC, "id");
 			Pageable _pageable = new PageRequest(pageable.getPageNumber(), Constants.Paging.SIZE, sort);
-			Page<Bill> page = billService.findAllBillByType(_fromDate, _toDate, Bill.STATUSPAYMENT.WAITDELIVERY.value(), DELETE, _pageable);
+			Page<Bill> page = billService.findAllBillByType(_fromDate, _toDate, Bill.STATUSPAYMENT.WAITDELIVERY.value(),
+					DELETE, _pageable);
 			model.addAttribute("page", page);
 			session.setAttribute("from_date", sdf.format(_fromDate));
 			session.setAttribute("to_date", sdf.format(_toDate));
@@ -172,22 +173,22 @@ public class BillController {
 		}
 		return "admin/bill/listNotGive";
 	}
-	
+
 	@RequestMapping(value = "listReceipt.html", method = { RequestMethod.GET, RequestMethod.POST })
 //  @PreAuthorize("hasAnyAuthority('Administrators','Staffs')")
 	public String listReceipt(Model model, HttpSession session, HttpServletRequest request, Pageable pageable,
 			@RequestParam(value = "from_date", defaultValue = "") String fromDate,
 			@RequestParam(value = "to_date", defaultValue = "") String toDate) {
 		try {
-			
-			if(request.getMethod().equalsIgnoreCase("GET")) {
+
+			if (request.getMethod().equalsIgnoreCase("GET")) {
 				AuthUser authUser = authSer.findByUserName(session.getAttribute("account").toString());
 				Infomation inf = infSer.findByAuthUserId(authUser.getId());
-				if(inf == null) {
+				if (inf == null) {
 					return "redirect:/profile/detail.html";
 				}
 			}
-			
+
 			DateTime time = new DateTime();
 			Date _fromDate = time.withTimeAtStartOfDay().toDate();
 			Date _toDate = time.withTime(23, 59, 59, 999).toDate();
@@ -232,15 +233,15 @@ public class BillController {
 			@RequestParam(value = "to_date", defaultValue = "") String toDate,
 			@RequestParam(value = "code", defaultValue = "") String code) {
 		try {
-			
-			if(request.getMethod().equalsIgnoreCase("GET")) {
+
+			if (request.getMethod().equalsIgnoreCase("GET")) {
 				AuthUser authUser = authSer.findByUserName(session.getAttribute("account").toString());
 				Infomation inf = infSer.findByAuthUserId(authUser.getId());
-				if(inf == null) {
+				if (inf == null) {
 					return "redirect:/profile/detail.html";
 				}
 			}
-			
+
 			DateTime time = new DateTime();
 			Date _fromDate = time.withTimeAtStartOfDay().toDate();
 			Date _toDate = time.withTime(23, 59, 59, 999).toDate();
@@ -298,13 +299,13 @@ public class BillController {
 			e.printStackTrace();
 		}
 		AuthUser authUser = authSer.findByUserName(session.getAttribute("account").toString());
-		if(authUser.getAuthRoles().get(0).getId() == 4l) {
+		if (authUser.getAuthRoles().get(0).getId() == 4l) {
 			return "redirect:/bill/listReceipt.html";
-		}else {
+		} else {
 			return "redirect:/bill/list.html";
 		}
 	}
-	
+
 	@RequestMapping(value = "{id}/acceptBill.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Administrators','Staffs','Shipper')")
 	public String acceptBill(@PathVariable("id") Long id, HttpSession session) {
@@ -321,7 +322,7 @@ public class BillController {
 		}
 		return "redirect:/bill/listNotGive.html";
 	}
-	
+
 	@RequestMapping(value = "{id}/cancelBill.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Administrators','Staffs','Shipper')")
 	public String cancelBill(@PathVariable("id") Long id, HttpSession session) {
@@ -334,7 +335,7 @@ public class BillController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 		return "redirect:/bill/listReceipt.html";
 	}
@@ -369,7 +370,7 @@ public class BillController {
 				if (statusType == 0) {
 					bill.setStatus(1);
 				}
-				if(statusType==6) {
+				if (statusType == 6) {
 					bill.setShipper(null);
 				}
 				billService.update(bill);

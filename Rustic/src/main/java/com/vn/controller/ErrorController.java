@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class ErrorController {
 
-    @RequestMapping(value = "/error", method = RequestMethod.GET)
-    public String error() {
-        return "404";
-    }
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String error() {
+		return "404";
+	}
 
-    @RequestMapping(value = "/error/403.html", method = RequestMethod.GET)
-    public String denied() {
-        return "403";
-    }
+	@RequestMapping(value = "/error/403.html", method = RequestMethod.GET)
+	public String denied() {
+		return "403";
+	}
 
-    @RequestMapping(value = "/404.html", method = RequestMethod.GET)
-    public String notfound() {
-        return "404";
-    }
+	@RequestMapping(value = "/404.html", method = RequestMethod.GET)
+	public String notfound() {
+		return "404";
+	}
 
 }

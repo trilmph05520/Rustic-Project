@@ -265,6 +265,32 @@
 	</div> -->
 
 
+	<!-- <div id="deleteConfirm-wrapper">
+		Modal
+		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id="name"></p>
+						<button id="delete" class="btn btn-sm btn-danger text-right">Xóa</button>
+						.modal-product
+					</div>
+					.modal-body
+				</div>
+				.modal-content
+			</div>
+			.modal-dialog
+		</div>
+		END Modal
+	</div> -->
+
+
 
 
 	<script th:inline="javascript">
@@ -274,6 +300,32 @@
 	</script>
 
 
+	
+
+	<script type="text/javascript">
+		function deleteConfirm(key) {
+			var id = key;
+
+			$('#modal-title-notification').text('Xác nhận xóa khách hàng')
+
+			$('#name').text(
+					'Bạn có chắc chắn muốn xóa khách hàng: ' + key + ' - '
+							+ ' không ? Bấm Xóa	 để xác nhận.');
+
+			$('#delete').click(
+					function() {
+						$.ajax({
+							url : window.location.origin + currUrl
+									+ 'user/delete/' + id + '/list.html',
+							method : 'GET',
+							success : function() {
+								window.location.href = window.location.origin
+										+ currUrl + 'user/list.html';
+							}
+						});
+					});
+		}
+	</script>
 	<script>
 		function detailUser(id) {
 			$.ajax({
@@ -311,31 +363,43 @@
 			})
 		}
 	</script>
-
-	<script type="text/javascript">
-		function deleteConfirm(key) {
-			var id = key;
-
-			$('#modal-title-notification').text('Xác nhận xóa khách hàng')
-
-			$('#name').text(
-					'Bạn có chắc chắn muốn xóa khách hàng: ' + key + ' - '
-							+ ' không ? Bấm Xóa	 để xác nhận.');
-
-			$('#delete').click(
-					function() {
-						$.ajax({
-							url : window.location.origin + currUrl
-									+ 'user/delete/' + id + '/list.html',
-							method : 'GET',
-							success : function() {
-								window.location.href = window.location.origin
-										+ currUrl + 'user/list.html';
-							}
-						});
-					});
+	<!-- <script>
+		function detailUser(id) {
+			$.ajax({
+				url : currUrl + 'staff/detail.html',
+				method : 'GET',
+				data : {
+					'id' : id
+				},
+				contentType : 'application/x-www-form-urlencoded',
+				success : function(response) {
+					var data = JSON.parse(response);
+					if (data !== null && data !== '') {
+						$('#nameUser').val(data.nameUser);
+						$('#emailUser').val(data.emailUser);
+						$('#bank').val(data.bank);
+						$('#atmNumber').val(data.atmNumberBank);
+						$('#birthday').val(data.birthday);
+						$('#company').val(data.company);
+						$('#phone').val(data.phone);
+						$('#province').val(data.province);
+						$('#town').val(data.town);
+						$('#address').val(data.address);
+					} else {
+						$('#nameUser').val('');
+						$('#emailUser').val('');
+						$('#bank').val('');
+						$('#atmNumber').val('');
+						$('#birthday').val('');
+						$('#company').val('');
+						$('#phone').val('');
+						$('#province').val('');
+						$('#town').val('');
+					}
+				}
+			})
 		}
-	</script>
+	</script> -->
 </body>
 
 </html>

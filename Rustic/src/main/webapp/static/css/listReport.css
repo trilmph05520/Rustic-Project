@@ -1,0 +1,12 @@
+.text-table-header {
+	text-align: left;
+	font-family: "Segoe UI";
+	vertical-align: inherit;
+}
+
+.text-table-body {
+	text-align: left;
+	vertical-align: inherit;
+	font-family: "Segoe UI";
+	font-size: 15px;
+}

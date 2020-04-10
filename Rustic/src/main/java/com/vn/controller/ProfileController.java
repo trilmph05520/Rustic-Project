@@ -39,9 +39,9 @@ public class ProfileController {
 
 	@Resource
 	private BankInfoService bankService;
-	
+
 	@Resource
-    private InfomationFormValidator infoFormValidator;
+	private InfomationFormValidator infoFormValidator;
 
 	@GetMapping("detail.html")
 	private ModelAndView profileDetail(Model model, HttpSession session) {
@@ -82,7 +82,6 @@ public class ProfileController {
 		}
 	}
 
-	
 	@RequestMapping(value = "detail.html", method = RequestMethod.POST)
 	public String profileSave(HttpSession session, Model model,
 			@ModelAttribute("profile") @Valid InfomationModel infomationModel, BindingResult result,

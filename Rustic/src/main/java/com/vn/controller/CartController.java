@@ -60,7 +60,7 @@ public class CartController {
 //		return "redirect:/home/" + productId + "/single-product.html";
 		return "redirect:/home/cart.html";
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "addAjax/{productId}.html", method = RequestMethod.GET)
 	public @ResponseBody String viewAdd(ModelMap mm, HttpSession session, @PathVariable("productId") long productId) {
@@ -97,7 +97,8 @@ public class CartController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "sub/{productId}.html", method = RequestMethod.GET)
-	public @ResponseBody String viewUpdate(ModelMap mm, HttpSession session, @PathVariable("productId") long productId) {
+	public @ResponseBody String viewUpdate(ModelMap mm, HttpSession session,
+			@PathVariable("productId") long productId) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HashMap<Long, Cart> cartItems = (HashMap<Long, Cart>) session.getAttribute("myCartItems");
 		if (cartItems == null) {
@@ -130,7 +131,8 @@ public class CartController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "remove/{productId}.html", method = RequestMethod.GET)
-	public @ResponseBody String viewRemove(ModelMap mm, HttpSession session, @PathVariable("productId") long productId) {
+	public @ResponseBody String viewRemove(ModelMap mm, HttpSession session,
+			@PathVariable("productId") long productId) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HashMap<Long, Cart> cartItems = (HashMap<Long, Cart>) session.getAttribute("myCartItems");
 		if (cartItems == null || cartItems.isEmpty()) {
@@ -156,10 +158,12 @@ public class CartController {
 	public double totalPrice(HashMap<Long, Cart> cartItems) {
 		BigDecimal count = BigDecimal.ZERO;
 		for (Map.Entry<Long, Cart> list : cartItems.entrySet()) {
-			if(list.getValue().getProduct().getPriceSale() == 0) {
-				count = count.add(new BigDecimal(list.getValue().getProduct().getPrice()).multiply(new BigDecimal(list.getValue().getQuantity())));
-			}else {
-				count = count.add(new BigDecimal(list.getValue().getProduct().getPriceSale()).multiply(new BigDecimal(list.getValue().getQuantity())));
+			if (list.getValue().getProduct().getPriceSale() == 0) {
+				count = count.add(new BigDecimal(list.getValue().getProduct().getPrice())
+						.multiply(new BigDecimal(list.getValue().getQuantity())));
+			} else {
+				count = count.add(new BigDecimal(list.getValue().getProduct().getPriceSale())
+						.multiply(new BigDecimal(list.getValue().getQuantity())));
 			}
 		}
 		return count.doubleValue();
@@ -167,8 +171,8 @@ public class CartController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "add/{productId}/{quantity}.html", method = RequestMethod.GET)
-	public @ResponseBody String vieChangeInput(ModelMap mm, HttpSession session, @PathVariable("productId") long productId,
-			@PathVariable("quantity") int quantity) {
+	public @ResponseBody String vieChangeInput(ModelMap mm, HttpSession session,
+			@PathVariable("productId") long productId, @PathVariable("quantity") int quantity) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HashMap<Long, Cart> cartItems = (HashMap<Long, Cart>) session.getAttribute("myCartItems");
 		if (cartItems == null || cartItems.isEmpty()) {
@@ -181,7 +185,7 @@ public class CartController {
 				item.setProduct(product);
 				item.setQuantity(quantity);
 				cartItems.put(productId, item);
-			}  else {
+			} else {
 				Cart item = new Cart();
 				item.setProduct(product);
 				item.setQuantity(quantity);

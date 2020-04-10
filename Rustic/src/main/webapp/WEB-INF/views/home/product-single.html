@@ -4,7 +4,7 @@
 
 <div th:replace="fragments/initHome :: head"></div>
 
-<style>
+<!-- <style>
 /*css quickview*/
 .modal-dialog.modal-lg {
 	margin-top: 50px;
@@ -172,7 +172,9 @@
 .widget-color ul li:hover {
 	cursor: pointer;
 }
-</style>
+</style> -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/home/product-singer.css}" />
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -520,7 +522,8 @@
 												th:href="@{/home/{id}/single-product.html(id = ${eachNew.id})}"><img
 												th:src="${eachNew.mainImg}" alt=""
 												style="height: 300px; object-fit: cover;"> </a>
-											<div class="sale" th:if="${eachNew.priceSale != 0 && eachNew.quantity > 0}">Giảm
+											<div class="sale"
+												th:if="${eachNew.priceSale != 0 && eachNew.quantity > 0}">Giảm
 												giá</div>
 											<span class="sale" th:if="${eachNew.quantity <= 0}"
 												style="font-size: 15px; border: 2px dotted; padding: 6px; color: white; position: absolute; border-radius: 50%; background: coral; text-align: center; margin-top: 5px;">Hết</span>

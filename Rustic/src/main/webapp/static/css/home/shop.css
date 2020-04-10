@@ -1,0 +1,117 @@
+
+/*css quickview*/
+.modal-dialog.modal-lg {
+	margin-top: 50px;
+}
+
+.modal-content {
+	min-height: 400px;
+	height: 100%;
+}
+
+.product-info {
+	line-height: 28px;
+}
+
+.product-images #imageQuick {
+	height: 300px;
+}
+
+.product-info h4 {
+	font-weight: bold;
+}
+
+.product-info .s-price-box {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.product-info .new-price {
+	font-weight: bold;
+}
+
+.product-info .old-price {
+	text-decoration: line-through;
+	font-weight: 550;
+}
+
+.product-info #status {
+	font-size: 13px;
+	padding: 2px;
+	display: inline;
+}
+
+.product-info #quickCart {
+	margin-top: 10px;
+	padding: 6px;
+	transition: all .3s;
+}
+
+.product-info #quickCart:hover {
+	background: black;
+	color: white;
+	transition: all .3s;
+}
+
+.product-info #info {
+	margin-top: 10px;
+}
+
+/*end css quickview*/
+.status-success {
+	color: white !important;
+	background: #0fa145 !important;
+	text-decoration: none !important;
+	width: 100px;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.status-warning {
+	color: white !important;
+	background: #ff9800 !important;
+	text-decoration: none !important;
+	width: 100px;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.like {
+	height: 30px;
+	width: 30px;
+	border-radius: 50px;
+	text-align: center;
+	line-height: 28px;
+	text-shadow: 1px 1px 1px #1684B2;
+	overflow: hidden;
+	position: relative;
+	border: 1px solid #ddd;
+}
+
+.like:hover {
+	background: #FF7F00;
+	border: #FF7F00;
+	color: white;
+}
+
+.gloss {
+	background: #FFF;
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+	margin-left: -25px;
+	position: absolute;
+	top: -100px;
+	opacity: 0.3;
+}
+
+.down {
+	background: #005aff;
+	/*text-shadow: 1px -1px 1px #FF526F;*/
+	/*box-shadow: 0 -10px 10px #311;*/
+}
+
+.action-button {
+	display: flex !important;
+	justify-content: center !important;
+}

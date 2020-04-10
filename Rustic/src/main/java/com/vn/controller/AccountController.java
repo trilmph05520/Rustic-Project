@@ -45,7 +45,7 @@ public class AccountController {
 
 	@Resource
 	private UserFormValidator userFormValidator;
-	
+
 	@Resource
 	private InfomationService infomationService;
 
@@ -103,9 +103,6 @@ public class AccountController {
 		return "admin/account/user_list";
 	}
 
-	
-	
-	
 	@RequestMapping(value = "add.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Administrators')")
 	public String userAdd(Model model) {
@@ -144,8 +141,8 @@ public class AccountController {
 		else if (user.getUserType() == 2) {
 			roles.add(authRoleService.findOne(2l));
 		}
-		
-		//SHIP
+
+		// SHIP
 		else if (user.getUserType() == 3) {
 			roles.add(authRoleService.findOne(4l));
 		}
@@ -176,7 +173,6 @@ public class AccountController {
 		return "redirect:/account/list.html";
 	}
 
-	
 	@RequestMapping(value = "{id}/update.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Administrators')")
 	public String updateAccount(Model model, @PathVariable("id") Long id) {
@@ -237,12 +233,12 @@ public class AccountController {
 		else if (user.getUserType() == 2) {
 			roles.add(authRoleService.findOne(2l));
 		}
-		
-		//Ship
+
+		// Ship
 		else if (user.getUserType() == 3) {
 			roles.add(authRoleService.findOne(4l));
 		}
-		
+
 		Date createdDate = new DateTime().toDate();
 		authUser.setCreatedDate(createdDate);
 		authUser.setEmail(user.getEmail());
@@ -262,7 +258,6 @@ public class AccountController {
 		return "redirect:/account/list.html";
 	}
 
-	
 	@RequestMapping(value = "delete/{username}/list.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Administrators')")
 	public String deleteAccount(@PathVariable("username") String username) {
@@ -272,7 +267,7 @@ public class AccountController {
 		}
 		authUserService.delete(authUser);
 		Infomation inf = infomationService.findByAuthUserId(authUser.getId());
-		if(inf != null)
+		if (inf != null)
 			infomationService.delete(inf);
 		return "redirect:/account/list.html";
 	}
