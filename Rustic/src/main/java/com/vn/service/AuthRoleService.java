@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface AuthRoleService {
 
-    List<Role> findAll();
+	List<Role> findAll();
 
-    Role findOne(Long id);
-    
+	Role findOne(Long id);
+
 }

@@ -8,13 +8,17 @@
         cursor: none !important;
     }
 
-    #checkout .checkout-form input, #checkout .custom-select, #checkout .form-control {
+    #checkout .checkout-form input,
+    #checkout .custom-select,
+    #checkout .form-control {
         margin-bottom: 5px !important;
         margin-top: 20px;
     }
 </style>
 <style>
-    input[type="text"], input[type="password"], textarea {
+    input[type="text"],
+    input[type="password"],
+    textarea {
         margin-bottom: 0px !important;
         margin-top: 20px !important;
     }
@@ -25,19 +29,23 @@
             -webkit-transform: translate3d(0, -200px, 0);
             transform: translate3d(0, -200px, 0);
         }
+
         60% {
             opacity: 1;
             -webkit-transform: translate3d(0, 10px, 0);
             transform: translate3d(0, 10px, 0);
         }
+
         75% {
             -webkit-transform: translate3d(0, -10px, 0);
             transform: translate3d(0, -10px, 0);
         }
+
         90% {
             -webkit-transform: translate3d(0, 5px, 0);
             transform: translate3d(0, 5px, 0);
         }
+
         100% {
             -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
@@ -575,64 +583,67 @@
         height: 1.5rem;
     }
 </style>
+
 <body>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 
-<!-- Header Section Begin -->
-<div th:replace="fragments/navHome :: header"></div>
-<!-- Header End -->
+    <!-- Header Section Begin -->
+    <div th:replace="fragments/navHome :: header"></div>
+    <!-- Header End -->
 
-<!-- Breadcrumb Section Begin -->
-<div class="breacrumb-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb-text product-more">
-                    <a href="./index.html"><i class="fa fa-home"></i> Home</a><span>Reject</span>
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="./index.html"><i class="fa fa-home"></i> Home</a><span>Reject</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Breadcrumb Section Begin -->
+    <!-- Breadcrumb Section Begin -->
 
-<!-- Shopping Cart Section Begin -->
-<input type="hidden" id="contextPath" th:value="@{/}"/>
-<input type="hidden" id="login" th:value="${session.userLogin}">
-<br>
-<div th:if="${bill.typeStatus == 1 || bill.typeStatus == 2 || bill.typeStatus == 0}">
-    <div class="container" style="margin-bottom: 70px;">
-        <span style="font-weight: bold;">Đơn hàng của Quý khách đã bị hủy hoặc đã nhận, Quý khách xin vui lòng liên hệ với admin để nhận được hỗ trợ. Xin chân thành cảm ơn.
-            <a th:href="@{/}" style="text-decoration: underline;color: blue;">Trang chủ</a>
-        </span>
+    <!-- Shopping Cart Section Begin -->
+    <input type="hidden" id="contextPath" th:value="@{/}" />
+    <input type="hidden" id="login" th:value="${session.userLogin}">
+    <br>
+    <div th:if="${bill.typeStatus == 1 || bill.typeStatus == 2 || bill.typeStatus == 0}">
+        <div class="container" style="margin-bottom: 70px;">
+            <span style="font-weight: bold;">Đơn hàng của Quý khách đã bị hủy hoặc đã nhận, Quý khách xin vui lòng liên
+                hệ với admin để nhận được hỗ trợ. Xin chân thành cảm ơn.
+                <a th:href="@{/}" style="text-decoration: underline;color: blue;">Trang chủ</a>
+            </span>
+        </div>
     </div>
-</div>
-<div th:if="${bill.typeStatus != 1 and bill.typeStatus != 2 and bill.typeStatus != 0}">
-    <div class="row" style="width: 85%!important;margin: 0px auto;margin-bottom: 30px;color: black; border: 1px solid #E8E8E8;
+    <div th:if="${bill.typeStatus != 1 and bill.typeStatus != 2 and bill.typeStatus != 0}">
+        <div class="row"
+            style="width: 85%!important;margin: 0px auto;margin-bottom: 30px;color: black; border: 1px solid #E8E8E8;
         box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);">
-        <div class="col col-xs-12 col-sm-4 col-md-4 col-lg-4 infoRight">
-            <div class="col col-xs-12 col-sm-12 col-md-12" style="border-bottom: 1px solid #E8E8E8;margin-top: 0px;font-size: 17px;font-weight: bold;
+            <div class="col col-xs-12 col-sm-4 col-md-4 col-lg-4 infoRight">
+                <div class="col col-xs-12 col-sm-12 col-md-12" style="border-bottom: 1px solid #E8E8E8;margin-top: 0px;font-size: 17px;font-weight: bold;
 					padding-bottom: 8px;padding-left: 0px;">
-                Thông tin sản phẩm
-            </div>
-            <div th:each="each : ${reject}"
-                 style="margin-top: 10px;border-bottom: 1px solid #E8E8E8;padding-bottom: 10px;">
-                <input type="hidden" th:value="${bill.id}" id="idBill"/>
-                <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px;">
-                    <img th:src="${each.product.mainImg}"/>
+                    Thông tin sản phẩm
                 </div>
-                <div class="row" style="width: 93%;margin-left: 15px;line-height: 30px;">
-                    <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
-                        <div class="txtLeft">Tên sản phẩm</div>
-                        <div class="txtRight" th:text="${each.product.name}">IPhone</div>
+                <div th:each="each : ${reject}"
+                    style="margin-top: 10px;border-bottom: 1px solid #E8E8E8;padding-bottom: 10px;">
+                    <input type="hidden" th:value="${bill.id}" id="idBill" />
+                    <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px;">
+                        <img th:src="${each.product.mainImg}" />
                     </div>
-                    <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
-                        <div class="txtLeft">Giá</div>
-                        <div class="txtRight" th:if="${each.product.priceSale == 0 || each.product.priceSale == null}"
-                             th:text="${#numbers.formatDecimal(each.product.price, 0, 'COMMA', 0,'POINT')}">50,000,000
+                    <div class="row" style="width: 93%;margin-left: 15px;line-height: 30px;">
+                        <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
+                            <div class="txtLeft">Tên sản phẩm</div>
+                            <div class="txtRight" th:text="${each.product.name}">IPhone</div>
+                        </div>
+                        <div class="col col-xs-12 col-sm-12 col-md-12" style="padding: 0px">
+                            <div class="txtLeft">Giá</div>
+                            <div class="txtRight"
+                                th:if="${each.product.priceSale == 0 || each.product.priceSale == null}" th:text="${#numbers.formatDecimal(each.product.price, 0, 'COMMA', 0,'POINT')}">50,000,000
                             VNĐ
                         </div>
                            <div class="txtRight" th:if="${each.product.priceSale != 0 && each.product.priceSale != null}"

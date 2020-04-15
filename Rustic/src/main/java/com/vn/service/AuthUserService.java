@@ -7,29 +7,29 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface AuthUserService  {
+public interface AuthUserService {
 
-    AuthUser findByUsername(String var);
+	AuthUser findByUsername(String var);
 
-    AuthUser findByEmail(String emamail);
+	AuthUser findByEmail(String emamail);
 
-    AuthUser findByUserName(String username);
+	AuthUser findByUserName(String username);
 
-    AuthUser findOne(Long id);
+	AuthUser findOne(Long id);
 
-    Page<AuthUserModel> listUsers(String username, String email, Pageable pageable);
+	Page<AuthUserModel> listUsers(String username, String email, Pageable pageable);
 
-    Page<AuthUserModel> listUserByType(String username, String email,byte type, Pageable pageable);
+	Page<AuthUserModel> listUserByType(String username, String email, byte type, Pageable pageable);
 
-    AuthUser create(AuthUser authUser);
+	AuthUser create(AuthUser authUser);
 
-    AuthUser update(AuthUser authUser);
+	AuthUser update(AuthUser authUser);
 
-    void delete(AuthUser authUser);
+	void delete(AuthUser authUser);
 
-    List<Long> findRolesByUserId(Long userId);
-    
-    AuthUser findByUserNameANDPassword(String user,String pass);
+	List<Long> findRolesByUserId(Long userId);
 
-    boolean checkExistByUserName(String user);
+	AuthUser findByUserNameANDPassword(String user, String pass);
+
+	boolean checkExistByUserName(String user);
 }

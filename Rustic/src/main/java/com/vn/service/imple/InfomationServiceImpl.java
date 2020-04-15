@@ -14,41 +14,41 @@ import javax.transaction.Transactional;
 @Transactional
 public class InfomationServiceImpl implements InfomationService {
 
-    @Resource
-    private InfomationRepo infomationRepo;
-
-    @Override
-    public Page<Infomation> findAll(Pageable pageable) {
-        return infomationRepo.findAll(pageable);
-    }
-
-    @Override
-    public Infomation create(Infomation infomation) {
-        return infomationRepo.save(infomation);
-    }
-
-    @Override
-    public Infomation update(Infomation infomation) {
-        return infomationRepo.save(infomation);
-    }
-
-    @Override
-    public void delete(Infomation infomation) {
-        infomationRepo.delete(infomation);
-    }
-
-    @Override
-    public Infomation findOne(Long id) {
-        return infomationRepo.findOne(id);
-    }
-
-    @Override
-    public Infomation findByAuthUserId(Long id) {
-        return infomationRepo.findByAuthUserId(id);
-    }
+	@Resource
+	private InfomationRepo infomationRepo;
 
 	@Override
-	public Infomation findByPhone(String phone){
+	public Page<Infomation> findAll(Pageable pageable) {
+		return infomationRepo.findAll(pageable);
+	}
+
+	@Override
+	public Infomation create(Infomation infomation) {
+		return infomationRepo.save(infomation);
+	}
+
+	@Override
+	public Infomation update(Infomation infomation) {
+		return infomationRepo.save(infomation);
+	}
+
+	@Override
+	public void delete(Infomation infomation) {
+		infomationRepo.delete(infomation);
+	}
+
+	@Override
+	public Infomation findOne(Long id) {
+		return infomationRepo.findOne(id);
+	}
+
+	@Override
+	public Infomation findByAuthUserId(Long id) {
+		return infomationRepo.findByAuthUserId(id);
+	}
+
+	@Override
+	public Infomation findByPhone(String phone) {
 		return infomationRepo.findByPhone(phone);
 	}
 }

@@ -3,10 +3,11 @@
 
 <div th:replace="fragments/initAdmin :: head"></div>
 <style>
-.readonly {
-	background: white !important;
-}
+	.readonly {
+		background: white !important;
+	}
 </style>
+
 <body>
 	<!-- Sidenav -->
 	<!-- Sidenav -->
@@ -30,17 +31,15 @@
 					</div>
 				</div>
 				<div class="card-body">
-					<form th:object="${review}"
-						th:action="@{/review/{id}/reply.html(id=${review.id})}"
-						method="POST">
+					<form th:object="${review}" th:action="@{/review/{id}/reply.html(id=${review.id})}" method="POST">
 						<input type="hidden" name="id" id="id" th:value="*{id}" />
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
 									<label>Tên KH</label>
 									<div>
-										<input class="form-control readonly" type="text"
-											id="form-field-name" th:field="*{name}" readonly />
+										<input class="form-control readonly" type="text" id="form-field-name"
+											th:field="*{name}" readonly />
 									</div>
 								</div>
 							</div>
@@ -48,20 +47,19 @@
 								<div class="form-group">
 									<label>Tên SP</label>
 									<div>
-										<input class="form-control readonly" type="text"
-											id="form-field-nameProduct" th:field="*{product.name}"
-											readonly />
+										<input class="form-control readonly" type="text" id="form-field-nameProduct"
+											th:field="*{product.name}" readonly />
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6" >
+							<div class="col-lg-6">
 								<div class="form-group">
 									<label>Ý kiến</label>
 									<div>
-										<textarea placeholder="Ý kiến..."
-											class="form-control readonly" id="form-field-opinion"
-											th:field="*{description}" style="height: 100%;" readonly />
-									</div>
+										<textarea placeholder="Ý kiến..." class="form-control readonly"
+											id="form-field-opinion" th:field="*{description}" style="height: 100%;"
+											readonly />
+										</div>
 								</div>
 							</div>
 							<div class="col-lg-6" >

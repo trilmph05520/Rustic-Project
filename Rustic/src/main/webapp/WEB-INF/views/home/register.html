@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="fragments/initHome :: head"></div>
 <style>
-.error-valid {
-	color: red;
-	margin-top: 5px;
-}
+	.error-valid {
+		color: red;
+		margin-top: 5px;
+	}
 </style>
 
 <body>
@@ -39,31 +39,25 @@
 			<div class="col-lg-12 offset-lg-12">
 				<div class="register-form">
 					<h2>Đăng ký</h2>
-					<form th:action="@{/account/save.html}" th:object="${authUser}"
-						method="POST">
-						<div
-							th:if="${mapError != null && mapError.containsKey('errorUnknown') != null}"
+					<form th:action="@{/account/save.html}" th:object="${authUser}" method="POST">
+						<div th:if="${mapError != null && mapError.containsKey('errorUnknown') != null}"
 							style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 							th:each="err: ${mapError.get('errorUnknown')}" th:text="${err}"></div>
 						<div class="row">
 							<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="group-input">
-									<label for="firstName">Họ <font color="red">*</font></label> <input
-										type="text" th:field="*{firstName}" name="firstName"
-										id="firstName">
-									<div
-										th:if="${mapError != null && mapError.containsKey('firstName') != null}"
+									<label for="firstName">Họ <font color="red">*</font></label> <input type="text"
+										th:field="*{firstName}" name="firstName" id="firstName">
+									<div th:if="${mapError != null && mapError.containsKey('firstName') != null}"
 										style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 										th:each="err: ${mapError.get('firstName')}" th:text="${err}"></div>
 								</div>
 							</div>
 							<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="group-input">
-									<label for="lastName">Tên <font color="red">*</font></label> <input
-										type="tel" th:field="*{lastName}" name="lastName"
-										id="lastName">
-									<div
-										th:if="${mapError != null && mapError.containsKey('lastName') != null}"
+									<label for="lastName">Tên <font color="red">*</font></label> <input type="tel"
+										th:field="*{lastName}" name="lastName" id="lastName">
+									<div th:if="${mapError != null && mapError.containsKey('lastName') != null}"
 										style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 										th:each="err: ${mapError.get('lastName')}" th:text="${err}"></div>
 								</div>
@@ -73,10 +67,8 @@
 							<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="group-input">
 									<label for="middleName">Tên đệm <font color="red">*</font></label>
-									<input type="text" th:field="*{middleName}" name="middleName"
-										id="middleName">
-									<div
-										th:if="${mapError != null && mapError.containsKey('middleName') != null}"
+									<input type="text" th:field="*{middleName}" name="middleName" id="middleName">
+									<div th:if="${mapError != null && mapError.containsKey('middleName') != null}"
 										style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 										th:each="err: ${mapError.get('middleName')}" th:text="${err}"></div>
 								</div>
@@ -84,14 +76,13 @@
 							<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="group-input">
 									<label for="gender">Giới tính <font color="red">*</font></label>
-									<select class="custom-select" th:field="*{gender}"
-										name="gender" id="gender" style="height: 50px;">
+									<select class="custom-select" th:field="*{gender}" name="gender" id="gender"
+										style="height: 50px;">
 										<option value="">Giới tính</option>
 										<option value="0">Nam</option>
 										<option value="1">Nữ</option>
 									</select>
-									<div
-										th:if="${mapError != null && mapError.containsKey('gender') != null}"
+									<div th:if="${mapError != null && mapError.containsKey('gender') != null}"
 										style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 										th:each="err: ${mapError.get('gender')}" th:text="${err}"></div>
 								</div>
@@ -100,10 +91,9 @@
 						<div class="row">
 							<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="group-input">
-									<label for="email">Email <font color="red">*</font></label> <input
-										type="text" th:field="*{email}" name="email" id="email">
-									<div
-										th:if="${mapError != null && mapError.containsKey('email') != null}"
+									<label for="email">Email <font color="red">*</font></label> <input type="text"
+										th:field="*{email}" name="email" id="email">
+									<div th:if="${mapError != null && mapError.containsKey('email') != null}"
 										style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 										th:each="err: ${mapError.get('email')}" th:text="${err}"></div>
 								</div>
@@ -111,10 +101,8 @@
 							<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="group-input">
 									<label for="userName">Tên đăng nhập <font color="red">*</font></label>
-									<input type="text" th:field="*{userName}" name="userName"
-										id="userName">
-									<div
-										th:if="${mapError != null && mapError.containsKey('userName') != null}"
+									<input type="text" th:field="*{userName}" name="userName" id="userName">
+									<div th:if="${mapError != null && mapError.containsKey('userName') != null}"
 										style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 										th:each="err: ${mapError.get('userName')}" th:text="${err}"></div>
 								</div>
@@ -124,25 +112,20 @@
 							<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="group-input">
 									<label for="password">Mật khẩu <font color="red">*</font></label>
-									<input type="password" th:field="*{password}" name="passWord"
-										id="password">
-									<div
-										th:if="${mapError != null && mapError.containsKey('password') != null}"
+									<input type="password" th:field="*{password}" name="passWord" id="password">
+									<div th:if="${mapError != null && mapError.containsKey('password') != null}"
 										style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 										th:each="err: ${mapError.get('password')}" th:text="${err}"></div>
 								</div>
 							</div>
 							<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="group-input">
-									<label for="verifyPassword">Nhập lại mật khẩu <font
-										color="red">*</font></label> <input type="password"
-										th:field="*{verifyPassword}" name="verifyPassword"
+									<label for="verifyPassword">Nhập lại mật khẩu <font color="red">*</font></label>
+									<input type="password" th:field="*{verifyPassword}" name="verifyPassword"
 										id="verifyPassword">
-									<div
-										th:if="${mapError != null && mapError.containsKey('verifyPassword') != null}"
+									<div th:if="${mapError != null && mapError.containsKey('verifyPassword') != null}"
 										style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
-										th:each="err: ${mapError.get('verifyPassword')}"
-										th:text="${err}"></div>
+										th:each="err: ${mapError.get('verifyPassword')}" th:text="${err}"></div>
 								</div>
 							</div>
 						</div>

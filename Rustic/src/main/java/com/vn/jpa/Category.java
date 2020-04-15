@@ -130,11 +130,11 @@ public class Category implements Serializable {
 	}
 
 	@PrePersist
-	 public void prePersist( ) {
-		 if(this.date == null ) {
-		    this.date = new Date();
-		 }
-	 }
+	public void prePersist() {
+		if (this.date == null) {
+			this.date = new Date();
+		}
+	}
 
 	public static enum status {
 		ACTIVE(0), INACTIVE(1);

@@ -14,31 +14,31 @@ import javax.transaction.Transactional;
 @Transactional
 public class HistoryServiceImpl implements HistoryService {
 
-    @Resource
-    private HistoryRepo historyRepo;
+	@Resource
+	private HistoryRepo historyRepo;
 
-    @Override
-    public Page<History> findAll(Pageable pageable) {
-        return historyRepo.findAll(pageable);
-    }
+	@Override
+	public Page<History> findAll(Pageable pageable) {
+		return historyRepo.findAll(pageable);
+	}
 
-    @Override
-    public History insert(History history) {
-        return historyRepo.save(history);
-    }
+	@Override
+	public History insert(History history) {
+		return historyRepo.save(history);
+	}
 
-    @Override
-    public History update(History history) {
-        return historyRepo.save(history);
-    }
+	@Override
+	public History update(History history) {
+		return historyRepo.save(history);
+	}
 
-    @Override
-    public void delete(History history) {
-        historyRepo.delete(history);
-    }
+	@Override
+	public void delete(History history) {
+		historyRepo.delete(history);
+	}
 
-    @Override
-    public History findOne(Long id) {
-        return historyRepo.findOne(id);
-    }
+	@Override
+	public History findOne(Long id) {
+		return historyRepo.findOne(id);
+	}
 }

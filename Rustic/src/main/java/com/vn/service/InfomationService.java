@@ -6,17 +6,17 @@ import org.springframework.data.domain.Pageable;
 
 public interface InfomationService {
 
-    Page<Infomation> findAll(Pageable pageable);
+	Page<Infomation> findAll(Pageable pageable);
 
-    Infomation create(Infomation infomation);
+	Infomation create(Infomation infomation);
 
-    Infomation update(Infomation infomation);
+	Infomation update(Infomation infomation);
 
-    void delete(Infomation infomation);
+	void delete(Infomation infomation);
 
-    Infomation findOne(Long id);
+	Infomation findOne(Long id);
 
-    Infomation findByAuthUserId(Long id);
-    
-    Infomation findByPhone(String phone);
+	Infomation findByAuthUserId(Long id);
+
+	Infomation findByPhone(String phone);
 }

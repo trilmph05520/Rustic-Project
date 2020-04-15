@@ -9,6 +9,6 @@ import java.util.List;
 @Repository(value = "bankInfoRepo")
 public interface BankInfoRepo extends JpaRepository<BankInfo, Long> {
 
-    List<BankInfo> findAllByType(Integer type);
+	List<BankInfo> findAllByType(Integer type);
 
 }

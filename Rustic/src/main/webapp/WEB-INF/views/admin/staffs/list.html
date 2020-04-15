@@ -3,9 +3,9 @@
 
 <div th:replace="fragments/initAdmin :: head"></div>
 <style>
-.readonly {
-	background: white !important;
-}
+	.readonly {
+		background: white !important;
+	}
 </style>
 
 <body>
@@ -20,43 +20,39 @@
 		<!-- Header -->
 
 		<!-- Page content -->
-		<div class="container-fluid mt--6"
-			style="margin-top: 25px !important;">
+		<div class="container-fluid mt--6" style="margin-top: 25px !important;">
 
 			<!-- Dark table -->
 			<div class="row">
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0" >Nhân viên</h3>
+							<h3 class="text-white mb-0">Nhân viên</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
-								<form role="form" th:object="${userSearchingForm}"
-									th:action="@{/staff/list.html}" method="POST">
+								<form role="form" th:object="${userSearchingForm}" th:action="@{/staff/list.html}"
+									method="POST">
 									<div class="row">
 										<div class="col-lg-4 col-12">
 											<div>
-												<input class="form-control" id="txtUserName" name="userName"
-													type="text" placeholder="Tên tài khoản"
-													th:value="*{userName}">
+												<input class="form-control" id="txtUserName" name="userName" type="text"
+													placeholder="Tên tài khoản" th:value="*{userName}">
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
-												<input class="form-control" id="txtEmail" name="email"
-													type="text" placeholder="Email"
-													th:value="*{email}">
+												<input class="form-control" id="txtEmail" name="email" type="text"
+													placeholder="Email" th:value="*{email}">
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
-												<button type="submit" id="btnSearch" class="btn btn-primary"
-													>Tìm kiếm</button>
+												<button type="submit" id="btnSearch" class="btn btn-primary">Tìm
+													kiếm</button>
 											</div>
 										</div>
 									</div>
-									<div
-										style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+									<div style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
 										th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
 								</form>
 							</div>

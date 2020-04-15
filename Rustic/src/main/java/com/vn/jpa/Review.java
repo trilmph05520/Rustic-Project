@@ -11,135 +11,136 @@ import java.util.Date;
 @NamedQuery(name = "Review.findAll", query = "SELECT r FROM Review r")
 public class Review implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	public static final Long serializable = 2L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "email")
-    private String email;
+	@Column(name = "email")
+	private String email;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "created_date")
-    private Date createDate;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "created_date")
+	private Date createDate;
 
-    @Column(name = "description")
-    private String description;
+	@Column(name = "description")
+	private String description;
 
-    @Column(name = "reply")
-    private String reply;
+	@Column(name = "reply")
+	private String reply;
 
-    @Column(name = "rate", columnDefinition = "TINYINT")
-    private Integer rate;
+	@Column(name = "rate", columnDefinition = "TINYINT")
+	private Integer rate;
 
-    @Column(name = "status", columnDefinition = "TINYINT")
-    private int status;
+	@Column(name = "status", columnDefinition = "TINYINT")
+	private int status;
 
-    @ManyToOne
-    @JoinColumn(name = "id_product")
-    private Product product;
-    
-    @ManyToOne
-    @JoinColumn(name = "bill_id")
-    private Bill bill;
-    
-    public Review() {
-    }
+	@ManyToOne
+	@JoinColumn(name = "id_product")
+	private Product product;
 
-    public Review(String name,String email, Date createDate, String description, String reply, Integer rate, int status, Product product, Bill bill) {
-        this.name = name;
-        this.email = email;
-        this.createDate = createDate;
-        this.description = description;
-        this.reply = reply;
-        this.rate = rate;
-        this.status = status;
-        this.product = product;
-        this.bill = bill;
-    }
+	@ManyToOne
+	@JoinColumn(name = "bill_id")
+	private Bill bill;
 
-    public Long getId() {
-        return id;
-    }
+	public Review() {
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Review(String name, String email, Date createDate, String description, String reply, Integer rate,
+			int status, Product product, Bill bill) {
+		this.name = name;
+		this.email = email;
+		this.createDate = createDate;
+		this.description = description;
+		this.reply = reply;
+		this.rate = rate;
+		this.status = status;
+		this.product = product;
+		this.bill = bill;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public Date getCreateDate() {
+		return createDate;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public String getReply() {
-        return reply;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setReply(String reply) {
-        this.reply = reply;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Integer getRate() {
-        return rate;
-    }
+	public String getReply() {
+		return reply;
+	}
 
-    public void setRate(Integer rate) {
-        this.rate = rate;
-    }
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public Integer getRate() {
+		return rate;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public void setRate(Integer rate) {
+		this.rate = rate;
+	}
 
-    public Product getProduct() {
-        return product;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public Bill getBill() {
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Bill getBill() {
 		return bill;
 	}
 
@@ -148,23 +149,24 @@ public class Review implements Serializable {
 	}
 
 	@PrePersist
-	public void pre() throws ParseException{
-        if(this.createDate == null){
-            this.createDate = new Date();
-        }
-    }
+	public void pre() throws ParseException {
+		if (this.createDate == null) {
+			this.createDate = new Date();
+		}
+	}
 
-    public static enum status {
+	public static enum status {
 
-        INACTIVE(0), ACTIVE(1);
-        private final int value;
+		INACTIVE(0), ACTIVE(1);
 
-        private status(int value) {
-            this.value = value;
-        }
+		private final int value;
 
-        public int value() {
-            return this.value;
-        }
-    }
+		private status(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return this.value;
+		}
+	}
 }

@@ -20,8 +20,8 @@
 	width: 100% !important;
 }
 </style> -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/static/css/listNotGive.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/listNotGive.css}" />
+
 <body>
 	<!-- Sidenav -->
 	<!-- Sidenav -->
@@ -34,8 +34,7 @@
 		<!-- Header -->
 
 		<!-- Page content -->
-		<div class="container-fluid mt--6"
-			style="margin-top: 25px !important;">
+		<div class="container-fluid mt--6" style="margin-top: 25px !important;">
 
 			<!-- Dark table -->
 			<div class="row">
@@ -45,8 +44,7 @@
 							<h3 class="text-white mb-0">Hóa đơn đã nhận</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
-								<form role="form" th:action="@{/bill/listReceipt.html}"
-									method="POST">
+								<form role="form" th:action="@{/bill/listReceipt.html}" method="POST">
 									<div class="row">
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
@@ -55,11 +53,11 @@
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
-																class="ni ni-calendar-grid-58"></i></span>
+																	class="ni ni-calendar-grid-58"></i></span>
 														</div>
-														<input class="form-control" placeholder="Start date"
-															type="text" value="06/18/2020" name="from_date"
-															id="from_date" th:value="${from_date}">
+														<input class="form-control" placeholder="Start date" type="text"
+															value="06/18/2020" name="from_date" id="from_date"
+															th:value="${from_date}">
 													</div>
 												</div>
 											</div>
@@ -69,11 +67,11 @@
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
-																class="ni ni-calendar-grid-58"></i></span>
+																	class="ni ni-calendar-grid-58"></i></span>
 														</div>
-														<input class="form-control" placeholder="End date"
-															type="text" value="06/22/2020" name="to_date"
-															id="to_date" th:value="${to_date}">
+														<input class="form-control" placeholder="End date" type="text"
+															value="06/22/2020" name="to_date" id="to_date"
+															th:value="${to_date}">
 													</div>
 												</div>
 											</div>
@@ -90,8 +88,7 @@
 							</div>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
-								<a th:href="@{/bill/listNotGive.html}"
-									class="btn btn-sm btn-neutral">Làm mới</a>
+								<a th:href="@{/bill/listNotGive.html}" class="btn btn-sm btn-neutral">Làm mới</a>
 							</div>
 						</div>
 						<div class="table-responsive">
@@ -117,11 +114,10 @@
 										<td class="text-table-body" th:text="${eachRow.name}"></td>
 										<!--                                    <td class="text-table-body" th:text="${eachRow.email}"></td>-->
 										<td class="text-table-body" th:text="${eachRow.code}"></td>
-										<td class="text-table-body"><span
-											th:if="${eachRow.payment == 0}">Thanh toán trực tiếp</span> <span
-											th:if="${eachRow.payment == 1}">Thanh toán online</span></td>
-										<td class="text-table-body"
-											th:text="${#numbers.formatDecimal(eachRow.total, 0, 'COMMA', 0,'POINT')  + ' VND'}"></td>
+										<td class="text-table-body"><span th:if="${eachRow.payment == 0}">Thanh toán
+												trực tiếp</span> <span th:if="${eachRow.payment == 1}">Thanh toán
+												online</span></td>
+										<td class="text-table-body" th:text="${#numbers.formatDecimal(eachRow.total, 0, 'COMMA', 0,'POINT')  + ' VND'}"></td>
 										<td class="text-table-body" style="text-align: center;">
 											<button class="btn btn-success"
 												th:if="${eachRow.status == 1}">Đã Thanh Toán</button>

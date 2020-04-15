@@ -20,8 +20,8 @@
 	width: 100% !important;
 }
 </style> -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/static/css/listCancel.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/listCancel.css}" />
+
 <body>
 	<!-- Sidenav -->
 	<!-- Sidenav -->
@@ -34,8 +34,7 @@
 		<!-- Header -->
 
 		<!-- Page content -->
-		<div class="container-fluid mt--6"
-			style="margin-top: 25px !important;">
+		<div class="container-fluid mt--6" style="margin-top: 25px !important;">
 
 			<!-- Dark table -->
 			<div class="row">
@@ -45,8 +44,7 @@
 							<h3 class="text-white mb-0">Yêu cầu hủy Hóa đơn</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
-								<form role="form" th:action="@{/bill/listCancel.html}"
-									method="POST">
+								<form role="form" th:action="@{/bill/listCancel.html}" method="POST">
 									<div class="row">
 										<div class="input-daterange datepicker row align-items-center">
 											<div class="col">
@@ -55,11 +53,11 @@
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
-																class="ni ni-calendar-grid-58"></i></span>
+																	class="ni ni-calendar-grid-58"></i></span>
 														</div>
-														<input class="form-control" placeholder="Start date"
-															type="text" value="06/18/2020" name="from_date"
-															id="from_date" th:value="${from_date}">
+														<input class="form-control" placeholder="Start date" type="text"
+															value="06/18/2020" name="from_date" id="from_date"
+															th:value="${from_date}">
 													</div>
 												</div>
 											</div>
@@ -69,11 +67,11 @@
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
-																class="ni ni-calendar-grid-58"></i></span>
+																	class="ni ni-calendar-grid-58"></i></span>
 														</div>
-														<input class="form-control" placeholder="End date"
-															type="text" value="06/22/2020" name="to_date"
-															id="to_date" th:value="${to_date}">
+														<input class="form-control" placeholder="End date" type="text"
+															value="06/22/2020" name="to_date" id="to_date"
+															th:value="${to_date}">
 													</div>
 												</div>
 											</div>
@@ -98,8 +96,8 @@
 										<div class="col-lg-2">
 											<label class="text-white">Mã hóa đơn</label>
 											<div>
-												<input type="text" class="form-control" name="code"
-													th:value="${code}" placeholder="Tìm kiếm" />
+												<input type="text" class="form-control" name="code" th:value="${code}"
+													placeholder="Tìm kiếm" />
 											</div>
 										</div>
 										<div class="col-sm-2">
@@ -112,8 +110,7 @@
 									</div>
 								</form>
 							</div>
-							<input type="hidden" name="bill_list_ss"
-								th:value="${bill_list_ss}" />
+							<input type="hidden" name="bill_list_ss" th:value="${bill_list_ss}" />
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
 								<!-- <a th:href="@{/product/add.html}"
@@ -150,21 +147,20 @@
 										<td class="text-table-body" th:text="${eachRow.mobile}"></td>
 										<td class="text-table-body" th:text="${eachRow.address}"></td>
 										<td class="text-table-body" th:text="${eachRow.reason}"></td>
-										<td class="text-table-body" th:if="${eachRow.status == 0}"
-											th:text="''"></td>
+										<td class="text-table-body" th:if="${eachRow.status == 0}" th:text="''"></td>
 										<td class="text-table-body" th:if="${eachRow.status == 1}"><button
 												class="btn btn-danger btn-circle">Đã hủy</button></td>
 										<td class="text-table-body" th:if="${eachRow.status == 2}"><button
 												class="btn btn-info btn-circle">Từ chối hủy</button></td>
 										<td class="text-table-body"><a
-											th:if="${eachRow.status == 0 || eachRow.status == null}"
-											th:onclick="'acceptReject(\'' + ${eachRow.code} + '\',\'' + ${eachRow.id} + '\')'"
-											data-toggle="modal" data-target="#productModal"><button
+												th:if="${eachRow.status == 0 || eachRow.status == null}"
+												th:onclick="'acceptReject(\'' + ${eachRow.code} + '\',\'' + ${eachRow.id} + '\')'"
+												data-toggle="modal" data-target="#productModal"><button
 													class="btn btn-danger btn-circle">Xác nhận</button></a></td>
 										<td class="text-table-body"><a
-											th:if="${eachRow.status == 0 || eachRow.status == null}"
-											th:onclick="'cancelReject(\'' + ${eachRow.code} + '\',\'' + ${eachRow.id} + '\')'"
-											data-toggle="modal" data-target="#productModal"><button
+												th:if="${eachRow.status == 0 || eachRow.status == null}"
+												th:onclick="'cancelReject(\'' + ${eachRow.code} + '\',\'' + ${eachRow.id} + '\')'"
+												data-toggle="modal" data-target="#productModal"><button
 													class="btn btn-info btn-circle">Hủy</button></a></td>
 									</tr>
 
@@ -173,8 +169,7 @@
 						</div>
 						<!-- Card footer -->
 						<div class="card-footer py-4">
-							<div
-								th:replace="fragments/panigatorAdmin :: content(page = ${page})">
+							<div th:replace="fragments/panigatorAdmin :: content(page = ${page})">
 							</div>
 						</div>
 					</div>
@@ -202,7 +197,7 @@
 
 	<script th:inline="javascript">
 		/*<![CDATA[*/
-		var currUrl = /*[[@{/}]]*/"";
+		var currUrl = /*[[@{/}]]*/ "";
 		/*]]>*/
 	</script>
 
@@ -271,27 +266,27 @@
 			$('#modal-title-notification').text('Xác Nhận Yêu Cầu Hủy')
 
 			$('#contentDelete').text(
-					'Bạn có muốn xác nhận yêu cầu hủy hóa đơn có mã là  '
-							+ code + ' không ? Bấm Xác nhận để xác nhận.');
+				'Bạn có muốn xác nhận yêu cầu hủy hóa đơn có mã là  ' +
+				code + ' không ? Bấm Xác nhận để xác nhận.');
 			$('#delete').text('Xác nhận')
 			$('#delete')
-					.click(
-							function() {
-								$
-										.ajax({
-											url : window.location.origin
-													+ currUrl + '/reject/'
-													+ key + "/" + id
-													+ '/accept.html',
-											method : 'POST',
-											success : function() {
-														alert('Hủy hóa đơn thành công!'),
-														window.location.href = window.location.origin
-																+ currUrl
-																+ 'bill/listCancel.html';
-											}
-										});
+				.click(
+					function () {
+						$
+							.ajax({
+								url: window.location.origin +
+									currUrl + '/reject/' +
+									key + "/" + id +
+									'/accept.html',
+								method: 'POST',
+								success: function () {
+									alert('Hủy hóa đơn thành công!'),
+										window.location.href = window.location.origin +
+										currUrl +
+										'bill/listCancel.html';
+								}
 							});
+					});
 		}
 
 		function cancelReject(code, key) {
@@ -300,27 +295,27 @@
 			$('#modal-title-notification').text('Xác Nhận Yêu Cầu Hủy')
 
 			$('#contentDelete').text(
-					'Bạn có muốn từ chối yêu cầu hủy hóa đơn có mã là  ' + code
-							+ ' không ? Bấm Xác nhận để xác nhận.');
+				'Bạn có muốn từ chối yêu cầu hủy hóa đơn có mã là  ' + code +
+				' không ? Bấm Xác nhận để xác nhận.');
 			$('#delete').text('Xác nhận')
 			$('#delete')
-					.click(
-							function() {
-								$
-										.ajax({
-											url : window.location.origin
-													+ currUrl + '/reject/'
-													+ key + "/" + id
-													+ '/cancel.html',
-											method : 'POST',
-											success : function() {
-														alert('Từ chối hủy hóa đơn thành công!'),
-														window.location.href = window.location.origin
-																+ currUrl
-																+ 'bill/listCancel.html';
-											}
-										});
+				.click(
+					function () {
+						$
+							.ajax({
+								url: window.location.origin +
+									currUrl + '/reject/' +
+									key + "/" + id +
+									'/cancel.html',
+								method: 'POST',
+								success: function () {
+									alert('Từ chối hủy hóa đơn thành công!'),
+										window.location.href = window.location.origin +
+										currUrl +
+										'bill/listCancel.html';
+								}
 							});
+					});
 		}
 	</script>
 </body>

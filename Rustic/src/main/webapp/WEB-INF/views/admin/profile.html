@@ -16,8 +16,7 @@
 		<!-- Header -->
 
 		<!-- Page content -->
-		<div class="container-fluid mt--6"
-			style="margin-top: 25px !important;">
+		<div class="container-fluid mt--6" style="margin-top: 25px !important;">
 			<div class="row">
 				<div class="col-xl-12 order-xl-2">
 					<div class="card">
@@ -29,20 +28,17 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<form th:action="@{/profile/detail.html}" th:object="${profile}"
-								method="POST">
-								<div
-									th:if="${mapError != null && mapError.containsKey('error') != null}"
+							<form th:action="@{/profile/detail.html}" th:object="${profile}" method="POST">
+								<div th:if="${mapError != null && mapError.containsKey('error') != null}"
 									style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 									th:each="err: ${mapError.get('errorProfile')}" th:text="${err}"></div>
 								<div class="row">
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 										<div class="form-group">
 											<label for="fir">Họ <font color="red">*</font></label> <input type="text"
-												class="form-control" th:field="*{firstName}"
-												name="firstName" id="firstName">
-											<div
-												th:if="${mapError != null && mapError.containsKey('firstName') != null}"
+												class="form-control" th:field="*{firstName}" name="firstName"
+												id="firstName">
+											<div th:if="${mapError != null && mapError.containsKey('firstName') != null}"
 												style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 												th:each="err: ${mapError.get('firstName')}" th:text="${err}"></div>
 										</div>
@@ -50,10 +46,9 @@
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 										<div class="form-group">
 											<label for="lastName">Tên <font color="red">*</font></label> <input
-												class="form-control" type="tel" th:field="*{lastName}"
-												name="lastName" id="lastName">
-											<div
-												th:if="${mapError != null && mapError.containsKey('lastName') != null}"
+												class="form-control" type="tel" th:field="*{lastName}" name="lastName"
+												id="lastName">
+											<div th:if="${mapError != null && mapError.containsKey('lastName') != null}"
 												style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 												th:each="err: ${mapError.get('lastName')}" th:text="${err}"></div>
 										</div>
@@ -64,9 +59,8 @@
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 										<div class="form-group">
 											<label for="lastName">Thành phố</label> <input type="text"
-												class="form-control" name="province"
-												placeholder="Thành phố..." th:field="*{province}"
-												maxlength="64">
+												class="form-control" name="province" placeholder="Thành phố..."
+												th:field="*{province}" maxlength="64">
 										</div>
 									</div>
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -80,27 +74,23 @@
 								<div class="row">
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 										<div class="form-group">
-											<label for="lastName">Giới tính</label> <select
-												class="custom-select" name="gender" style="height: 50px;"
-												th:field="*{gender}">
+											<label for="lastName">Giới tính</label> <select class="custom-select"
+												name="gender" style="height: 50px;" th:field="*{gender}">
 												<option value="">Giới tính</option>
 												<option value="0">Nam</option>
 												<option value="1">Nữ</option>
 											</select>
-											<div
-												th:if="${mapError != null && mapError.containsKey('gender') != null}"
+											<div th:if="${mapError != null && mapError.containsKey('gender') != null}"
 												style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 												th:each="err: ${mapError.get('gender')}" th:text="${err}"></div>
 										</div>
 									</div>
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 										<div class="form-group">
-											<label for="lastName">Số điện thoại <font color="red">*</font></label> <input
-												class="form-control" type="text" name="phone"
-												placeholder="Số điện thoại..." th:field="*{phone}"
-												maxlength="10">
-											<div
-												th:if="${mapError != null && mapError.containsKey('phone') != null}"
+											<label for="lastName">Số điện thoại <font color="red">*</font></label>
+											<input class="form-control" type="text" name="phone"
+												placeholder="Số điện thoại..." th:field="*{phone}" maxlength="10">
+											<div th:if="${mapError != null && mapError.containsKey('phone') != null}"
 												style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 												th:each="err: ${mapError.get('phone')}" th:text="${err}"></div>
 										</div>
@@ -109,9 +99,8 @@
 								<div class="row">
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 										<div class="form-group">
-											<label for="lastName">Ngân hàng</label> <select
-												class="custom-select" name="bank" style="height: 50px;"
-												th:field="*{bank}">
+											<label for="lastName">Ngân hàng</label> <select class="custom-select"
+												name="bank" style="height: 50px;" th:field="*{bank}">
 												<option value="">Ngân hàng</option>
 												<option th:each="bank : ${bankInfo}" th:value="${bank.code}"
 													th:text="${bank.name}" th:selected="${bank.code==bank}"></option>
@@ -121,9 +110,8 @@
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 										<div class="form-group">
 											<label for="lastName">Số tài khoản</label> <input type="text"
-												class="form-control" name="atmNumber"
-												placeholder="Số tài khoản..." th:field="*{atmNumberBank}"
-												maxlength="16">
+												class="form-control" name="atmNumber" placeholder="Số tài khoản..."
+												th:field="*{atmNumberBank}" maxlength="16">
 										</div>
 									</div>
 								</div>
@@ -137,17 +125,17 @@
 									</div>
 									<div class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 										<div class="form-group">
-											<label for="lastName">Email</label> <input type="text"
-												class="form-control" name="email" th:field="*{emailUser}"
-												placeholder="Email..." readonly="readonly">
+											<label for="lastName">Email</label> <input type="text" class="form-control"
+												name="email" th:field="*{emailUser}" placeholder="Email..."
+												readonly="readonly">
 										</div>
 									</div>
 								</div>
 								<div class="row  text-right">
 									<div class="col-lg-12 col-5">
 										<div class="form-group">
-											<a th:href="@{/admin/dashboard.html}"
-												class="btn btn-sm btn-neutral">Bỏ qua</a>
+											<a th:href="@{/admin/dashboard.html}" class="btn btn-sm btn-neutral">Bỏ
+												qua</a>
 											<button type="submit" class="btn btn-sm btn-neutral">Lưu</button>
 
 										</div>

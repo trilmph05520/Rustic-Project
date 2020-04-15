@@ -36,5 +36,6 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
 			@Param("isActive") String active);
 
 	@Query(value = "SELECT id FROM Category  WHERE (parent_id = :parentId) AND (isactive = :active) AND (isdelete = :isdelete)", nativeQuery = true)
-	List<BigInteger> listCateIdByParentId(@Param("parentId") Long parentId, @Param("active") String active, @Param("isdelete") String delete);
+	List<BigInteger> listCateIdByParentId(@Param("parentId") Long parentId, @Param("active") String active,
+			@Param("isdelete") String delete);
 }

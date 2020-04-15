@@ -6,13 +6,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface HistoryService {
 
-    Page<History> findAll(Pageable pageable);
+	Page<History> findAll(Pageable pageable);
 
-    History insert(History history);
+	History insert(History history);
 
-    History update(History history);
+	History update(History history);
 
-    void delete(History history);
+	void delete(History history);
 
-    History findOne(Long id);
+	History findOne(Long id);
 }

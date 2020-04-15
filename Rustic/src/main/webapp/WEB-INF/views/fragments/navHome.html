@@ -6,56 +6,47 @@
 				<div class="logo-carousel owl-carousel">
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/sat.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/sat.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/dong.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/dong.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/bac.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/bac.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/vang.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/vang.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/bachkim.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/bachkim.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/kimcuong.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/kimcuong.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/caothu.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/caothu.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/daicaothu.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/daicaothu.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 					<div class="logo-item">
 						<div class="tablecell-inner">
-							<img th:src="@{/static/rank/thachdau.png}" alt="" width="300%"
-								height="300%">
+							<img th:src="@{/static/rank/thachdau.png}" alt="" width="300%" height="300%">
 						</div>
 					</div>
 				</div>
@@ -69,9 +60,9 @@
 			function remove(id) {
 				var path = window.location.pathname.split("/")[1];
 				$.ajax({
-					url : window.location.origin + '/' + path + '/'
-							+ 'cart/remove/' + id + '.html',
-					method : 'GET',
+					url: window.location.origin + '/' + path + '/' +
+						'cart/remove/' + id + '.html',
+					method: 'GET',
 				});
 				location.reload();
 
@@ -89,21 +80,16 @@
 						</div>
 					</div>
 					<div class="ht-right">
-						<a th:if="${session.userLogin == null}"
-							th:href="@{/home/login.html}" class="login-panel">Đăng nhập <i
-							class="fa fa-user"></i>
-						</a> <a th:if="${session.userLogin != null}"
-							th:href="@{/home/logout.html}" class="login-panel"
+						<a th:if="${session.userLogin == null}" th:href="@{/home/login.html}" class="login-panel">Đăng
+							nhập <i class="fa fa-user"></i>
+						</a> <a th:if="${session.userLogin != null}" th:href="@{/home/logout.html}" class="login-panel"
 							th:utext="#{lable.logout}"><i class="fa fa-user"></i></a> <a
-							th:if="${session.userLogin != null}"
-							th:href="@{/home/profile.html}" class="login-panel"
-							style="padding-right: 20px;" th:utext="#{lable.profile}"><i
-							class="fa fa-user"></i></a>
+							th:if="${session.userLogin != null}" th:href="@{/home/profile.html}" class="login-panel"
+							style="padding-right: 20px;" th:utext="#{lable.profile}"><i class="fa fa-user"></i></a>
 
 						<div class="top-social">
-							<a href="https://www.facebook.com/mt.minhtri" target="blank"><i
-								class="ti-facebook"></i></a> <a href="#"><i
-								class="fa fa-instagram"></i></a>
+							<a href="https://www.facebook.com/mt.minhtri" target="blank"><i class="ti-facebook"></i></a>
+							<a href="#"><i class="fa fa-instagram"></i></a>
 						</div>
 					</div>
 				</div>
@@ -113,9 +99,8 @@
 					<div class="row">
 						<div class="col-lg-2 col-md-2">
 							<div class="logo">
-								<a th:href="@{/}"> <img
-									th:src="@{/assets/img/logoRustic.png}" width="88px"
-									height="23px" alt="">
+								<a th:href="@{/}"> <img th:src="@{/assets/img/logoRustic.png}" width="88px"
+										height="23px" alt="">
 								</a>
 							</div>
 						</div>
@@ -140,11 +125,10 @@
 							<ul class="nav-right">
 								<li class="cart-icon"><a th:href="@{/home/cart.html}">
 										<i class="icon_bag_alt"></i> <span class="cart-quantity"
-										th:if="${session.myCartNum != 0}"
-										th:text="${session.myCartNum}">3</span> <span
-										class="cart-quantity"
-										th:if="${session.myCartNum == null || session.myCartNum==0}">0</span>
-								</a>
+											th:if="${session.myCartNum != 0}" th:text="${session.myCartNum}">3</span>
+										<span class="cart-quantity"
+											th:if="${session.myCartNum == null || session.myCartNum==0}">0</span>
+									</a>
 									<div class="cart-hover"
 										th:if="${session.myCartItems != null} and ${session.myCartTotal != 0}">
 										<div class="select-items">
@@ -152,9 +136,9 @@
 												<tbody>
 													<tr th:each="cart : ${session.myCartItems}">
 														<td class="si-pic"><a
-															th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}"><img
-																th:src="|${cart.value.product.mainImg}|" alt=""
-																width="72px" height="72px"></a></td>
+																th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}"><img
+																	th:src="|${cart.value.product.mainImg}|" alt=""
+																	width="72px" height="72px"></a></td>
 														<td class="si-text">
 															<div class="product-selected">
 																<a
@@ -368,4 +352,3 @@
 	<!-- END QUICKVIEW PRODUCT -->
 
 </div>
-

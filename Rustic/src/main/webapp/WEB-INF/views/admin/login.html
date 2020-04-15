@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<div th:replace="fragments/initAdmin :: head"></div>
+	<div th:replace="fragments/initAdmin :: head"></div>
 </head>
 
 <body class="bg-default">
@@ -23,7 +23,7 @@
 			<!--					</div>-->
 			<!--				</div>-->
 			<!--			</div>-->
-					<!--			<div class="container">-->
+			<!--			<div class="container">-->
 			<!--				<div class="header-body text-center mb-7">-->
 			<!--					<div class="row justify-content-center">-->
 			<!--						<div class="col-xl-5 col-lg-6 col-md-8 px-5">-->
@@ -35,10 +35,10 @@
 			<!--				</div>-->
 			<!--			</div>-->
 			<div class="separator separator-bottom separator-skew zindex-100">
-				<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none"
-					version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
+				<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+					xmlns="http://www.w3.org/2000/svg">
+					<polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+				</svg>
 			</div>
 		</div>
 		<!-- Page content -->
@@ -66,40 +66,35 @@
 							<!-- 	<div class="text-center text-muted mb-4">
 								<small>Or sign in with credentials</small>
 							</div> -->
-							<form role="form" action="/login.html"
-								th:action="@{/admin/login.html}" method="POST">
+							<form role="form" action="/login.html" th:action="@{/admin/login.html}" method="POST">
 								<center>
 									<img th:src="@{/assets/img/logoRustic.png}" style="margin-bottom: 3%" width="88px"
 										height="23px" />
 								</center>
-								<p th:if="${param.authentication_error}"
-									style="color: red; font-size: 14px;">Sai tên đăng nhập hoặc
+								<p th:if="${param.authentication_error}" style="color: red; font-size: 14px;">Sai tên
+									đăng nhập hoặc
 									mật khẩu</p>
 								<div class="form-group mb-3">
-									<div
-										class="input-group input-group-merge input-group-alternative">
+									<div class="input-group input-group-merge input-group-alternative">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i
-												class="ni ni-email-83"></i></span>
+											<span class="input-group-text"><i class="ni ni-email-83"></i></span>
 										</div>
 										<input class="form-control" placeholder="Tên đăng nhập"
-											style="padding-left: 10px !important;" id="username"
-											name="username" type="text" autofocus="autofocus">
+											style="padding-left: 10px !important;" id="username" name="username"
+											type="text" autofocus="autofocus">
 									</div>
 								</div>
 								<div class="form-group">
-									<div
-										class="input-group input-group-merge input-group-alternative">
+									<div class="input-group input-group-merge input-group-alternative">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i
-												class="ni ni-lock-circle-open"></i></span>
+											<span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
 										</div>
 										<input class="form-control" placeholder="Mật khẩu"
-											style="padding-left: 10px !important" name="password"
-											type="password" value="">
+											style="padding-left: 10px !important" name="password" type="password"
+											value="">
 									</div>
 								</div>
-							<!-- 	<div
+								<!-- 	<div
 									class="custom-control custom-control-alternative custom-checkbox"
 									style="padding-left: 0px !important">
 									<a href="#"> <span class="text-muted">Quên mật khẩu?</span>
@@ -111,7 +106,7 @@
 							</form>
 						</div>
 					</div>
-	<!-- 				<div class="row mt-3">
+					<!-- 				<div class="row mt-3">
 												<div class="col-6">
 													<a href="#" class="text-light"><small>Forgot
 															password?</small></a>

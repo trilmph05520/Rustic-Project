@@ -23,55 +23,54 @@ import java.util.List;
 @Transactional
 public class RejectServiceImpl implements RejectService {
 
-    @Resource
-    private RejectRepo rejectRepo;
+	@Resource
+	private RejectRepo rejectRepo;
 
-    @Override
-    public Page<Reject> findAll(Pageable pageable) {
-        return rejectRepo.findAll(pageable);
-    }
+	@Override
+	public Page<Reject> findAll(Pageable pageable) {
+		return rejectRepo.findAll(pageable);
+	}
 
-    @Override
-    public Reject insert(Reject reject) {
-        return rejectRepo.save(reject);
-    }
+	@Override
+	public Reject insert(Reject reject) {
+		return rejectRepo.save(reject);
+	}
 
-    @Override
-    public Reject update(Reject reject) {
-        return rejectRepo.save(reject);
-    }
+	@Override
+	public Reject update(Reject reject) {
+		return rejectRepo.save(reject);
+	}
 
-    @Override
-    public void delete(Reject reject) {
-        rejectRepo.delete(reject);
-    }
+	@Override
+	public void delete(Reject reject) {
+		rejectRepo.delete(reject);
+	}
 
-    @Override
-    public Reject findOne(Long id) {
-        return rejectRepo.findOne(id);
-    }
+	@Override
+	public Reject findOne(Long id) {
+		return rejectRepo.findOne(id);
+	}
 
-    @Override
-    public List<ChartDashboardBillOrder> listCountRejectDashBoard(Date date) {
-        List<ChartDashboardBillOrder> response = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        DateTime time = new DateTime(date);
-        Date fromDate = time.plusDays(-7).toDate();
-        Date toDate = time.withTimeAtStartOfDay().toDate();
-        List<Object[]> lsObject = rejectRepo.listCountRejectDashBoard(fromDate, toDate);
-        for (Object[] each : lsObject) {
-            String key = sdf.format(each[0]);
-            BigDecimal value = new BigDecimal(each[1].toString());
-            ChartDashboardBillOrder order = new ChartDashboardBillOrder(key, value);
-            response.add(order);
-        }
-        return response;
-    }
+	@Override
+	public List<ChartDashboardBillOrder> listCountRejectDashBoard(Date date) {
+		List<ChartDashboardBillOrder> response = new ArrayList<>();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		DateTime time = new DateTime(date);
+		Date fromDate = time.plusDays(-7).toDate();
+		Date toDate = time.withTimeAtStartOfDay().toDate();
+		List<Object[]> lsObject = rejectRepo.listCountRejectDashBoard(fromDate, toDate);
+		for (Object[] each : lsObject) {
+			String key = sdf.format(each[0]);
+			BigDecimal value = new BigDecimal(each[1].toString());
+			ChartDashboardBillOrder order = new ChartDashboardBillOrder(key, value);
+			response.add(order);
+		}
+		return response;
+	}
 
-    @Override
-    public Page<Reject> pageByDateAndCode(Date fromDate, Date toDate, String code, Pageable pageable) {
-        return rejectRepo.pageByDateAndCode(fromDate, toDate, code, pageable);
-    }
-
+	@Override
+	public Page<Reject> pageByDateAndCode(Date fromDate, Date toDate, String code, Pageable pageable) {
+		return rejectRepo.pageByDateAndCode(fromDate, toDate, code, pageable);
+	}
 
 }

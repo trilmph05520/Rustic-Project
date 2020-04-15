@@ -25,25 +25,22 @@
 							<h3 class="text-white mb-0">Danh mục</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
-								<form role="form" th:action="@{/category/list.html}"
-									method="POST">
+								<form role="form" th:action="@{/category/list.html}" method="POST">
 									<div class="row">
 										<div class="col-lg-8 col-12">
 											<div>
-												<input class="form-control form-control-sm" id="txtName"
-													name="txtName" type="text" 
-													th:value="${txtName}" placeholder="Tìm kiếm">
+												<input class="form-control form-control-sm" id="txtName" name="txtName"
+													type="text" th:value="${txtName}" placeholder="Tìm kiếm">
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
-												<button type="submit" id="btnSearch"
-													class="btn btn-primary btn-sm" >Tìm kiếm</button>
+												<button type="submit" id="btnSearch" class="btn btn-primary btn-sm">Tìm
+													kiếm</button>
 											</div>
 										</div>
 									</div>
-									<div
-										style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+									<div style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
 										th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
 								</form>
 							</div>

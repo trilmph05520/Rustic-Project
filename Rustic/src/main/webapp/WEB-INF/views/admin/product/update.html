@@ -3,12 +3,12 @@
 
 <div th:replace="fragments/initAdmin :: head"></div>
 <style>
-.error {
-	color: red;
-}
+	.error {
+		color: red;
+	}
 
-/*---------upload ảnh------------*/
-/* .wrap-custom-file {
+	/*---------upload ảnh------------*/
+	/* .wrap-custom-file {
 	position: relative;
 	display: inline-block;
 	width: 150px;
@@ -72,9 +72,9 @@
 	border: 1px dashed cornflowerblue;
 	border-radius: 10px;
 	/*box-shadow: 2px 2px 5px #cdcdcd;*/
-}
+	
 
-/* .wrap-custom-file label.file-ok {
+	/* .wrap-custom-file label.file-ok {
 	border: none;
 	box-shadow: 2px 2px 5px #b1b1b1;
 }
@@ -91,8 +91,8 @@
 	background-color: rgba(255, 255, 255, 0.7);
 } */
 
-/*---------end upload ảnh--------*/
-/* .wrap-custom-fileadd {
+	/*---------end upload ảnh--------*/
+	/* .wrap-custom-fileadd {
 	position: relative;
 	display: inline-block;
 	width: 150px;
@@ -192,7 +192,7 @@
 	float: left;
 	margin-bottom: 20px;
 } */
-/* 
+	/* 
 .removeIMG {
 	font-size: 13px !important;
 	margin-top: 40px !important;
@@ -216,8 +216,8 @@
 	display: block !important;
 }  */
 </style>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/static/css/product_edit.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/product_edit.css}" />
+
 <body>
 	<!-- Sidenav -->
 	<!-- Sidenav -->
@@ -231,10 +231,8 @@
 		<!-- Page content -->
 		<div class="container-fluid mt--6" style="margin-top: 25px !important;">
 			<input type="hidden" id="idProduct" th:value="${product.id}">
-			<input type="hidden" id="idCateChildren"
-				th:value="${product.category.id}"> <input type="hidden"
-				id="contextPath" th:value="@{/}"> <input type="hidden"
-				th:value="${subImg}" id="subImg" />
+			<input type="hidden" id="idCateChildren" th:value="${product.category.id}"> <input type="hidden"
+				id="contextPath" th:value="@{/}"> <input type="hidden" th:value="${subImg}" id="subImg" />
 			<div class="row">
 				<div class="col-xl-12 order-xl-1">
 					<div class="card">
@@ -250,8 +248,7 @@
 						</div>
 						<div class="card-body">
 							<form>
-								<div
-									style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+								<div style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 									id="error"></div>
 								<div class="row">
 									<div class="col-lg-3">
@@ -260,9 +257,8 @@
 											<div>
 												<div class="group-hinhanh">
 													<div class="wrap-custom-file">
-														<input type="file" name="image1" class="imgUpload"
-															id="image1" accept=".gif,.jpg,.png,.jpeg" /> <label
-															for="image1"
+														<input type="file" name="image1" class="imgUpload" id="image1"
+															accept=".gif,.jpg,.png,.jpeg" /> <label for="image1"
 															th:style="'background-image:url(' + ${product.mainImg} + ');'">
 														</label>
 													</div>
@@ -285,8 +281,8 @@
 																for="addSubImage"
 																style="display: flex; align-items: center; justify-content: center;">
 																<span style="margin-top: 0px !important;"> <i
-																	class="fa fa-plus" style="font-size: 50px;"></i>
-															</span>
+																		class="fa fa-plus" style="font-size: 50px;"></i>
+																</span>
 															</label>
 														</div>
 													</div>
@@ -304,9 +300,10 @@
 											<label>Danh mục SP</label>
 											<div>
 												<select class="form-control" id="form-field-cateChildren">
-													<option th:each="eachCate : ${category}"
-														th:value="${eachCate.id}" th:text="${eachCate.name}"
-														th:selected="${eachCate.id == product.category.parent.id}"></option>
+													<option th:each="eachCate : ${category}" th:value="${eachCate.id}"
+														th:text="${eachCate.name}"
+														th:selected="${eachCate.id == product.category.parent.id}">
+													</option>
 												</select>
 											</div>
 										</div>
@@ -339,8 +336,8 @@
 										<div class="form-group">
 											<label>Số lượng</label><span class="error"> *</span>
 											<div>
-												<input type="text" class="form-control" id="quantity"
-													maxlength="11" th:value="${product.quantity}" /> <span
+												<input type="text" class="form-control" id="quantity" maxlength="11"
+													th:value="${product.quantity}" /> <span
 													style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
 													id="quantityError"></span>
 											</div>
@@ -350,9 +347,8 @@
 										<div class="form-group">
 											<label>Giá sản phẩm</label><span class="error"> *</span>
 											<div>
-												<input type="text" class="form-control"
-													placeholder="Giá sản phẩm" id="price"
-													th:value="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0,'POINT')}" />
+												<input type="text" class="form-control" placeholder="Giá sản phẩm"
+													id="price" th:value="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0,'POINT')}" />
 												<span
 													style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
 													id="priceError"></span>

@@ -13,16 +13,16 @@ import java.util.List;
 @Transactional
 public class AuthRoleServiceImpl implements AuthRoleService {
 
-    @Resource
-    private AuthRoleRepo authRoleRepo;
+	@Resource
+	private AuthRoleRepo authRoleRepo;
 
-    @Override
-    public List<Role> findAll() {
-        return authRoleRepo.findAll();
-    }
+	@Override
+	public List<Role> findAll() {
+		return authRoleRepo.findAll();
+	}
 
-    @Override
-    public Role findOne(Long id) {
-        return authRoleRepo.findOne(id);
-    }
+	@Override
+	public Role findOne(Long id) {
+		return authRoleRepo.findOne(id);
+	}
 }

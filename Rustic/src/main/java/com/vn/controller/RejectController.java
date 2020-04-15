@@ -122,8 +122,8 @@ public class RejectController {
 			new Thread(() -> {
 				try {
 					GoogleMailSender mailSender = new GoogleMailSender();
-					final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath(
-							"html/MailRejectSuccess.html", (HashMap<String, Object>) responseMapMail);
+					final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailRejectSuccess.html",
+							(HashMap<String, Object>) responseMapMail);
 					mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", bill.getEmail(),
 							"[Rustic] Email yêu cầu hủy đơn của Quý Khách", htmlContent);
 				} catch (Exception e) {
@@ -152,8 +152,8 @@ public class RejectController {
 			new Thread(() -> {
 				try {
 					GoogleMailSender mailSender = new GoogleMailSender();
-					final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath(
-							"html/MailRejectFail.html", (HashMap<String, Object>) responseMapMail);
+					final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailRejectFail.html",
+							(HashMap<String, Object>) responseMapMail);
 					mailSender.sendSimpleMailWarningTLS("Rustic<trilmph05520@fpt.edu.vn>", bill.getEmail(),
 							"[Rustic] Email yêu cầu hủy đơn của Quý Khách", htmlContent);
 				} catch (Exception e) {

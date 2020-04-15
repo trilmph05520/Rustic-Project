@@ -15,26 +15,30 @@ import java.util.Map;
 @Component
 public class SendMailOrderSuccess {
 
-    @Resource
-    private BillService billService;
+	@Resource
+	private BillService billService;
 
-    @Scheduled(cron = "0/15 * * * * ?") // 15 phút chạy 1 lần gửi mail cho KH đã nhận được hàng do nhân viên cập nhật Trạng thái
-    private void scheduleSendMailCusOrderSuccess(){
-        try {
-            List<Bill> lsbill = billService.findByTypeStatusAndMailStatus(Bill.STATUSPAYMENT.PAID.value(), Bill.MAILSTATUS.UNPAID.value());
-            for(Bill each : lsbill){
-                Map<String, Object> responseMap = new HashMap<>();
-                responseMap.put("name",each.getName());
-                responseMap.put("id", each.getId());
-                GoogleMailSender mailSender = new GoogleMailSender();
-                final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailThankiuCustomer.html", (HashMap<String, Object>) responseMap);
-                mailSender.sendSimpleMailWarningTLS("RUSTIC<trilmph05520@fpt.edu.vn>", each.getEmail(), "[Rustic] EMail cảm ơn Quý Khách", htmlContent);
-                each.setMailStatus(Bill.MAILSTATUS.PAID.value());
-                billService.update(each);
-                Thread.sleep(500);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+	@Scheduled(cron = "0/15 * * * * ?") // 15 phút chạy 1 lần gửi mail cho KH đã nhận được hàng do nhân viên cập nhật
+										// Trạng thái
+	private void scheduleSendMailCusOrderSuccess() {
+		try {
+			List<Bill> lsbill = billService.findByTypeStatusAndMailStatus(Bill.STATUSPAYMENT.PAID.value(),
+					Bill.MAILSTATUS.UNPAID.value());
+			for (Bill each : lsbill) {
+				Map<String, Object> responseMap = new HashMap<>();
+				responseMap.put("name", each.getName());
+				responseMap.put("id", each.getId());
+				GoogleMailSender mailSender = new GoogleMailSender();
+				final String htmlContent = ThymeleafUtil.getHtmlContentInClassPath("html/MailThankiuCustomer.html",
+						(HashMap<String, Object>) responseMap);
+				mailSender.sendSimpleMailWarningTLS("RUSTIC<trilmph05520@fpt.edu.vn>", each.getEmail(),
+						"[Rustic] EMail cảm ơn Quý Khách", htmlContent);
+				each.setMailStatus(Bill.MAILSTATUS.PAID.value());
+				billService.update(each);
+				Thread.sleep(500);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

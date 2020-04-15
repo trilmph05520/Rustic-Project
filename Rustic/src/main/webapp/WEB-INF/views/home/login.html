@@ -2,15 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="fragments/initHome :: head"></div>
 <style>
-.hidden {
-	display: none;
-}
+	.hidden {
+		display: none;
+	}
 
-.error-valid {
-	color: red;
-	margin-top: 5px;
-}
+	.error-valid {
+		color: red;
+		margin-top: 5px;
+	}
 </style>
+
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -45,19 +46,17 @@
 						<h2>Đăng nhập</h2>
 						<form method="POST" th:action="@{/home/login.html}">
 							<div class="group-input">
-								<label for="username">Tên tài khoản *</label> <input type="text"
-									name="user" id="username">
+								<label for="username">Tên tài khoản *</label> <input type="text" name="user"
+									id="username">
 							</div>
 							<div class="group-input">
-								<label for="pass">Mật khẩu *</label> <input type="password"
-									name="password" id="pass">
+								<label for="pass">Mật khẩu *</label> <input type="password" name="password" id="pass">
 							</div>
-							<div class="error-valid" th:if="${errorLogin != null}"
-								th:text="${errorLogin}"></div>
+							<div class="error-valid" th:if="${errorLogin != null}" th:text="${errorLogin}"></div>
 							<div class="group-input gi-check">
 								<div class="gi-more">
-									<a href="#" data-toggle="modal" data-target="#productModal"
-										class="forget-pass">Quên mật khẩu</a>
+									<a href="#" data-toggle="modal" data-target="#productModal" class="forget-pass">Quên
+										mật khẩu</a>
 								</div>
 							</div>
 							<button type="submit" class="site-btn login-btn">Đăng
@@ -77,13 +76,11 @@
 	<div id="quickview-wrapper">
 		<!-- Modal -->
 		<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document"
-				style="width: 35% !important; margin-top: 15% !important;">
+			<div class="modal-dialog" role="document" style="width: 35% !important; margin-top: 15% !important;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Quên mật khẩu</h5>
-						<button id="close" type="button" class="close"
-							data-dismiss="modal" aria-label="Close">
+						<button id="close" type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -94,8 +91,7 @@
 									<div class="col-lg-12 offset-lg-12">
 										<div class="login-form">
 											<form>
-												<div class="group-input"
-													style="margin-bottom: 15px !important;">
+												<div class="group-input" style="margin-bottom: 15px !important;">
 													<label for="emailForget">Email *</label> <input type="text"
 														id="emailForget" placeholder="Email..."
 														style="margin-top: 5px;">
@@ -137,18 +133,18 @@
 
 	<script th:inline="javascript">
 		/*<![CDATA[*/
-		var currUrl = /*[[@{/}]]*/"";
+		var currUrl = /*[[@{/}]]*/ "";
 		/*]]>*/
 	</script>
 	<script>
-		$(document).ajaxStart(function() {
+		$(document).ajaxStart(function () {
 			$('.btn-call-ajax').addClass('disable-call-ajax');
-		}).ajaxComplete(function() {
+		}).ajaxComplete(function () {
 			$('.btn-call-ajax').removeClass('disable-call-ajax');
 		});
 
 		var regexEmail = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-		$('#forget').on('click', function() {
+		$('#forget').on('click', function () {
 			var email = $('#emailForget').val();
 			var valid = true;
 
@@ -165,13 +161,13 @@
 			if (valid == true) {
 				$('#spinner').removeClass('hidden');
 				$.ajax({
-					url : currUrl + '/home/forgetPassword.html',
-					method : 'POST',
-					data : {
-						email : email
+					url: currUrl + '/home/forgetPassword.html',
+					method: 'POST',
+					data: {
+						email: email
 					},
-					contentType : 'application/x-www-form-urlencoded',
-					success : function(response) {
+					contentType: 'application/x-www-form-urlencoded',
+					success: function (response) {
 						$('#spinner').addClass('hidden');
 						var data = JSON.parse(response);
 						if (data.err != null) {
@@ -179,7 +175,7 @@
 						}
 						if (data.success != null) {
 							$('#err').text(data.success);
-							setTimeout(function() {
+							setTimeout(function () {
 								$('#close').click();
 							}, 1000)
 						}

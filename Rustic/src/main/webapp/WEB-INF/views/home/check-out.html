@@ -4,16 +4,18 @@
 
 <div th:replace="fragments/initHome :: head"></div>
 <style>
-.disable-call-ajax {
-	cursor: none !important;
-}
+	.disable-call-ajax {
+		cursor: none !important;
+	}
 
-#checkout .checkout-form input, #checkout .custom-select, #checkout .form-control
-	{
-	margin-bottom: 5px !important;
-	margin-top: 20px;
-}
+	#checkout .checkout-form input,
+	#checkout .custom-select,
+	#checkout .form-control {
+		margin-bottom: 5px !important;
+		margin-top: 20px;
+	}
 </style>
+
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -30,8 +32,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text product-more">
-						<a href="./index.html"><i class="fa fa-home"></i> Trang Chủ</a> <a
-							href="./shop.html">Shop</a> <span>Thanh toán</span>
+						<a href="./index.html"><i class="fa fa-home"></i> Trang Chủ</a> <a href="./shop.html">Shop</a>
+						<span>Thanh toán</span>
 					</div>
 				</div>
 			</div>
@@ -54,13 +56,12 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<input type="text" style="margin-top: 0px !important;" id="name"
-									placeholder="Tên của bạn" th:value="${name}"> <span
-									id="nameError" style="color: red;"></span>
+									placeholder="Tên của bạn" th:value="${name}"> <span id="nameError"
+									style="color: red;"></span>
 							</div>
 							<div class="col-lg-12">
-								<input type="text" id="email" placeholder="Email"
-									th:value="${email}"> <span id="emailError"
-									style="color: red;"></span>
+								<input type="text" id="email" placeholder="Email" th:value="${email}"> <span
+									id="emailError" style="color: red;"></span>
 							</div>
 							<div class="col-lg-12">
 								<select id="payment" name="payment" class="custom-select"
@@ -71,15 +72,14 @@
 								</select> <span id="paymentError" style="color: red;"></span>
 							</div>
 							<div class="col-lg-12">
-								<input type="text" id="mobile" placeholder="Số điện thoại"
-									th:value="${mobile}"> <span id="mobileError"
-									style="color: red;"></span>
+								<input type="text" id="mobile" placeholder="Số điện thoại" th:value="${mobile}"> <span
+									id="mobileError" style="color: red;"></span>
 							</div>
 							<div class="col-lg-12">
-								<textarea id="address" placeholder="Địa chỉ"
-									class="form-control" th:text="${address}"></textarea>
-								<span id="addressError" style="color: red;"></span> <span
-									id="authUserError" style="color: red;"></span>
+								<textarea id="address" placeholder="Địa chỉ" class="form-control"
+									th:text="${address}"></textarea>
+								<span id="addressError" style="color: red;"></span> <span id="authUserError"
+									style="color: red;"></span>
 
 							</div>
 						</div>
@@ -96,8 +96,8 @@
 									<li class="fw-normal" th:each="cart : ${session.myCartItems}">
 										[[${cart.value.product.name} + ' x ' +
 										${cart.value.quantity}]] <span
-										th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
-										th:text="${#numbers.formatDecimal(cart.value.product.price, 0, 'COMMA', 0,'POINT')} + ' VND'">$60.00</span>
+											th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
+											th:text="${#numbers.formatDecimal(cart.value.product.price, 0, 'COMMA', 0,'POINT')} + ' VND'">$60.00</span>
 										<span th:if="${cart.value.product.priceSale != 0}"
 										th:text="${#numbers.formatDecimal(cart.value.product.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'"></span>
 									</li>

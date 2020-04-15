@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "vnpayTransactionRepo")
 public interface VnpayTransactionInfoRepo extends JpaRepository<VnpayTransactionInfo, Long> {
 
-    VnpayTransactionInfo findByCode(String code);
+	VnpayTransactionInfo findByCode(String code);
 
 }

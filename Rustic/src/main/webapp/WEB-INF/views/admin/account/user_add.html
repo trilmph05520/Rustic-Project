@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="fragments/initAdmin :: head"></div>
@@ -21,10 +21,8 @@
 					</div>
 				</div>
 				<div class="card-body col-xl-12">
-					<form th:object="${user}" th:action="@{/account/add.html}"
-						method="POST">
-						<div class="alert alert-danger"
-							style="text-align: left;  font-weight: bold; font-size: 13px;"
+					<form th:object="${user}" th:action="@{/account/add.html}" method="POST">
+						<div class="alert alert-danger" style="text-align: left; font-weight: bold; font-size: 13px;"
 							th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
 						<input type="hidden" name="txtPassword" id="txtPassword"
 							th:value="${defaultPassword}" />

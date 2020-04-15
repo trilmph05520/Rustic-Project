@@ -9,22 +9,22 @@ import java.util.List;
 
 public interface ReviewService {
 
-    Page<Review> findAll(Pageable pageable);
+	Page<Review> findAll(Pageable pageable);
 
-    Page<Review> findALlReview(Date fromDate, Date toDate, String name, Pageable pageable);
+	Page<Review> findALlReview(Date fromDate, Date toDate, String name, Pageable pageable);
 
-    List<Review> findAllByProductIdAndStatus(Long id, int status);
-    
-    Long countRateByBillId(Long i);
+	List<Review> findAllByProductIdAndStatus(Long id, int status);
 
-    Review insert(Review review);
+	Long countRateByBillId(Long i);
 
-    Review update(Review review);
+	Review insert(Review review);
 
-    void delete(Review review);
+	Review update(Review review);
 
-    Review findOne(Long id);
+	void delete(Review review);
 
-    Long countRateByProductId(Long id);
+	Review findOne(Long id);
+
+	Long countRateByProductId(Long id);
 
 }

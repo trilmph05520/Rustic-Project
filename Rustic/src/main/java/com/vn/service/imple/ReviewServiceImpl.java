@@ -16,48 +16,48 @@ import java.util.List;
 @Transactional
 public class ReviewServiceImpl implements ReviewService {
 
-    @Resource
-    private ReviewRepo reviewRepo;
+	@Resource
+	private ReviewRepo reviewRepo;
 
-    @Override
-    public Page<Review> findAll(Pageable pageable) {
-        return reviewRepo.findAll(pageable);
-    }
+	@Override
+	public Page<Review> findAll(Pageable pageable) {
+		return reviewRepo.findAll(pageable);
+	}
 
-    @Override
-    public Page<Review> findALlReview(Date fromDate, Date toDate, String name, Pageable pageable) {
-        return reviewRepo.findALlReview(fromDate, toDate, name, pageable);
-    }
+	@Override
+	public Page<Review> findALlReview(Date fromDate, Date toDate, String name, Pageable pageable) {
+		return reviewRepo.findALlReview(fromDate, toDate, name, pageable);
+	}
 
-    @Override
-    public List<Review> findAllByProductIdAndStatus(Long id, int status) {
-        return reviewRepo.findAllByProductIdAndStatus(id, status);
-    }
+	@Override
+	public List<Review> findAllByProductIdAndStatus(Long id, int status) {
+		return reviewRepo.findAllByProductIdAndStatus(id, status);
+	}
 
-    @Override
-    public Review insert(Review review) {
-        return reviewRepo.save(review);
-    }
+	@Override
+	public Review insert(Review review) {
+		return reviewRepo.save(review);
+	}
 
-    @Override
-    public Review update(Review review) {
-        return reviewRepo.save(review);
-    }
+	@Override
+	public Review update(Review review) {
+		return reviewRepo.save(review);
+	}
 
-    @Override
-    public void delete(Review review) {
-        reviewRepo.delete(review);
-    }
+	@Override
+	public void delete(Review review) {
+		reviewRepo.delete(review);
+	}
 
-    @Override
-    public Review findOne(Long id) {
-        return reviewRepo.findOne(id);
-    }
+	@Override
+	public Review findOne(Long id) {
+		return reviewRepo.findOne(id);
+	}
 
-    @Override
-    public Long countRateByProductId(Long id) {
-        return reviewRepo.countRateByProductId(id);
-    }
+	@Override
+	public Long countRateByProductId(Long id) {
+		return reviewRepo.countRateByProductId(id);
+	}
 
 	@Override
 	public Long countRateByBillId(Long id) {

@@ -10,17 +10,17 @@ import java.util.List;
 
 public interface RejectService {
 
-    Page<Reject> findAll(Pageable pageable);
+	Page<Reject> findAll(Pageable pageable);
 
-    Reject insert(Reject reject);
+	Reject insert(Reject reject);
 
-    Reject update(Reject reject);
+	Reject update(Reject reject);
 
-    void delete(Reject reject);
+	void delete(Reject reject);
 
-    Reject findOne(Long id);
+	Reject findOne(Long id);
 
-    List<ChartDashboardBillOrder> listCountRejectDashBoard(Date date);
+	List<ChartDashboardBillOrder> listCountRejectDashBoard(Date date);
 
-    Page<Reject> pageByDateAndCode(Date fromDate, Date toDate, String code, Pageable pageable);
+	Page<Reject> pageByDateAndCode(Date fromDate, Date toDate, String code, Pageable pageable);
 }

@@ -17,26 +17,26 @@ import java.util.Collection;
 
 @Service("userDetailsService")
 public class AuthUserDetailsServiceImpl implements UserDetailsService {
-    private static final Logger logger = LoggerFactory.getLogger(AuthUserDetailsServiceImpl.class);
-    private final String cacheName = "authUsers";
+	private static final Logger logger = LoggerFactory.getLogger(AuthUserDetailsServiceImpl.class);
+	private final String cacheName = "authUsers";
 
-    @Resource
-    private AuthUserRepo authUserRepo;
+	@Resource
+	private AuthUserRepo authUserRepo;
 
-    public AuthUserDetailsServiceImpl() {
-    }
+	public AuthUserDetailsServiceImpl() {
+	}
 
-    @Transactional(readOnly = true)
-    @Cacheable({"authUsers"})
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AuthUser user = this.authUserRepo.findByUserName(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Oops!");
-        } else {
-            Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) user.getAuthorities();
-            logger.debug("authorities[{}]", authorities);
-            return user;
-        }
-    }
+	@Transactional(readOnly = true)
+	@Cacheable({ "authUsers" })
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		AuthUser user = this.authUserRepo.findByUserName(username);
+		if (user == null) {
+			throw new UsernameNotFoundException("Oops!");
+		} else {
+			Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) user.getAuthorities();
+			logger.debug("authorities[{}]", authorities);
+			return user;
+		}
+	}
 }

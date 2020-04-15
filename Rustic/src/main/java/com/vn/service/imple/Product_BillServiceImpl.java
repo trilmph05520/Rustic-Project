@@ -25,76 +25,76 @@ import java.util.List;
 @Transactional
 public class Product_BillServiceImpl implements Product_BillService {
 
-    @Resource
-    private Product_BillRepo product_billRepo;
+	@Resource
+	private Product_BillRepo product_billRepo;
 
-    @Override
-    public Page<Product_Bill> findAll(Pageable pageable) {
-        return product_billRepo.findAll(pageable);
-    }
+	@Override
+	public Page<Product_Bill> findAll(Pageable pageable) {
+		return product_billRepo.findAll(pageable);
+	}
 
-    @Override
-    public Product_Bill insert(Product_Bill product_bill) {
-        return product_billRepo.save(product_bill);
-    }
+	@Override
+	public Product_Bill insert(Product_Bill product_bill) {
+		return product_billRepo.save(product_bill);
+	}
 
-    @Override
-    public Product_Bill update(Product_Bill product_bill) {
-        return product_billRepo.save(product_bill);
-    }
+	@Override
+	public Product_Bill update(Product_Bill product_bill) {
+		return product_billRepo.save(product_bill);
+	}
 
-    @Override
-    public void delete(Product_Bill product_bill) {
-        product_billRepo.delete(product_bill);
-    }
+	@Override
+	public void delete(Product_Bill product_bill) {
+		product_billRepo.delete(product_bill);
+	}
 
-    @Override
-    public Product_Bill findOne(Long id) {
-        return product_billRepo.findOne(id);
-    }
+	@Override
+	public Product_Bill findOne(Long id) {
+		return product_billRepo.findOne(id);
+	}
 
-    @Override
-    public Long countQuantityByProduct(Long id) {
-        return product_billRepo.countQuantityByProduct(id);
-    }
+	@Override
+	public Long countQuantityByProduct(Long id) {
+		return product_billRepo.countQuantityByProduct(id);
+	}
 
-    @Override
-    public List<Product_Bill> findByProductId(Long id) {
-        return product_billRepo.findByProductId(id);
-    }
+	@Override
+	public List<Product_Bill> findByProductId(Long id) {
+		return product_billRepo.findByProductId(id);
+	}
 
-    @Override
-    public List<Product_Bill> findByBill_Id(Long id) {
-        return product_billRepo.findByBill_Id(id);
-    }
+	@Override
+	public List<Product_Bill> findByBill_Id(Long id) {
+		return product_billRepo.findByBill_Id(id);
+	}
 
-    @Override
-    public List<ChartDashboardBillOrder> listCountBillGrByDateBillId(Date date) {
-        List<ChartDashboardBillOrder> response = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        DateTime time = new DateTime(date).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0);
-        Date fromDate = time.plusDays(-7).toDate();
-        Date toDate = time.withTimeAtStartOfDay().toDate();
-        List<Object[]> lsObject = product_billRepo.listCountBillGrByDateBillId(fromDate, toDate);
-        for(Object[] each : lsObject){
-            String key = sdf.format(each[0]);
-            BigDecimal val = new BigDecimal(each[1].toString());
-            ChartDashboardBillOrder model = new ChartDashboardBillOrder(key, val);
-            response.add(model);
-        }
-        return response;
-    }
+	@Override
+	public List<ChartDashboardBillOrder> listCountBillGrByDateBillId(Date date) {
+		List<ChartDashboardBillOrder> response = new ArrayList<>();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		DateTime time = new DateTime(date).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0);
+		Date fromDate = time.plusDays(-7).toDate();
+		Date toDate = time.withTimeAtStartOfDay().toDate();
+		List<Object[]> lsObject = product_billRepo.listCountBillGrByDateBillId(fromDate, toDate);
+		for (Object[] each : lsObject) {
+			String key = sdf.format(each[0]);
+			BigDecimal val = new BigDecimal(each[1].toString());
+			ChartDashboardBillOrder model = new ChartDashboardBillOrder(key, val);
+			response.add(model);
+		}
+		return response;
+	}
 
-    @Override
-    public List<KeyValueStringIntegerModel> listCountBillOrGrDateNow() {
-        List<KeyValueStringIntegerModel> response = new ArrayList<>();
-        List<Object[]> lsObject = product_billRepo.listCountBillOrGrDateNow();
-        for(Object[] each : lsObject){
-            String name = (String) each[0];
-            BigDecimal count = new BigDecimal(each[1].toString());
-            KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(name, count);
-            response.add(model);
-        }
-        return response;
-    }
+	@Override
+	public List<KeyValueStringIntegerModel> listCountBillOrGrDateNow() {
+		List<KeyValueStringIntegerModel> response = new ArrayList<>();
+		List<Object[]> lsObject = product_billRepo.listCountBillOrGrDateNow();
+		for (Object[] each : lsObject) {
+			String name = (String) each[0];
+			BigDecimal count = new BigDecimal(each[1].toString());
+			KeyValueStringIntegerModel model = new KeyValueStringIntegerModel(name, count);
+			response.add(model);
+		}
+		return response;
+	}
 }

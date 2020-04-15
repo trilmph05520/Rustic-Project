@@ -4,26 +4,28 @@
 <div th:replace="fragments/initHome :: head"></div>
 
 <style>
-.hidden {
-	display: none;
-}
+	.hidden {
+		display: none;
+	}
 
-.product-tab {
-	width: 100%;
-}
+	.product-tab {
+		width: 100%;
+	}
 
-.customer-review-option {
-	padding-top: 0px !important;
-}
+	.customer-review-option {
+		padding-top: 0px !important;
+	}
 
-.btn.btn-success, .btn.btn-warning {
-	border-radius: 5px !important;
-}
+	.btn.btn-success,
+	.btn.btn-warning {
+		border-radius: 5px !important;
+	}
 
-.p-30 {
-	padding-bottom: 40px !important;
-}
+	.p-30 {
+		padding-bottom: 40px !important;
+	}
 </style>
+
 <body>
 
 	<!-- Body main wrapper start -->
@@ -36,9 +38,8 @@
 		<!-- Header Section Begin -->
 		<div th:replace="fragments/navHome :: header"></div>
 		<!-- Header End -->
-		<input type="hidden" id="user"
-			th:value="${session.userLogin.userName}"> <input
-			type="hidden" id="contextPath" th:value="@{/}">
+		<input type="hidden" id="user" th:value="${session.userLogin.userName}"> <input type="hidden" id="contextPath"
+			th:value="@{/}">
 		<div id="page-content" class="page-wrapper">
 			<div class="shop-section mb-80">
 				<div class="container">
@@ -46,8 +47,8 @@
 						<div class="product-tab">
 							<div class="tab-item">
 								<ul class="nav" role="tablist">
-									<li><a class="active" data-toggle="tab" href="#profile"
-										role="tab">Thông tin cá nhân </a></li>
+									<li><a class="active" data-toggle="tab" href="#profile" role="tab">Thông tin cá nhân
+										</a></li>
 									<li><a data-toggle="tab" href="#history" role="tab">Lịch
 											sử mua hàng </a></li>
 									<li><a data-toggle="tab" href="#chang-password" role="tab">Đổi
@@ -56,17 +57,14 @@
 							</div>
 							<div class="tab-item-content">
 								<div class="tab-content">
-									<div class="tab-pane fade-in active" id="profile"
-										role="tabpanel">
+									<div class="tab-pane fade-in active" id="profile" role="tabpanel">
 										<div class="register-login-section spad">
 											<div class="container">
 												<div class="col-lg-12 offset-lg-12">
 													<div class="register-form">
-														<form th:action="@{/home/profile.html}"
-															th:object="${profile}" method="POST"
-															class="checkout-form">
-															<div
-																th:if="${mapError != null && mapError.containsKey('error') != null}"
+														<form th:action="@{/home/profile.html}" th:object="${profile}"
+															method="POST" class="checkout-form">
+															<div th:if="${mapError != null && mapError.containsKey('error') != null}"
 																style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 																th:each="err: ${mapError.get('errorProfile')}"
 																th:text="${err}"></div>
@@ -74,11 +72,11 @@
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
-																		<label for="fir">Họ <font color="red">*</font></label>
+																		<label for="fir">Họ <font color="red">*</font>
+																			</label>
 																		<input type="text" th:field="*{firstName}"
 																			name="firstName" id="firstName">
-																		<div
-																			th:if="${mapError != null && mapError.containsKey('firstName') != null}"
+																		<div th:if="${mapError != null && mapError.containsKey('firstName') != null}"
 																			style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 																			th:each="err: ${mapError.get('firstName')}"
 																			th:text="${err}"></div>
@@ -87,11 +85,11 @@
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
-																		<label for="lastName">Tên <font color="red">*</font></label>
+																		<label for="lastName">Tên <font color="red">*
+																			</font></label>
 																		<input type="tel" th:field="*{lastName}"
 																			name="lastName" id="lastName">
-																		<div
-																			th:if="${mapError != null && mapError.containsKey('lastName') != null}"
+																		<div th:if="${mapError != null && mapError.containsKey('lastName') != null}"
 																			style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 																			th:each="err: ${mapError.get('lastName')}"
 																			th:text="${err}"></div>
@@ -105,15 +103,16 @@
 																	<div class="group-input">
 																		<label for="lastName">Thành phố</label> <input
 																			type="text" name="province"
-																			placeholder="Thành phố..." th:field="*{province}"
-																			maxlength="64">
+																			placeholder="Thành phố..."
+																			th:field="*{province}" maxlength="64">
 																	</div>
 																</div>
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
 																		<label for="lastName">Quận/Huyện</label> <input
-																			type="text" name="town" placeholder="Quận/Huyện..."
+																			type="text" name="town"
+																			placeholder="Quận/Huyện..."
 																			th:field="*{town}" maxlength="64">
 																	</div>
 																</div>
@@ -123,15 +122,14 @@
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
 																		<label for="lastName">Giới tính <font
-																			color="red">*</font></label> <select class="custom-select"
-																			name="gender" style="height: 50px;"
-																			th:field="*{gender}">
+																				color="red">*</font></label> <select
+																			class="custom-select" name="gender"
+																			style="height: 50px;" th:field="*{gender}">
 																			<option value="">Giới tính</option>
 																			<option value="0">Nam</option>
 																			<option value="1">Nữ</option>
 																		</select>
-																		<div
-																			th:if="${mapError != null && mapError.containsKey('gender') != null}"
+																		<div th:if="${mapError != null && mapError.containsKey('gender') != null}"
 																			style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 																			th:each="err: ${mapError.get('gender')}"
 																			th:text="${err}"></div>
@@ -141,11 +139,11 @@
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
 																		<label for="lastName">Số điện thoại <font
-																			color="red">*</font></label> <input type="text" name="phone"
-																			placeholder="Số điện thoại..." th:field="*{phone}"
-																			maxlength="10">
-																		<div
-																			th:if="${mapError != null && mapError.containsKey('phone') != null}"
+																				color="red">*</font></label> <input
+																			type="text" name="phone"
+																			placeholder="Số điện thoại..."
+																			th:field="*{phone}" maxlength="10">
+																		<div th:if="${mapError != null && mapError.containsKey('phone') != null}"
 																			style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 																			th:each="err: ${mapError.get('phone')}"
 																			th:text="${err}"></div>
@@ -161,16 +159,18 @@
 																			style="height: 50px;" th:field="*{bank}">
 																			<option value="">Ngân hàng</option>
 																			<option th:each="bank : ${bankInfo}"
-																				th:value="${bank.code}" th:text="${bank.name}"
-																				th:selected="${bank.code==bank}"></option>
+																				th:value="${bank.code}"
+																				th:text="${bank.name}"
+																				th:selected="${bank.code==bank}">
+																			</option>
 																		</select>
 																	</div>
 																</div>
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
-																		<label for="lastName">Số tài khoản</label> <input
-																			type="text" name="atmNumber"
+																		<label for="lastName">Số tài khoản</label>
+																		<input type="text" name="atmNumber"
 																			placeholder="Số tài khoản..."
 																			th:field="*{atmNumberBank}" maxlength="16">
 																	</div>
@@ -181,15 +181,17 @@
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
 																		<label for="lastName">Địa chỉ</label> <input
-																			type="text" name="address" placeholder="Địa chỉ..."
+																			type="text" name="address"
+																			placeholder="Địa chỉ..."
 																			th:field="*{address}" maxlength="256">
 																	</div>
 																</div>
 																<div
 																	class="col-sx-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 																	<div class="group-input">
-																		<label for="lastName">Email</label> <input type="text"
-																			name="email" th:field="*{emailUser}"
+																		<label for="lastName">Email</label> <input
+																			type="text" name="email"
+																			th:field="*{emailUser}"
 																			placeholder="Email..." readonly="readonly">
 																	</div>
 																</div>
@@ -210,8 +212,7 @@
 												<div class="co-item">
 													<br>
 													<div class="table-responsive">
-														<table
-															class="table align-items-center table-dark table-flush">
+														<table class="table align-items-center table-dark table-flush">
 															<thead class="thead-dark">
 																<tr>
 																	<th scope="col">STT</th>
@@ -225,9 +226,9 @@
 															<tbody class="list"
 																th:if="${lsBill.getTotalElements() != 0}">
 																<tr th:each="each, iterate : ${lsBill}">
-																	<td class="text-table-body" th:text="${iterate.count}"></td>
 																	<td class="text-table-body"
-																		th:text="${#dates.format(each.createdDate, 'dd/MM/yyyy')}"></td>
+																		th:text="${iterate.count}"></td>
+																	<td class="text-table-body" th:text="${#dates.format(each.createdDate, 'dd/MM/yyyy')}"></td>
 																	<td class="text-table-body" th:text="${each.code}"></td>
 																	<td class="text-table-body"
 																		th:text="${#numbers.formatDecimal(each.total, 0, 'COMMA', 0, 'POINT')}"></td>

@@ -15,8 +15,7 @@
 		<!-- Header -->
 
 		<!-- Page content -->
-		<div class="container-fluid mt--6"
-			style="margin-top: 25px !important;">
+		<div class="container-fluid mt--6" style="margin-top: 25px !important;">
 
 			<!-- Dark table -->
 			<div class="row">
@@ -35,11 +34,11 @@
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
-																class="ni ni-calendar-grid-58"></i></span>
+																	class="ni ni-calendar-grid-58"></i></span>
 														</div>
-														<input class="form-control" placeholder="Start date"
-															type="text" value="06/18/2020" name="from_date"
-															id="from_date" th:value="${from_date}">
+														<input class="form-control" placeholder="Start date" type="text"
+															value="06/18/2020" name="from_date" id="from_date"
+															th:value="${from_date}">
 													</div>
 												</div>
 											</div>
@@ -49,28 +48,28 @@
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"><i
-																class="ni ni-calendar-grid-58"></i></span>
+																	class="ni ni-calendar-grid-58"></i></span>
 														</div>
-														<input class="form-control" placeholder="End date"
-															type="text" value="06/22/2020" name="to_date"
-															id="to_date" th:value="${to_date}">
+														<input class="form-control" placeholder="End date" type="text"
+															value="06/22/2020" name="to_date" id="to_date"
+															th:value="${to_date}">
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="col-lg-4 col-12">
 											<div>
-												<label class="text-white">Tên</label> <input
-													class="form-control" id="name" name="name" type="text"
-													placeholder="Name" th:value="${name}">
+												<label class="text-white">Tên</label> <input class="form-control"
+													id="name" name="name" type="text" placeholder="Name"
+													th:value="${name}">
 											</div>
 										</div>
 										<div class="col-lg-2 col-12 text-right">
 											<div>
 												<label>&nbsp;</label>
 												<div>
-													<button type="submit" id="btnSearch"
-														class="btn btn-primary">Tìm kiếm</button>
+													<button type="submit" id="btnSearch" class="btn btn-primary">Tìm
+														kiếm</button>
 												</div>
 											</div>
 										</div>
@@ -98,7 +97,7 @@
 										<th class="text-table-header">#</th>
 									</tr>
 								</thead>
-								
+
 								<tbody th:if="${page}!=null">
 									<tr th:each="eachRow,iterStat :${page}">
 										<td class="text-table-body" th:text="${iterStat.count}"></td>

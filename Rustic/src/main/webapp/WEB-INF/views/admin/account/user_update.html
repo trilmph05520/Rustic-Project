@@ -24,12 +24,9 @@
 					</div>
 				</div>
 				<div class="card-body col-xl-12">
-					<form th:object="${user}"
-						th:action="@{/account/{id}/update.html(id=${user.id})}"
-						method="POST">
+					<form th:object="${user}" th:action="@{/account/{id}/update.html(id=${user.id})}" method="POST">
 						<div class="alert alert-danger"
-							style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
-							th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
+							style="text-align: left; color: red; font-weight: bold; font-size: 13px;" th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>
 						<input type="hidden" name="user_id" id="user_id" th:value="*{id}" />
 						<div class="col-lg-12">
 							<div class="form-group col-lg-12">

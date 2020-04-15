@@ -9,11 +9,11 @@ import org.springframework.validation.Validator;
 import com.vn.jpa.Report;
 import com.vn.validation.service.ReportFormValidator;
 
-@Service(value="reportFormValidator")
+@Service(value = "reportFormValidator")
 public class ReportFormValidatorImpl implements Validator, ReportFormValidator {
 
 	int INDEX = -1;
-	
+
 	@Override
 	public void validateReportForm(Object var1, Errors var2) {
 		INDEX = 1;
@@ -34,8 +34,8 @@ public class ReportFormValidatorImpl implements Validator, ReportFormValidator {
 		if (this.isBlank(report.getOpinion())) {
 			errors.reject("opinion", "Không được để trống ý kiến !");
 		}
-		this.emailValidate(report.getEmail(),errors);
-		if(INDEX == 1) {
+		this.emailValidate(report.getEmail(), errors);
+		if (INDEX == 1) {
 			if (this.isBlank(report.getMobile())) {
 				errors.reject("mobile", "Không được để trống số điện thoại !");
 			}
@@ -44,7 +44,6 @@ public class ReportFormValidatorImpl implements Validator, ReportFormValidator {
 			}
 		}
 	}
-	
 
 	@Override
 	public void validateReportFormInFooter(Object var1, Errors var2) {
@@ -65,6 +64,5 @@ public class ReportFormValidatorImpl implements Validator, ReportFormValidator {
 			errors.reject("email", "Email không đúng định dạng !");
 		}
 	}
-
 
 }

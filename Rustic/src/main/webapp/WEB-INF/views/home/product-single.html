@@ -173,8 +173,8 @@
 	cursor: pointer;
 }
 </style> -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/static/css/home/product-singer.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/home/product-singer.css}" />
+
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -208,15 +208,13 @@
 					<div class="row">
 						<div class="col-lg-5">
 							<div class="product-pic-zoom">
-								<img class="product-big-img" th:src="${product.mainImg}" alt=""
-									height="458px">
+								<img class="product-big-img" th:src="${product.mainImg}" alt="" height="458px">
 								<div class="zoom-icon">
 									<i class="fa fa-search-plus"></i>
 								</div>
 							</div>
 							<div class="product-thumbs">
-								<div class="product-thumbs-track ps-slider owl-carousel"
-									th:if="${subImg} != null">
+								<div class="product-thumbs-track ps-slider owl-carousel" th:if="${subImg} != null">
 									<div class="pt" th:data-imgbigurl="${product.mainImg}">
 										<img th:src="${product.mainImg}" alt="" height="153px">
 									</div>
@@ -245,20 +243,16 @@
 											class="fa fa-star-o"></i>
 									</div>
 									<div th:if="${product.rate == 3}">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i
-											class="fa fa-star-o"></i>
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
 									</div>
 									<div th:if="${product.rate == 4}">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+										<i class="fa fa-star"></i> <i class="fa fa-star-o"></i>
 									</div>
-									<div
-										th:if="${product.rate == 5 || product.rate == null || product.rate == 0}">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i>
+									<div th:if="${product.rate == 5 || product.rate == null || product.rate == 0}">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i>
 									</div>
 									<span class="text-black-5" th:if="${countRate} != 0"
 										th:text="'( ' + ${countRate} + ' Rating )'">( 27
@@ -270,8 +264,7 @@
 										amet, consectetur ing elit, sed do eiusmod tempor sum dolor
 										sit amet, consectetur adipisicing elit, sed do mod tempor</p>
 									<div class="product-price" th:if="${product.priceSale != 0}">
-										<h4 th:id="price+${product.id}" style="text-decoration: blink"
-											th:text="${#numbers.formatDecimal(product.priceSale, 0,
+										<h4 th:id="price+${product.id}" style="text-decoration: blink" th:text="${#numbers.formatDecimal(product.priceSale, 0,
 											'COMMA', 0,'POINT')} + ' VND'">
 											$495.00</h4>
 										<span style="text-decoration: line-through"

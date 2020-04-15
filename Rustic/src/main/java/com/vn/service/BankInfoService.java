@@ -8,18 +8,18 @@ import java.util.List;
 
 public interface BankInfoService {
 
-    Page<BankInfo> findAll(Pageable pageable);
-    
-    List<BankInfo> findAll();
+	Page<BankInfo> findAll(Pageable pageable);
 
-    BankInfo insert(BankInfo bankInfo);
+	List<BankInfo> findAll();
 
-    BankInfo update(BankInfo bankInfo);
+	BankInfo insert(BankInfo bankInfo);
 
-    void delete(BankInfo bankInfo);
+	BankInfo update(BankInfo bankInfo);
 
-    BankInfo findOne(Long id);
+	void delete(BankInfo bankInfo);
 
-    List<BankInfo> findAllByType(Integer type);
+	BankInfo findOne(Long id);
+
+	List<BankInfo> findAllByType(Integer type);
 
 }

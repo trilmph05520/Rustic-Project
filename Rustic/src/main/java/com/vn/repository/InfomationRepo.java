@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "infomationRepo")
 public interface InfomationRepo extends JpaRepository<Infomation, Long> {
 
-    Infomation findByAuthUserId(Long id);
+	Infomation findByAuthUserId(Long id);
 
-    Infomation findByPhone(String phone);
-    
+	Infomation findByPhone(String phone);
+
 }

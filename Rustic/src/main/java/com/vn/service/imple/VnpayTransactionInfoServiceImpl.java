@@ -14,36 +14,36 @@ import javax.transaction.Transactional;
 @Transactional
 public class VnpayTransactionInfoServiceImpl implements VnpayTransactionInfoService {
 
-    @Resource
-    private VnpayTransactionInfoRepo vnpayTransactionInfoRepo;
+	@Resource
+	private VnpayTransactionInfoRepo vnpayTransactionInfoRepo;
 
-    @Override
-    public Page<VnpayTransactionInfo> findAll(Pageable pageable) {
-        return vnpayTransactionInfoRepo.findAll(pageable);
-    }
+	@Override
+	public Page<VnpayTransactionInfo> findAll(Pageable pageable) {
+		return vnpayTransactionInfoRepo.findAll(pageable);
+	}
 
-    @Override
-    public VnpayTransactionInfo insert(VnpayTransactionInfo vnpayTransactionInfo) {
-        return vnpayTransactionInfoRepo.save(vnpayTransactionInfo);
-    }
+	@Override
+	public VnpayTransactionInfo insert(VnpayTransactionInfo vnpayTransactionInfo) {
+		return vnpayTransactionInfoRepo.save(vnpayTransactionInfo);
+	}
 
-    @Override
-    public VnpayTransactionInfo update(VnpayTransactionInfo vnpayTransactionInfo) {
-        return vnpayTransactionInfoRepo.save(vnpayTransactionInfo);
-    }
+	@Override
+	public VnpayTransactionInfo update(VnpayTransactionInfo vnpayTransactionInfo) {
+		return vnpayTransactionInfoRepo.save(vnpayTransactionInfo);
+	}
 
-    @Override
-    public void delete(VnpayTransactionInfo vnpayTransactionInfo) {
-        vnpayTransactionInfoRepo.delete(vnpayTransactionInfo);
-    }
+	@Override
+	public void delete(VnpayTransactionInfo vnpayTransactionInfo) {
+		vnpayTransactionInfoRepo.delete(vnpayTransactionInfo);
+	}
 
-    @Override
-    public VnpayTransactionInfo findOne(Long id) {
-        return vnpayTransactionInfoRepo.findOne(id);
-    }
+	@Override
+	public VnpayTransactionInfo findOne(Long id) {
+		return vnpayTransactionInfoRepo.findOne(id);
+	}
 
-    @Override
-    public VnpayTransactionInfo findByCode(String code) {
-        return vnpayTransactionInfoRepo.findByCode(code);
-    }
+	@Override
+	public VnpayTransactionInfo findByCode(String code) {
+		return vnpayTransactionInfoRepo.findByCode(code);
+	}
 }

@@ -45,15 +45,12 @@
 
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
-			<li class="page-item first" th:if="${not page.first}"><a
-				class="page-link"
-				th:href="@{${pageUrl}(page=${0},size=${page.size})}">First</a></li>
-			<li class="page-item prev" th:if="${page.hasPrevious()}"><a
-				class="page-link"
-				th:href="@{${pageUrl}(page=${page.number-1},size=${page.size})}">Previous</a></li>
+			<li class="page-item first" th:if="${not page.first}"><a class="page-link"
+					th:href="@{${pageUrl}(page=${0},size=${page.size})}">First</a></li>
+			<li class="page-item prev" th:if="${page.hasPrevious()}"><a class="page-link"
+					th:href="@{${pageUrl}(page=${page.number-1},size=${page.size})}">Previous</a></li>
 
-			<th:block
-				th:each="pageNumber : ${#numbers.sequence(page.number - 5, page.number + 5)}">
+			<th:block th:each="pageNumber : ${#numbers.sequence(page.number - 5, page.number + 5)}">
 				<li class="active page-item"
 					th:if="${pageNumber eq (page.number+1) and pageNumber gt 0 and  pageNumber lt (page.totalPages +1) }">
 					<a class="page-link"

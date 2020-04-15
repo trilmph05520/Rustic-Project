@@ -89,55 +89,48 @@
 							<h4>Để lại bình luận</h4>
 							<p>Nhân viên của chúng tôi sẽ gọi lại sau và trả lời các câu
 								hỏi của bạn.</p>
-							<form id="contact-form" th:object="${report}"
-								class="comment-form" th:action="@{/report/save.html}"
-								method="post">
+							<form id="contact-form" th:object="${report}" class="comment-form"
+								th:action="@{/report/save.html}" method="post">
 								<div class="row">
 									<div class="col-md-12">
 										<h4 class="blog-section-title border-left mb-30">Góp ý</h4>
-										<div
-											th:if="${mapError != null && mapError.containsKey('error') != null}"
+										<div th:if="${mapError != null && mapError.containsKey('error') != null}"
 											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 											th:each="err: ${mapError.get('error')}" th:text="${err}"></div>
 									</div>
 
 									<div class="col-md-6">
-										<input type="text" th:field="*{name}" name="name"
-											placeholder="Tên của bạn..." maxlength="64">
-										<div
-											th:if="${mapError != null && mapError.containsKey('name') != null}"
+										<input type="text" th:field="*{name}" name="name" placeholder="Tên của bạn..."
+											maxlength="64">
+										<div th:if="${mapError != null && mapError.containsKey('name') != null}"
 											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 											th:each="err: ${mapError.get('name')}" th:text="${err}"></div>
 									</div>
 									<div class="col-md-6">
-										<input type="text" th:field="*{email}" name="email"
-											placeholder="Email..." maxlength="45">
-										<div
-											th:if="${mapError != null && mapError.containsKey('email') != null}"
+										<input type="text" th:field="*{email}" name="email" placeholder="Email..."
+											maxlength="45">
+										<div th:if="${mapError != null && mapError.containsKey('email') != null}"
 											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 											th:each="err: ${mapError.get('email')}" th:text="${err}"></div>
 									</div>
 									<div class="col-md-6">
 										<input type="text" th:field="*{problem}" name="subject"
 											placeholder="Vấn đề của bạn..." maxlength="128">
-										<div
-											th:if="${mapError != null && mapError.containsKey('problem') != null}"
+										<div th:if="${mapError != null && mapError.containsKey('problem') != null}"
 											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 											th:each="err: ${mapError.get('problem')}" th:text="${err}"></div>
 									</div>
 									<div class="col-md-6">
 										<input type="text" th:field="*{mobile}" name="phone"
 											placeholder="Số điện thoại..." maxlength="12">
-										<div
-											th:if="${mapError != null && mapError.containsKey('mobile') != null}"
+										<div th:if="${mapError != null && mapError.containsKey('mobile') != null}"
 											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 											th:each="err: ${mapError.get('mobile')}" th:text="${err}"></div>
 									</div>
 									<div class="col-md-12">
-										<textarea class="custom-textarea" th:field="*{opinion}"
-											name="message" placeholder="Ý kiến của bạn" maxlength="128"></textarea>
-										<div
-											th:if="${mapError != null && mapError.containsKey('opinion') != null}"
+										<textarea class="custom-textarea" th:field="*{opinion}" name="message"
+											placeholder="Ý kiến của bạn" maxlength="128"></textarea>
+										<div th:if="${mapError != null && mapError.containsKey('opinion') != null}"
 											style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
 											th:each="err: ${mapError.get('opinion')}" th:text="${err}"></div>
 										<button type="submit" class="site-btn">Gửi góp ý</button>

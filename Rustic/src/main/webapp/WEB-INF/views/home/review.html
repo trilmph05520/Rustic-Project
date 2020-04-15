@@ -48,14 +48,12 @@
 							</thead>
 							<tbody id="cartInfo">
 								<tr th:each="each : ${lstBillPr}" class="data">
-									<td class="cart-pic first-row"><img
-										th:src="${each.product.mainImg}" alt=""></td>
+									<td class="cart-pic first-row"><img th:src="${each.product.mainImg}" alt=""></td>
 									<td class="cart-title first-row"><a
-										th:href="@{/home/{id}/single-product.html(id = ${each.product.id})}">
-											<input type="hidden" th:value="${each.product.id}"
-											class="idPr" />
+											th:href="@{/home/{id}/single-product.html(id = ${each.product.id})}">
+											<input type="hidden" th:value="${each.product.id}" class="idPr" />
 											<h5 th:text="${each.product.name}"></h5>
-									</a></td>
+										</a></td>
 									<td class="text-table-body"
 										th:if="${each.product.info != null && #strings.length(each.product.info) < 30}"
 										th:text="${each.product.info}"></td>

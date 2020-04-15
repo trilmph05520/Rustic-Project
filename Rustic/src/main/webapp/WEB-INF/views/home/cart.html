@@ -48,14 +48,14 @@
 							</thead>
 							<tbody id="cartInfo">
 								<tr th:each="cart : ${session.myCartItems}" class="data">
-									<td class="cart-pic first-row"><img
-										th:src="${cart.value.product.mainImg}" alt=""></td>
+									<td class="cart-pic first-row"><img th:src="${cart.value.product.mainImg}" alt="">
+									</td>
 									<td class="cart-title first-row"><a
-										th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}"><h5
-												th:text="${cart.value.product.name}"></h5></a></td>
-									<td class="p-price first-row"
-										th:id="price+${cart.value.product.id}"><p
-											th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
+											th:href="@{/home/{id}/single-product.html(id = ${cart.value.product.id})}">
+											<h5 th:text="${cart.value.product.name}"></h5>
+										</a></td>
+									<td class="p-price first-row" th:id="price+${cart.value.product.id}">
+										<p th:if="${cart.value.product.priceSale == 0 || cart.value.product.priceSale == null}"
 											th:text="${#numbers.formatDecimal(cart.value.product.price, 0, 'COMMA', 0,'POINT')} + ' VND'"></p>
 										<p th:if="${cart.value.product.priceSale != 0}"
 											th:text="${#numbers.formatDecimal(cart.value.product.priceSale, 0, 'COMMA', 0,'POINT')} + ' VND'">

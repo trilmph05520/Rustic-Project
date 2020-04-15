@@ -15,38 +15,38 @@ import java.util.List;
 @Transactional
 public class BankInfoServiceImpl implements BankInfoService {
 
-    @Resource
-    private BankInfoRepo bankInfoRepo;
+	@Resource
+	private BankInfoRepo bankInfoRepo;
 
-    @Override
-    public Page<BankInfo> findAll(Pageable pageable) {
-        return bankInfoRepo.findAll(pageable);
-    }
+	@Override
+	public Page<BankInfo> findAll(Pageable pageable) {
+		return bankInfoRepo.findAll(pageable);
+	}
 
-    @Override
-    public BankInfo insert(BankInfo bankInfo) {
-        return bankInfoRepo.save(bankInfo);
-    }
+	@Override
+	public BankInfo insert(BankInfo bankInfo) {
+		return bankInfoRepo.save(bankInfo);
+	}
 
-    @Override
-    public BankInfo update(BankInfo bankInfo) {
-        return bankInfoRepo.save(bankInfo);
-    }
+	@Override
+	public BankInfo update(BankInfo bankInfo) {
+		return bankInfoRepo.save(bankInfo);
+	}
 
-    @Override
-    public void delete(BankInfo bankInfo) {
-        bankInfoRepo.delete(bankInfo);
-    }
+	@Override
+	public void delete(BankInfo bankInfo) {
+		bankInfoRepo.delete(bankInfo);
+	}
 
-    @Override
-    public BankInfo findOne(Long id) {
-        return bankInfoRepo.findOne(id);
-    }
+	@Override
+	public BankInfo findOne(Long id) {
+		return bankInfoRepo.findOne(id);
+	}
 
-    @Override
-    public List<BankInfo> findAllByType(Integer type) {
-        return bankInfoRepo.findAllByType(type);
-    }
+	@Override
+	public List<BankInfo> findAllByType(Integer type) {
+		return bankInfoRepo.findAllByType(type);
+	}
 
 	@Override
 	public List<BankInfo> findAll() {

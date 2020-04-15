@@ -13,29 +13,29 @@ import com.vn.model.ChartDashboardBillOrder;
 
 public interface BillService {
 
-    Page<Bill> findAll(Pageable pageable);
+	Page<Bill> findAll(Pageable pageable);
 
-    Page<Bill> findAllBill(Date fromDate, Date toDate, Integer status,String code, String isDelete ,Pageable pageable);
-    
-    Page<Bill> findAllBillByType(Date fromDate, Date toDate, Integer typeStatus, String isDelete ,Pageable pageable);
+	Page<Bill> findAllBill(Date fromDate, Date toDate, Integer status, String code, String isDelete, Pageable pageable);
 
-    Page<Bill> findAllBillByShip(Date fromDate, Date toDate, AuthUser ship, String isDelete ,Pageable pageable);
-    
-    Bill insert(Bill bill);
+	Page<Bill> findAllBillByType(Date fromDate, Date toDate, Integer typeStatus, String isDelete, Pageable pageable);
 
-    Bill update(Bill bill);
+	Page<Bill> findAllBillByShip(Date fromDate, Date toDate, AuthUser ship, String isDelete, Pageable pageable);
 
-    void delete(Bill bill);
+	Bill insert(Bill bill);
 
-    Bill findOne(Long id);
+	Bill update(Bill bill);
 
-    Bill findByCode(String code);
+	void delete(Bill bill);
 
-    List<Bill> findByTypeStatusAndMailStatus(Integer type, Integer statusMail);
+	Bill findOne(Long id);
 
-    boolean checkExistByCode(String code);
+	Bill findByCode(String code);
 
-    List<ChartDashboardBillOrder> listSumTotalForDashboard(Date date);
+	List<Bill> findByTypeStatusAndMailStatus(Integer type, Integer statusMail);
 
-    Page<BillProfileModel> pageBillForShowProfileUser(Long id, Pageable pageable);
+	boolean checkExistByCode(String code);
+
+	List<ChartDashboardBillOrder> listSumTotalForDashboard(Date date);
+
+	Page<BillProfileModel> pageBillForShowProfileUser(Long id, Pageable pageable);
 }

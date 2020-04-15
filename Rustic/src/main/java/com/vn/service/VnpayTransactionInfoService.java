@@ -6,15 +6,15 @@ import org.springframework.data.domain.Pageable;
 
 public interface VnpayTransactionInfoService {
 
-    Page<VnpayTransactionInfo> findAll(Pageable pageable);
+	Page<VnpayTransactionInfo> findAll(Pageable pageable);
 
-    VnpayTransactionInfo insert(VnpayTransactionInfo vnpayTransactionInfo);
+	VnpayTransactionInfo insert(VnpayTransactionInfo vnpayTransactionInfo);
 
-    VnpayTransactionInfo update(VnpayTransactionInfo vnpayTransactionInfo);
+	VnpayTransactionInfo update(VnpayTransactionInfo vnpayTransactionInfo);
 
-    void delete(VnpayTransactionInfo vnpayTransactionInfo);
+	void delete(VnpayTransactionInfo vnpayTransactionInfo);
 
-    VnpayTransactionInfo findOne(Long id);
+	VnpayTransactionInfo findOne(Long id);
 
-    VnpayTransactionInfo findByCode(String code);
+	VnpayTransactionInfo findByCode(String code);
 }
