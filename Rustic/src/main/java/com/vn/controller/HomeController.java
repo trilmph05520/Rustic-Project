@@ -1,5 +1,6 @@
 package com.vn.controller;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -114,6 +115,23 @@ public class HomeController {
 		model.addAttribute("athUser", new AuthUserModel());
 		model.addAttribute("mapError", mapError);
 		ModelAndView modelAndView = new ModelAndView("home/login");
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
 		return modelAndView;
 	}
 
@@ -133,6 +151,25 @@ public class HomeController {
 			} else {
 				model.addAttribute("errorLogin", "Sai tài khoản hoặc mật khẩu");
 			}
+			
+			List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+			List<Category> lstCatePr = new ArrayList<Category>();
+			for (Category each : categoryList) {
+				if (each.getParent() == null) {
+					List ls = new ArrayList();
+					ls.add(each.getName());
+					List lsCategoryChildren = new ArrayList();
+					ls.add(lsCategoryChildren);
+					lstCatePr.add(each);
+				}
+			}
+			
+			for(Category cat : lstCatePr) {
+				recursiveTree(cat);
+			}
+			
+			model.addAttribute("categoryNav", lstCatePr);
+			
 			return "home/login";
 		}
 	}
@@ -145,7 +182,6 @@ public class HomeController {
 		Page<Product> product = productService.findAllByIsdelete("N", _pageable);
 		List<Product> newProduct = productService.lsProductDateDesc();
 		List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
-		Map<Long, List> mapLsId = new HashMap<>();
 		List<Category> lstCatePr = new ArrayList<Category>();
 		for (Category each : category) {
 			if (each.getParent() == null) {
@@ -153,38 +189,63 @@ public class HomeController {
 				ls.add(each.getName());
 				List lsCategoryChildren = new ArrayList();
 				ls.add(lsCategoryChildren);
-				mapLsId.put(each.getId(), ls);
 				lstCatePr.add(each);
 			}
 		}
-		session.setAttribute("categoryNavPr", lstCatePr);
-		for (Category eachCateChildren : category) {
-			if (eachCateChildren.getParent() != null) {
-				if (mapLsId.get(eachCateChildren.getParent().getId()).get(1) != null) {
-					ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
-					List lsCategoryInfo = new ArrayList();
-					lsCategoryInfo.add(eachCateChildren.getId());
-					lsCategoryInfo.add(eachCateChildren.getName());
-					lsChildren.add(lsCategoryInfo);
-				}
-			}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
 		}
-		session.setAttribute("categoryNav", mapLsId);
+		
+		model.addAttribute("categoryNav", lstCatePr);
 		model.addAttribute("newProduct", newProduct);
 		model.addAttribute("page", product);
 		ModelAndView modelAndView = new ModelAndView("home/index");
 		return modelAndView;
 	}
+	
+	public void recursiveTree(Category cat) {
+        if (cat.getChildren().size() > 0) {
+            for (Category c : cat.getChildren()) {
+                recursiveTree(c);
+            }
+        }
+    }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = { "/home/shop.html" }, method = RequestMethod.GET)
-	public ModelAndView shop(Model model, Pageable pageable, HttpSession session) {
+	public ModelAndView shop(Model model, Pageable pageable, HttpSession session, @RequestParam(value="price", defaultValue = "") String price, @RequestParam(value="cateId",defaultValue = "") Long cateId) {
 		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
 		Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
-		Page<Product> product = productService.findAllByIsdelete("N", _pageable);
-		List<Product> newProduct = productService.lsProductDateDesc();
+		Page<Product> product;
+		if(price.isEmpty() && cateId ==null) {
+			product = productService.findAllByIsdelete("N", _pageable);
+		}else {
+			Category cate = null;
+			BigDecimal priceMin;
+			BigDecimal priceMax;
+			if(cateId != null) {
+				 cate = categoryService.findOne(cateId);
+			}
+			
+			if(price.isEmpty()) {
+				priceMin = null;
+				priceMax = null;
+			}else {
+				BigDecimal priCheck = new BigDecimal(price);
+				if(priCheck.compareTo(new BigDecimal("300000000"))>0) {
+					priceMin = new BigDecimal("300000000");
+					priceMax = null;
+				}else {
+					priceMin = BigDecimal.ZERO;
+					priceMax = priCheck;
+				}
+			}
+			
+			product = productService.findFilter(priceMin==null ? null : priceMin.floatValue(), priceMax == null ? null : priceMax.floatValue(), cate, _pageable);
+		}
+//		List<Product> newProduct = productService.lsProductDateDesc();
 		List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
-		Map<Long, List> mapLsId = new HashMap<>();
 		List<Category> lstCatePr = new ArrayList<Category>();
 		for (Category each : category) {
 			if (each.getParent() == null) {
@@ -192,24 +253,18 @@ public class HomeController {
 				ls.add(each.getName());
 				List lsCategoryChildren = new ArrayList();
 				ls.add(lsCategoryChildren);
-				mapLsId.put(each.getId(), ls);
 				lstCatePr.add(each);
 			}
 		}
-		session.setAttribute("categoryNavPr", lstCatePr);
-		for (Category eachCateChildren : category) {
-			if (eachCateChildren.getParent() != null) {
-				if (mapLsId.get(eachCateChildren.getParent().getId()).get(1) != null) {
-					ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
-					List lsCategoryInfo = new ArrayList();
-					lsCategoryInfo.add(eachCateChildren.getId());
-					lsCategoryInfo.add(eachCateChildren.getName());
-					lsChildren.add(lsCategoryInfo);
-				}
-			}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
 		}
-		session.setAttribute("categoryNav", mapLsId);
-		model.addAttribute("newProduct", newProduct);
+		
+		model.addAttribute("categoryNav", lstCatePr);
+		model.addAttribute("price",price);
+		model.addAttribute("cateId",cateId);
+//		model.addAttribute("newProduct", newProduct);
 		model.addAttribute("page", product);
 		ModelAndView modelAndView = new ModelAndView("home/shop");
 		return modelAndView;
@@ -231,6 +286,25 @@ public class HomeController {
 		List<Product> productRelationship = productService
 				.findProductByCategoryIdAndIsdelete(product.getCategory().getId(), "N");
 		Long countRate = reviewService.countRateByProductId(id);
+		
+		List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : category) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
+		
 		model.addAttribute("countRate", countRate);
 		model.addAttribute("newProduct", newProduct);
 		model.addAttribute("product", product);
@@ -248,6 +322,25 @@ public class HomeController {
 		Page<Product> page = productService.findAllByCategoryIdAndIsdelete(id, _page, "N");
 		model.addAttribute("name", category.getName());
 		model.addAttribute("page", page);
+		
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
+		
 		return "home/product";
 	}
 
@@ -263,6 +356,23 @@ public class HomeController {
 			Pageable _page = new PageRequest(pageable.getPageNumber(), 8, sort);
 			Page<Product> page = productService.findByCategoryParentAndIsdelete(lsLong, "N", _page);
 			model.addAttribute("page", page);
+			List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+			List<Category> lstCatePr = new ArrayList<Category>();
+			for (Category each : category) {
+				if (each.getParent() == null) {
+					List ls = new ArrayList();
+					ls.add(each.getName());
+					List lsCategoryChildren = new ArrayList();
+					ls.add(lsCategoryChildren);
+					lstCatePr.add(each);
+				}
+			}
+			
+			for(Category cat : lstCatePr) {
+				recursiveTree(cat);
+			}
+			
+			model.addAttribute("categoryNav", lstCatePr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -297,36 +407,32 @@ public class HomeController {
 				model.addAttribute("address", infomation.getAddress());
 			}
 		}
+		
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
+		
 		ModelAndView modelAndView = new ModelAndView("home/cart");
 		if (session.getAttribute("myCartItems") == null) {
 			Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
 			Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
 			Page<Product> product = productService.findAllByIsdelete("N", _pageable);
 			List<Product> newProduct = productService.lsProductDateDesc();
-			List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
-			Map<Long, List> mapLsId = new HashMap<>();
-			List<Category> lstCatePr = new ArrayList<Category>();
-			for (Category each : category) {
-				if (each.getParent() == null) {
-					List ls = new ArrayList();
-					ls.add(each.getName());
-					List lsCategoryChildren = new ArrayList();
-					ls.add(lsCategoryChildren);
-					mapLsId.put(each.getId(), ls);
-					lstCatePr.add(each);
-				}
-			}
-			session.setAttribute("categoryNavPr", lstCatePr);
-			for (Category eachCateChildren : category) {
-				if (eachCateChildren.getParent() != null) {
-					ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
-					List lsCategoryInfo = new ArrayList();
-					lsCategoryInfo.add(eachCateChildren.getId());
-					lsCategoryInfo.add(eachCateChildren.getName());
-					lsChildren.add(lsCategoryInfo);
-				}
-			}
-			session.setAttribute("categoryNav", mapLsId);
+			
 			model.addAttribute("newProduct", newProduct);
 			model.addAttribute("page", product);
 			modelAndView = new ModelAndView("redirect:/");
@@ -335,30 +441,6 @@ public class HomeController {
 			Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
 			Page<Product> product = productService.findAllByIsdelete("N", _pageable);
 			List<Product> newProduct = productService.lsProductDateDesc();
-			List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
-			Map<Long, List> mapLsId = new HashMap<>();
-			List<Category> lstCatePr = new ArrayList<Category>();
-			for (Category each : category) {
-				if (each.getParent() == null) {
-					List ls = new ArrayList();
-					ls.add(each.getName());
-					List lsCategoryChildren = new ArrayList();
-					ls.add(lsCategoryChildren);
-					mapLsId.put(each.getId(), ls);
-					lstCatePr.add(each);
-				}
-			}
-			session.setAttribute("categoryNavPr", lstCatePr);
-			for (Category eachCateChildren : category) {
-				if (eachCateChildren.getParent() != null) {
-					ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
-					List lsCategoryInfo = new ArrayList();
-					lsCategoryInfo.add(eachCateChildren.getId());
-					lsCategoryInfo.add(eachCateChildren.getName());
-					lsChildren.add(lsCategoryInfo);
-				}
-			}
-			session.setAttribute("categoryNav", mapLsId);
 			model.addAttribute("newProduct", newProduct);
 			model.addAttribute("page", product);
 			modelAndView = new ModelAndView("redirect:/");
@@ -369,6 +451,23 @@ public class HomeController {
 	@RequestMapping(value = "/home/about.html", method = RequestMethod.GET)
 	public ModelAndView viewAbout() {
 		ModelAndView modelAndView = new ModelAndView("home/about");
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		modelAndView.addObject("categoryNav", lstCatePr);
 		return modelAndView;
 	}
 
@@ -377,12 +476,46 @@ public class HomeController {
 //        model.addAttribute("report", new Report());
 //        model.addAttribute("mapError", new HashedMap<String, String>());
 		ModelAndView modelAndView = new ModelAndView("home/contact");
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/home/blog.html", method = RequestMethod.GET)
 	public ModelAndView viewBlog(Model model) {
 		ModelAndView modelAndView = new ModelAndView("home/blog");
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
 		return modelAndView;
 	}
 
@@ -392,18 +525,71 @@ public class HomeController {
 		model.addAttribute("authUser", new AuthUserModel());
 		model.addAttribute("mapError", mapError);
 		ModelAndView modelAndView = new ModelAndView("home/register");
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/home/faq.html", method = RequestMethod.GET)
 	public ModelAndView viewFAQ(Model model) {
 		ModelAndView modelAndView = new ModelAndView("home/faq");
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/home/profile.html", method = RequestMethod.GET)
 	public ModelAndView profilePage(HttpSession session, Model model, Pageable pageable) {
 		try {
+			
+			List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+			List<Category> lstCatePr = new ArrayList<Category>();
+			for (Category each : categoryList) {
+				if (each.getParent() == null) {
+					List ls = new ArrayList();
+					ls.add(each.getName());
+					List lsCategoryChildren = new ArrayList();
+					ls.add(lsCategoryChildren);
+					lstCatePr.add(each);
+				}
+			}
+			
+			for(Category cat : lstCatePr) {
+				recursiveTree(cat);
+			}
+			
+			model.addAttribute("categoryNav", lstCatePr);
+			
 			if (session.getAttribute("userLogin") == null) {
 				Map<String, String> mapError = new HashedMap<String, String>();
 				model.addAttribute("authUser", new AuthUserModel());
@@ -623,6 +809,24 @@ public class HomeController {
 			Page<Product> page = productService.findAllByNameIsLikeAndIsdelete(name, "N", _page);
 			session.setAttribute("search", name);
 			model.addAttribute("page", page);
+			
+			List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+			List<Category> lstCatePr = new ArrayList<Category>();
+			for (Category each : categoryList) {
+				if (each.getParent() == null) {
+					List ls = new ArrayList();
+					ls.add(each.getName());
+					List lsCategoryChildren = new ArrayList();
+					ls.add(lsCategoryChildren);
+					lstCatePr.add(each);
+				}
+			}
+			
+			for(Category cat : lstCatePr) {
+				recursiveTree(cat);
+			}
+			
+			model.addAttribute("categoryNav", lstCatePr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -639,6 +843,23 @@ public class HomeController {
 			model.addAttribute("rate", 1);
 			model.addAttribute("description", "");
 			session.setAttribute("idBill", id);
+			List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+			List<Category> lstCatePr = new ArrayList<Category>();
+			for (Category each : categoryList) {
+				if (each.getParent() == null) {
+					List ls = new ArrayList();
+					ls.add(each.getName());
+					List lsCategoryChildren = new ArrayList();
+					ls.add(lsCategoryChildren);
+					lstCatePr.add(each);
+				}
+			}
+			
+			for(Category cat : lstCatePr) {
+				recursiveTree(cat);
+			}
+			
+			model.addAttribute("categoryNav", lstCatePr);
 			return "home/review";
 		}
 	}
@@ -655,36 +876,30 @@ public class HomeController {
 				model.addAttribute("address", infomation.getAddress());
 			}
 		}
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
+		
 		ModelAndView modelAndView = new ModelAndView("home/check-out");
 		if (session.getAttribute("myCartItems") == null) {
 			Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
 			Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
 			Page<Product> product = productService.findAllByIsdelete("N", _pageable);
 			List<Product> newProduct = productService.lsProductDateDesc();
-			List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
-			Map<Long, List> mapLsId = new HashMap<>();
-			List<Category> lstCatePr = new ArrayList<Category>();
-			for (Category each : category) {
-				if (each.getParent() == null) {
-					List ls = new ArrayList();
-					ls.add(each.getName());
-					List lsCategoryChildren = new ArrayList();
-					ls.add(lsCategoryChildren);
-					mapLsId.put(each.getId(), ls);
-					lstCatePr.add(each);
-				}
-			}
-			session.setAttribute("categoryNavPr", lstCatePr);
-			for (Category eachCateChildren : category) {
-				if (eachCateChildren.getParent() != null) {
-					ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
-					List lsCategoryInfo = new ArrayList();
-					lsCategoryInfo.add(eachCateChildren.getId());
-					lsCategoryInfo.add(eachCateChildren.getName());
-					lsChildren.add(lsCategoryInfo);
-				}
-			}
-			session.setAttribute("categoryNav", mapLsId);
 			model.addAttribute("newProduct", newProduct);
 			model.addAttribute("page", product);
 			modelAndView = new ModelAndView("redirect:/");
@@ -694,29 +909,6 @@ public class HomeController {
 			Page<Product> product = productService.findAllByIsdelete("N", _pageable);
 			List<Product> newProduct = productService.lsProductDateDesc();
 			List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
-			Map<Long, List> mapLsId = new HashMap<>();
-			List<Category> lstCatePr = new ArrayList<Category>();
-			for (Category each : category) {
-				if (each.getParent() == null) {
-					List ls = new ArrayList();
-					ls.add(each.getName());
-					List lsCategoryChildren = new ArrayList();
-					ls.add(lsCategoryChildren);
-					mapLsId.put(each.getId(), ls);
-					lstCatePr.add(each);
-				}
-			}
-			session.setAttribute("categoryNavPr", lstCatePr);
-			for (Category eachCateChildren : category) {
-				if (eachCateChildren.getParent() != null) {
-					ArrayList lsChildren = (ArrayList) mapLsId.get(eachCateChildren.getParent().getId()).get(1);
-					List lsCategoryInfo = new ArrayList();
-					lsCategoryInfo.add(eachCateChildren.getId());
-					lsCategoryInfo.add(eachCateChildren.getName());
-					lsChildren.add(lsCategoryInfo);
-				}
-			}
-			session.setAttribute("categoryNav", mapLsId);
 			model.addAttribute("newProduct", newProduct);
 			model.addAttribute("page", product);
 			modelAndView = new ModelAndView("redirect:/");

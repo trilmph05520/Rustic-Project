@@ -1,5 +1,4 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
-
 	<div th:fragment="partner-logo">
 		<div class="partner-logo">
 			<div class="container">
@@ -67,6 +66,7 @@
 				location.reload();
 
 			}
+			
 		</script>
 		<header class="header-section">
 			<div class="header-top">
@@ -193,33 +193,14 @@
 						<div class="depart-btn">
 
 							<i class="ti-menu"><span>Danh mục</span></i>
-							<ul class="depart-hover"
-								th:if="${session.categoryNav != null && session.categoryNav.size() > 10}"
-								style="height: 400px; overflow-y: scroll;">
-								<li th:each="eachCate : ${session.categoryNav}"><span
-									th:each="cateChilren : ${eachCate.value[1]}"> <a
-										th:href="@{/home/{id}/product.html(id=${cateChilren[0]})}"
-										th:text="${cateChilren[1]}">Iphone</a>
-								</span></li>
-
-							</ul>
-
-							<ul class="depart-hover"
-								th:if="${session.categoryNav != null && session.categoryNav.size() < 10}">
-								<li th:each="eachCate : ${session.categoryNav}"><span
-									th:each="cateChilren : ${eachCate.value[1]}"> <a
-										th:href="@{/home/{id}/product.html(id=${cateChilren[0]})}"
-										th:text="${cateChilren[1]}">Iphone</a>
-								</span></li>
-
-							</ul>
+							<ul th:replace="/fragments/menu :: submenu" th:with="categoryNav=${categoryNav}"></ul>
 						</div>
 					</div>
 					<nav class="nav-menu mobile-menu">
 						<ul>
 							<li><a th:href="@{/}">Trang chủ</a></li>
 							<li><a th:href="@{/home/shop.html}">Shop</a></li>
-							<li><a>Bộ sưu tập</a>
+							<!-- <li><a>Bộ sưu tập</a>
 								<ul class="dropdown" style="height: 400px; overflow-y: scroll;"
 									th:if="${session.categoryNavPr != null && session.categoryNavPr.size() > 10}">
 									<li th:each="eachCatePr : ${session.categoryNavPr}"><a
@@ -231,7 +212,7 @@
 									<li th:each="eachCatePr : ${session.categoryNavPr}"><a
 										th:href="@{/home/{id}/list/product.html(id=${eachCatePr.id})}"
 										th:text="${eachCatePr.name}">Iphone</a></li>
-								</ul></li>
+								</ul></li> -->
 
 							<li><a th:href="@{/home/blog.html}">Blog</a></li>
 							<li><a th:href="@{/home/contact.html}">Liên hệ</a></li>

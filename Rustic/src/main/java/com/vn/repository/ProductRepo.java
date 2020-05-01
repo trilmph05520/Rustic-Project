@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,9 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
 	List<Product> findProductByCategoryIdAndIsdelete(Long id, String isdelete);
 
-	Page<Product> findAllByCategoryIdAndIsdelete(Long id, Pageable pageable, String isdelete);
+	@Query(value = "SELECT p FROM Product p WHERE p.isdelete = :isDelete AND (p.category.id = :id "
+			+ "	or p.category.parent.id = :id) ")
+	Page<Product> findAllByCategoryIdAndIsdelete(@Param("id")Long id, Pageable pageable, @Param("isDelete")String isdelete);
 
 	@Query(value = "SELECT p FROM Product p WHERE (p.createDate BETWEEN :fromDate AND :toDate)"
 			+ "AND (:name IS NULL OR :name = '' OR p.name LIKE CONCAT('%', :name, '%'))"
@@ -39,4 +42,10 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 	@Query(value = "SELECT p FROM Product p WHERE (:name IS NULL OR :name = '' OR p.name LIKE CONCAT('%', :name, '%')) AND (p.isdelete = :isdelete)")
 	Page<Product> findAllByNameIsLikeAndIsdelete(@Param("name") String name, @Param("isdelete") String isdelete,
 			Pageable pageable);
+	
+	@Query(value = "SELECT p FROM Product p WHERE p.isdelete = 'N' AND (( :priceMax is null or p.price <= :priceMax) AND (:priceMin is null or p.price >= :priceMin) ) AND (:category is null or  p.category = :category "
+			+ "	or p.category.parent = :category) ")
+	Page<Product> findFilter(@Param("priceMin") Float priceMin, @Param("priceMax") Float priceMax, @Param("category") Category category,
+			Pageable pageable);
+	
 }

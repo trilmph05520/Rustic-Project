@@ -4,7 +4,9 @@ import com.vn.jpa.Category;
 import com.vn.jpa.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -33,4 +35,8 @@ public interface ProductService {
 	Page<Product> findByCategoryParentAndIsdelete(List<Long> categoryId, String isdelete, Pageable pageable);
 
 	Page<Product> findAllByNameIsLikeAndIsdelete(String name, String isdelete, Pageable pageable);
+	
+	Page<Product> findFilter(Float priceMin,Float priceMax, Category cate,
+			Pageable pageable);
+	
 }

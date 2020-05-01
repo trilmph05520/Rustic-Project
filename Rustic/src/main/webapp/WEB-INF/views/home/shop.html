@@ -152,25 +152,37 @@
 	<section class="product-shop spad">
 		<div class="container">
 			<div class="row">
-
 				<div class="col-lg-12 order-1 order-lg-2" th:if="${page.content} != null">
-					<!-- <div class="product-show-option">
-                    <div class="row">
-                        <div class="col-lg-7 col-md-7">
-                            <div class="select-option">
-                                <select class="sorting">
-                                    <option value="">Default Sorting</option>
-                                </select> <select class="p-show">
-                                    <option value="">Show:</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-md-5 text-right">
-                            <p>Show 01- 09 Of 36 Product</p>
-                        </div>
-                    </div>
-                </div> -->
 					<div class="product-list">
+						<div class="product-show-option">
+	                            <form th:action="@{/home/shop.html}" class="col-lg-12 col-md-12">
+	                            <div class="row">
+	                            	<div class="col-lg-7 col-md-7">
+		                                <div class="select-option">
+		                                    <select class="sorting" name="cateId">
+		                                        <option value="">Danh mục</option>
+		                                        <option th:each="cate : ${categoryNav}" th:value="${cate.id}" th:text="${cate.name}"
+		                                        th:selected="${cateId == cate.id}"></option>
+		                                    </select>
+		                                    <select class="sorting" name="price">
+		                                        <option th:selected="${price==''}" value="">Khoảng giá</option>
+		                                        <option th:selected="${price=='5000000'}" value="5000000">Dưới 5 triệu</option>
+		                                        <option th:selected="${price=='10000000'}" value="10000000">Dưới 10 triệu</option>
+		                                        <option th:selected="${price=='50000000'}" value="50000000">Dưới 50 triệu</option>
+		                                        <option th:selected="${price=='100000000'}" value="100000000">Dưới 100 triệu</option>
+		                                        <option th:selected="${price=='300000000'}" value="300000000">Dưới 300 triệu</option>
+		                                        <option th:selected="${price=='301000000'}" value="301000000">Trên 300 triệu</option>
+		                                    </select>
+		                                </div>
+		                            </div>
+		                            <div class="col-lg-5 col-md-5 text-right">
+		                                <div class="filter-widget">
+		                                	<button type="submit" class="site-btn">Lọc</button>
+		                                </div>
+		                            </div>
+		                            </div>
+	                            </form>
+	                    </div>
 						<div class="row">
 							<div class="col-lg-3 col-sm-6" th:each="eachPro : ${page.content}">
 								<div class="product-item">

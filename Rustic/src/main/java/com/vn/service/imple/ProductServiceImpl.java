@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -78,5 +80,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Page<Product> findAllByNameIsLikeAndIsdelete(String name, String isdelete, Pageable pageable) {
 		return productRepo.findAllByNameIsLikeAndIsdelete(name, isdelete, pageable);
+	}
+
+	@Override
+	public Page<Product> findFilter(Float priceMin, Float priceMax, Category cate, Pageable pageable) {
+		return productRepo.findFilter(priceMin, priceMax, cate, pageable);
 	}
 }

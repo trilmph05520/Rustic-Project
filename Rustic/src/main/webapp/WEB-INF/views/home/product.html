@@ -121,7 +121,8 @@
 }
 </style>
 -->
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/home/product.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/home/product.css}" />
 
 <body>
 	<!-- Page Preloder -->
@@ -151,32 +152,48 @@
 	<section class="product-shop spad">
 		<div class="container">
 			<div class="row">
-
-				<div class="col-lg-12 order-1 order-lg-2" th:if="${page.content} != null">
-					<!-- <div class="product-show-option">
-						<div class="row">
-							<div class="col-lg-7 col-md-7">
-								<div class="select-option">
-									<select class="sorting">
-										<option value="">Default Sorting</option>
-									</select> <select class="p-show">
-										<option value="">Show:</option>
-									</select>
+				<div class="col-lg-12 order-1 order-lg-2"
+					th:if="${page.content} != null">
+					<div class="product-show-option">
+						<form th:action="@{/home/shop.html}" class="col-lg-12 col-md-12">
+							<div class="row">
+								<div class="col-lg-7 col-md-7">
+									<div class="select-option">
+										<select class="sorting" name="cateId">
+											<option value="">Danh mục</option>
+											<option th:each="cate : ${categoryNav}" th:value="${cate.id}"
+												th:text="${cate.name}"></option>
+										</select> <select class="sorting" name="price">
+											<option value="">Khoảng giá</option>
+											<option value="5000000">Dưới 5 triệu</option>
+											<option value="10000000">Dưới 10 triệu</option>
+											<option value="50000000">Dưới 50 triệu</option>
+											<option value="100000000">Dưới 100 triệu</option>
+											<option value="300000000">Dưới 300 triệu</option>
+											<option value="301000000">Trên 300 triệu</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-5 col-md-5 text-right">
+									<div class="filter-widget">
+										<button type="submit" class="site-btn">Lọc</button>
+									</div>
 								</div>
 							</div>
-							<div class="col-lg-5 col-md-5 text-right">
-								<p>Show 01- 09 Of 36 Product</p>
-							</div>
-						</div>
-					</div> -->
+						</form>
+					</div>
 					<div class="product-list">
 						<div class="row">
-							<div class="col-lg-3 col-sm-6" th:each="eachPro : ${page.content}">
+							<div class="col-lg-3 col-sm-6"
+								th:each="eachPro : ${page.content}">
 								<div class="product-item">
 									<div class="pi-pic">
-										<a th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}"><img
-												th:src="${eachPro.mainImg}" alt="" width="100%" height="295px"> </a>
-										<div class="sale" th:if="${eachPro.priceSale != 0 && eachPro.quantity > 0}">Giảm
+										<a
+											th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}"><img
+											th:src="${eachPro.mainImg}" alt="" width="100%"
+											height="295px"> </a>
+										<div class="sale"
+											th:if="${eachPro.priceSale != 0 && eachPro.quantity > 0}">Giảm
 											giá</div>
 										<div class="sale"
 											style="font-size: 15px; border: 2px dotted; padding: 6px; color: white; position: absolute; border-radius: 50%; background: coral; text-align: center; margin-top: 5px;"
@@ -186,11 +203,11 @@
 										</div>
 										<ul>
 											<li class="w-icon active" th:if="${eachPro.quantity} > 0"><a
-													th:href="@{/cart/add/{productId}.html(productId = ${eachPro.id})}"><i
-														class="icon_bag_alt"></i></a></li>
+												th:href="@{/cart/add/{productId}.html(productId = ${eachPro.id})}"><i
+													class="icon_bag_alt"></i></a></li>
 											<li class="quick-view"><a
-													th:onclick="'quickView(\'' + ${eachPro.id} + '\')'"
-													data-toggle="modal" data-target="#productModal">+ Xem
+												th:onclick="'quickView(\'' + ${eachPro.id} + '\')'"
+												data-toggle="modal" data-target="#productModal">+ Xem
 													chi tiết</a></li>
 											<!-- <li class="w-icon"><a href="#"><i
 													class="fa fa-random"></i></a></li> -->
@@ -199,7 +216,8 @@
 									<div class="pi-text">
 										<div class="catagory-name" th:text="${eachPro.category.name}">Khăn
 											tắm</div>
-										<a th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}">
+										<a
+											th:href="@{/home/{id}/single-product.html(id = ${eachPro.id})}">
 											<h5 th:text="${eachPro.name}">Dứa</h5>
 										</a>
 										<div class="pd-rating">
@@ -231,7 +249,8 @@
 										</div>
 										<div class="product-price" th:if="${eachPro.priceSale == 0}">
 											<!-- $14.00 <span>$35.00</span> -->
-											<h4 class="product-price" style="margin-top: 33px;" th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
+											<h4 class="product-price" style="margin-top: 33px;"
+												th:text="${#numbers.formatDecimal(eachPro.price, 0, 'COMMA', 0,'POINT')} + ' VND'">
 												&nbsp;Vnđ</h4>
 										</div>
 										<div class="product-price" th:if="${eachPro.priceSale != 0}">

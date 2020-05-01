@@ -207,12 +207,12 @@
 		max : maxPrice,
 		values : [ minPrice, maxPrice ],
 		slide : function(event, ui) {
-			minamount.val('$' + ui.values[0]);
-			maxamount.val('$' + ui.values[1]);
+			minamount.val(ui.values[0]  + ' VND' );
+			maxamount.val(ui.values[1]  + ' VND' );
 		}
 	});
-	minamount.val('$' + rangeSlider.slider("values", 0));
-	maxamount.val('$' + rangeSlider.slider("values", 1));
+	minamount.val(rangeSlider.slider("values", 0) + ' VND' );
+	maxamount.val(rangeSlider.slider("values", 1) + ' VND' );
 
 	/*-------------------
 		Radio Btn
@@ -435,6 +435,11 @@
 			$("#" + id).remove();
 			location.reload();
 		}
+	});
+	
+	$('.caret').on('click', function() {
+		this.parentElement.querySelector(".nested").classList.toggle("active");
+	    this.classList.toggle("caret-down");
 	});
 
 })(jQuery);

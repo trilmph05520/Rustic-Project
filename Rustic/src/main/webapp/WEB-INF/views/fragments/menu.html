@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<ul class="myUL depart-hover" th:fragment="submenu">
+	<li th:each="cat : ${categoryNav}"><span th:class="${cat.children !=null && cat.children.size() > 0} ? 'caret' : ''"><a
+			th:href="@{/home/{id}/product.html(id=${cat.id})}"
+			th:text="${cat.name}"></a></span>
+		<ul class="nested dropdown" th:if="${cat.children !=null && cat.children.size() > 0}"
+			th:include="/fragments/menu :: submenu"
+			th:with="categoryNav = ${cat.children}"></ul></li>
+</ul>
+</html>

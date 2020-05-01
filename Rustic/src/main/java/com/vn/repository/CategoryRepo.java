@@ -22,6 +22,8 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
 	List<Category> findAllByIsDeleteAndIsActive(String isDelete, String isActive);
 
 	List<Category> findByParentIdAndIsActiveAndIsDelete(Long id, String isActive, String isDelete);
+	
+	List<Category> findByParentIsNullAndIsActiveAndIsDelete(String isActive, String isDelete);
 
 	@Query(value = "SELECT c FROM Category c WHERE "
 			+ " (:name IS NULL OR :name = '' OR c.name LIKE CONCAT('%', :name, '%'))" + " AND (c.isDelete = :isDelete)"

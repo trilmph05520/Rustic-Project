@@ -4,8 +4,10 @@ import com.google.common.base.Strings;
 import com.vn.common.Constants;
 import com.vn.common.ThymeleafUtil;
 import com.vn.config.GoogleMailSender;
+import com.vn.jpa.Category;
 import com.vn.jpa.Report;
 import com.vn.model.ReportModel;
+import com.vn.service.CategoryService;
 import com.vn.service.ReportService;
 import com.vn.validation.service.ReportFormValidator;
 
@@ -30,8 +32,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -43,6 +47,9 @@ public class ReportController {
 
 	@Resource
 	private ReportFormValidator reportFormValidator;
+	
+	@Resource
+	private CategoryService categoryService;
 
 	private SimpleDateFormat sdf_ddMMyyyHHmm = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -153,10 +160,36 @@ public class ReportController {
 		}
 		return "redirect:/report/list.html";
 	}
+	
+	public void recursiveTree(Category cat) {
+        if (cat.getChildren().size() > 0) {
+            for (Category c : cat.getChildren()) {
+                recursiveTree(c);
+            }
+        }
+    }
+
 
 	@RequestMapping(value = "save.html", method = RequestMethod.POST)
 	public String saveReply(@ModelAttribute("report") Report report, BindingResult result, Model model) {
 		Map<String, String> mapError = new HashedMap<String, String>();
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		model.addAttribute("categoryNav", lstCatePr);
 		try {
 			reportFormValidator.validateReportForm(report, result);
 			if (result.hasErrors()) {

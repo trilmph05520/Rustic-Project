@@ -33,4 +33,5 @@ public interface CategoryService {
 	List<Category> findByParentIdAndIsActiveAndIsDelete(Long id, String isActive, String isDelete);
 
 	List<BigInteger> getListCategoryById(Long parentId, String active, String delete);
+	
 }
