@@ -16,13 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `auth_user_role`
+-- Dumping data for table `blog`
 --
 
-LOCK TABLES `auth_user_role` WRITE;
-/*!40000 ALTER TABLE `auth_user_role` DISABLE KEYS */;
-INSERT INTO `auth_user_role` VALUES (1,1),(2,1),(3,1),(2,2),(4,3),(2,4),(2,5);
-/*!40000 ALTER TABLE `auth_user_role` ENABLE KEYS */;
+LOCK TABLES `blog` WRITE;
+/*!40000 ALTER TABLE `blog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `blog` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
