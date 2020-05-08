@@ -23,6 +23,8 @@ public interface ProductService {
 	Product findOne(Long id);
 
 	List<Product> lsProductDateDesc();
+	
+	List<Product> lstProductQuantityDesc();
 
 	List<Product> findProductByCategoryIdAndIsdelete(Long id, String isdelete);
 

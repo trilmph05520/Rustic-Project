@@ -179,8 +179,8 @@ public class HomeController {
 	public ModelAndView indexs(Model model, Pageable pageable, HttpSession session) {
 		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
 		Pageable _pageable = new PageRequest(pageable.getPageNumber(), 8, sort);
-		Page<Product> product = productService.findAllByIsdelete("N", _pageable);
 		List<Product> newProduct = productService.lsProductDateDesc();
+		List<Product> lstProductQuantityDesc = productService.lstProductQuantityDesc();
 		List<Category> category = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
 		List<Category> lstCatePr = new ArrayList<Category>();
 		for (Category each : category) {
@@ -199,7 +199,7 @@ public class HomeController {
 		
 		model.addAttribute("categoryNav", lstCatePr);
 		model.addAttribute("newProduct", newProduct);
-		model.addAttribute("page", product);
+		model.addAttribute("lstProductQuantityDesc", lstProductQuantityDesc);
 		ModelAndView modelAndView = new ModelAndView("home/index");
 		return modelAndView;
 	}

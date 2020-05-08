@@ -86,4 +86,9 @@ public class ProductServiceImpl implements ProductService {
 	public Page<Product> findFilter(Float priceMin, Float priceMax, Category cate, Pageable pageable) {
 		return productRepo.findFilter(priceMin, priceMax, cate, pageable);
 	}
+
+	@Override
+	public List<Product> lstProductQuantityDesc() {
+		return productRepo.lstProductQuantityDesc();
+	}
 }
