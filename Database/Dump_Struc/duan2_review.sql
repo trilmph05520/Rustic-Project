@@ -16,13 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `review`
+-- Table structure for table `review`
 --
 
-LOCK TABLES `review` WRITE;
-/*!40000 ALTER TABLE `review` DISABLE KEYS */;
-/*!40000 ALTER TABLE `review` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `review` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  `description` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
+  `reply` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `rate` tinyint(4) DEFAULT NULL,
+  `id_product` bigint(20) DEFAULT NULL,
+  `bill_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -33,4 +46,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-08 23:23:45
+-- Dump completed on 2020-05-10 11:37:35

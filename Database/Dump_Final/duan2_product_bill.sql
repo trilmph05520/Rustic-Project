@@ -16,33 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `vnpay_trans_info`
+-- Table structure for table `product_bill`
 --
 
-DROP TABLE IF EXISTS `vnpay_trans_info`;
+DROP TABLE IF EXISTS `product_bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vnpay_trans_info` (
+CREATE TABLE `product_bill` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_product` bigint(20) NOT NULL,
+  `id_bill` bigint(20) NOT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `isdelete` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `vnp_locale` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_curr_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_order_info` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_order_type` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_amount` bigint(20) DEFAULT NULL,
-  `vnp_ip_addr` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_create_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_bank_code` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_bank_tran_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_pay_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_transaction_no` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_response_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `id_bill` bigint(20) DEFAULT NULL,
-  `code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`,`id_product`,`id_bill`),
+  KEY `fk_product_has_bill_product1_idx` (`id_product`),
+  KEY `fk_bill_idx` (`id_bill`),
+  CONSTRAINT `fk_bill` FOREIGN KEY (`id_bill`) REFERENCES `bill` (`id`),
+  CONSTRAINT `fk_product` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_bill`
+--
+
+LOCK TABLES `product_bill` WRITE;
+/*!40000 ALTER TABLE `product_bill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_bill` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -53,4 +55,4 @@ CREATE TABLE `vnpay_trans_info` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-10 11:37:36
+-- Dump completed on 2020-05-10 11:39:16

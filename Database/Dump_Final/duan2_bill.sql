@@ -16,33 +16,41 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `vnpay_trans_info`
+-- Table structure for table `bill`
 --
 
-DROP TABLE IF EXISTS `vnpay_trans_info`;
+DROP TABLE IF EXISTS `bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vnpay_trans_info` (
+CREATE TABLE `bill` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `total` float DEFAULT NULL,
+  `payment` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `type_status` tinyint(4) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `vnp_locale` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_curr_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_order_info` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_order_type` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_amount` bigint(20) DEFAULT NULL,
-  `vnp_ip_addr` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_create_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_bank_code` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_bank_tran_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_pay_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_transaction_no` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_response_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `id_bill` bigint(20) DEFAULT NULL,
+  `created_by` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `isdelete` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mobile` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   `code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
+  `name` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mail_status` tinyint(4) DEFAULT NULL,
+  `id_auth_user` bigint(20) DEFAULT NULL,
+  `id_shipper` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bill`
+--
+
+LOCK TABLES `bill` WRITE;
+/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -53,4 +61,4 @@ CREATE TABLE `vnpay_trans_info` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-10 11:37:36
+-- Dump completed on 2020-05-10 11:39:16

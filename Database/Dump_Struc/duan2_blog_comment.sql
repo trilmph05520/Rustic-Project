@@ -16,30 +16,18 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `vnpay_trans_info`
+-- Table structure for table `blog_comment`
 --
 
-DROP TABLE IF EXISTS `vnpay_trans_info`;
+DROP TABLE IF EXISTS `blog_comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vnpay_trans_info` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` date DEFAULT NULL,
-  `vnp_locale` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_curr_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_order_info` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_order_type` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_amount` bigint(20) DEFAULT NULL,
-  `vnp_ip_addr` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_create_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_bank_code` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_bank_tran_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_pay_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_transaction_no` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_response_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `id_bill` bigint(20) DEFAULT NULL,
-  `code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
+CREATE TABLE `blog_comment` (
+  `id` bigint(20) NOT NULL,
+  `email` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `messages` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
+  `blog_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

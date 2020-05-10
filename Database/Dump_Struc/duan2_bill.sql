@@ -16,13 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `bill`
+-- Table structure for table `bill`
 --
 
-LOCK TABLES `bill` WRITE;
-/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `bill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bill` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `total` float DEFAULT NULL,
+  `payment` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `type_status` tinyint(4) DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  `created_by` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `isdelete` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mobile` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mail_status` tinyint(4) DEFAULT NULL,
+  `id_auth_user` bigint(20) DEFAULT NULL,
+  `id_shipper` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -33,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-08 23:23:45
+-- Dump completed on 2020-05-10 11:37:35
