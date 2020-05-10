@@ -22,6 +22,7 @@ public class FileUtils {
 			setupDirectoryStorage(uploadingDirectory);
 			String filePath;
 			String webResourcePath = "";
+			fileName = fileName.replaceAll("\\s++", "");
 			filePath = uploadingDirectory + fileName;
 			if (isSaveWebResourcePath) {
 				webResourcePath = webContextPath + fileName;
@@ -36,6 +37,7 @@ public class FileUtils {
 					webResourcePath = webContextPath + fileNameCustom;
 				}
 			}
+			filePath = filePath.replaceAll("\\s++", "");
 			File file = new File(filePath);
 			if (file.exists() && !isAllowOverRide) {
 				result.setSuccess(false);

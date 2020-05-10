@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.25, for Win64 (x86_64)
 --
--- Host: localhost    Database: duan2
+-- Host: 127.0.0.1    Database: duan2
 -- ------------------------------------------------------
--- Server version	5.7.25-log
+-- Server version	5.7.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,12 +26,12 @@ CREATE TABLE `blog` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `title` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
   `mainDescription` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
-  `mainImg` text CHARACTER SET latin1,
-  `subImg` text CHARACTER SET latin1,
+  `mainImg` text COLLATE utf8_unicode_ci,
+  `subImg` text CHARACTER SET utf8,
   `created` date DEFAULT NULL,
   `subDescription` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-10 11:39:16
+-- Dump completed on 2020-05-10 13:32:21
