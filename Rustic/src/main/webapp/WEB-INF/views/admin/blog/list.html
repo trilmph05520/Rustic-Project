@@ -21,46 +21,16 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0">Danh sách sản phẩm</h3>
+							<h3 class="text-white mb-0">Danh sách blog</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
-								<form role="form" th:action="@{/product/list.html}" method="POST">
+								<form role="form" th:action="@{/blog/list.html}" method="POST">
 									<div class="row">
-										<div class="input-daterange datepicker row align-items-center">
-											<div class="col">
-												<div class="form-group">
-													<label class="text-white">Từ ngày</label>
-													<div class="input-group">
-														<div class="input-group-prepend">
-															<span class="input-group-text"><i
-																	class="ni ni-calendar-grid-58"></i></span>
-														</div>
-														<input class="form-control" placeholder="Start date" type="text"
-															value="06/18/2020" name="from_date" id="from_date"
-															th:value="${from_date}">
-													</div>
-												</div>
-											</div>
-											<div class="col">
-												<div class="form-group">
-													<label class="text-white">Đến ngày</label>
-													<div class="input-group">
-														<div class="input-group-prepend">
-															<span class="input-group-text"><i
-																	class="ni ni-calendar-grid-58"></i></span>
-														</div>
-														<input class="form-control" placeholder="End date" type="text"
-															value="06/22/2020" name="to_date" id="to_date"
-															th:value="${to_date}">
-													</div>
-												</div>
-											</div>
-										</div>
 										<div class="col-lg-3">
-											<label class="text-white">Tên sản phẩm</label>
+											<label class="text-white">Tiêu đề</label>
 											<div>
-												<input type="text" placeholder="" name="name" id="name"
-													class="form-control" th:value="${name}" />
+												<input type="text" placeholder="" name="title" id="title"
+													class="form-control" th:value="${title}" />
 											</div>
 										</div>
 										<div class="col-sm-2">
@@ -76,10 +46,10 @@
 							<input type="hidden" name="category_list_ss" th:value="${category_list_ss}" />
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5 text-right">
-								<a th:href="@{/product/add.html}"
+								<a th:href="@{/blog/add.html}"
 									sec:authorize="hasAnyAuthority('Administrators','Staffs')"
 									class="btn btn-sm btn-primary">Thêm mới</a> <a
-									th:href="@{/product/list.html(category_list_ss=${category_list_ss})}"
+									th:href="@{/blog/list.html(category_list_ss=${category_list_ss})}"
 									class="btn btn-sm btn-neutral">Làm mới</a>
 							</div>
 						</div>
@@ -88,13 +58,9 @@
 								<thead class="thead-dark">
 									<tr>
 										<th scope="col">#</th>
-										<th scope="col">Tên</th>
-										<th scope="col">Giá</th>
-										<th scope="col">Giảm giá</th>
-										<th scope="col">Số lượng</th>
-										<th scope="col">Miêu tả</th>
-										<th scope="col">Thông tin</th>
-										<th scope="col">Trạng thái</th>
+										<th scope="col">Tiêu đề</th>
+										<th scope="col">Nội dung chính</th>
+										<th scope="col">Ngày tạo</th>
 										<th scope="col" class="text-center">#</th>
 										<th scope="col" class="text-center">#</th>
 									</tr>
@@ -102,23 +68,14 @@
 								<tbody class="list" th:if="${page.content} != null">
 									<tr th:each="eachRow, iterStat : ${page}">
 										<td class="text-table-body" th:text="${iterStat.count}"></td>
-										<td class="text-table-body" th:text="${eachRow.name}"></td>
-										<td class="text-table-body" th:text="${#numbers.formatDecimal(eachRow.price, 0, 'COMMA', 0,'POINT') + ' VND'}"></td>
+										<td class="text-table-body" th:text="${eachRow.title}"></td>
 										<td class="text-table-body"
-											th:text="${#numbers.formatDecimal(eachRow.priceSale, 0, 'COMMA', 0,'POINT') + ' VND'}"></td>
-										<td class="text-table-body" th:text="${eachRow.quantity}"></td>
+											th:if="${eachRow.mainDescription != null && #strings.length(eachRow.mainDescription) < 30}"
+											th:text="${eachRow.mainDescription}"></td>
 										<td class="text-table-body"
-											th:if="${eachRow.description != null && #strings.length(eachRow.description) < 30}"
-											th:text="${eachRow.description}"></td>
-										<td class="text-table-body"
-											th:if="${eachRow.description != null && #strings.length(eachRow.description) > 30}"
-											th:text="${#strings.substring(eachRow.description,0,30) + '...'}"></td>
-										<td class="text-table-body"
-											th:if="${eachRow.info != null && #strings.length(eachRow.info) < 30}"
-											th:text="${eachRow.info}"></td>
-										<td class="text-table-body"
-											th:if="${eachRow.info != null && #strings.length(eachRow.info) > 30}"
-											th:text="${#strings.substring(eachRow.info,0,30) + '...'}"></td>
+											th:if="${eachRow.mainDescription != null && #strings.length(eachRow.mainDescription) > 30}"
+											th:text="${#strings.substring(eachRow.mainDescription,0,30) + '...'}"></td>
+										<td class="text-table-body" th:text="${eachRow.created}"></td>
 										<td class="text-table-body" style="text-align: center;">
 											<button class="btn btn-warning"
 												th:if="${eachRow.quantity <= 0}"

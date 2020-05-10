@@ -171,6 +171,14 @@
 								class="ni ni-bullet-list-67 text-default"></i> <span
 								class="nav-link-text">Phản hồi</span>
 						</a></li>
+						<li class="nav-item"
+							sec:authorize="hasAnyAuthority('Administrators','Staffs')"><a
+							class="nav-link"
+							th:classappend="${#httpServletRequest.getRequestURI().contains('/blog') ? 'active':''}"
+							th:href="@{/blog/list.html}"> <i
+								class="ni ni-bullet-list-67 text-default"></i> <span
+								class="nav-link-text">Blog</span>
+						</a></li>
 						<!-- <li class="nav-item"><a class="nav-link" href="upgrade.html">
 								<i class="ni ni-send text-dark"></i> <span class="nav-link-text">Upgrade</span>
 						</a></li> -->
