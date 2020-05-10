@@ -1,5 +1,7 @@
 package com.vn.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +18,6 @@ public interface BlogRepo extends JpaRepository<Blog, Long>{
 			+ "(:title IS NULL OR :title = '' OR b.title LIKE CONCAT('%', :title, '%'))")
 	Page<Blog> findAllByTitle(@Param("title") String title,Pageable pageable);
 	
+	@Query(value = "SELECT * FROM Blog ORDER BY created DESC LIMIT 8 ", nativeQuery = true)
+	List<Blog> lsBlogDateDesc();
 }

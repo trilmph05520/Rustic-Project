@@ -16,14 +16,21 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `auth_user_role`
+-- Table structure for table `auth_user_role`
 --
 
-LOCK TABLES `auth_user_role` WRITE;
-/*!40000 ALTER TABLE `auth_user_role` DISABLE KEYS */;
-INSERT INTO `auth_user_role` VALUES (1,1),(2,1),(3,1),(2,2),(4,3),(2,4),(2,5);
-/*!40000 ALTER TABLE `auth_user_role` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `auth_user_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_role` (
+  `role_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`role_id`,`user_id`),
+  KEY `FK_49bop9tj6tt0scnnvvjmnji4c` (`user_id`),
+  CONSTRAINT `FK_49bop9tj6tt0scnnvvjmnji4c` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `FK_asv6my78ndgs160mlq2r3ad7r` FOREIGN KEY (`role_id`) REFERENCES `auth_role` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -34,4 +41,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-08 23:23:45
+-- Dump completed on 2020-05-10 11:37:35

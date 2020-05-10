@@ -36,147 +36,45 @@
 						<div class="recent-post">
 							<h4>Những bài gần đây</h4>
 							<div class="recent-blog">
-								<a href="#" class="rb-item">
+								<a th:href="@{/home/{id}/blogDetail.html(id = ${each.id})}"
+									class="rb-item" th:each="each : ${lsBlogDateDesc}">
 									<div class="rb-pic">
-										<img th:src="@{/assets/img/blog/phongkhach.jpg}" alt="">
+										<img th:src="${each.mainImg}" alt="" width="80px"
+											height="80px">
 									</div>
 									<div class="rb-text">
-										<h6>Phong cách tạo nên cá tính của bạn...</h6>
+										<h6 th:if="${#strings.length(each.title) <= 30}"
+											th:text="${each.title}">Phong cách tạo nên cá tính của
+											bạn...</h6>
+										<h6 th:if="${#strings.length(each.title) > 30}"
+											th:text="${#strings.substring(each.title,0,30) + '...'}">Phong
+											cách tạo nên cá tính của bạn...</h6>
 										<p>
-											Nội thất <span>- May 19, 2019</span>
-										</p>
-									</div>
-								</a> <a href="#" class="rb-item">
-									<div class="rb-pic">
-										<img th:src="@{/assets/img/blog/recent-2.jpg}" alt="">
-									</div>
-									<div class="rb-text">
-										<h6>Phong cách tạo nên cá tính của bạn..</h6>
-										<p>
-											Nội thất <span>- May 19, 2019</span>
-										</p>
-									</div>
-								</a> <a href="#" class="rb-item">
-									<div class="rb-pic">
-										<img th:src="@{/assets/img/blog/banlamviec.jpg}" alt="">
-									</div>
-									<div class="rb-text">
-										<h6>Phong cách tạo nên cá tính của bạn..</h6>
-										<p>
-											Nội thất <span>- May 19, 2019</span>
-										</p>
-									</div>
-								</a> <a href="#" class="rb-item">
-									<div class="rb-pic">
-										<img th:src="@{/assets/img/blog/vanphong.jpg}" alt="">
-									</div>
-									<div class="rb-text">
-										<h6>Phong cách tạo nên cá tính của bạn..</h6>
-										<p>
-											Nội thất <span>- May 19, 2019</span>
+											Ngày đăng <span
+												th:text="${#dates.format(each.created, 'dd/MM/yyyy')}">-
+												May 19, 2019</span>
 										</p>
 									</div>
 								</a>
 							</div>
 						</div>
-						<div class="blog-tags">
-							<h4>Thẻ sản phẩm</h4>
-							<div class="tag-item">
-								<a href="#">Phòng khách</a> <a href="#">Giường</a> <a href="#">
-									Tủ quẩn áo </a> <a href="#">Phòng bếp</a> <a href="#">Phòng tắm</a>
-								<a href="#">Phòng làm việc</a> <a href="#">Văn phòng</a>
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="col-lg-9 order-1 order-lg-2">
-					<div class="row">
-						<div class="col-lg-6 col-sm-6">
+					<div class="row" th:if="${page.content} != null">
+						<div class="col-lg-6 col-sm-6" th:each="eachPro : ${page.content}">
 							<div class="blog-item">
 								<div class="bi-pic">
-									<img th:src="@{/assets/img/blog/phongkhach-1.png}" alt="">
+									<img th:src="${eachPro.mainImg}" alt="">
 								</div>
 								<div class="bi-text">
-									<a href="./blog-details.html">
-										<h4>Nội thất được cho là su hướng năm nay...</h4>
+									<a th:href="@{/home/{id}/blogDetail.html(id = ${eachPro.id})}">
+										<h4 th:text="${eachPro.title}"></h4>
 									</a>
 									<p>
-										Phòng khách <span>- May 19, 2019</span>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-sm-6">
-							<div class="blog-item">
-								<div class="bi-pic">
-									<img th:src="@{/assets/img/blog/phonglamviec-2.jpg}" style="height: 291.91px;">
-								</div>
-								<div class="bi-text">
-									<a href="./blog-details.html">
-										<h4>Phòng làm việc cho bạn cảm hứng...</h4>
-									</a>
-									<p>
-										Văn phòng <span>- May 19, 2019</span>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-sm-6">
-							<div class="blog-item">
-								<div class="bi-pic">
-									<img th:src="@{/assets/img/blog/phongtam-3.jpg}" style="height: 291.91px;" alt="">
-								</div>
-								<div class="bi-text">
-									<a href="./blog-details.html">
-										<h4>Phòng tắm giúp thư giãn mỗi ngày</h4>
-									</a>
-									<p>
-										Phòng tắm <span>- May 19, 2019</span>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-sm-6">
-							<div class="blog-item">
-								<div class="bi-pic">
-									<img th:src="@{/assets/img/blog/phongngu-4.jpg}" style="height: 291.91px;" alt="">
-								</div>
-								<div class="bi-text">
-									<a href="./blog-details.html">
-										<h4>Giấc ngủ thoải mái và thư giãn...</h4>
-									</a>
-									<p>
-										Phòng ngủ <span>- May 19, 2019</span>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-sm-6">
-							<div class="blog-item">
-								<div class="bi-pic">
-									<img th:src="@{/assets/img/blog/phongan-5.jpg}" style="height: 291.91px;" alt="">
-								</div>
-								<div class="bi-text">
-									<a href="./blog-details.html">
-										<h4>Nơi gia đình quây quần bên nhau...</h4>
-									</a>
-									<p>
-										Phòng ăn <span>- May 19, 2019</span>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-sm-6">
-							<div class="blog-item">
-								<div class="bi-pic">
-									<img th:src="@{/assets/img/blog/phongnauan-6.jpg}" style="height: 291.91px;" alt="">
-								</div>
-								<div class="bi-text">
-									<a href="./blog-details.html">
-										<h4>Nơi tình yêu thẻ hiện qua món ăn...</h4>
-									</a>
-									<p>
-										Bếp <span>- May 19, 2019</span>
+										Ngày đăng <span
+											th:text="${#dates.format(eachPro.created, 'dd/MM/yyyy')}">-
+											May 19, 2019</span>
 									</p>
 								</div>
 							</div>
@@ -192,7 +90,7 @@
 		</div>
 	</section>
 	<!-- Blog Section End -->
-
+	<div th:replace="fragments/panigatorHome :: content(page = ${page})"></div>
 	<!-- Partner Logo Section Begin -->
 	<div th:replace="fragments/navHome :: partner-logo"></div>
 	<!-- Partner Logo Section End -->

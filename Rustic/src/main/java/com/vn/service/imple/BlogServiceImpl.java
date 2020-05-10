@@ -1,5 +1,7 @@
 package com.vn.service.imple;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
@@ -26,6 +28,26 @@ public class BlogServiceImpl implements BlogService{
 	@Override
 	public Blog insert(Blog blog) {
 		return blogRepo.save(blog);
+	}
+
+	@Override
+	public Blog update(Blog blog) {
+		return blogRepo.save(blog);
+	}
+
+	@Override
+	public Blog findOne(Long id) {
+		return blogRepo.findOne(id);
+	}
+
+	@Override
+	public void delete(Blog blog) {
+		blogRepo.delete(blog);
+	}
+
+	@Override
+	public List<Blog> lsBlogDateDesc() {
+		return blogRepo.lsBlogDateDesc();
 	}
 
 }

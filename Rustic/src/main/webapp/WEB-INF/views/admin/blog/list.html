@@ -21,7 +21,7 @@
 				<div class="col">
 					<div class="card bg-default shadow">
 						<div class="card-header bg-transparent border-0">
-							<h3 class="text-white mb-0">Danh sách blog</h3>
+							<h3 class="text-white mb-0">Danh sách bài viết</h3>
 							<hr class="my-4" />
 							<div class="col-lg-12 col-5">
 								<form role="form" th:action="@{/blog/list.html}" method="POST">
@@ -70,25 +70,18 @@
 										<td class="text-table-body" th:text="${iterStat.count}"></td>
 										<td class="text-table-body" th:text="${eachRow.title}"></td>
 										<td class="text-table-body"
-											th:if="${eachRow.mainDescription != null && #strings.length(eachRow.mainDescription) < 30}"
+											th:if="${eachRow.mainDescription != null && #strings.length(eachRow.mainDescription) <= 30}"
 											th:text="${eachRow.mainDescription}"></td>
 										<td class="text-table-body"
 											th:if="${eachRow.mainDescription != null && #strings.length(eachRow.mainDescription) > 30}"
 											th:text="${#strings.substring(eachRow.mainDescription,0,30) + '...'}"></td>
-										<td class="text-table-body" th:text="${eachRow.created}"></td>
-										<td class="text-table-body" style="text-align: center;">
-											<button class="btn btn-warning"
-												th:if="${eachRow.quantity <= 0}"
-												th:utext="#{lable.Outofstock}"></button>
-											<button class="btn btn-success"
-												th:if="${eachRow.quantity > 0}" th:utext="#{lable.stocking}"></button>
-										</td>
+										<td class="text-table-body" th:text="${#dates.format(eachRow.created, 'dd/MM/yyyy')}"></td>
 										<td scope="row"><a type="button" class="btn btn-warning"
-											th:href="@{/product/{id}/update.html(id=${eachRow.id})}"
+											th:href="@{/blog/{id}/update.html(id=${eachRow.id})}"
 											th:utext="#{lable.edit}"></a></td>
 										<td scope="row"><a type="button" class="btn btn-danger"
 											data-toggle="modal" data-target="#productModal"
-											th:onclick="'deleteConfirm(\'' + ${eachRow.name} + '\',\'' + ${eachRow.id} + '\' );'"
+											th:onclick="'deleteConfirm(\'' + ${eachRow.title} + '\',\'' + ${eachRow.id} + '\' );'"
 											>Xóa</a></td>
 
 									</tr>
@@ -134,21 +127,21 @@
 		function deleteConfirm(name, key) {
 			var id = key;
 
-			$('#modal-title-notification').text('Xác nhận xóa sản phẩm')
+			$('#modal-title-notification').text('Xác nhận xóa bài viết')
 
 			$('#contentDelete').text(
-					'Bạn có chắc chắn muốn xóa sản phẩm: ' + key + ' - ' + name
+					'Bạn có chắc chắn muốn xóa bài viết: ' + key + ' - ' + name
 							+ ' không ? Bấm XÓA để xác nhận.');
 
 			$('#delete').click(
 					function() {
 						$.ajax({
 							url : window.location.origin + currUrl
-									+ 'product/delete/' + id + '/list.html',
+									+ 'blog/delete/' + id + '/list.html',
 							method : 'GET',
 							success : function() {
 								window.location.href = window.location.origin
-										+ currUrl + 'product/list.html';
+										+ currUrl + 'blog/list.html';
 							}
 						});
 					});

@@ -46,6 +46,7 @@ import com.vn.common.ThymeleafUtil;
 import com.vn.config.GoogleMailSender;
 import com.vn.jpa.AuthUser;
 import com.vn.jpa.Bill;
+import com.vn.jpa.Blog;
 import com.vn.jpa.Category;
 import com.vn.jpa.Infomation;
 import com.vn.jpa.Product;
@@ -60,6 +61,7 @@ import com.vn.model.ProductQuickViewModel;
 import com.vn.service.AuthUserService;
 import com.vn.service.BankInfoService;
 import com.vn.service.BillService;
+import com.vn.service.BlogService;
 import com.vn.service.CategoryService;
 import com.vn.service.InfomationService;
 import com.vn.service.ProductService;
@@ -102,6 +104,9 @@ public class HomeController {
 
 	@Resource
 	private BankInfoService bankService;
+	
+	@Resource
+	private BlogService blogService;
 
 	@ModelAttribute("report")
 	public Report report(Model model) {
@@ -497,10 +502,17 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/home/blog.html", method = RequestMethod.GET)
-	public ModelAndView viewBlog(Model model) {
+	public ModelAndView viewBlog(Model model, Pageable pageable, @RequestParam(value = "title", defaultValue = "") String title) {
 		ModelAndView modelAndView = new ModelAndView("home/blog");
 		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
 		List<Category> lstCatePr = new ArrayList<Category>();
+		
+		List<Blog> lsBlogDateDesc = blogService.lsBlogDateDesc();
+		
+		Sort sort = new Sort(Sort.Direction.DESC, "id");
+		Pageable _pageable = new PageRequest(pageable.getPageNumber(), Constants.Paging.SIZE, sort);
+		Page<Blog> page = blogService.findAllByTitle(title, _pageable);
+		
 		for (Category each : categoryList) {
 			if (each.getParent() == null) {
 				List ls = new ArrayList();
@@ -513,6 +525,49 @@ public class HomeController {
 		
 		for(Category cat : lstCatePr) {
 			recursiveTree(cat);
+		}
+		
+		model.addAttribute("page", page);
+		
+		model.addAttribute("lsBlogDateDesc",lsBlogDateDesc);
+		
+		model.addAttribute("categoryNav", lstCatePr);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/home/{id}/blogDetail.html", method = RequestMethod.GET)
+	public ModelAndView viewBlogDetail(Model model, @PathVariable("id") Long id) {
+		ModelAndView modelAndView = new ModelAndView("home/blog-details");
+		List<Category> categoryList = categoryService.findAllByIsDeleteAndIsActive("N", "Y");
+		List<Category> lstCatePr = new ArrayList<Category>();
+		
+		Blog blog = blogService.findOne(id);
+		
+		for (Category each : categoryList) {
+			if (each.getParent() == null) {
+				List ls = new ArrayList();
+				ls.add(each.getName());
+				List lsCategoryChildren = new ArrayList();
+				ls.add(lsCategoryChildren);
+				lstCatePr.add(each);
+			}
+		}
+		
+		for(Category cat : lstCatePr) {
+			recursiveTree(cat);
+		}
+		
+		
+		if(blog!=null) {
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			if (blog.getSubImg() != null || blog.getSubImg() != "") {
+				String[] subImg = gson.fromJson(blog.getSubImg(), new TypeToken<String[]>() {
+				}.getType());
+				model.addAttribute("subImg", subImg);
+			}
+			model.addAttribute("blog", blog);
+		}else {
+			model.addAttribute("blog", new Blog());
 		}
 		
 		model.addAttribute("categoryNav", lstCatePr);

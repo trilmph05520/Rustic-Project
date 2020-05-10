@@ -16,14 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `info`
+-- Table structure for table `info`
 --
 
-LOCK TABLES `info` WRITE;
-/*!40000 ALTER TABLE `info` DISABLE KEYS */;
-INSERT INTO `info` VALUES (1,'Thái Bình','Kiến Xương','Quang Bình - Kiến Xương -  Thái Bình','0338070700','1999-08-21','BACABANK','Công ty Cổ phần Viễn Thông Tuổi Trẻ Yotel','212312354534','Từng học tại FPT PolyTechnic','N',2),(4,'HN','HĐ','Tòa nhà Ecolife Capitol, 58 Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội','0377810192',NULL,'',NULL,'',NULL,'N',1),(5,'Asia','Ha Noi','Xuan La,Xuan Tao,Bac Tu Liem, 105 Xuan La','0983231999',NULL,'NCB',NULL,'9704198526191432',NULL,'N',4),(6,'Asia','Ha Noi','Xuan La,Xuan Tao,Bac Tu Liem, 105 Xuan La','0983231999',NULL,'TPBANK',NULL,'9704198526191432',NULL,'N',3);
-/*!40000 ALTER TABLE `info` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `province` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `town` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `address` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
+  `phone` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `bank` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `company` varchar(128) CHARACTER SET utf8 DEFAULT NULL,
+  `atm_number_bank` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `info_plus` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
+  `isdelete` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_auth_user` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -34,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-08 23:23:44
+-- Dump completed on 2020-05-10 11:37:35

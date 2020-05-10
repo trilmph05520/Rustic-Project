@@ -16,33 +16,41 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `vnpay_trans_info`
+-- Table structure for table `product`
 --
 
-DROP TABLE IF EXISTS `vnpay_trans_info`;
+DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vnpay_trans_info` (
+CREATE TABLE `product` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` date DEFAULT NULL,
-  `vnp_locale` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_curr_code` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_order_info` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_order_type` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_amount` bigint(20) DEFAULT NULL,
-  `vnp_ip_addr` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_create_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_bank_code` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_bank_tran_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_pay_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_transaction_no` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `vnp_response_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `id_bill` bigint(20) DEFAULT NULL,
-  `code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `description` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
+  `price_sale` float DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `mainImg` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `subImg` text COLLATE utf8_unicode_ci,
+  `isdelete` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `info` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
+  `rate` tinyint(4) DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  `id_category` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_product_category_idx` (`id_category`),
+  CONSTRAINT `fk_product_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product`
+--
+
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -53,4 +61,4 @@ CREATE TABLE `vnpay_trans_info` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-10 11:37:36
+-- Dump completed on 2020-05-10 11:39:15

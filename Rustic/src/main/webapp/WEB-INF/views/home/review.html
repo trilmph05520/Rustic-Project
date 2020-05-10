@@ -55,7 +55,7 @@
 											<h5 th:text="${each.product.name}"></h5>
 										</a></td>
 									<td class="text-table-body"
-										th:if="${each.product.info != null && #strings.length(each.product.info) < 30}"
+										th:if="${each.product.info != null && #strings.length(each.product.info) <= 30}"
 										th:text="${each.product.info}"></td>
 									<td class="text-table-body"
 										th:if="${each.product.info != null && #strings.length(each.product.info) > 30}"

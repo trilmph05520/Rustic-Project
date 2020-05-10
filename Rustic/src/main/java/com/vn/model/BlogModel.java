@@ -12,6 +12,8 @@ public class BlogModel {
     private String mainDescription;
     private String subDescription;
     private Date created;
+    private String removeSub;
+    
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +58,12 @@ public class BlogModel {
 	}
 	public BlogModel() {
 		super();
+	}
+	public String getRemoveSub() {
+		return removeSub;
+	}
+	public void setRemoveSub(String removeSub) {
+		this.removeSub = removeSub;
 	}
     
     
