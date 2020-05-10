@@ -79,9 +79,9 @@ public class ProductController {
 			@RequestParam(value = "to_date", defaultValue = "") String toDate,
 			@RequestParam(value = "name", defaultValue = "") String name, Pageable pageable) {
 		try {
-			DateTime time = new DateTime();
-			Date _fromDate = time.withTimeAtStartOfDay().toDate();
-			Date _toDate = time.withTime(23, 59, 59, 999).toDate();
+			Date time = new Date();
+			Date _fromDate = time;
+			Date _toDate = time;
 
 			if (Strings.isNullOrEmpty(fromDate) && request.getMethod().equalsIgnoreCase("GET")) {
 				fromDate = (String) session.getAttribute("from_date");

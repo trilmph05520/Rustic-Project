@@ -41,8 +41,8 @@ public interface BillRepo extends JpaRepository<Bill, Long> {
 	List<Bill> findByTypeStatusAndMailStatus(Integer type, Integer statusMail);
 
 	@Query(value = "SELECT b.createDate, SUM(b.total) FROM Bill b "
-			+ "WHERE (DATE(b.createDate) BETWEEN DATE(:fromDate) AND DATE(:toDate))"
-			+ "AND (b.isDelete = 'N') AND (b.status = 1)" + "GROUP BY DATE(b.createDate)", nativeQuery = false)
+			+ "WHERE (b.createDate BETWEEN :fromDate AND :toDate)"
+			+ "AND (b.isDelete = 'N') AND (b.status = 1)" + "GROUP BY b.createDate", nativeQuery = false)
 	List<Object[]> listSumTotalForDashboard(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 
 	@Query(value = "SELECT b.createDate, b.code, b.total, b.typeStatus, b.status FROM Bill b "

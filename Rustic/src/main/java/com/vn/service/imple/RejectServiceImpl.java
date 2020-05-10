@@ -57,7 +57,7 @@ public class RejectServiceImpl implements RejectService {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		DateTime time = new DateTime(date);
 		Date fromDate = time.plusDays(-7).toDate();
-		Date toDate = time.withTimeAtStartOfDay().toDate();
+		Date toDate = time.toDate();
 		List<Object[]> lsObject = rejectRepo.listCountRejectDashBoard(fromDate, toDate);
 		for (Object[] each : lsObject) {
 			String key = sdf.format(each[0]);

@@ -85,7 +85,7 @@ public class BillServiceImpl implements BillService {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		DateTime time = new DateTime(date);
 		Date fromDate = time.plusDays(-7).toDate();
-		Date toDate = time.withTimeAtStartOfDay().toDate();
+		Date toDate = time.toDate();
 		List<ChartDashboardBillOrder> response = new ArrayList<>();
 		List<Object[]> lsObject = billRepo.listSumTotalForDashboard(fromDate, toDate);
 		for (Object[] each : lsObject) {

@@ -74,7 +74,7 @@ public class Product_BillServiceImpl implements Product_BillService {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		DateTime time = new DateTime(date).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0);
 		Date fromDate = time.plusDays(-7).toDate();
-		Date toDate = time.withTimeAtStartOfDay().toDate();
+		Date toDate = time.toDate();
 		List<Object[]> lsObject = product_billRepo.listCountBillGrByDateBillId(fromDate, toDate);
 		for (Object[] each : lsObject) {
 			String key = sdf.format(each[0]);
