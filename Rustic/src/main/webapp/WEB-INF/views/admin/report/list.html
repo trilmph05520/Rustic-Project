@@ -118,13 +118,13 @@
 										<td class="text-table-body" th:text="${eachRow.email}"></td>
 										<td class="text-table-body" th:text="${eachRow.mobile}"></td>
 										<td class="text-table-body"
-											th:if="${eachRow.problem != null && #strings.length(eachRow.problem) < 30}"
+											th:if="${eachRow.problem != null && #strings.length(eachRow.problem) <= 30}"
 											th:text="${eachRow.problem}"></td>
 										<td class="text-table-body"
 											th:if="${eachRow.problem != null && #strings.length(eachRow.problem) > 30}"
 											th:text="${#strings.substring(eachRow.problem,0,30) + '...'}"></td>
 										<td class="text-table-body"
-											th:if="${eachRow.opinion != null && #strings.length(eachRow.opinion) < 30}"
+											th:if="${eachRow.opinion != null && #strings.length(eachRow.opinion) <= 30}"
 											th:text="${eachRow.opinion}"></td>
 										<td class="text-table-body"
 											th:if="${eachRow.opinion != null && #strings.length(eachRow.opinion) > 30}"

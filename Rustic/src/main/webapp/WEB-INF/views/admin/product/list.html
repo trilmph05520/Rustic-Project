@@ -108,13 +108,13 @@
 											th:text="${#numbers.formatDecimal(eachRow.priceSale, 0, 'COMMA', 0,'POINT') + ' VND'}"></td>
 										<td class="text-table-body" th:text="${eachRow.quantity}"></td>
 										<td class="text-table-body"
-											th:if="${eachRow.description != null && #strings.length(eachRow.description) < 30}"
+											th:if="${eachRow.description != null && #strings.length(eachRow.description) <= 30}"
 											th:text="${eachRow.description}"></td>
 										<td class="text-table-body"
 											th:if="${eachRow.description != null && #strings.length(eachRow.description) > 30}"
 											th:text="${#strings.substring(eachRow.description,0,30) + '...'}"></td>
 										<td class="text-table-body"
-											th:if="${eachRow.info != null && #strings.length(eachRow.info) < 30}"
+											th:if="${eachRow.info != null && #strings.length(eachRow.info) <= 30}"
 											th:text="${eachRow.info}"></td>
 										<td class="text-table-body"
 											th:if="${eachRow.info != null && #strings.length(eachRow.info) > 30}"

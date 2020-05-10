@@ -104,7 +104,7 @@
 										<td class="text-table-body" th:text="${eachRow.name}"></td>
 										<td class="text-table-body" th:text="${eachRow.email}"></td>
 										<td class="text-table-body"
-											th:if="${eachRow.description != null && #strings.length(eachRow.description) < 30}"
+											th:if="${eachRow.description != null && #strings.length(eachRow.description) <= 30}"
 											th:text="${eachRow.description}"></td>
 										<td class="text-table-body"
 											th:if="${eachRow.description != null && #strings.length(eachRow.description) > 30}"

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/initAdmin :: head"></div>
+<style>
+.error {
+	color: red;
+}
+
+/*---------upload ảnh------------*/
+/* .wrap-custom-file {
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	margin: 10px 10px 5px 20px;
+	text-align: center;
+}
+
+.wrap-custom-file input[type="file"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2px;
+	height: 2px;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.wrap-custom-file label {
+	z-index: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	overflow: hidden;
+	padding: 0 0.5rem;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 4px;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	transition: transform 0.4s, -webkit-transform 0.4s;
+}
+
+.wrap-custom-file label span {
+	display: block;
+	margin-top: 2rem;
+	font-size: 1.4rem;
+	color: #777;
+	-webkit-transition: color 0.4s;
+	transition: color 0.4s;
+}
+
+.wrap-custom-file label:hover {
+	-webkit-transform: translateY(-0.5rem);
+	transform: translateY(-0.5rem);
+	transition: transform .5s, box-shadow .5s;
+	box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+.wrap-custom-file label:hover span {
+	color: #333;
+}
+
+.wrap-custom-file label {
+	background-size: cover;
+	background-position: center;
+	border: 1px dashed cornflowerblue;
+	border-radius: 10px;
+	/*box-shadow: 2px 2px 5px #cdcdcd;*/
+
+/* .wrap-custom-file label.file-ok {
+	border: none;
+	box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+.wrap-custom-file label.file-ok span {
+	height: 30px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 0.3rem;
+	font-size: 1.1rem;
+	color: #6a0700;
+	background-color: rgba(255, 255, 255, 0.7);
+} */
+
+/*---------end upload ảnh--------*/
+/* .wrap-custom-fileadd {
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	margin: 10px 10px 5px 20px;
+	text-align: center;
+}
+
+.wrap-custom-fileadd input[type="file"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2px;
+	height: 2px;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.wrap-custom-fileadd label {
+	z-index: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	overflow: hidden;
+	padding: 0 0.5rem;
+	background-color: #fff;
+	border-radius: 4px;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	transition: transform 0.4s, -webkit-transform 0.4s;
+}
+
+.wrap-custom-fileadd label span {
+	display: block;
+	margin-top: 2rem;
+	font-size: 1.4rem;
+	color: #777;
+	-webkit-transition: color 0.4s;
+	transition: color 0.4s;
+}
+
+.wrap-custom-fileadd label:hover {
+	-webkit-transform: translateY(-0.5rem);
+	transform: translateY(-0.5rem);
+	transition: transform .5s, box-shadow .5s;
+	box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+.wrap-custom-fileadd label:hover span {
+	color: #333;
+}
+
+.wrap-custom-fileadd label {
+	background-size: cover;
+	background-position: center;
+	border: 1px dashed cornflowerblue;
+	border-radius: 10px;
+}
+
+.wrap-custom-fileadd label.file-ok {
+	border: none;
+	box-shadow: 2px 2px 5px #b1b1b1;
+}
+
+.wrap-custom-fileadd label.file-ok span {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 0.3rem;
+	font-size: 1.1rem;
+	color: #6a0700;
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
+.title-hinhanh-chi-tiet {
+	width: 100%;
+	height: 46px;
+	border-bottom: 1px solid #E8E8E8;
+}
+
+.title-hinhanh-chi-tiet h5 {
+	font-size: 20px;
+	margin-left: 20px;
+	line-height: 46px;
+	margin-top: 10px;
+	font-weight: 500;
+	margin-top: 5px;
+}
+
+.row-card-hinhanh-chit-tiet .group-hinhanh {
+	width: 100%;
+	float: left;
+	margin-bottom: 20px;
+} */
+/* 
+.removeIMG {
+	font-size: 13px !important;
+	margin-top: 40px !important;
+}
+
+.removeIMGAdd {
+	font-size: 13px !important;
+}
+
+.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file label:hover {
+	background: #aaaaaa !important;
+}
+
+.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file[id^="idSubImage_"] label:hover span
+	{
+	display: block !important;
+}
+
+.detail-step.row-card-hinhanh-chit-tiet .wrap-custom-file[id^="idAddSubImage_"] label:hover span
+	{
+	display: block !important;
+}  */
+</style>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/product_edit.css}" />
+
+<body>
+	<!-- Sidenav -->
+	<!-- Sidenav -->
+	<div th:replace="fragments/navAdmin :: slide-bar"></div>
+	<!-- Main content -->
+	<div class="main-content" id="panel">
+		<!-- Topnav -->
+		<div th:replace="fragments/navAdmin :: top-nav"></div>
+		<!-- Header -->
+		<!-- Header -->
+		<!-- Page content -->
+		<div class="container-fluid mt--6"
+			style="margin-top: 25px !important;">
+			<input type="hidden" id="idBlog" th:value="${blog.id}"> <input
+				type="hidden" id="contextPath" th:value="@{/}"> <input
+				type="hidden" th:value="${subImg}" id="subImg" />
+			<div class="row">
+				<div class="col-xl-12 order-xl-1">
+					<div class="card">
+						<div class="card-header">
+							<div class="row align-items-center">
+								<div class="col-8">
+									<h3 class="mb-0">Sửa bài viết</h3>
+								</div>
+								<!-- <div class="col-4 text-right">
+									<a href="#!" class="btn btn-sm btn-primary">Settings</a>
+								</div> -->
+							</div>
+						</div>
+						<div class="card-body">
+							<form>
+								<h6 class="heading-small text-muted mb-4">Thông tin bài
+									viết</h6>
+								<div class="pl-lg-4">
+									<div class="row">
+										<div class="col-lg-3">
+											<div class="form-group">
+												<label>Hình đại diện</label><span class="error"> *</span>
+												<div>
+													<div class="group-hinhanh">
+														<div class="wrap-custom-file">
+															<input type="file" name="image1" class="imgUpload"
+																id="image1" accept=".gif,.jpg,.png,.jpeg" /> <label
+																for="image1"
+																th:style="'background-image:url(' + ${blog.mainImg} + ');'">
+															</label>
+														</div>
+													</div>
+													<input type="text" name="mainImg" id="mainImg" hidden /> <span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+														id="mainError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-9" style="border-left: 2px solid #aaa;">
+											<div class="form-group">
+												<label>Chi tiết ảnh</label><span class="error"> *</span>
+												<div>
+													<div class="detail-step row-card-hinhanh-chit-tiet">
+														<div class="group-hinhanh">
+															<div class="wrap-custom-fileadd" id="addSubImages">
+																<input type="file" name="addSubImage" class="imgAddSub"
+																	id="addSubImage" accept=".gif,.jpg,.png,.jpeg" /> <label
+																	for="addSubImage"
+																	style="display: flex; align-items: center; justify-content: center;">
+																	<span style="margin-top: 0px !important;"> <i
+																		class="fa fa-plus" style="font-size: 50px;"></i>
+																</span>
+																</label>
+															</div>
+															<br> <span
+																style="text-align: left; color: red; font-weight: bold; font-size: 13px;"
+																id="subError"></span>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="form-group">
+												<label>Tiêu đề</label><span class="error"> *</span>
+												<div>
+													<input type="text" class="form-control" id="title"
+														th:value="${blog.title}" placeholder="Tiêu đề"
+														maxlength="64" /> <span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="titleError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6" style="height: 100px;">
+											<div class="form-group" style="height: 100px;">
+												<label>Nội dung chính</label><span class="error"> *</span>
+												<div style="height: 100px;">
+													<textarea class="form-control" placeholder="Nội dung chính"
+														id="mainDescription" style="height: 100px;"
+														maxlength="500" th:text="${blog.mainDescription}"></textarea>
+													<span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="mainDescriptionError"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label>Nội dung phụ</label><span class="error"> *</span>
+												<div>
+													<textarea class="form-control" placeholder="Nội dung phụ"
+														id="subDescription" style="height: 100px;" maxlength="500"
+														th:text="${blog.subDescription}"></textarea>
+													<span
+														style="text-align: left; color: red; font-weight: bold; font-size: 13px; margin-top: 10px;"
+														id="subDescriptionError"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row  text-right">
+										<div class="col-lg-12 col-5">
+											<div class="form-group">
+												<a
+													th:href="@{/blog/list.html?page={pageIdx}(pageIdx=${session.pageIndex})}"
+													href="/account/list" class="btn btn-sm btn-neutral">Thoát</a>
+												<button type="button" id="updateBlog"
+													class="btn btn-sm btn-neutral">Lưu</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer -->
+
+		</div>
+	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+	<div th:replace="fragments/initAdmin :: commonScript"></div>
+	<script th:inline="javascript">
+    /*<![CDATA[*/
+    var currUrl = /*[[@{/}]]*/ "";
+    /*]]>*/
+</script>
+	<script>
+    $('#form-field-cateChildren').on('change', function () {
+        var id = $('#form-field-cateChildren option:selected').val();
+        $.ajax({
+            url: currUrl + 'product/categoryChildren.html',
+            method: 'GET',
+            data: {'parent_id': id},
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (response) {
+                var data = JSON.parse(response);
+                var html = '';
+                for (var eachRow of data) {
+                    html += `<option value="${eachRow.id}">${eachRow.name}</option>`;
+                }
+                $('#form-field-cate-children').html(html);
+            }
+        });
+    });
+    $('#form-field-cateChildren').trigger('change');
+    setTimeout(function () {
+        $('#form-field-cate-children').val($('#idCateChildren').val()).trigger('change');
+    }, 100);
+</script>
+
+	<script>
+    function formatNumberString(numberStr) {
+        if (typeof numberStr === 'number') {
+            numberStr = numberStr.toString();
+        }
+        return numberStr.replace(/(?=(?:\d{3})+$)(?!^)/g, ',');
+    }
+</script>
+	<script>
+    var that = this;
+    var isFormatNumber = true;
+    if (isFormatNumber !== false) {
+        $('#price').on('keyup', function () {
+            var formattedVal = formatNumberString($('#price').val().replace(/,/g, ''));
+            $('#price').val(formattedVal);
+        });
+    }
+    if (isFormatNumber !== false) {
+        $('#priceSale').on('keyup', function () {
+            var formattedVal = formatNumberString($('#priceSale').val().replace(/,/g, ''));
+            $('#priceSale').val(formattedVal);
+        });
+    }
+    $('#price, #priceSale, #quantity').on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+        if (/^\d*$/.test(this.value.replace(/,/g, ''))) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        }
+    });
+</script>
+	<script type="text/javascript">
+    var subGetted = $('#subImg').val();
+    var subImageGetted = JSON.parse(subGetted);
+    var parseSub = JSON.parse(subImageGetted);
+    for (var i = 0; i < parseSub.length; i++) {
+        var nameSubIMG = parseSub[i].split('\/').pop();
+        let htmlCardImage = `<div class="wrap-custom-file" id="idSubImage_${i}" data-index="${i}">
+                                <label for="image" style="background-image:url(
+										'${parseSub[i]}')">
+										<span id="remove_${i}" class="removeIMG" style="display:none;border:2px solid #fff;
+										font-size: 15px;color: white;padding: 3px;width: calc(100% - 15px);
+										align-items: center;justify-content: center;margin-left: 7px;margin-top: 49px!important;
+										cursor:pointer;">REMOVE FILE</span>
+										<span style="position:absolute;bottom:0;left:0;width:100%;padding:0.3rem;font-size:1.1rem;color:#6a0700;background-color: rgba(255, 255, 255, 0.7);height:28px;">${nameSubIMG}</span>
+										</label>
+										</div>`;
+        $('#addSubImages').before(htmlCardImage);
+    }
+
+    var mainImg = null;
+    var that = this;
+    $('input[type="file"].imgUpload').each(
+        function () {
+            var $file = $(this), $label = $file.next('label'),
+                $labelText = $label.find('span'), labelDefault = $labelText.text();
+            $file.on('change', function (event) {
+                var reader = new FileReader();
+                var objectResult = {};
+                var dataFile = this.files[0];
+                reader.readAsDataURL(dataFile);
+                reader.onload = function () {
+                    if (dataFile.size < 15728640) {
+                        setTimeout(function () {
+                            objectResult.fileName = dataFile.name;
+                            var readerResult = reader.result;
+                            objectResult.content = readerResult.split(',')[1];
+                            var tmppath = URL.createObjectURL(dataFile);
+                            if (readerResult) {
+                                $label.addClass('file-ok').css('background-image', 'url(' + readerResult + ')');
+                                $labelText.removeClass('red');
+                                $labelText.text(dataFile.name);
+                                mainImg = objectResult;
+                            } else {
+                                $label.removeClass('file-ok');
+                                $labelText.text(labelDefault);
+                            }
+                        }, 500);
+                    } else {
+                        $('#mainError').text("Ảnh không quá 15Mb");
+                    }
+                };
+                reader.onerror = function (error) {
+                };
+            });
+        });
+
+    var subImages = [];
+    var indexOfImageToAdd = 0;
+    $('#addSubImage').on('change', function (event) {
+        var that = this;
+        var html = `<div class="wrap-custom-file" id="idAddSubImage_${indexOfImageToAdd}">
+            <label style="display:flex;
+            justify-content:center;
+            align-items:center;">
+        <span id="removeAdded_${indexOfImageToAdd}" data-id="${indexOfImageToAdd}" class="removeIMGAdd" style="display:none;border:2px solid #fff;
+            font-size: 15px;color: white;padding: 3px;width: calc(100% - 15px);align-items: center;justify-content: center;
+            margin-top: 0!important;cursor:pointer;">REMOVE FILE</span>
+            <span id="loading-add-image-span" class="fa fa-spinner fa-spin" style="margin-top:0!important"></span>
+            <span class="nameFile" style="position:absolute;bottom:0;left:0;width:100%;padding:0.3rem;font-size:1.1rem;color:#6a0700;background-color: rgba(255, 255, 255, 0.7);height:28px;"></span>
+            </label></div>`;
+        var reader = new FileReader();
+        var imageGetted = [];
+        var objectResult = {};
+        var dataFile = this.files[0];
+        reader.readAsDataURL(dataFile);
+        var htmlAppend = $(html);
+        reader.onload = function () {
+            if (dataFile.size < 15728640) {
+                setTimeout(function () {
+                    objectResult.fileName = dataFile.name;
+                    var readerResult = reader.result;
+                    objectResult.content = readerResult.split(',')[1];
+                    $('#loading-add-image-span').remove();
+                    imageGetted.push(indexOfImageToAdd, objectResult);
+                    subImages.push(imageGetted);
+                    var tmppath = URL.createObjectURL(dataFile);
+                    htmlAppend.find('label').css('background-image', 'url(' + readerResult + ')');
+                    htmlAppend.find('.nameFile').text(dataFile.name);
+                    indexOfImageToAdd++;
+                }, 500);
+                $('#addSubImages').before(htmlAppend);
+            } else {
+                $('#subError').text("Ảnh không quá 15Mb");
+            }
+        };
+        reader.onerror = function (error) {
+        };
+        // $(that).val('');
+    });
+
+    $('body').on('click', '.wrap-custom-file label span[id^="removeAdded_"]', function () {
+        let id = $(this).attr('data-id');
+        let indexDelete = '';
+        for (let i = 0; i < subImages.length; i++) {
+            if (subImages[i][0] == id) {
+                indexDelete = i;
+                subImages.splice(i, 1);
+                break;
+            }
+        }
+        $(this).parent().parent().remove();
+    });
+
+    var removeSub = [];
+    $('body').on('click', '.wrap-custom-file label span[id^="remove_"]', function () {
+        var data_index = $(this).parent().parent().attr('data-index');
+        removeSub.push(parseSub[data_index]);
+        $(this).parent().parent().remove();
+    });
+
+    $('#updateBlog').on('click', function () {
+        let subImamgeObject = [];
+        var valid = true;
+        for (let i of subImages) {
+            subImamgeObject.push(i[1]);
+        }
+        var errorMessage = '';
+        if (subImamgeObject.length === 0 && (parseSub.length === removeSub.length)) {
+            errorMessage = "Ảnh chi tiết bài viết không để trống";
+        }
+        
+        if ($('#mainDescription').val().trim().length === 0) {
+            $('#mainDescriptionError').text("Nội dung chính không được để trống");
+            $('#mainDescriptionError').hide().fadeIn(0).delay(2000).fadeOut(1000);
+            valid = false;
+        }
+        if ($('#subDescription').val().trim().length === 0) {
+            $('#subDescriptionError').text("Nội dung phụ không được để trống");
+            $('#subDescriptionError').hide().fadeIn(0).delay(2000).fadeOut(1000);
+            valid = false;
+        }
+        if ($('#title').val().trim().length === 0) {
+            $('#titleError').text("Tiêu đề không được để trống");
+            $('#titleError').hide().fadeIn(0).delay(2000).fadeOut(1000);
+            valid = false;
+        }
+        
+        if (errorMessage != '') {
+            $('#subError').text(errorMessage);
+            $("#error").hide().fadeIn(0).delay(3000).fadeOut(1000);
+        } else {
+            if(valid){
+            	var id = $('#idBlog').val();
+                var dataObject = {};
+                dataObject.mainImg = mainImg;
+                dataObject.subImg = subImamgeObject;
+                if (removeSub.length === 0) {
+                    removeSub = null;
+                }else{
+                    removeSub = removeSub.toString();
+                }
+                dataObject.removeSub = removeSub;
+                dataObject.mainImg = mainImg;
+                dataObject.subImg = subImamgeObject;
+                dataObject.title = $('#title').val();
+                dataObject.mainDescription = $('#mainDescription').val();
+                dataObject.subDescription = $('#subDescription').val();
+                $.ajax({
+                    url: currUrl + 'blog/' + id + '/update.html',
+                    method: 'POST',
+                    data: JSON.stringify(dataObject),
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        removeSub = [];
+                        var data = JSON.parse(response);
+                        if (data.title != null) {
+                            $('#titleError').text(data.name);
+                        } else {
+                            $('#titleError').text('');
+                        }
+                        if (data.mainDescription != null) {
+                            $('#mainDescriptionError').text(data.description);
+                        } else {
+                            $('#mainDescriptionError').text('');
+                        }
+                        
+                        if (data.subDescription != null) {
+                            $('#subDescriptionError').text(data.description);
+                        } else {
+                            $('#subDescriptionError').text('');
+                        }
+                        if(data.success != null){
+                            alert(data.success);
+                            // setTimeout(function(){
+                                window.location.href = window.location.origin + $('#contextPath').val() + 'blog/list.html';
+                            // },1500);
+                        }
+                    }
+            	
+            });
+        }
+    }
+    });
+</script>
+</body>
+
+</html>
