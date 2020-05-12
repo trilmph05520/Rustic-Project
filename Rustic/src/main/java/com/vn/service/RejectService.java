@@ -23,4 +23,6 @@ public interface RejectService {
 	List<ChartDashboardBillOrder> listCountRejectDashBoard(Date date);
 
 	Page<Reject> pageByDateAndCode(Date fromDate, Date toDate, String code, Pageable pageable);
+	
+	Reject findByCode(String code);
 }

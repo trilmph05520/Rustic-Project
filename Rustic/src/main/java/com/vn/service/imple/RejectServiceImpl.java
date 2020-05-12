@@ -73,4 +73,9 @@ public class RejectServiceImpl implements RejectService {
 		return rejectRepo.pageByDateAndCode(fromDate, toDate, code, pageable);
 	}
 
+	@Override
+	public Reject findByCode(String code) {
+		return rejectRepo.findByCode(code);
+	}
+
 }

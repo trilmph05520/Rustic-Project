@@ -24,4 +24,6 @@ public interface RejectRepo extends JpaRepository<Reject, Long> {
 	Page<Reject> pageByDateAndCode(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate,
 			@Param("code") String code, Pageable pageable);
 
+	Reject findByCode(String code);
+	
 }

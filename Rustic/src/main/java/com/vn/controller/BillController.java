@@ -293,6 +293,10 @@ public class BillController {
 				bill.setStatus(1);
 				bill.setTypeStatus(0);
 				bill.setCreateBy((String) session.getAttribute("account"));
+				Reject reject = rejectService.findByCode(bill.getCode());
+				if(reject!=null) {
+					rejectService.delete(reject);
+				}
 				billService.update(bill);
 			}
 		} catch (Exception e) {
@@ -369,6 +373,10 @@ public class BillController {
 				bill.setTypeStatus(statusType);
 				if (statusType == 0) {
 					bill.setStatus(1);
+					Reject reject = rejectService.findByCode(bill.getCode());
+					if(reject!=null) {
+						rejectService.delete(reject);
+					}
 				}
 				if (statusType == 6) {
 					bill.setShipper(null);
